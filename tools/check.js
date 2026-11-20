@@ -76,16 +76,38 @@ else {
   if (!/<html[^>]*\sdata-style="blend"/.test(home)) fail('index.html: must open in the "blend" style');
   for (const s of ['academia', 'deco', 'blend']) if (!styleDefined(s)) fail(`css/themes.css: style "${s}" is missing`);
   for (const s of ['academia', 'deco', 'blend']) if (!home.includes(`data-set-style="${s}"`)) fail(`index.html: no switch button for "${s}"`);
-  const blocks = (cls) => [...home.matchAll(new RegExp(`<(figure|aside|blockquote|div)[^>]*class="[^"]*\\b${cls}\\b[^"]*"[^>]*>([\\s\\S]*?)</\\1>`, 'g'))].map((m) => m[2]);
-  const quotes = blocks('voice-quote');
-  const imagined = blocks('voice-imagined');
-  if (quotes.length === 0) fail('index.html: no real quote (.voice-quote) to sample');
-  if (imagined.length === 0) fail('index.html: no imagined voice (.voice-imagined) to sample');
-  quotes.forEach((b, i) => { if (!/<a [^>]*href="https?:\/\//.test(b)) fail(`index.html: real quote ${i + 1} has no source link`); });
-  imagined.forEach((b, i) => {
-    if (/[“”"]|&ldquo;|&rdquo;|&quot;|<q[\s>]|<blockquote/.test(b.replace(/<[^>]+>/g, (t) => (/^<(q|blockquote)[\s>]/.test(t) ? t : '')))) fail(`index.html: imagined voice ${i + 1} must not use quote marks`);
-    if (!/our reading/i.test(b)) fail(`index.html: imagined voice ${i + 1} must say it is "our reading"`);
+  if (!/class="[^"]*\bvoice-quote\b/.test(home)) fail('index.html: no real quote (.voice-quote) to sample');
+  if (!/class="[^"]*\bvoice-imagined\b/.test(home)) fail('index.html: no imagined voice (.voice-imagined) to sample');
+}
+
+// 7. The council voice rule, on every page.
+//    Blocks are matched by their outer tag; a voice block must not nest the same tag inside itself.
+const voiceBlocks = (html, cls) =>
+  [...html.matchAll(new RegExp(`<(figure|aside|blockquote|div)[^>]*class="[^"]*\\b${cls}\\b[^"]*"[^>]*>([\\s\\S]*?)</\\1>`, 'g'))];
+// Text with tags removed and character references decoded, so &#8220; and &ldquo; look like the characters they are.
+const named = { ldquo: '“', rdquo: '”', lsquo: '‘', laquo: '«', raquo: '»', quot: '"' };
+const plain = (html) => html
+  .replace(/<[^>]+>/g, ' ')
+  .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)))
+  .replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(Number(d)))
+  .replace(/&([a-z]+);/g, (m, n) => named[n] || m);
+// Opening and closing double quotes, an opening single quote, guillemets, and straight double quotes.
+// The closing single quote is left out: it doubles as the apostrophe.
+const QUOTE_MARKS = /[“”‘«»"]/;
+for (const file of htmlFiles) {
+  const html = read(file);
+  const quotes = voiceBlocks(html, 'voice-quote');
+  quotes.forEach((m, i) => {
+    if (!/<a [^>]*href="https?:\/\//.test(m[2])) fail(`${file}: real quote ${i + 1} has no source link`);
   });
+  voiceBlocks(html, 'voice-imagined').forEach((m, i) => {
+    if (/<(q|blockquote)[\s>]/.test(m[2]) || QUOTE_MARKS.test(plain(m[2]))) fail(`${file}: imagined voice ${i + 1} must not use quote marks`);
+    if (!/our reading/i.test(m[2])) fail(`${file}: imagined voice ${i + 1} must say it is "our reading"`);
+  });
+  // A <blockquote> or <q> anywhere else is a quote without the rule's frame and source.
+  let rest = html;
+  for (const m of quotes) rest = rest.replace(m[0], '');
+  if (/<(blockquote|q)[\s>]/.test(rest)) fail(`${file}: a <blockquote> or <q> sits outside a .voice-quote block, so it has no source`);
 }
 
 if (failures.length) {

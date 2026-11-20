@@ -4,6 +4,16 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-11-20
+
+The council voice rule is now checked on every page, and keyboard focus is easier to see.
+
+### Fixed
+
+- The deploy check now applies the voice rule to every page, not just the welcome page, and fails any `<blockquote>` or `<q>` outside a sourced real-quote block.
+- The check now catches quote marks in an imagined voice when they are written as numeric entities (`&#8220;`), single quotes, or guillemets.
+- In the blend, the focus ring on the style switch was gold on cream (1.9:1). It is now oxblood (8.2:1).
+
 ## [0.1.0] - 2026-11-20
 
 The book's first page: a style sampler for choosing its look.

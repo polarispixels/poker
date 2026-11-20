@@ -50,7 +50,7 @@
         <li><strong>A real quote</strong> sits in quote marks, set between gold rules, with a link to its source. No source, no quote.</li>
         <li><strong>An imagined voice</strong> ("what Brunson might say") is paraphrase in a shaded box. It never uses quote marks, and it says it is our reading of that player's published ideas.</li>
       </ul>
-      <p>The deploy check enforces both: a real quote without a source link fails, and so does an imagined voice with quote marks or without the words "our reading".</p>
+      <p>The deploy check enforces both, on every page: a real quote without a source link fails, and so does an imagined voice with quote marks (in any spelling) or without the words "our reading". A <code>&lt;blockquote&gt;</code> or <code>&lt;q&gt;</code> outside a real-quote block fails too, since it has no source.</p>
 
       <h2 id="versioning">Versioning and releases</h2>
       <p>The site follows <a href="https://semver.org/">SemVer</a> and keeps a <a href="https://github.com/polarispixels/poker/blob/main/CHANGELOG.md">changelog</a>. The version shows in the footer of the welcome page and at the top of this one, so a deploy can be checked by eye.</p>

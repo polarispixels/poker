@@ -59,7 +59,7 @@ a:hover { color: var(--accent); }
   cursor: pointer;
 }
 .switch button[aria-pressed="true"] { background: var(--fg); color: var(--bg); }
-.switch button:focus-visible { outline: 2px solid var(--ornament); outline-offset: 2px; }
+.switch button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 /* Ornament: a centered glyph between two rules */
 .ornament {
