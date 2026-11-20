@@ -4,6 +4,25 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-11-20
+
+The book's frame: its title, its contents, and the kit that every chapter is built from.
+
+### Added
+
+- The title page for The Long Game, with the full contents: 38 chapters in six parts and six appendices, each marked "To come" until it is written.
+- A chapter build (`tools/build.js`) with shorthands for playing cards, chapter links, and figure numbers.
+- A figure kit (`js/figures.js`): bars, columns, lines, split bars, 100-dot grids, the 13 by 13 hand grid, a poker table diagram, scatter plots, and heat tables, plus hand logs, flows, trees, drills, and Table Math boxes in plain HTML.
+- A figure gallery (`docs/figures.html`) showing every type with its source, and a writing guide (`docs/writing-guide.md`).
+- A poker calculator (`tools/poker.js`) for exact equities, draws, combos, and bet math, tested by the deploy check.
+- One-command chapter releases (`tools/publish.js`).
+- The book outline, draft 2, in `reference/`.
+
+### Changed
+
+- The look is settled: the blend. The style sampler and its switch are retired.
+- The deploy check now covers chapters: a figure for every section, one Table Math box, a council voice, valid figure specs, and a fresh build.
+
 ## [0.1.1] - 2026-11-20
 
 The council voice rule is now checked on every page, and keyboard focus is easier to see.

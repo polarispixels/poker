@@ -4,9 +4,10 @@ Committed work lives in [GitHub Issues](https://github.com/polarispixels/poker/i
 
 ## Ideas
 
-- Pick the look from the sampler, then retire the switch.
-- The book outline (parts and chapters) and a chapter build script, as in Return Of.
 - A council roster page: every voice in the book, with their seat and sources.
-- A 13 by 13 starting hand grid figure, colored by Sklansky-Malmuth group.
-- Table and seat diagrams for position.
-- A Swiss-style theme for charts and numbers, as in Return Of.
+- A printable one-page Table Math card.
+- Interactive figures: a pot odds calculator, a range builder, an equity slider.
+- Multimedia: audio notes, embedded video, hand replays that step through a hand log.
+- More verified real quotes, each with a source, to sit beside the imagined voices.
+- The encyclopedia volumes from the outline, starting with Volume 2 (Mathematics).
+- A `poker.polarispixels.com` subdomain pointing at the site.

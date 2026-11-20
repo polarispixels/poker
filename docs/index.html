@@ -18,31 +18,56 @@
       <span>Docs <span data-version></span></span>
     </header>
 
-    <main class="prose">
-      <h2>Docs</h2>
-      <p>Poker is a personal study book on poker and poker strategy, a sibling of <a href="https://polarispixels.github.io/return-of/">Return Of</a>. Each chapter asks what the great players would say. This page explains how the site is put together.</p>
+    <main class="prose chapter-body">
+      <h1>Docs</h1>
+      <p class="lead">The Long Game is a personal study book on live No-Limit Hold'em, a sibling of <a href="https://polarispixels.github.io/return-of/">Return Of</a>. Each chapter asks what the great players would say, and ends with a piece of table math. This page explains how the site is put together.</p>
 
       <h2 id="layout">How the site is laid out</h2>
-      <p>Plain HTML, CSS, and a little JavaScript. There is nothing to install: open <code>index.html</code> in a browser and it works.</p>
+      <p>Plain HTML, CSS, and a little JavaScript. There is nothing to install: open <code>index.html</code> in a browser and it works. One small script builds the chapter pages, and its output is saved in the repo.</p>
       <ul>
-        <li><code>index.html</code>: the welcome page. For now, a style sampler.</li>
-        <li><code>docs/index.html</code>: this page.</li>
-        <li><code>css/themes.css</code>: one block of values per style.</li>
-        <li><code>css/site.css</code>: layout and components. It reads theme values and never hard-codes a color or font.</li>
-        <li><code>js/version.js</code>: the version number, in one place.</li>
-        <li><code>js/switch.js</code>: the sampler's style switch.</li>
-        <li><code>tools/check.js</code>: the checks that gate every deploy.</li>
-        <li><code>reference/</code>: source material, including the starting hands guide and the Oval Table council.</li>
+        <li><code>index.html</code>: the title page and the contents.</li>
+        <li><code>content/chapters.json</code>: the book's parts, chapters, and appendices, in order.</li>
+        <li><code>content/chapters/</code>: one file of content per chapter. This is where the writing lives.</li>
+        <li><code>chapters/</code>: the finished pages. Built by a script: do not edit them by hand.</li>
+        <li><code>js/figures.js</code>: the figure kit, plus range and odds arithmetic.</li>
+        <li><code>css/themes.css</code>: one block of values per style. <code>css/site.css</code>: layout and components, reading theme values only.</li>
+        <li><code>tools/build.js</code>, <code>tools/check.js</code>, <code>tools/publish.js</code>, <code>tools/poker.js</code>: build, deploy gate, one-chapter release, and the poker calculator.</li>
+        <li><code>docs/</code>: this page, the <a href="figures.html">figure gallery</a>, and the writing guide (<code>docs/writing-guide.md</code>).</li>
+        <li><code>reference/</code>: source material: the starting hands guide, the Oval Table council, and the book outline.</li>
       </ul>
 
-      <h2 id="styles">How styles work</h2>
-      <p>A style applies to whatever element carries a <code>data-style</code> attribute, and styles nest. To add a style, copy a block in <code>css/themes.css</code>, rename it, and change the values. Values come from the <a href="https://polarispixels.com/laboratory">Visual Design Laboratory</a>.</p>
+      <h2 id="styles">The look</h2>
+      <p>The book uses the <code>blend</code> style, chosen from a live sampler on November 20, 2026: Dark Academia's parchment, ink, and serif text, with Art Deco's display capitals and gold rules. Values come from the <a href="https://polarispixels.com/laboratory">Visual Design Laboratory</a>. Gold fails contrast on cream, so it marks rules and ornaments, never text. The <code>academia</code> and <code>deco</code> blocks stay in <code>css/themes.css</code>, and any element can take one with a <code>data-style</code> attribute.</p>
+
+      <h2 id="chapters">How chapters work</h2>
+      <p>A chapter is one content file, such as <code>content/chapters/05-odds-and-outs.html</code>, holding only headings, paragraphs, and figures. <code>node tools/build.js</code> wraps each one in the shared page and rewrites the contents list. A chapter with no content file shows as "To come".</p>
+      <p>Three shorthands keep content files short. The build expands them:</p>
       <ul>
-        <li><code>academia</code>: Dark Academia. Parchment, ink, oxblood, and classical serifs.</li>
-        <li><code>deco</code>: Art Deco. Black and gold, with tall geometric capitals.</li>
-        <li><code>blend</code>: the book's own mix. Academia's paper, ink, and serif body, with Deco's display capitals and gold rules. Gold fails contrast on cream, so here it marks rules and ornaments, never text.</li>
+        <li><code>[[As Kh]]</code> draws playing cards. Suits are s, h, d, c; x is any suit; <code>??</code> is a face-down card.</li>
+        <li><code>&#123;&#123;ch:7&#125;&#125;</code> links to Chapter 7 by title. A letter links to an appendix.</li>
+        <li>A figure numbered <code>Fig.</code> or <code>Table</code> is numbered for you (Fig. 7.1, Table 7.2).</li>
       </ul>
-      <p>The welcome page opens in the blend, and the switch shows all three. The choice is remembered in the browser when it allows that.</p>
+      <p>Every chapter opens with a lead paragraph, gives every section a figure, carries at least one council voice, and closes with one Table Math box. The deploy check enforces all four. The full rules are in the writing guide.</p>
+
+      <h2 id="figures">Figures</h2>
+      <p>Figures are first-class parts of the book. The <a href="figures.html">gallery</a> shows every type with its source. A kit figure is a type and a JSON spec:</p>
+<pre><code>&lt;div data-fig="bars"&gt;&lt;script type="application/json"&gt;{ ... }&lt;/script&gt;&lt;/div&gt;</code></pre>
+      <ul>
+        <li>Kit types, drawn by <code>js/figures.js</code>: <code>bars</code>, <code>columns</code>, <code>line</code>, <code>split</code>, <code>dots</code> (times out of 100), <code>range</code> (the 13 by 13 hand grid), <code>table</code> (seats, stacks, and bets), <code>scatter</code>, and <code>heat</code>.</li>
+        <li>Components in plain HTML: tables, hand logs, flows, trees, stats, compares, timelines, drills, and inline SVG.</li>
+        <li>Charts are drawn at the real width of their container, not scaled, so labels stay readable on a phone. They redraw when the window changes size.</li>
+        <li><strong>Color has one meaning across the book.</strong> Ink is the main line or the hero. Oxblood (<code>accent</code>) is risk, loss, a bluff, or the villain. Teal (<code>accent2</code>) is value or the alternative. Gold is a highlight. A good outcome is never oxblood.</li>
+        <li>Every figure says where its numbers come from, and every kit figure carries a sentence describing it for readers who cannot see it.</li>
+      </ul>
+
+      <h2 id="numbers">Where the numbers come from</h2>
+      <p>No poker number in the book is quoted from memory. <code>tools/poker.js</code> counts every possible board for an equity, and the range and odds arithmetic lives in <code>js/figures.js</code>. Both are tested by the deploy check.</p>
+<pre><code>node tools/poker.js equity "AsKs" "QhQd"
+node tools/poker.js vsrange "AsKs" "TT+,AQs+,AKo" --board "Ts 9s 2d"
+node tools/poker.js draw 9
+node tools/poker.js combos "22+,ATs+,KQo"
+node tools/poker.js odds 100 50</code></pre>
+      <p>Example hands are invented for teaching and say so. They are not real hand histories.</p>
 
       <h2 id="voices">Council voices</h2>
       <p>The book draws on a council of players: the Oval Table to start, others as chapters need them. Their voices come in two kinds, and the two never look alike.</p>
@@ -53,13 +78,11 @@
       <p>The deploy check enforces both, on every page: a real quote without a source link fails, and so does an imagined voice with quote marks (in any spelling) or without the words "our reading". A <code>&lt;blockquote&gt;</code> or <code>&lt;q&gt;</code> outside a real-quote block fails too, since it has no source.</p>
 
       <h2 id="versioning">Versioning and releases</h2>
-      <p>The site follows <a href="https://semver.org/">SemVer</a> and keeps a <a href="https://github.com/polarispixels/poker/blob/main/CHANGELOG.md">changelog</a>. The version shows in the footer of the welcome page and at the top of this one, so a deploy can be checked by eye.</p>
-      <ol>
-        <li>Bump <code>POKER_VERSION</code> in <code>js/version.js</code>.</li>
-        <li>Add a <code>## [x.y.z]</code> entry to <code>CHANGELOG.md</code>.</li>
-        <li>Run <code>node tools/check.js</code>.</li>
-        <li>Commit, push to <code>main</code>, then tag: <code>git tag vX.Y.Z &amp;&amp; git push --tags</code>.</li>
-      </ol>
+      <p>The site follows <a href="https://semver.org/">SemVer</a> and keeps a <a href="https://github.com/polarispixels/poker/blob/main/CHANGELOG.md">changelog</a>. The version shows in every footer, so a deploy can be checked by eye. The book is published one chapter at a time: each new chapter is a minor version.</p>
+      <ul>
+        <li><strong>A chapter:</strong> write the draft in <code>drafts/</code> (not committed), check it with <code>node tools/check.js --draft drafts/NN-slug.html</code>, then run <code>node tools/publish.js N "summary"</code>. That one command moves the draft in, bumps the version, adds the changelog entry, builds, checks, commits, pushes, and tags. If the check fails, it puts everything back.</li>
+        <li><strong>Anything else:</strong> bump <code>POKER_VERSION</code> in <code>js/version.js</code>, add a <code>## [x.y.z]</code> entry to <code>CHANGELOG.md</code>, run the build and the check, commit, push <code>main</code>, and tag.</li>
+      </ul>
 
       <h2 id="deploy">How it ships</h2>
       <p>Every push to <code>main</code> runs the checks in GitHub Actions. If they pass, the same workflow publishes the site to GitHub Pages. A failing check never reaches the live site. A deploy is done when the live page shows the new version.</p>
@@ -69,9 +92,14 @@
 
       <h2 id="decisions">Decisions</h2>
       <ul>
-        <li><strong>November 20, 2026: built the same way as Return Of.</strong> Plain static files, styles scoped by <code>data-style</code>, a deploy check, and GitHub Pages through Actions. The tradeoff: the header and footer are copied between pages until a build script is worth adding.</li>
-        <li><strong>November 20, 2026: the look is chosen from a live sampler.</strong> Dark Academia, Art Deco, and a blend are shown side by side on the real site, at real phone widths. Building one style blind would likely have meant building twice.</li>
+        <li><strong>November 20, 2026: built the same way as Return Of.</strong> Plain static files, styles scoped by <code>data-style</code>, a deploy check, and GitHub Pages through Actions.</li>
+        <li><strong>November 20, 2026: the look is the blend,</strong> chosen by Ryan from a live sampler of Dark Academia, Art Deco, and a mix of the two.</li>
         <li><strong>November 20, 2026: real quotes need a source; imagined voices are labeled.</strong> Return Of bans quotes from real people. This book is built around the council, so it allows them, with a source link, and keeps invented voices visibly apart.</li>
+        <li><strong>November 20, 2026: the title is The Long Game.</strong> Ryan chose it over the outline's working title, The Complete Game. The outline's subtitle stays.</li>
+        <li><strong>November 20, 2026: figures are declared, not programmed.</strong> Return Of has one draw function per chart. Here a chapter gives a figure type and a JSON spec, and a small kit draws it. The tradeoff: a figure the kit cannot draw needs a new type or hand-written SVG, but a writer can add a correct, themed figure without touching code, and the check can validate every spec.</li>
+        <li><strong>November 20, 2026: numbers come from a calculator in the repo.</strong> Poker odds are easy to misremember. <code>tools/poker.js</code> counts exact equities, so writers and reviewers compute every figure. The tradeoff: range-against-range numbers before the flop are sampled, not exact, and say so.</li>
+        <li><strong>November 20, 2026: the book is published one chapter at a time.</strong> Ryan wants to read along while it is written. Each chapter is drafted, reviewed for accuracy, and released as its own version by one locked command, so several can be in progress at once. Unwritten chapters show as "To come". All chapters ship as preliminary drafts.</li>
+        <li><strong>November 20, 2026: the default game is live $2/$5, nine-handed, 100 big blinds.</strong> One setting across the book keeps examples comparable. Online play is out of scope for now, by the outline's second draft.</li>
       </ul>
     </main>
 

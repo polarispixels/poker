@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="en" data-style="blend">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Figures: The Long Game</title>
+  <meta name="description" content="Every figure type and page component in The Long Game, each shown with its source.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Josefin+Sans:wght@400;700&family=Limelight&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/themes.css">
+  <link rel="stylesheet" href="../css/site.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="masthead label">
+      <a href="../">The Long Game</a>
+      <span><a href="index.html">Docs</a> / Figures <span data-version></span></span>
+    </header>
+
+    <main class="prose chapter-body">
+      <h1>Figures</h1>
+      <p class="lead">Figures are first-class parts of this book. This page shows every figure type and page component with the source that makes it. A chapter is written by copying these and changing the content.</p>
+      <p>Tones name a meaning, not a color: <code>ink</code> is the main line or the hero, <code>accent</code> (oxblood) is risk, loss, a bluff, or the villain, <code>accent2</code> (teal) is value or the alternative, <code>gold</code> is a highlight, and <code>muted</code> and <code>paper</code> are structure. Soft versions exist: <code>ink-soft</code>, <code>accent-soft</code>, <code>accent2-soft</code>, <code>gold-soft</code>. Every kit figure needs a <code>label</code>: a sentence for readers who cannot see it.</p>
+      <section class="gallery-item" id="cards-shorthand">
+        <h2>Cards (shorthand)</h2>
+        <p>Write cards anywhere in text as <code>[[As Kh]]</code>. Suits are s, h, d, c. Use x for any suit and ?? for a face-down card. The build expands them, so they need no script.</p>
+<p>Hero holds <span class="cards" role="img" aria-label="Ace of spades, King of spades"><span class="pc">A<i>♠</i></span><span class="pc">K<i>♠</i></span></span> on a flop of <span class="cards" role="img" aria-label="Ten of spades, 9 of spades, 2 of diamonds"><span class="pc">T<i>♠</i></span><span class="pc">9<i>♠</i></span><span class="pc r">2<i>♦</i></span></span>. The villain shows <span class="cards" role="img" aria-label="Queen of hearts, Queen of diamonds"><span class="pc r">Q<i>♥</i></span><span class="pc r">Q<i>♦</i></span></span>. A hand like <span class="cards" role="img" aria-label="Ace, 7"><span class="pc">A</span><span class="pc">7</span></span> has no suits named, and <span class="cards" role="img" aria-label="a face-down card, a face-down card"><span class="pc back"></span><span class="pc back"></span></span> is unknown.</p>
+<pre><code>&lt;p&gt;Hero holds [[As Ks]] on a flop of [[Ts 9s 2d]]. The villain shows [[Qh Qd]]. A hand like [[Ax 7x]] has no suits named, and [[?? ??]] is unknown.&lt;/p&gt;</code></pre>
+      </section>
+      <section class="gallery-item" id="bars">
+        <h2>bars</h2>
+        <p>One number per item. Use for ranked comparisons: equities, frequencies, costs.</p>
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. G.1</span><h3 class="figure-title">Common draws, flop to river</h3></div>
+  <div data-fig="bars"><script type="application/json">
+  {"label": "Chance of completing five common draws by the river, from 54 percent for a flush draw plus open-ender down to 16 percent for a gutshot.",
+   "unit": "%", "max": 100,
+   "items": [
+     {"label": "Flush draw + open-ender", "value": 54.1, "note": "15 outs", "tone": "accent2"},
+     {"label": "Flush draw", "value": 35.0, "note": "9 outs"},
+     {"label": "Open-ended straight draw", "value": 31.5, "note": "8 outs"},
+     {"label": "Two overcards", "value": 24.1, "note": "6 outs"},
+     {"label": "Gutshot", "value": 16.5, "note": "4 outs", "tone": "accent"}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact odds with two cards to come: 1 minus (47 minus outs)(46 minus outs) over 47 times 46.</p>
+</figure>
+<pre><code>&lt;figure class=&quot;figure&quot;&gt;
+  &lt;div class=&quot;figure-head&quot;&gt;&lt;span class=&quot;figure-number&quot;&gt;Fig.&lt;/span&gt;&lt;h3 class=&quot;figure-title&quot;&gt;Common draws, flop to river&lt;/h3&gt;&lt;/div&gt;
+  &lt;div data-fig=&quot;bars&quot;&gt;&lt;script type=&quot;application/json&quot;&gt;
+  {&quot;label&quot;: &quot;Chance of completing five common draws by the river, from 54 percent for a flush draw plus open-ender down to 16 percent for a gutshot.&quot;,
+   &quot;unit&quot;: &quot;%&quot;, &quot;max&quot;: 100,
+   &quot;items&quot;: [
+     {&quot;label&quot;: &quot;Flush draw + open-ender&quot;, &quot;value&quot;: 54.1, &quot;note&quot;: &quot;15 outs&quot;, &quot;tone&quot;: &quot;accent2&quot;},
+     {&quot;label&quot;: &quot;Flush draw&quot;, &quot;value&quot;: 35.0, &quot;note&quot;: &quot;9 outs&quot;},
+     {&quot;label&quot;: &quot;Open-ended straight draw&quot;, &quot;value&quot;: 31.5, &quot;note&quot;: &quot;8 outs&quot;},
+     {&quot;label&quot;: &quot;Two overcards&quot;, &quot;value&quot;: 24.1, &quot;note&quot;: &quot;6 outs&quot;},
+     {&quot;label&quot;: &quot;Gutshot&quot;, &quot;value&quot;: 16.5, &quot;note&quot;: &quot;4 outs&quot;, &quot;tone&quot;: &quot;accent&quot;}
+   ]}
+  &lt;/script&gt;&lt;/div&gt;
+  &lt;p class=&quot;figure-note&quot;&gt;Exact odds with two cards to come: 1 minus (47 minus outs)(46 minus outs) over 47 times 46.&lt;/p&gt;
+&lt;/figure&gt;</code></pre>
+      </section>
+      <section class="gallery-item" id="columns">
+        <h2>columns</h2>
+        <p>Grouped vertical bars: one or more series across categories. Add "xLabel" and "yLabel" when the axes need naming.</p>
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. G.2</span><h3 class="figure-title">The rule of 4 against the exact odds</h3></div>
+  <div data-fig="columns"><script type="application/json">
+  {"label": "Rule of 4 estimates compared with exact flop-to-river odds for 4, 8, 9, 12, and 15 outs. The rule overstates more as outs grow.",
+   "unit": "%", "categories": ["4 outs", "8 outs", "9 outs", "12 outs", "15 outs"],
+   "series": [
+     {"name": "Rule of 4", "values": [16, 32, 36, 48, 60], "tone": "gold"},
+     {"name": "Exact", "values": [16.5, 31.5, 35.0, 45.0, 54.1], "tone": "ink"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: outs times 4 against the exact two-card odds.</p>
+</figure>
+<pre><code>&lt;figure class=&quot;figure&quot;&gt;
+  &lt;div class=&quot;figure-head&quot;&gt;&lt;span class=&quot;figure-number&quot;&gt;Fig.&lt;/span&gt;&lt;h3 class=&quot;figure-title&quot;&gt;The rule of 4 against the exact odds&lt;/h3&gt;&lt;/div&gt;
+  &lt;div data-fig=&quot;columns&quot;&gt;&lt;script type=&quot;application/json&quot;&gt;
+  {&quot;label&quot;: &quot;Rule of 4 estimates compared with exact flop-to-river odds for 4, 8, 9, 12, and 15 outs. The rule overstates more as outs grow.&quot;,
+   &quot;unit&quot;: &quot;%&quot;, &quot;categories&quot;: [&quot;4 outs&quot;, &quot;8 outs&quot;, &quot;9 outs&quot;, &quot;12 outs&quot;, &quot;15 outs&quot;],
+   &quot;series&quot;: [
+     {&quot;name&quot;: &quot;Rule of 4&quot;, &quot;values&quot;: [16, 32, 36, 48, 60], &quot;tone&quot;: &quot;gold&quot;},
+     {&quot;name&quot;: &quot;Exact&quot;, &quot;values&quot;: [16.5, 31.5, 35.0, 45.0, 54.1], &quot;tone&quot;: &quot;ink&quot;}
+   ]}
+  &lt;/script&gt;&lt;/div&gt;
+  &lt;p class=&quot;figure-note&quot;&gt;Arithmetic: outs times 4 against the exact two-card odds.&lt;/p&gt;
+&lt;/figure&gt;</code></pre>
+      </section>
+      <section class="gallery-item" id="line">
+        <h2>line</h2>
+        <p>A value that changes along a numeric axis. Series take "points" as [x, y] pairs, or give "categories" and "values". Optional: "refs" (dashed reference lines), "marks" (labeled points), "xLabel", "yLabel", "xUnit", "yUnit", "dashed" on a series.</p>
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. G.3</span><h3 class="figure-title">What a bet asks of the caller</h3></div>
+  <div data-fig="line"><script type="application/json">
+  {"label": "Equity needed to call and how often a bluff must work, as the bet grows from a quarter of the pot to twice the pot.",
+   "xLabel": "Bet as a share of the pot", "xUnit": "x", "yUnit": "%", "yMin": 0, "yMax": 70,
+   "series": [
+     {"name": "Equity needed to call", "tone": "ink", "points": [[0.25, 16.7], [0.33, 20], [0.5, 25], [0.67, 28.6], [1, 33.3], [1.5, 37.5], [2, 40]]},
+     {"name": "Bluff must work", "tone": "accent", "points": [[0.25, 20], [0.33, 25], [0.5, 33.3], [0.67, 40], [1, 50], [1.5, 60], [2, 66.7]]}
+   ],
+   "marks": [{"x": 1, "y": 33.3, "label": "Pot bet: 33%"}]}
+  </script></div>
+  <p class="figure-note">Arithmetic: call needs bet / (pot + 2 x bet). A bluff breaks even at bet / (pot + bet).</p>
+</figure>
+<pre><code>&lt;figure class=&quot;figure&quot;&gt;
+  &lt;div class=&quot;figure-head&quot;&gt;&lt;span class=&quot;figure-number&quot;&gt;Fig.&lt;/span&gt;&lt;h3 class=&quot;figure-title&quot;&gt;What a bet asks of the caller&lt;/h3&gt;&lt;/div&gt;
+  &lt;div data-fig=&quot;line&quot;&gt;&lt;script type=&quot;application/json&quot;&gt;
+  {&quot;label&quot;: &quot;Equity needed to call and how often a bluff must work, as the bet grows from a quarter of the pot to twice the pot.&quot;,
+   &quot;xLabel&quot;: &quot;Bet as a share of the pot&quot;, &quot;xUnit&quot;: &quot;x&quot;, &quot;yUnit&quot;: &quot;%&quot;, &quot;yMin&quot;: 0, &quot;yMax&quot;: 70,
+   &quot;series&quot;: [
+     {&quot;name&quot;: &quot;Equity needed to call&quot;, &quot;tone&quot;: &quot;ink&quot;, &quot;points&quot;: [[0.25, 16.7], [0.33, 20], [0.5, 25], [0.67, 28.6], [1, 33.3], [1.5, 37.5], [2, 40]]},
+     {&quot;name&quot;: &quot;Bluff must work&quot;, &quot;tone&quot;: &quot;accent&quot;, &quot;points&quot;: [[0.25, 20], [0.33, 25], [0.5, 33.3], [0.67, 40], [1, 50], [1.5, 60], [2, 66.7]]}
+   ],
+   &quot;marks&quot;: [{&quot;x&quot;: 1, &quot;y&quot;: 33.3, &quot;label&quot;: &quot;Pot bet: 33%&quot;}]}
+  &lt;/script&gt;&lt;/div&gt;
+  &lt;p class=&quot;figure-note&quot;&gt;Arithmetic: call needs bet / (pot + 2 x bet). A bluff breaks even at bet / (pot + bet).&lt;/p&gt;
+&lt;/figure&gt;</code></pre>
+      </section>
+      <section class="gallery-item" id="split">
+        <h2>split</h2>
+        <p>Bars cut into shares. Use for equity matchups, range make-up, and where the money in a pot came from. Values are shown with "%" unless you set "unit".</p>
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. G.4</span><h3 class="figure-title">Three classic preflop matchups</h3></div>
+  <div data-fig="split"><script type="application/json">
+  {"label": "All-in preflop equity for three matchups: pair against overcards is close to even, pair over pair is 80 to 20, and a dominated ace is 74 to 26.",
+   "rows": [
+     {"label": "QQ against AKs", "note": "the coin flip", "parts": [{"label": "First hand", "value": 53.8, "tone": "ink"}, {"label": "Second hand", "value": 46.2, "tone": "accent"}]},
+     {"label": "KK against 88", "note": "pair over pair", "parts": [{"label": "First hand", "value": 80.2, "tone": "ink"}, {"label": "Second hand", "value": 19.8, "tone": "accent"}]},
+     {"label": "AKo against AQo", "note": "domination", "parts": [{"label": "First hand", "value": 74.0, "tone": "ink"}, {"label": "Second hand", "value": 26.0, "tone": "accent"}]}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact equities from tools/poker.js, counting every possible board. Ties are split.</p>
+</figure>
+<pre><code>&lt;figure class=&quot;figure&quot;&gt;
+  &lt;div class=&quot;figure-head&quot;&gt;&lt;span class=&quot;figure-number&quot;&gt;Fig.&lt;/span&gt;&lt;h3 class=&quot;figure-title&quot;&gt;Three classic preflop matchups&lt;/h3&gt;&lt;/div&gt;
+  &lt;div data-fig=&quot;split&quot;&gt;&lt;script type=&quot;application/json&quot;&gt;
+  {&quot;label&quot;: &quot;All-in preflop equity for three matchups: pair against overcards is close to even, pair over pair is 80 to 20, and a dominated ace is 74 to 26.&quot;,
+   &quot;rows&quot;: [
+     {&quot;label&quot;: &quot;QQ against AKs&quot;, &quot;note&quot;: &quot;the coin flip&quot;, &quot;parts&quot;: [{&quot;label&quot;: &quot;First hand&quot;, &quot;value&quot;: 53.8, &quot;tone&quot;: &quot;ink&quot;}, {&quot;label&quot;: &quot;Second hand&quot;, &quot;value&quot;: 46.2, &quot;tone&quot;: &quot;accent&quot;}]},
+     {&quot;label&quot;: &quot;KK against 88&quot;, &quot;note&quot;: &quot;pair over pair&quot;, &quot;parts&quot;: [{&quot;label&quot;: &quot;First hand&quot;, &quot;value&quot;: 80.2, &quot;tone&quot;: &quot;ink&quot;}, {&quot;label&quot;: &quot;Second hand&quot;, &quot;value&quot;: 19.8, &quot;tone&quot;: &quot;accent&quot;}]},
+     {&quot;label&quot;: &quot;AKo against AQo&quot;, &quot;note&quot;: &quot;domination&quot;, &quot;parts&quot;: [{&quot;label&quot;: &quot;First hand&quot;, &quot;value&quot;: 74.0, &quot;tone&quot;: &quot;ink&quot;}, {&quot;label&quot;: &quot;Second hand&quot;, &quot;value&quot;: 26.0, &quot;tone&quot;: &quot;accent&quot;}]}
+   ]}
+  &lt;/script&gt;&lt;/div&gt;
+  &lt;p class=&quot;figure-note&quot;&gt;Exact equities from tools/poker.js, counting every possible board. Ties are split.&lt;/p&gt;
+&lt;/figure&gt;</code></pre>
+      </section>
+      <section class="gallery-item" id="dots">
+        <h2>dots</h2>
+        <p>One hundred dots: "times out of 100". Values must be whole numbers that add to 100. The best way to make a percentage feel real.</p>
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. G.5</span><h3 class="figure-title">A flush draw on the flop, played 100 times</h3></div>
+  <div data-fig="dots"><script type="application/json">
+  {"label": "Out of 100 flush draws on the flop, about 35 complete by the river and 65 miss.",
+   "parts": [
+     {"label": "The flush arrives by the river", "value": 35, "tone": "accent2"},
+     {"label": "It misses", "value": 65, "tone": "paper"}
+   ]}
+  </script></div>
+  <p class="figure-note">Nine outs with two cards to come is 34.97%, rounded to 35.</p>
+</figure>
+<pre><code>&lt;figure class=&quot;figure&quot;&gt;
+  &lt;div class=&quot;figure-head&quot;&gt;&lt;span class=&quot;figure-number&quot;&gt;Fig.&lt;/span&gt;&lt;h3 class=&quot;figure-title&quot;&gt;A flush draw on the flop, played 100 times&lt;/h3&gt;&lt;/div&gt;
+  &lt;div data-fig=&quot;dots&quot;&gt;&lt;script type=&quot;application/json&quot;&gt;
+  {&quot;label&quot;: &quot;Out of 100 flush draws on the flop, about 35 complete by the river and 65 miss.&quot;,
+   &quot;parts&quot;: [
+     {&quot;label&quot;: &quot;The flush arrives by the river&quot;, &quot;value&quot;: 35, &quot;tone&quot;: &quot;accent2&quot;},
+     {&quot;label&quot;: &quot;It misses&quot;, &quot;value&quot;: 65, &quot;tone&quot;: &quot;paper&quot;}
+   ]}
+  &lt;/script&gt;&lt;/div&gt;
+  &lt;p class=&quot;figure-note&quot;&gt;Nine outs with two cards to come is 34.97%, rounded to 35.&lt;/p&gt;
+&lt;/figure&gt;</code></pre>
+      </section>
+      <section class="gallery-item" id="range">
+        <h2>range</h2>
+        <p>The 13 by 13 starting hand grid. Suited hands sit above the diagonal, offsuit below, pairs on it. Each group is a range string: "TT+", "22-66", "AKs", "AK" (both), "ATs+", "A2s-A5s". The figure counts combos and percentages for you.</p>
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. G.6</span><h3 class="figure-title">Sklansky-Malmuth Groups 1 to 3</h3></div>
+  <div data-fig="range"><script type="application/json">
+  {"label": "The starting hand grid with Sklansky-Malmuth Group 1, Group 2, and Group 3 hands shaded.",
+   "groups": [
+     {"name": "Group 1", "tone": "ink", "hands": "JJ+,AKs"},
+     {"name": "Group 2", "tone": "accent", "hands": "TT,AQs,AJs,KQs,AKo"},
+     {"name": "Group 3", "tone": "gold", "hands": "99,JTs,QJs,KJs,ATs,AQo"}
+   ]}
+  </script></div>
+  <p class="figure-note">Groups from Sklansky and Malmuth, as listed in the starting hands reference.</p>
+</figure>
+<pre><code>&lt;figure class=&quot;figure&quot;&gt;
+  &lt;div class=&quot;figure-head&quot;&gt;&lt;span class=&quot;figure-number&quot;&gt;Fig.&lt;/span&gt;&lt;h3 class=&quot;figure-title&quot;&gt;Sklansky-Malmuth Groups 1 to 3&lt;/h3&gt;&lt;/div&gt;
+  &lt;div data-fig=&quot;range&quot;&gt;&lt;script type=&quot;application/json&quot;&gt;
+  {&quot;label&quot;: &quot;The starting hand grid with Sklansky-Malmuth Group 1, Group 2, and Group 3 hands shaded.&quot;,
+   &quot;groups&quot;: [
+     {&quot;name&quot;: &quot;Group 1&quot;, &quot;tone&quot;: &quot;ink&quot;, &quot;hands&quot;: &quot;JJ+,AKs&quot;},
+     {&quot;name&quot;: &quot;Group 2&quot;, &quot;tone&quot;: &quot;accent&quot;, &quot;hands&quot;: &quot;TT,AQs,AJs,KQs,AKo&quot;},
+     {&quot;name&quot;: &quot;Group 3&quot;, &quot;tone&quot;: &quot;gold&quot;, &quot;hands&quot;: &quot;99,JTs,QJs,KJs,ATs,AQo&quot;}
+   ]}
+  &lt;/script&gt;&lt;/div&gt;
+  &lt;p class=&quot;figure-note&quot;&gt;Groups from Sklansky and Malmuth, as listed in the starting hands reference.&lt;/p&gt;
+&lt;/figure&gt;</code></pre>
+      </section>
+      <section class="gallery-item" id="table">
+        <h2>table</h2>
+        <p>A poker table seen from above. Seats run clockwise in the order given, and the hero sits at the bottom. Each seat has "pos" and may have "stack", "bet", "cards", "note", and "state" (hero, villain, active, fold). "button" is the index of the dealer seat. "pot", "board", and "center" go in the middle.</p>
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. G.7</span><h3 class="figure-title">A raise from the cutoff, nine-handed</h3></div>
+  <div data-fig="table"><script type="application/json">
+  {"label": "Nine-handed table. Hero in the cutoff raises to 15 with ace king of spades after four folds. The button, small blind, and big blind are still to act.",
+   "button": 1, "pot": "$23",
+   "seats": [
+     {"pos": "CO", "stack": "$500", "bet": "$15", "cards": "As Ks", "state": "hero"},
+     {"pos": "BTN", "stack": "$420"},
+     {"pos": "SB", "stack": "$310", "bet": "$2"},
+     {"pos": "BB", "stack": "$600", "bet": "$5"},
+     {"pos": "UTG", "state": "fold"},
+     {"pos": "UTG+1", "state": "fold"},
+     {"pos": "MP", "state": "fold"},
+     {"pos": "LJ", "state": "fold"},
+     {"pos": "HJ", "state": "fold"}
+   ]}
+  </script></div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history.</p>
+</figure>
+<pre><code>&lt;figure class=&quot;figure&quot;&gt;
+  &lt;div class=&quot;figure-head&quot;&gt;&lt;span class=&quot;figure-number&quot;&gt;Fig.&lt;/span&gt;&lt;h3 class=&quot;figure-title&quot;&gt;A raise from the cutoff, nine-handed&lt;/h3&gt;&lt;/div&gt;
+  &lt;div data-fig=&quot;table&quot;&gt;&lt;script type=&quot;application/json&quot;&gt;
+  {&quot;label&quot;: &quot;Nine-handed table. Hero in the cutoff raises to 15 with ace king of spades after four folds. The button, small blind, and big blind are still to act.&quot;,
+   &quot;button&quot;: 1, &quot;pot&quot;: &quot;$23&quot;,
+   &quot;seats&quot;: [
+     {&quot;pos&quot;: &quot;CO&quot;, &quot;stack&quot;: &quot;$500&quot;, &quot;bet&quot;: &quot;$15&quot;, &quot;cards&quot;: &quot;As Ks&quot;, &quot;state&quot;: &quot;hero&quot;},
+     {&quot;pos&quot;: &quot;BTN&quot;, &quot;stack&quot;: &quot;$420&quot;},
+     {&quot;pos&quot;: &quot;SB&quot;, &quot;stack&quot;: &quot;$310&quot;, &quot;bet&quot;: &quot;$2&quot;},
+     {&quot;pos&quot;: &quot;BB&quot;, &quot;stack&quot;: &quot;$600&quot;, &quot;bet&quot;: &quot;$5&quot;},
+     {&quot;pos&quot;: &quot;UTG&quot;, &quot;state&quot;: &quot;fold&quot;},
+     {&quot;pos&quot;: &quot;UTG+1&quot;, &quot;state&quot;: &quot;fold&quot;},
+     {&quot;pos&quot;: &quot;MP&quot;, &quot;state&quot;: &quot;fold&quot;},
+     {&quot;pos&quot;: &quot;LJ&quot;, &quot;state&quot;: &quot;fold&quot;},
+     {&quot;pos&quot;: &quot;HJ&quot;, &quot;state&quot;: &quot;fold&quot;}
+   ]}
+  &lt;/script&gt;&lt;/div&gt;
+  &lt;p class=&quot;figure-note&quot;&gt;An example hand in a $2/$5 game. Not a real hand history.&lt;/p&gt;
+&lt;/figure&gt;</code></pre>
+      </section>
+      <section class="gallery-item" id="scatter">
+        <h2>scatter</h2>
+        <p>Things placed on two axes, with the four corners named. Values run 0 to 100 unless you set "min" and "max" on an axis. "quadrants" are top-left, top-right, bottom-left, bottom-right.</p>
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. G.8</span><h3 class="figure-title">Four kinds of opponent</h3></div>
+  <div data-fig="scatter"><script type="application/json">
+  {"label": "Player types on two axes: how many hands they play, and how often they bet and raise. Tight-aggressive, loose-aggressive, tight-passive, and loose-passive.",
+   "x": {"label": "Hands played", "low": "Tight", "high": "Loose"},
+   "y": {"label": "Aggression", "high": "Bets and raises"},
+   "quadrants": ["Tight-aggressive", "Loose-aggressive", "Tight-passive", "Loose-passive"],
+   "points": [
+     {"label": "The solid regular", "x": 28, "y": 76, "tone": "ink"},
+     {"label": "The maniac", "x": 82, "y": 86, "tone": "accent"},
+     {"label": "The nit", "x": 14, "y": 22, "tone": "muted"},
+     {"label": "The calling station", "x": 78, "y": 18, "tone": "gold"}
+   ]}
+  </script></div>
+  <p class="figure-note">A sketch of the standard four types. Positions are illustrative, not measured.</p>
+</figure>
+<pre><code>&lt;figure class=&quot;figure&quot;&gt;
+  &lt;div class=&quot;figure-head&quot;&gt;&lt;span class=&quot;figure-number&quot;&gt;Fig.&lt;/span&gt;&lt;h3 class=&quot;figure-title&quot;&gt;Four kinds of opponent&lt;/h3&gt;&lt;/div&gt;
+  &lt;div data-fig=&quot;scatter&quot;&gt;&lt;script type=&quot;application/json&quot;&gt;
+  {&quot;label&quot;: &quot;Player types on two axes: how many hands they play, and how often they bet and raise. Tight-aggressive, loose-aggressive, tight-passive, and loose-passive.&quot;,
+   &quot;x&quot;: {&quot;label&quot;: &quot;Hands played&quot;, &quot;low&quot;: &quot;Tight&quot;, &quot;high&quot;: &quot;Loose&quot;},
+   &quot;y&quot;: {&quot;label&quot;: &quot;Aggression&quot;, &quot;high&quot;: &quot;Bets and raises&quot;},
+   &quot;quadrants&quot;: [&quot;Tight-aggressive&quot;, &quot;Loose-aggressive&quot;, &quot;Tight-passive&quot;, &quot;Loose-passive&quot;],
+   &quot;points&quot;: [
+     {&quot;label&quot;: &quot;The solid regular&quot;, &quot;x&quot;: 28, &quot;y&quot;: 76, &quot;tone&quot;: &quot;ink&quot;},
+     {&quot;label&quot;: &quot;The maniac&quot;, &quot;x&quot;: 82, &quot;y&quot;: 86, &quot;tone&quot;: &quot;accent&quot;},
+     {&quot;label&quot;: &quot;The nit&quot;, &quot;x&quot;: 14, &quot;y&quot;: 22, &quot;tone&quot;: &quot;muted&quot;},
+     {&quot;label&quot;: &quot;The calling station&quot;, &quot;x&quot;: 78, &quot;y&quot;: 18, &quot;tone&quot;: &quot;gold&quot;}
+   ]}
+  &lt;/script&gt;&lt;/div&gt;
+  &lt;p class=&quot;figure-note&quot;&gt;A sketch of the standard four types. Positions are illustrative, not measured.&lt;/p&gt;
+&lt;/figure&gt;</code></pre>
+      </section>
+      <section class="gallery-item" id="heat">
+        <h2>heat</h2>
+        <p>A grid of numbers where shade carries the value. Use for two-way lookups. "tone" is ink, accent, accent2, or gold. Give "cells" (text, same shape as values) to show something other than the number.</p>
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table G.1</span><h3 class="figure-title">Equity needed to call, by pot and bet</h3></div>
+  <div data-fig="heat"><script type="application/json">
+  {"label": "Equity needed to call for bets of 25, 50, 100, and 200 dollars into pots of 50, 100, and 200 dollars.",
+   "corner": "Pot", "unit": "%", "tone": "accent2",
+   "cols": ["Bet $25", "Bet $50", "Bet $100", "Bet $200"],
+   "rows": ["$50", "$100", "$200"],
+   "values": [[25, 33.3, 40, 44.4], [16.7, 25, 33.3, 40], [10, 16.7, 25, 33.3]]}
+  </script></div>
+  <p class="figure-note">Arithmetic: bet / (pot + 2 x bet).</p>
+</figure>
+<pre><code>&lt;figure class=&quot;figure&quot;&gt;
+  &lt;div class=&quot;figure-head&quot;&gt;&lt;span class=&quot;figure-number&quot;&gt;Table&lt;/span&gt;&lt;h3 class=&quot;figure-title&quot;&gt;Equity needed to call, by pot and bet&lt;/h3&gt;&lt;/div&gt;
+  &lt;div data-fig=&quot;heat&quot;&gt;&lt;script type=&quot;application/json&quot;&gt;
+  {&quot;label&quot;: &quot;Equity needed to call for bets of 25, 50, 100, and 200 dollars into pots of 50, 100, and 200 dollars.&quot;,
+   &quot;corner&quot;: &quot;Pot&quot;, &quot;unit&quot;: &quot;%&quot;, &quot;tone&quot;: &quot;accent2&quot;,
+   &quot;cols&quot;: [&quot;Bet $25&quot;, &quot;Bet $50&quot;, &quot;Bet $100&quot;, &quot;Bet $200&quot;],
+   &quot;rows&quot;: [&quot;$50&quot;, &quot;$100&quot;, &quot;$200&quot;],
+   &quot;values&quot;: [[25, 33.3, 40, 44.4], [16.7, 25, 33.3, 40], [10, 16.7, 25, 33.3]]}
+  &lt;/script&gt;&lt;/div&gt;
+  &lt;p class=&quot;figure-note&quot;&gt;Arithmetic: bet / (pot + 2 x bet).&lt;/p&gt;
+&lt;/figure&gt;</code></pre>
+      </section>
+      <section class="gallery-item" id="a-plain-table">
+        <h2>A plain table</h2>
+        <p>Any HTML table works inside a figure. Add class="wrap" when cells hold sentences. Mark a cell class="good" or class="bad" to color it, and a row class="total" for a sum.</p>
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table G.2</span><h3 class="figure-title">What each bet size asks</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Bet size</th><th>Equity to call</th><th>Bluff must work</th><th>Minimum defense</th></tr></thead>
+      <tbody>
+        <tr><td>1/3 pot</td><td>20%</td><td>25%</td><td>75%</td></tr>
+        <tr><td>1/2 pot</td><td>25%</td><td>33%</td><td>67%</td></tr>
+        <tr><td>Pot</td><td>33%</td><td>50%</td><td>50%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Arithmetic. Pot is counted before the bet.</p>
+</figure>
+<pre><code>&lt;figure class=&quot;figure&quot;&gt;
+  &lt;div class=&quot;figure-head&quot;&gt;&lt;span class=&quot;figure-number&quot;&gt;Table&lt;/span&gt;&lt;h3 class=&quot;figure-title&quot;&gt;What each bet size asks&lt;/h3&gt;&lt;/div&gt;
+  &lt;div class=&quot;table-scroll&quot;&gt;
+    &lt;table&gt;
+      &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Bet size&lt;/th&gt;&lt;th&gt;Equity to call&lt;/th&gt;&lt;th&gt;Bluff must work&lt;/th&gt;&lt;th&gt;Minimum defense&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;&lt;td&gt;1/3 pot&lt;/td&gt;&lt;td&gt;20%&lt;/td&gt;&lt;td&gt;25%&lt;/td&gt;&lt;td&gt;75%&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;1/2 pot&lt;/td&gt;&lt;td&gt;25%&lt;/td&gt;&lt;td&gt;33%&lt;/td&gt;&lt;td&gt;67%&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;Pot&lt;/td&gt;&lt;td&gt;33%&lt;/td&gt;&lt;td&gt;50%&lt;/td&gt;&lt;td&gt;50%&lt;/td&gt;&lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/div&gt;
+  &lt;p class=&quot;figure-note&quot;&gt;Arithmetic. Pot is counted before the bet.&lt;/p&gt;
+&lt;/figure&gt;</code></pre>
+      </section>
+      <section class="gallery-item" id="hand-log">
+        <h2>Hand log</h2>
+        <p>One hand, street by street: a table with class="hand-log". Use it for every worked hand.</p>
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. G.9</span><h3 class="figure-title">A flush draw facing a half-pot bet</h3></div>
+  <div class="table-scroll">
+    <table class="hand-log">
+      <thead><tr><th>Street</th><th>Board</th><th>Action</th><th>Pot</th></tr></thead>
+      <tbody>
+        <tr><td>Preflop</td><td>Hero: <span class="cards" role="img" aria-label="Ace of spades, 7 of spades"><span class="pc">A<i>♠</i></span><span class="pc">7<i>♠</i></span></span></td><td>Villain raises to $15 in the cutoff. Hero calls on the button.</td><td class="pot">$37</td></tr>
+        <tr><td>Flop</td><td><span class="cards" role="img" aria-label="King of spades, 9 of spades, 4 of diamonds"><span class="pc">K<i>♠</i></span><span class="pc">9<i>♠</i></span><span class="pc r">4<i>♦</i></span></span></td><td>Villain bets $20. Hero has nine outs to the nut flush and calls.</td><td class="pot">$77</td></tr>
+        <tr><td>Turn</td><td><span class="cards" role="img" aria-label="King of spades, 9 of spades, 4 of diamonds, 2 of hearts"><span class="pc">K<i>♠</i></span><span class="pc">9<i>♠</i></span><span class="pc r">4<i>♦</i></span><span class="pc r">2<i>♥</i></span></span></td><td>Villain bets $40. Hero needs 40 / 157 = 25%, and has 9 / 46 = 20%.</td><td class="pot">$117</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history.</p>
+</figure>
+<pre><code>&lt;figure class=&quot;figure&quot;&gt;
+  &lt;div class=&quot;figure-head&quot;&gt;&lt;span class=&quot;figure-number&quot;&gt;Fig.&lt;/span&gt;&lt;h3 class=&quot;figure-title&quot;&gt;A flush draw facing a half-pot bet&lt;/h3&gt;&lt;/div&gt;
+  &lt;div class=&quot;table-scroll&quot;&gt;
+    &lt;table class=&quot;hand-log&quot;&gt;
+      &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Street&lt;/th&gt;&lt;th&gt;Board&lt;/th&gt;&lt;th&gt;Action&lt;/th&gt;&lt;th&gt;Pot&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;&lt;td&gt;Preflop&lt;/td&gt;&lt;td&gt;Hero: [[As 7s]]&lt;/td&gt;&lt;td&gt;Villain raises to $15 in the cutoff. Hero calls on the button.&lt;/td&gt;&lt;td class=&quot;pot&quot;&gt;$37&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;Flop&lt;/td&gt;&lt;td&gt;[[Ks 9s 4d]]&lt;/td&gt;&lt;td&gt;Villain bets $20. Hero has nine outs to the nut flush and calls.&lt;/td&gt;&lt;td class=&quot;pot&quot;&gt;$77&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;Turn&lt;/td&gt;&lt;td&gt;[[Ks 9s 4d 2h]]&lt;/td&gt;&lt;td&gt;Villain bets $40. Hero needs 40 / 157 = 25%, and has 9 / 46 = 20%.&lt;/td&gt;&lt;td class=&quot;pot&quot;&gt;$117&lt;/td&gt;&lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/div&gt;
+  &lt;p class=&quot;figure-note&quot;&gt;An example hand in a $2/$5 game. Not a real hand history.&lt;/p&gt;
+&lt;/figure&gt;</code></pre>
+      </section>
+      <section class="gallery-item" id="flow">
+        <h2>Flow</h2>
+        <p>Steps in order: an ordered list with class="flow". It runs across on wide screens and down on phones. Add class="down" to keep it vertical.</p>
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. G.10</span><h3 class="figure-title">The call-or-fold decision</h3></div>
+  <ol class="flow">
+    <li><strong>Count outs</strong><span>Cards that make your hand best.</span></li>
+    <li><strong>Turn outs into a percentage</strong><span>Times 2 with one card to come.</span></li>
+    <li><strong>Find the price</strong><span>Bet / (pot + 2 x bet).</span></li>
+    <li><strong>Compare</strong><span>Call when your chance beats the price.</span></li>
+  </ol>
+  <p class="figure-note">A summary of this section.</p>
+</figure>
+<pre><code>&lt;figure class=&quot;figure&quot;&gt;
+  &lt;div class=&quot;figure-head&quot;&gt;&lt;span class=&quot;figure-number&quot;&gt;Fig.&lt;/span&gt;&lt;h3 class=&quot;figure-title&quot;&gt;The call-or-fold decision&lt;/h3&gt;&lt;/div&gt;
+  &lt;ol class=&quot;flow&quot;&gt;
+    &lt;li&gt;&lt;strong&gt;Count outs&lt;/strong&gt;&lt;span&gt;Cards that make your hand best.&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Turn outs into a percentage&lt;/strong&gt;&lt;span&gt;Times 2 with one card to come.&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Find the price&lt;/strong&gt;&lt;span&gt;Bet / (pot + 2 x bet).&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Compare&lt;/strong&gt;&lt;span&gt;Call when your chance beats the price.&lt;/span&gt;&lt;/li&gt;
+  &lt;/ol&gt;
+  &lt;p class=&quot;figure-note&quot;&gt;A summary of this section.&lt;/p&gt;
+&lt;/figure&gt;</code></pre>
+      </section>
+      <section class="gallery-item" id="tree">
+        <h2>Tree</h2>
+        <p>A decision and its branches: nested lists with class="tree". Use "edge" for the branch label and "node" for the outcome. Nodes may be "root", "win", or "lose".</p>
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. G.11</span><h3 class="figure-title">The value of a $50 bluff into a $100 pot</h3></div>
+  <ul class="tree">
+    <li><span class="node root">Bluff $50 into $100</span>
+      <ul>
+        <li><span class="edge">Villain folds 40% of the time</span><span class="node win">Win $100</span></li>
+        <li><span class="edge">Villain calls 60% of the time</span><span class="node lose">Lose $50</span></li>
+      </ul>
+    </li>
+  </ul>
+  <p class="math">EV = 0.40 x $100 + 0.60 x (-$50) = $40 - $30 = +$10</p>
+  <p class="figure-note">Arithmetic. The fold frequency is an assumption for the example.</p>
+</figure>
+<pre><code>&lt;figure class=&quot;figure&quot;&gt;
+  &lt;div class=&quot;figure-head&quot;&gt;&lt;span class=&quot;figure-number&quot;&gt;Fig.&lt;/span&gt;&lt;h3 class=&quot;figure-title&quot;&gt;The value of a $50 bluff into a $100 pot&lt;/h3&gt;&lt;/div&gt;
+  &lt;ul class=&quot;tree&quot;&gt;
+    &lt;li&gt;&lt;span class=&quot;node root&quot;&gt;Bluff $50 into $100&lt;/span&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;span class=&quot;edge&quot;&gt;Villain folds 40% of the time&lt;/span&gt;&lt;span class=&quot;node win&quot;&gt;Win $100&lt;/span&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;span class=&quot;edge&quot;&gt;Villain calls 60% of the time&lt;/span&gt;&lt;span class=&quot;node lose&quot;&gt;Lose $50&lt;/span&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;p class=&quot;math&quot;&gt;EV = 0.40 x $100 + 0.60 x (-$50) = $40 - $30 = +$10&lt;/p&gt;
+  &lt;p class=&quot;figure-note&quot;&gt;Arithmetic. The fold frequency is an assumption for the example.&lt;/p&gt;
+&lt;/figure&gt;</code></pre>
+      </section>
+      <section class="gallery-item" id="stats">
+        <h2>Stats</h2>
+        <p>A row of big numbers: a list with class="stats".</p>
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. G.12</span><h3 class="figure-title">The deck in three numbers</h3></div>
+  <ul class="stats">
+    <li><b>1,326</b><span>two-card starting hands</span></li>
+    <li><b>169</b><span>distinct hand types</span></li>
+    <li><b>1 in 17</b><span>hands is a pocket pair</span></li>
+  </ul>
+  <p class="figure-note">52 x 51 / 2 = 1,326. Pairs: 78 / 1,326 = 5.9%.</p>
+</figure>
+<pre><code>&lt;figure class=&quot;figure&quot;&gt;
+  &lt;div class=&quot;figure-head&quot;&gt;&lt;span class=&quot;figure-number&quot;&gt;Fig.&lt;/span&gt;&lt;h3 class=&quot;figure-title&quot;&gt;The deck in three numbers&lt;/h3&gt;&lt;/div&gt;
+  &lt;ul class=&quot;stats&quot;&gt;
+    &lt;li&gt;&lt;b&gt;1,326&lt;/b&gt;&lt;span&gt;two-card starting hands&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;b&gt;169&lt;/b&gt;&lt;span&gt;distinct hand types&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;b&gt;1 in 17&lt;/b&gt;&lt;span&gt;hands is a pocket pair&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;p class=&quot;figure-note&quot;&gt;52 x 51 / 2 = 1,326. Pairs: 78 / 1,326 = 5.9%.&lt;/p&gt;
+&lt;/figure&gt;</code></pre>
+      </section>
+      <section class="gallery-item" id="compare">
+        <h2>Compare</h2>
+        <p>Two or three things side by side: a div with class="compare". Children may be "a" (oxblood), "b" (teal), or "c" (gold).</p>
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. G.13</span><h3 class="figure-title">Two ways to win a pot</h3></div>
+  <div class="compare">
+    <div class="a"><h4>Showdown</h4><p>You turn over the best hand at the end.</p></div>
+    <div class="b"><h4>Fold equity</h4><p>Everyone else folds before the end. Only a bet or a raise can win this way.</p></div>
+  </div>
+  <p class="figure-note">A summary of this section.</p>
+</figure>
+<pre><code>&lt;figure class=&quot;figure&quot;&gt;
+  &lt;div class=&quot;figure-head&quot;&gt;&lt;span class=&quot;figure-number&quot;&gt;Fig.&lt;/span&gt;&lt;h3 class=&quot;figure-title&quot;&gt;Two ways to win a pot&lt;/h3&gt;&lt;/div&gt;
+  &lt;div class=&quot;compare&quot;&gt;
+    &lt;div class=&quot;a&quot;&gt;&lt;h4&gt;Showdown&lt;/h4&gt;&lt;p&gt;You turn over the best hand at the end.&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;b&quot;&gt;&lt;h4&gt;Fold equity&lt;/h4&gt;&lt;p&gt;Everyone else folds before the end. Only a bet or a raise can win this way.&lt;/p&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;p class=&quot;figure-note&quot;&gt;A summary of this section.&lt;/p&gt;
+&lt;/figure&gt;</code></pre>
+      </section>
+      <section class="gallery-item" id="timeline">
+        <h2>Timeline</h2>
+        <p>Moments in order: an ordered list with class="timeline".</p>
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. G.14</span><h3 class="figure-title">The four betting rounds</h3></div>
+  <ol class="timeline">
+    <li><b>Preflop</b><span>Two cards each, face down.</span></li>
+    <li><b>Flop</b><span>Three shared cards.</span></li>
+    <li><b>Turn</b><span>A fourth shared card.</span></li>
+    <li><b>River</b><span>The fifth and last.</span></li>
+  </ol>
+  <p class="figure-note">The order of play in Texas Hold'em.</p>
+</figure>
+<pre><code>&lt;figure class=&quot;figure&quot;&gt;
+  &lt;div class=&quot;figure-head&quot;&gt;&lt;span class=&quot;figure-number&quot;&gt;Fig.&lt;/span&gt;&lt;h3 class=&quot;figure-title&quot;&gt;The four betting rounds&lt;/h3&gt;&lt;/div&gt;
+  &lt;ol class=&quot;timeline&quot;&gt;
+    &lt;li&gt;&lt;b&gt;Preflop&lt;/b&gt;&lt;span&gt;Two cards each, face down.&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;b&gt;Flop&lt;/b&gt;&lt;span&gt;Three shared cards.&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;b&gt;Turn&lt;/b&gt;&lt;span&gt;A fourth shared card.&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;b&gt;River&lt;/b&gt;&lt;span&gt;The fifth and last.&lt;/span&gt;&lt;/li&gt;
+  &lt;/ol&gt;
+  &lt;p class=&quot;figure-note&quot;&gt;The order of play in Texas Hold&#x27;em.&lt;/p&gt;
+&lt;/figure&gt;</code></pre>
+      </section>
+      <section class="gallery-item" id="inline-svg">
+        <h2>Inline SVG</h2>
+        <p>For a drawing no other type covers. It must carry viewBox, role="img", and an aria-label, and class="art". Use a viewBox about 360 wide so text stays readable on a phone, text of 13 units or more, and theme classes for color: never a hex value.</p>
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. G.15</span><h3 class="figure-title">Stack-to-pot ratio</h3></div>
+  <svg class="art" viewBox="0 0 360 120" role="img" aria-label="A pot of 100 beside an effective stack of 400, giving a stack-to-pot ratio of 4.">
+    <rect class="fill-gold stroke-ink" x="20" y="70" width="60" height="30"/>
+    <text class="t" x="50" y="60" text-anchor="middle">Pot $100</text>
+    <rect class="fill-ink" x="130" y="10" width="60" height="90"/>
+    <text class="t" x="160" y="116" text-anchor="middle">Stack $400</text>
+    <text class="t big" x="270" y="62" text-anchor="middle">SPR 4</text>
+  </svg>
+  <p class="figure-note">Arithmetic: 400 / 100 = 4.</p>
+</figure>
+<pre><code>&lt;figure class=&quot;figure&quot;&gt;
+  &lt;div class=&quot;figure-head&quot;&gt;&lt;span class=&quot;figure-number&quot;&gt;Fig.&lt;/span&gt;&lt;h3 class=&quot;figure-title&quot;&gt;Stack-to-pot ratio&lt;/h3&gt;&lt;/div&gt;
+  &lt;svg class=&quot;art&quot; viewBox=&quot;0 0 360 120&quot; role=&quot;img&quot; aria-label=&quot;A pot of 100 beside an effective stack of 400, giving a stack-to-pot ratio of 4.&quot;&gt;
+    &lt;rect class=&quot;fill-gold stroke-ink&quot; x=&quot;20&quot; y=&quot;70&quot; width=&quot;60&quot; height=&quot;30&quot;/&gt;
+    &lt;text class=&quot;t&quot; x=&quot;50&quot; y=&quot;60&quot; text-anchor=&quot;middle&quot;&gt;Pot $100&lt;/text&gt;
+    &lt;rect class=&quot;fill-ink&quot; x=&quot;130&quot; y=&quot;10&quot; width=&quot;60&quot; height=&quot;90&quot;/&gt;
+    &lt;text class=&quot;t&quot; x=&quot;160&quot; y=&quot;116&quot; text-anchor=&quot;middle&quot;&gt;Stack $400&lt;/text&gt;
+    &lt;text class=&quot;t big&quot; x=&quot;270&quot; y=&quot;62&quot; text-anchor=&quot;middle&quot;&gt;SPR 4&lt;/text&gt;
+  &lt;/svg&gt;
+  &lt;p class=&quot;figure-note&quot;&gt;Arithmetic: 400 / 100 = 4.&lt;/p&gt;
+&lt;/figure&gt;</code></pre>
+      </section>
+      <section class="gallery-item" id="key-idea">
+        <h2>Key idea</h2>
+        <p>The one thing to keep from a section.</p>
+<aside class="key">
+  <p class="label">Key idea</p>
+  <p>A decision is good or bad when you make it, not when the cards come.</p>
+</aside>
+<pre><code>&lt;aside class=&quot;key&quot;&gt;
+  &lt;p class=&quot;label&quot;&gt;Key idea&lt;/p&gt;
+  &lt;p&gt;A decision is good or bad when you make it, not when the cards come.&lt;/p&gt;
+&lt;/aside&gt;</code></pre>
+      </section>
+      <section class="gallery-item" id="formula">
+        <h2>Formula</h2>
+        <p>A line of arithmetic, set apart.</p>
+<p class="math">Equity needed = bet / (pot + 2 x bet) = 50 / (100 + 100) = 25%</p>
+<pre><code>&lt;p class=&quot;math&quot;&gt;Equity needed = bet / (pot + 2 x bet) = 50 / (100 + 100) = 25%&lt;/p&gt;</code></pre>
+      </section>
+      <section class="gallery-item" id="drill">
+        <h2>Drill</h2>
+        <p>A question with its answer folded away. Use several in a row for practice.</p>
+<details class="drill">
+  <summary>The pot is $80 and your opponent bets $40. What equity do you need to call?</summary>
+  <p>40 / (80 + 40 + 40) = 40 / 160 = 25%.</p>
+</details>
+<pre><code>&lt;details class=&quot;drill&quot;&gt;
+  &lt;summary&gt;The pot is $80 and your opponent bets $40. What equity do you need to call?&lt;/summary&gt;
+  &lt;p&gt;40 / (80 + 40 + 40) = 40 / 160 = 25%.&lt;/p&gt;
+&lt;/details&gt;</code></pre>
+      </section>
+      <section class="gallery-item" id="a-real-quote">
+        <h2>A real quote</h2>
+        <p>Only with a source you have opened and read. Quote marks, the source named, and a link.</p>
+<figure class="voice voice-quote">
+  <p class="who label">David Sklansky, the Fundamental Theorem</p>
+  <blockquote>
+    <p>&ldquo;Every time you play a hand differently from the way you would have played it if you could see all your opponents' cards, they gain.&rdquo;</p>
+  </blockquote>
+  <figcaption class="note">From <cite>The Theory of Poker</cite> (fourth edition, 1999), as given on <a href="https://en.wikipedia.org/wiki/Fundamental_theorem_of_poker">Wikipedia</a>.</figcaption>
+</figure>
+<pre><code>&lt;figure class=&quot;voice voice-quote&quot;&gt;
+  &lt;p class=&quot;who label&quot;&gt;David Sklansky, the Fundamental Theorem&lt;/p&gt;
+  &lt;blockquote&gt;
+    &lt;p&gt;&amp;ldquo;Every time you play a hand differently from the way you would have played it if you could see all your opponents&#x27; cards, they gain.&amp;rdquo;&lt;/p&gt;
+  &lt;/blockquote&gt;
+  &lt;figcaption class=&quot;note&quot;&gt;From &lt;cite&gt;The Theory of Poker&lt;/cite&gt; (fourth edition, 1999), as given on &lt;a href=&quot;https://en.wikipedia.org/wiki/Fundamental_theorem_of_poker&quot;&gt;Wikipedia&lt;/a&gt;.&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+      </section>
+      <section class="gallery-item" id="an-imagined-voice">
+        <h2>An imagined voice</h2>
+        <p>What a council member might say. Paraphrase only: no quote marks of any kind, and the note must say it is our reading.</p>
+<aside class="voice voice-imagined">
+  <p class="who label">What Doyle Brunson might say</p>
+  <p class="said">He would push back on folding so much. A tight range keeps you safe, but the player who applies pressure controls the hand.</p>
+  <p class="note">An imagined voice: our reading of the ideas in Super/System (1979), not his words.</p>
+</aside>
+<pre><code>&lt;aside class=&quot;voice voice-imagined&quot;&gt;
+  &lt;p class=&quot;who label&quot;&gt;What Doyle Brunson might say&lt;/p&gt;
+  &lt;p class=&quot;said&quot;&gt;He would push back on folding so much. A tight range keeps you safe, but the player who applies pressure controls the hand.&lt;/p&gt;
+  &lt;p class=&quot;note&quot;&gt;An imagined voice: our reading of the ideas in Super/System (1979), not his words.&lt;/p&gt;
+&lt;/aside&gt;</code></pre>
+      </section>
+      <section class="gallery-item" id="table-math">
+        <h2>Table Math</h2>
+        <p>Every chapter ends with exactly one. One shortcut, a worked example, and how far off the shortcut can be.</p>
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>The rule of 2 and 4</h2>
+  <p><strong>The shortcut.</strong> Multiply your outs by 4 on the flop, or by 2 on the turn.</p>
+  <p class="math">Flush draw on the flop: 9 x 4 = 36% (exact: 35%)</p>
+  <p><strong>Where it bends.</strong> Above 8 outs on the flop the rule runs high. Fifteen outs gives 60%; the exact figure is 54%.</p>
+</aside>
+<pre><code>&lt;aside class=&quot;tablemath&quot;&gt;
+  &lt;p class=&quot;label&quot;&gt;Table Math&lt;/p&gt;
+  &lt;h2&gt;The rule of 2 and 4&lt;/h2&gt;
+  &lt;p&gt;&lt;strong&gt;The shortcut.&lt;/strong&gt; Multiply your outs by 4 on the flop, or by 2 on the turn.&lt;/p&gt;
+  &lt;p class=&quot;math&quot;&gt;Flush draw on the flop: 9 x 4 = 36% (exact: 35%)&lt;/p&gt;
+  &lt;p&gt;&lt;strong&gt;Where it bends.&lt;/strong&gt; Above 8 outs on the flop the rule runs high. Fifteen outs gives 60%; the exact figure is 54%.&lt;/p&gt;
+&lt;/aside&gt;</code></pre>
+      </section>
+    </main>
+
+    <footer class="colophon label">
+      <nav>
+        <a href="../">Home</a>
+        <a href="index.html">Docs</a>
+        <a href="https://github.com/polarispixels/poker">GitHub</a>
+      </nav>
+      <span data-version></span>
+    </footer>
+  </div>
+
+  <script src="../js/version.js"></script>
+  <script src="../js/figures.js"></script>
+</body>
+</html>

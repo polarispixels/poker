@@ -1,0 +1,275 @@
+{
+  "title": "The Long Game",
+  "subtitle": "Live No-Limit Hold'em from First Hand to Expert Play",
+  "parts": [
+    {
+      "numeral": "I",
+      "title": "Foundations",
+      "reader": "The first-time player",
+      "chapters": [
+        {
+          "slug": "what-poker-really-is",
+          "title": "What Poker Really Is",
+          "summary": "A game of incomplete information, and of decisions made under uncertainty."
+        },
+        {
+          "slug": "rules-hands-and-the-flow-of-a-live-hand",
+          "title": "Rules, Hands, and the Flow of a Live Hand",
+          "summary": "Hand rankings, the button, blinds, straddles, betting rounds, and live procedure."
+        },
+        {
+          "slug": "position",
+          "title": "Position",
+          "summary": "Why acting last is an advantage, and how your seat changes every decision."
+        },
+        {
+          "slug": "starting-hands",
+          "title": "Starting Hands",
+          "summary": "Which hands to play from which seat, and why folding most hands is correct."
+        },
+        {
+          "slug": "odds-and-outs",
+          "title": "Odds and Outs",
+          "summary": "Counting outs, pot odds, and the call-or-fold decision."
+        },
+        {
+          "slug": "mental-math-at-the-table-1",
+          "title": "Mental Math at the Table I: The Core Shortcuts",
+          "summary": "The handful of calculations that decide most live hands, each in under ten seconds."
+        },
+        {
+          "slug": "expected-value",
+          "title": "Expected Value",
+          "summary": "Decisions against results, the Fundamental Theorem, and thinking in long-run averages."
+        },
+        {
+          "slug": "aggression",
+          "title": "Aggression",
+          "summary": "Why betting and raising beat calling, and the two ways to win a pot."
+        },
+        {
+          "slug": "watching-the-table",
+          "title": "Watching the Table",
+          "summary": "First-level observation: keeping mental notes on nine people."
+        },
+        {
+          "slug": "bankroll-and-variance-basics",
+          "title": "Bankroll and Variance Basics",
+          "summary": "Why good players lose sessions, and how not to go broke."
+        },
+        {
+          "slug": "part-one-review",
+          "title": "Part I Review",
+          "summary": "Twenty annotated live beginner hands."
+        }
+      ]
+    },
+    {
+      "numeral": "II",
+      "title": "The Core Game",
+      "reader": "The developing player",
+      "chapters": [
+        {
+          "slug": "preflop-strategy-for-live-games",
+          "title": "Preflop Strategy for Live Games",
+          "summary": "Opening, isolating limpers, 3-betting, defending the blinds, and the straddle."
+        },
+        {
+          "slug": "thinking-in-ranges",
+          "title": "Thinking in Ranges",
+          "summary": "From what hand does he have to what hands could he have."
+        },
+        {
+          "slug": "combinatorics",
+          "title": "Combinatorics",
+          "summary": "Counting hand combinations, card removal, and blockers."
+        },
+        {
+          "slug": "board-texture",
+          "title": "Board Texture",
+          "summary": "Dry and wet boards, range advantage, and nut advantage."
+        },
+        {
+          "slug": "continuation-betting",
+          "title": "Continuation Betting",
+          "summary": "When to bet the flop after raising, how much, and when to check."
+        },
+        {
+          "slug": "playing-the-turn-and-river",
+          "title": "Playing the Turn and River",
+          "summary": "Barreling, pot control, thin value, and the most expensive decision."
+        },
+        {
+          "slug": "bluffing-and-semi-bluffing",
+          "title": "Bluffing and Semi-Bluffing",
+          "summary": "Choosing bluffs, blockers, and the ratio of value bets to bluffs."
+        },
+        {
+          "slug": "hand-reading",
+          "title": "Hand Reading",
+          "summary": "Narrowing a range street by street from bet sizes, timing, and history."
+        },
+        {
+          "slug": "bet-sizing",
+          "title": "Bet Sizing",
+          "summary": "What each size asks of the caller, and how live players react to it."
+        },
+        {
+          "slug": "part-two-review",
+          "title": "Part II Review",
+          "summary": "Full live hands walked through range by range."
+        }
+      ]
+    },
+    {
+      "numeral": "III",
+      "title": "Theory and Exploitation",
+      "reader": "The intermediate player",
+      "chapters": [
+        {
+          "slug": "game-theory-basics",
+          "title": "Game Theory Basics",
+          "summary": "Equilibrium in plain language, indifference, and minimum defense frequency."
+        },
+        {
+          "slug": "balance-and-unexploitability",
+          "title": "Balance and Unexploitability",
+          "summary": "Why balance protects you, where it costs you, and why it matters less live."
+        },
+        {
+          "slug": "exploitative-play",
+          "title": "Exploitative Play",
+          "summary": "Finding deviations and attacking them: baseline first, then deviate."
+        },
+        {
+          "slug": "live-player-types-and-population-tendencies",
+          "title": "Live Player Types and Population Tendencies",
+          "summary": "Profiling the regulars, the recreational players, and the nits of a live room."
+        },
+        {
+          "slug": "tells-table-talk-and-table-presence",
+          "title": "Tells, Table Talk, and Table Presence",
+          "summary": "Physical and verbal tells, how reliable they are, and your own image."
+        },
+        {
+          "slug": "multiway-pots",
+          "title": "Multiway Pots",
+          "summary": "The everyday reality of live poker: three or more players to the flop."
+        },
+        {
+          "slug": "mental-math-at-the-table-2",
+          "title": "Mental Math at the Table II: EV on the Fly",
+          "summary": "Equity, fold equity, and pot size combined into one fast estimate."
+        },
+        {
+          "slug": "part-three-review",
+          "title": "Part III Review",
+          "summary": "The same live hands played twice: once by theory, once by exploitation."
+        }
+      ]
+    },
+    {
+      "numeral": "IV",
+      "title": "Formats",
+      "reader": "Choosing your arena",
+      "chapters": [
+        {
+          "slug": "live-cash-games",
+          "title": "Live Cash Games",
+          "summary": "Deep stacks, rake, and choosing the game, the table, and the seat."
+        },
+        {
+          "slug": "live-tournament-fundamentals",
+          "title": "Live Tournament Fundamentals",
+          "summary": "Stack depth in big blinds, M, push-fold play, and the stages of a tournament."
+        },
+        {
+          "slug": "icm-and-final-tables",
+          "title": "ICM and Final Tables",
+          "summary": "Why chips change value near the money, bubble play, and deal-making."
+        },
+        {
+          "slug": "heads-up-play",
+          "title": "Heads-Up Play",
+          "summary": "Ranges at their widest, pressure, and closing out a match."
+        },
+        {
+          "slug": "a-holdem-players-guide-to-omaha",
+          "title": "A Hold'em Player's Guide to Omaha",
+          "summary": "Why big pairs shrink, why nut draws matter, and what Omaha teaches about equity."
+        }
+      ]
+    },
+    {
+      "numeral": "V",
+      "title": "The Player Behind the Cards",
+      "reader": "The serious player",
+      "chapters": [
+        {
+          "slug": "the-mental-game",
+          "title": "The Mental Game",
+          "summary": "Tilt, emotional control, focus, and routines for long live sessions."
+        },
+        {
+          "slug": "bankroll-business-and-longevity",
+          "title": "Bankroll, Business, and Longevity",
+          "summary": "Moving up and down, staking, records, travel, and health."
+        }
+      ]
+    },
+    {
+      "numeral": "VI",
+      "title": "Expert Play",
+      "reader": "The advanced player",
+      "chapters": [
+        {
+          "slug": "solvers-advanced-theory-and-elite-adaptation",
+          "title": "Solvers, Advanced Theory, and Elite Adaptation",
+          "summary": "How solvers work, simplifying for live play, and adapting to strong opponents."
+        },
+        {
+          "slug": "the-lifelong-student",
+          "title": "The Lifelong Student",
+          "summary": "A study system, hand review, finding your own leaks, and adapting as the game changes."
+        }
+      ]
+    },
+    {
+      "appendix": true,
+      "title": "Appendices",
+      "reader": "Reference",
+      "chapters": [
+        {
+          "slug": "table-math-cheat-sheet",
+          "title": "Table Math Cheat Sheet",
+          "summary": "The numbers worth memorizing, shortcuts first."
+        },
+        {
+          "slug": "probability-tables-and-odds-charts",
+          "title": "Probability Tables and Odds Charts",
+          "summary": "Exact figures for draws, flops, matchups, and frequencies."
+        },
+        {
+          "slug": "preflop-range-charts",
+          "title": "Preflop Range Charts",
+          "summary": "Opening ranges by position and stack depth, with live straddle adjustments."
+        },
+        {
+          "slug": "glossary",
+          "title": "Glossary",
+          "summary": "Every term the book uses, in plain words."
+        },
+        {
+          "slug": "recommended-reading-and-study-path",
+          "title": "Recommended Reading and Study Path",
+          "summary": "The books behind the council's ideas, and an order to read them in."
+        },
+        {
+          "slug": "live-etiquette-and-house-rules",
+          "title": "Live Etiquette and House Rules",
+          "summary": "How to behave at a live table, and the rules that vary by room."
+        }
+      ]
+    }
+  ]
+}
