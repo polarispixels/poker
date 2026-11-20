@@ -84,7 +84,8 @@ function checkFragment(html, file, opts) {
 
   if (!opts.appendix) {
     // A figure for every section, a Table Math box, and at least one council voice.
-    const sections = html.split(/<h2[\s>]/).slice(1);
+    // The Table Math box has its own heading; it is not a section that needs a figure.
+    const sections = html.replace(/<aside class="tablemath"[\s\S]*?<\/aside>/g, '').split(/<h2[\s>]/).slice(1);
     if (sections.length < 3) fail(`${file}: a chapter needs at least three <h2> sections`);
     sections.forEach((s, i) => {
       const title = (s.match(/^[^>]*>?([^<]*)/) || [])[1] || '';

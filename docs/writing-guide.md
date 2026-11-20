@@ -45,6 +45,10 @@ Aim for 1,500 to 2,500 words of prose and 6 to 10 figures. Figures are first-cla
 - Never write a color value. No images, video, or iframes yet.
 - Cards: `[[As Kh]]`. Cross-references: `{{ch:7}}` (or `{{ch:A}}` for an appendix). Do not write "Chapter 7" by hand when you mean a link.
 - Keep labels short so figures read at phone width (360px).
+- A `line` figure's `refs` draw dashed guide lines: `{"y": 25, "label": "..."}` is horizontal, `{"x": 0.5, "label": "..."}` is vertical.
+- Always write cards with the `[[...]]` shorthand, including inside tables and hand logs. Never write the expanded card markup by hand.
+- The Table Math box may hold a figure, but does not need one.
+- Name a book by its title. Give a year or edition only if you have verified it.
 
 ## Council voices
 

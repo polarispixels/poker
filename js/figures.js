@@ -258,7 +258,7 @@
     var pts = series.map(function (s) { return cats ? s.values.map(function (v, i) { return [i, v]; }) : s.points; });
     var xs = [], ys = [];
     pts.forEach(function (p) { p.forEach(function (q) { xs.push(q[0]); ys.push(q[1]); }); });
-    (spec.refs || []).forEach(function (r) { ys.push(r.y); });
+    (spec.refs || []).forEach(function (r) { if (r.y !== undefined) ys.push(r.y); });
     var xMin = spec.xMin !== undefined ? spec.xMin : Math.min.apply(null, xs), xMax = spec.xMax !== undefined ? spec.xMax : Math.max.apply(null, xs);
     var yMin = spec.yMin !== undefined ? spec.yMin : Math.min.apply(null, ys), yMax = spec.yMax !== undefined ? spec.yMax : Math.max.apply(null, ys);
     if (spec.yMin === undefined && yMin > 0 && yMin < (yMax - yMin)) yMin = 0;
@@ -277,6 +277,11 @@
       text(svg, x(v), H - m.b + 18, cats ? cats[v] : fmt(v, xUnit), { size: 12, anchor: 'middle', fill: 'var(--muted)' });
     });
     (spec.refs || []).forEach(function (r) {
+      if (r.x !== undefined) {
+        el('line', { x1: x(r.x), x2: x(r.x), y1: m.t, y2: H - m.b, style: 'stroke:var(--fg);stroke-width:1;stroke-dasharray:4 4' }, svg);
+        if (r.label) text(svg, x(r.x) + (x(r.x) < W * 0.6 ? 5 : -5), m.t + 12, r.label, { size: 12, anchor: x(r.x) < W * 0.6 ? 'start' : 'end', italic: true });
+        return;
+      }
       el('line', { x1: m.l, x2: W - m.r, y1: y(r.y), y2: y(r.y), style: 'stroke:var(--fg);stroke-width:1;stroke-dasharray:4 4' }, svg);
       if (r.label) text(svg, W - m.r, y(r.y) - 5, r.label, { size: 12, anchor: 'end', italic: true });
     });
@@ -392,7 +397,7 @@
         text(svg, bx + 8, by, String(s.bet), { size: 13, anchor: 'middle', weight: 600 });
       }
       if (spec.button === i) {
-        var tx = px + ux * (edge + 8) - uy * (narrow ? 22 : 30), ty = py + uy * (edge + 8) + ux * (narrow ? 22 : 30);
+        var off = (narrow ? 22 : 30) + (s.cards ? 22 : 0), tx = px + ux * (edge + 8) - uy * off, ty = py + uy * (edge + 8) + ux * off;
         el('circle', { cx: tx, cy: ty, r: 9, style: 'fill:var(--bg);stroke:var(--fg);stroke-width:1.5' }, svg);
         text(svg, tx, ty + 4, 'D', { size: 11, anchor: 'middle', weight: 700, label: true });
       }
