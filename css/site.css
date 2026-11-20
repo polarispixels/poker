@@ -1,0 +1,165 @@
+/* Layout and components. Reads theme tokens only: no colors or fonts hard-coded here. */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; background: var(--bg); }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100svh;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+a { color: inherit; text-decoration-color: var(--ornament); text-underline-offset: 0.2em; }
+a:hover { color: var(--accent); }
+
+.wrap { max-width: 60rem; margin: 0 auto; padding: 0 1.25rem; }
+
+.label {
+  font-family: var(--font-label);
+  font-size: 0.8125rem;
+  letter-spacing: var(--label-tracking);
+  text-transform: var(--label-transform);
+  font-variant: var(--label-variant);
+  color: var(--muted);
+}
+
+/* Masthead and footer */
+.masthead, .colophon {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem 1.5rem;
+  padding: 1rem 0;
+}
+.masthead { border-bottom: var(--rule-weight) solid var(--rule); }
+.colophon { border-top: var(--rule-weight) solid var(--rule); margin-top: 4rem; }
+.colophon nav { display: flex; gap: 1.25rem; }
+
+/* Style switch */
+.switch { display: flex; flex-wrap: wrap; gap: 0.25rem; margin: 0; padding: 0; border: 0; }
+.switch legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.switch button {
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  font-variant: inherit;
+  color: var(--fg);
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 0.35rem 0.75rem;
+  cursor: pointer;
+}
+.switch button[aria-pressed="true"] { background: var(--fg); color: var(--bg); }
+.switch button:focus-visible { outline: 2px solid var(--ornament); outline-offset: 2px; }
+
+/* Ornament: a centered glyph between two rules */
+.ornament {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2.5rem auto;
+  max-width: 24rem;
+  color: var(--ornament);
+}
+.ornament::before, .ornament::after { content: ""; flex: 1; border-top: 1px solid var(--ornament); }
+.ornament span::before { content: var(--fleuron); font-size: 1rem; }
+
+/* Title page */
+.title-page { padding: clamp(3rem, 10vh, 6rem) 0 1rem; text-align: center; }
+.kicker { margin: 0 0 1rem; }
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-style: var(--display-style);
+  text-transform: var(--display-transform);
+  letter-spacing: var(--display-tracking);
+  font-size: clamp(3.25rem, 15vw, 8.5rem);
+  line-height: 0.95;
+}
+.title em { color: var(--accent); font-style: inherit; }
+.standfirst {
+  max-width: var(--measure);
+  margin: 1.5rem auto 0;
+  font-size: clamp(1.125rem, 2.2vw, 1.3rem);
+  line-height: 1.45;
+  font-style: italic;
+}
+
+/* Prose */
+.prose { max-width: var(--measure); margin: 0 auto; }
+.prose h2 {
+  margin: 2.5rem 0 0.75rem;
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-style: var(--display-style);
+  text-transform: var(--display-transform);
+  letter-spacing: var(--display-tracking);
+  font-size: clamp(1.6rem, 4vw, 2.1rem);
+  line-height: 1.15;
+  color: var(--accent);
+}
+.prose p { margin: 0 0 1rem; }
+
+/* The hand: two playing cards drawn in HTML and CSS */
+.hand { display: flex; justify-content: center; gap: 1rem; margin: 2rem 0; }
+.card {
+  position: relative;
+  width: 5.5rem;
+  aspect-ratio: 5 / 7;
+  background: var(--card-face);
+  color: var(--card-ink);
+  border: 1px solid var(--rule);
+  border-radius: 0.4rem;
+  box-shadow: 0 0.35rem 0 -0.1rem var(--surface), 0 0.6rem 1.2rem rgba(0, 0, 0, 0.18);
+  font-family: var(--font-body);
+}
+.card:nth-child(1) { transform: rotate(-6deg); }
+.card:nth-child(2) { transform: rotate(5deg) translateY(0.3rem); }
+.card .corner { position: absolute; top: 0.35rem; left: 0.45rem; line-height: 1; text-align: center; font-weight: 600; font-size: 1.15rem; }
+.card .corner.bottom { top: auto; left: auto; bottom: 0.35rem; right: 0.45rem; transform: rotate(180deg); }
+.card .corner small { display: block; font-size: 0.95rem; }
+.card .pip { position: absolute; inset: 0; display: grid; place-items: center; font-size: 2.6rem; }
+.card.red { color: var(--card-red); }
+.hand-caption { text-align: center; margin: -0.5rem 0 2rem; }
+
+/* Council voices. Two kinds, and they must look different (see docs, Council voices). */
+.voice {
+  margin: 2rem 0;
+  padding: 1.25rem 1.5rem;
+  border-radius: var(--radius);
+}
+.voice .who { margin: 0 0 0.5rem; }
+.voice .note { margin: 0.75rem 0 0; font-size: 0.875rem; color: var(--muted); }
+
+/* A real quote: in quote marks, set large, with its source. */
+.voice-quote { border-top: 2px solid var(--ornament); border-bottom: 2px solid var(--ornament); text-align: center; }
+.voice-quote blockquote { margin: 0; }
+.voice-quote blockquote p {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: clamp(1.3rem, 3vw, 1.6rem);
+  line-height: 1.35;
+}
+
+/* An imagined voice: paraphrase in a margin-ruled box, no quote marks, labeled. */
+.voice-imagined {
+  background: var(--surface);
+  border-left: 4px solid var(--accent-2);
+}
+.voice-imagined .said { margin: 0; font-style: italic; }
+
+@media (max-width: 30rem) {
+  .card { width: 4.5rem; }
+  .card .pip { font-size: 2.1rem; }
+  .ornament { margin: 2rem auto; }
+}

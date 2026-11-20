@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en" data-style="blend">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Docs: Poker</title>
+  <meta name="description" content="How the Poker study book is built, styled, versioned, and shipped.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Josefin+Sans:wght@400;700&family=Limelight&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/themes.css">
+  <link rel="stylesheet" href="../css/site.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="masthead label">
+      <a href="../">Poker</a>
+      <span>Docs <span data-version></span></span>
+    </header>
+
+    <main class="prose">
+      <h2>Docs</h2>
+      <p>Poker is a personal study book on poker and poker strategy, a sibling of <a href="https://polarispixels.github.io/return-of/">Return Of</a>. Each chapter asks what the great players would say. This page explains how the site is put together.</p>
+
+      <h2 id="layout">How the site is laid out</h2>
+      <p>Plain HTML, CSS, and a little JavaScript. There is nothing to install: open <code>index.html</code> in a browser and it works.</p>
+      <ul>
+        <li><code>index.html</code>: the welcome page. For now, a style sampler.</li>
+        <li><code>docs/index.html</code>: this page.</li>
+        <li><code>css/themes.css</code>: one block of values per style.</li>
+        <li><code>css/site.css</code>: layout and components. It reads theme values and never hard-codes a color or font.</li>
+        <li><code>js/version.js</code>: the version number, in one place.</li>
+        <li><code>js/switch.js</code>: the sampler's style switch.</li>
+        <li><code>tools/check.js</code>: the checks that gate every deploy.</li>
+        <li><code>reference/</code>: source material, including the starting hands guide and the Oval Table council.</li>
+      </ul>
+
+      <h2 id="styles">How styles work</h2>
+      <p>A style applies to whatever element carries a <code>data-style</code> attribute, and styles nest. To add a style, copy a block in <code>css/themes.css</code>, rename it, and change the values. Values come from the <a href="https://polarispixels.com/laboratory">Visual Design Laboratory</a>.</p>
+      <ul>
+        <li><code>academia</code>: Dark Academia. Parchment, ink, oxblood, and classical serifs.</li>
+        <li><code>deco</code>: Art Deco. Black and gold, with tall geometric capitals.</li>
+        <li><code>blend</code>: the book's own mix. Academia's paper, ink, and serif body, with Deco's display capitals and gold rules. Gold fails contrast on cream, so here it marks rules and ornaments, never text.</li>
+      </ul>
+      <p>The welcome page opens in the blend, and the switch shows all three. The choice is remembered in the browser when it allows that.</p>
+
+      <h2 id="voices">Council voices</h2>
+      <p>The book draws on a council of players: the Oval Table to start, others as chapters need them. Their voices come in two kinds, and the two never look alike.</p>
+      <ul>
+        <li><strong>A real quote</strong> sits in quote marks, set between gold rules, with a link to its source. No source, no quote.</li>
+        <li><strong>An imagined voice</strong> ("what Brunson might say") is paraphrase in a shaded box. It never uses quote marks, and it says it is our reading of that player's published ideas.</li>
+      </ul>
+      <p>The deploy check enforces both: a real quote without a source link fails, and so does an imagined voice with quote marks or without the words "our reading".</p>
+
+      <h2 id="versioning">Versioning and releases</h2>
+      <p>The site follows <a href="https://semver.org/">SemVer</a> and keeps a <a href="https://github.com/polarispixels/poker/blob/main/CHANGELOG.md">changelog</a>. The version shows in the footer of the welcome page and at the top of this one, so a deploy can be checked by eye.</p>
+      <ol>
+        <li>Bump <code>POKER_VERSION</code> in <code>js/version.js</code>.</li>
+        <li>Add a <code>## [x.y.z]</code> entry to <code>CHANGELOG.md</code>.</li>
+        <li>Run <code>node tools/check.js</code>.</li>
+        <li>Commit, push to <code>main</code>, then tag: <code>git tag vX.Y.Z &amp;&amp; git push --tags</code>.</li>
+      </ol>
+
+      <h2 id="deploy">How it ships</h2>
+      <p>Every push to <code>main</code> runs the checks in GitHub Actions. If they pass, the same workflow publishes the site to GitHub Pages. A failing check never reaches the live site. A deploy is done when the live page shows the new version.</p>
+
+      <h2 id="backlog">Backlog and issues</h2>
+      <p>Work is tracked in <a href="https://github.com/polarispixels/poker/issues">GitHub Issues</a>. Each issue carries one MoSCoW label, one effort label, and one type label. Loose ideas live in <code>BACKLOG.md</code>.</p>
+
+      <h2 id="decisions">Decisions</h2>
+      <ul>
+        <li><strong>November 20, 2026: built the same way as Return Of.</strong> Plain static files, styles scoped by <code>data-style</code>, a deploy check, and GitHub Pages through Actions. The tradeoff: the header and footer are copied between pages until a build script is worth adding.</li>
+        <li><strong>November 20, 2026: the look is chosen from a live sampler.</strong> Dark Academia, Art Deco, and a blend are shown side by side on the real site, at real phone widths. Building one style blind would likely have meant building twice.</li>
+        <li><strong>November 20, 2026: real quotes need a source; imagined voices are labeled.</strong> Return Of bans quotes from real people. This book is built around the council, so it allows them, with a source link, and keeps invented voices visibly apart.</li>
+      </ul>
+    </main>
+
+    <footer class="colophon label">
+      <nav>
+        <a href="../">Home</a>
+        <a href="https://github.com/polarispixels/poker">GitHub</a>
+      </nav>
+      <span data-version></span>
+    </footer>
+  </div>
+
+  <script src="../js/version.js"></script>
+</body>
+</html>

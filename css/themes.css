@@ -1,0 +1,98 @@
+/*
+ * Themes. One block per style. A style applies to whatever element carries
+ * data-style="<name>", so styles can nest.
+ *
+ * To add a style: copy a block, rename it, change the values. Nothing else.
+ * Palette values come from the Visual Design Laboratory profiles
+ * (polarispixels.com/laboratory): dark-academia.json and art-deco.json.
+ * The blend is the book's own: Dark Academia's paper and ink, Art Deco's capitals and gold rules.
+ */
+
+[data-style="academia"] {
+  --bg: #EDE3D1;
+  --surface: #E4D7C0;
+  --fg: #2A1F17;
+  --accent: #6B2B2B;
+  --accent-2: #3E4A3D;
+  --muted: #5E4E40;
+  --rule: #8C6A3F;
+  --ornament: #8C6A3F;
+  --rule-weight: 1px;
+  --radius: 2px;
+  --font-display: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+  --font-body: "EB Garamond", Georgia, serif;
+  --font-label: "EB Garamond", Georgia, serif;
+  --display-weight: 600;
+  --display-style: italic;
+  --display-transform: none;
+  --display-tracking: -0.01em;
+  --heading-weight: 600;
+  --label-transform: none;
+  --label-variant: small-caps;
+  --label-tracking: 0.08em;
+  --fleuron: "\2766";
+  --card-face: #F7F1E6;
+  --card-ink: #2A1F17;
+  --card-red: #6B2B2B;
+  --measure: 34rem;
+}
+
+[data-style="deco"] {
+  --bg: #0E0E0E;
+  --surface: #171717;
+  --fg: #F3E9D2;
+  --accent: #C9A227;
+  --accent-2: #1F4E5F;
+  --muted: #B8AD94;
+  --rule: #C9A227;
+  --ornament: #C9A227;
+  --rule-weight: 1px;
+  --radius: 0px;
+  --font-display: "Limelight", "Josefin Sans", sans-serif;
+  --font-body: "Josefin Sans", "Futura", "Century Gothic", sans-serif;
+  --font-label: "Josefin Sans", "Futura", sans-serif;
+  --display-weight: 400;
+  --display-style: normal;
+  --display-transform: uppercase;
+  --display-tracking: 0.04em;
+  --heading-weight: 700;
+  --label-transform: uppercase;
+  --label-variant: normal;
+  --label-tracking: 0.24em;
+  --fleuron: "\25C6";
+  --card-face: #F3E9D2;
+  --card-ink: #0E0E0E;
+  --card-red: #7A1F2B;
+  --measure: 34rem;
+}
+
+/* The blend: Academia's paper, ink, and serif body; Deco's display capitals and gold rules.
+   Gold fails contrast on cream, so it is used for rules and ornament only, never text. */
+[data-style="blend"] {
+  --bg: #EDE3D1;
+  --surface: #E4D7C0;
+  --fg: #2A1F17;
+  --accent: #6B2B2B;
+  --accent-2: #1F4E5F;
+  --muted: #5E4E40;
+  --rule: #2A1F17;
+  --ornament: #C9A227;
+  --rule-weight: 1px;
+  --radius: 0px;
+  --font-display: "Limelight", "Cormorant Garamond", serif;
+  --font-body: "EB Garamond", Georgia, serif;
+  --font-label: "Josefin Sans", "Futura", sans-serif;
+  --display-weight: 400;
+  --display-style: normal;
+  --display-transform: uppercase;
+  --display-tracking: 0.03em;
+  --heading-weight: 600;
+  --label-transform: uppercase;
+  --label-variant: normal;
+  --label-tracking: 0.22em;
+  --fleuron: "\25C6";
+  --card-face: #F7F1E6;
+  --card-ink: #2A1F17;
+  --card-red: #6B2B2B;
+  --measure: 34rem;
+}

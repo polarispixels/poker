@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en" data-style="blend">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Poker: A Study Book</title>
+  <meta name="description" content="A personal study book on poker and poker strategy, with a council of the game's great players.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Josefin+Sans:wght@400;700&family=Limelight&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/themes.css">
+  <link rel="stylesheet" href="css/site.css">
+  <script src="js/switch.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <header class="masthead label">
+      <span>A study book</span>
+      <fieldset class="switch">
+        <legend>Style</legend>
+        <button type="button" data-set-style="academia" aria-pressed="false">Academia</button>
+        <button type="button" data-set-style="deco" aria-pressed="false">Deco</button>
+        <button type="button" data-set-style="blend" aria-pressed="true">Blend</button>
+      </fieldset>
+    </header>
+
+    <main>
+      <section class="title-page">
+        <p class="kicker label">Notes from the Oval Table</p>
+        <h1 class="title">The <em>Long</em> Game</h1>
+        <p class="standfirst">A personal study book on poker, written one page at a time, with a council of the game's great players at the table.</p>
+      </section>
+
+      <div class="ornament" aria-hidden="true"><span></span></div>
+
+      <article class="prose">
+        <p class="label">Style sampler</p>
+        <h2>Where every hand begins</h2>
+        <p>Before the first card is dealt, the most important decision is which hands to play at all. David Sklansky and Mason Malmuth ranked the 169 starting hands of Texas Hold'em into eight groups. Group 1 is the five hands you raise from anywhere: aces, kings, queens, jacks, and ace-king suited.</p>
+
+        <div class="hand" role="img" aria-label="Ace and king of spades">
+          <div class="card">
+            <span class="corner">A<small>&spades;</small></span>
+            <span class="pip">&spades;</span>
+            <span class="corner bottom">A<small>&spades;</small></span>
+          </div>
+          <div class="card">
+            <span class="corner">K<small>&spades;</small></span>
+            <span class="pip">&spades;</span>
+            <span class="corner bottom">K<small>&spades;</small></span>
+          </div>
+        </div>
+        <p class="hand-caption label">AKs, Group 1</p>
+
+        <p>The groups are a starting point, not a rulebook. Good players widen them as they move toward the button, and tighten them when the table is full and the action is loose. Most leaks come from playing the weakest groups out of position.</p>
+
+        <figure class="voice voice-quote">
+          <p class="who label">David Sklansky, the Fundamental Theorem</p>
+          <blockquote>
+            <p>&ldquo;Every time you play a hand differently from the way you would have played it if you could see all your opponents' cards, they gain.&rdquo;</p>
+          </blockquote>
+          <figcaption class="note">A real quote, from <cite>The Theory of Poker</cite> (fourth edition, 1999), as given on <a href="https://en.wikipedia.org/wiki/Fundamental_theorem_of_poker">Wikipedia</a>.</figcaption>
+        </figure>
+
+        <aside class="voice voice-imagined">
+          <p class="who label">What Doyle Brunson might say</p>
+          <p class="said">He would push back on folding so much. A tight range keeps you safe, but the player who applies pressure controls the hand. Pick your spots, then make the other player decide.</p>
+          <p class="note">An imagined voice: our reading of the ideas in Super/System (1979), not his words.</p>
+        </aside>
+      </article>
+
+      <div class="ornament" aria-hidden="true"><span></span></div>
+    </main>
+
+    <footer class="colophon label">
+      <nav>
+        <a href="docs/">Docs</a>
+        <a href="https://github.com/polarispixels/poker">GitHub</a>
+      </nav>
+      <span data-version></span>
+    </footer>
+  </div>
+
+  <script src="js/version.js"></script>
+</body>
+</html>
