@@ -22,13 +22,224 @@
     <main>
       <article class="chapter">
         <header class="chapter-head">
-          <p class="chapter-kicker label">Chapter 30 <span class="badge">To come</span></p>
+          <p class="chapter-kicker label">Chapter 30 <span class="badge">Preliminary draft</span></p>
           <h1 class="chapter-title">Live Cash Games</h1>
           <p class="standfirst">Deep stacks, rake, and choosing the game, the table, and the seat.</p>
         </header>
 
         <div class="prose chapter-body">
-<p class="lead">This page has not been written yet. The book is being written and published one chapter at a time.</p>
+<p class="lead">A live cash game is not one game. Stack depth, rake, the table, and your seat each change what a hand is worth. This chapter shows how to price those four things and how to pick the game you sit in.</p>
+
+<h2>Deep stacks change the price of hands</h2>
+
+<p>The default game in this book is $2/$5, nine-handed, with $500 stacks (100 big blinds). Many live rooms let you buy in for more, and some players at your table will have $1,000 or $2,000 in front of them. Deep stacks reward the player who sees flops cheaply and wins big when a strong hand meets a second-best one. They punish the player who plays big pots with one pair.</p>
+
+<p>Start with set mining. You hold a small pair, such as <span class="cards" role="img" aria-label="6 of hearts, 6 of diamonds"><span class="pc r">6<i>♥</i></span><span class="pc r">6<i>♦</i></span></span>, and call a raise hoping to flop a set (three of a kind using a pocket pair). Exact count: 1 minus C(48,3) / C(50,3) = 11.76%, about 1 time in 8.5, or odds of 7.5 to 1 against. See it in 100 tries.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 30.1</span><h3 class="figure-title">A small pair, flopped 100 times</h3></div>
+  <div data-fig="dots"><script type="application/json">
+  {"label": "Out of 100 times you hold a small pocket pair, about 12 flops contain a third card of your rank and 88 do not.",
+   "parts": [
+     {"label": "You flop a set", "value": 12, "tone": "accent2"},
+     {"label": "You miss", "value": 88, "tone": "paper"}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact: 11.76%, rounded to 12 for the picture. Arithmetic: 1 - C(48,3) / C(50,3).</p>
+</figure>
+
+<p>You miss about 88 times for every 12 hits, so each hit has to pay for the misses. At 7.5 to 1 against, a $15 call needs you to win about 7.5 x $15 = $112.50 from your opponents, on average, each time you hit. That is the implied-odds math (the money you expect to win later, on top of the pot you see now). It is why live players say you need a deep stack to call with small pairs. A quick test is the ratio of the stack left behind to the call.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table 30.1</span><h3 class="figure-title">Stack behind as a multiple of your call</h3></div>
+  <div data-fig="heat"><script type="application/json">
+  {"label": "Stack left behind divided by the preflop call, for calls of 10, 15, and 25 dollars and stacks behind of 100, 300, and 500 dollars. Ratios below 7.5 cannot pay for set mining even if you win the whole stack every time.",
+   "corner": "Call", "unit": "x", "tone": "accent2",
+   "cols": ["$100 behind", "$300 behind", "$500 behind"],
+   "rows": ["$10", "$15", "$25"],
+   "values": [[10, 30, 50], [6.7, 20, 33.3], [4, 12, 20]]}
+  </script></div>
+  <p class="figure-note">Arithmetic: stack behind / call. The break-even ratio is 7.5 (88.24 / 11.76). It assumes you win the whole stack behind every time you hit, and it ignores the money already in the pot.</p>
+</figure>
+
+<p>Read the table. At $100 behind, a $15 call (6.7 times) fails the test. At $300 behind it passes easily (20 times). In practice you rarely win the whole stack, and a set sometimes loses to a bigger set or a straight. That is why a common rule of thumb asks for 15 to 20 times, not 7.5. Opponent matters too: a set against a player who cannot fold an overpair pays far more than a set against a nit.</p>
+
+<p>Deep stacks also change how committed you are. The stack-to-pot ratio (SPR, effective stack divided by the pot) tells you how much one pair is worth. <a class="xref" href="17-playing-the-turn-and-river.html">Chapter 17, Playing the Turn and River</a> covers it in full. Here is how depth moves it for one common pot: you raise to $15 in the cutoff, the button calls, and both blinds fold. The pot is $15 + $15 + $2 + $5 = $37.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 30.2</span><h3 class="figure-title">The same pot at three stack depths</h3></div>
+  <div data-fig="bars"><script type="application/json">
+  {"label": "Stack-to-pot ratio on the flop in a $37 pot for effective stacks of $500, $1,000, and $2,000: about 13, 27, and 54.",
+   "unit": "", "max": 60,
+   "items": [
+     {"label": "$500 stacks (100 BB)", "value": 13.1, "note": "SPR 13", "tone": "ink"},
+     {"label": "$1,000 stacks", "value": 26.6, "note": "SPR 27", "tone": "gold"},
+     {"label": "$2,000 stacks", "value": 53.6, "note": "SPR 54", "tone": "accent"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: (stack - $15) / $37 = 485 / 37, 985 / 37, and 1,985 / 37. An example pot, not a real hand.</p>
+</figure>
+
+<p>At SPR 13, top pair with a good kicker is usually worth two streets of value, not a whole stack. At SPR 54 the gap is much wider: getting all the money in takes several big bets, and a careful player who puts in that much usually has two pair or better. Deep, you want hands that can make the nuts: sets, straights, and flushes. In our judgment, small pairs and suited connectors such as <span class="cards" role="img" aria-label="9 of spades, 8 of spades"><span class="pc">9<i>♠</i></span><span class="pc">8<i>♠</i></span></span> gain value as stacks get deeper, and offsuit hands that mostly make one pair, such as <span class="cards" role="img" aria-label="Ace of diamonds, Ten of hearts"><span class="pc r">A<i>♦</i></span><span class="pc r">T<i>♥</i></span></span>, lose some. This is a judgment from implied odds, not solver output. For ranges by depth see <a class="xref" href="12-preflop-strategy-for-live-games.html">Chapter 12, Preflop Strategy for Live Games</a>.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Doyle Brunson might say</p>
+  <p class="said">He would say deep stacks are where pressure pays most. When a player can lose everything on one hand, many will fold the second-best hand, and the player who can threaten the whole stack controls the pot. He would still warn you that the same depth lets a lucky amateur take your stack.</p>
+  <p class="note">An imagined voice: our reading of the aggressive approach in Super/System (1979), not his words.</p>
+</aside>
+
+<details class="drill">
+  <summary>You call a $20 raise with a pair of sevens. The stack behind is $400. Is the set-mining ratio met, and how much more than 7.5 is it?</summary>
+  <p>400 / 20 = 20 times. The break-even ratio is 7.5, so you have 12.5 times to spare. It also meets the 15 to 20 times rule of thumb, which leaves room for the times you hit and cannot win the whole stack.</p>
+</details>
+
+<h2>Rake: what the house takes, and what it costs you</h2>
+
+<p>The rake is the fee the room takes from each pot. Rooms differ, so the numbers below are one example, not a rule. <strong>Assumed example structure:</strong> 10% of the pot, capped at $5, plus a $1 jackpot drop. Both are taken only when a flop is dealt ("no flop, no drop"). Check your own room's posted rules, and see <a class="xref" href="f-live-etiquette-and-house-rules.html">Appendix F, Live Etiquette and House Rules</a> for the house rules that vary by room.</p>
+
+<p>The cap is the key feature. A cap makes the rake a flat fee on big pots and a heavy tax on small ones.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 30.3</span><h3 class="figure-title">Rake as a share of the pot (example structure)</h3></div>
+  <div data-fig="columns"><script type="application/json">
+  {"label": "Under an example rake of 10 percent capped at 5 dollars plus a 1 dollar jackpot drop, the rake takes 15 percent of a 20 dollar pot and only 2 percent of a 300 dollar pot.",
+   "unit": "%", "categories": ["$20", "$40", "$50", "$100", "$300"],
+   "series": [
+     {"name": "Rake plus drop as a share of the pot", "values": [15, 12.5, 12, 6, 2], "tone": "accent"}
+   ],
+   "xLabel": "Pot size"}
+  </script></div>
+  <p class="figure-note">Arithmetic with an assumed structure: (min(10% of pot, $5) + $1) / pot. A $20 pot pays $2 + $1 = $3, or 15%. A $300 pot pays $5 + $1 = $6, or 2%. Rooms differ.</p>
+</figure>
+
+<p>Two lessons follow. First, small pots are expensive to win, so raising and taking the blinds uncontested (no flop, no rake) is worth more than it looks. Second, the rake barely touches a stack-sized pot, so the cap does not stop you from playing big pots with strong hands. Here is one pot from start to finish.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 30.4</span><h3 class="figure-title">One pot, and the rake taken out of it</h3></div>
+  <div class="table-scroll">
+    <table class="hand-log">
+      <thead><tr><th>Street</th><th>Board</th><th>Action</th><th>Pot</th></tr></thead>
+      <tbody>
+        <tr><td>Preflop</td><td>Hero: <span class="cards" role="img" aria-label="Ace of hearts, Queen of hearts"><span class="pc r">A<i>♥</i></span><span class="pc r">Q<i>♥</i></span></span></td><td>Hero raises to $15 in the cutoff. The button and the big blind call. The small blind posted $2 and folds.</td><td class="pot">$47</td></tr>
+        <tr><td>Flop</td><td><span class="cards" role="img" aria-label="Queen of spades, 7 of diamonds, 3 of clubs"><span class="pc">Q<i>♠</i></span><span class="pc r">7<i>♦</i></span><span class="pc">3<i>♣</i></span></span></td><td>The big blind checks. Hero bets $40. The button calls and the big blind folds.</td><td class="pot">$127</td></tr>
+        <tr><td>Turn</td><td><span class="cards" role="img" aria-label="Queen of spades, 7 of diamonds, 3 of clubs, 9 of hearts"><span class="pc">Q<i>♠</i></span><span class="pc r">7<i>♦</i></span><span class="pc">3<i>♣</i></span><span class="pc r">9<i>♥</i></span></span></td><td>Both check.</td><td class="pot">$127</td></tr>
+        <tr><td>River</td><td><span class="cards" role="img" aria-label="Queen of spades, 7 of diamonds, 3 of clubs, 9 of hearts, 2 of spades"><span class="pc">Q<i>♠</i></span><span class="pc r">7<i>♦</i></span><span class="pc">3<i>♣</i></span><span class="pc r">9<i>♥</i></span><span class="pc">2<i>♠</i></span></span></td><td>Hero bets $60. The button folds. Hero wins the pot.</td><td class="pot">$127</td></tr>
+        <tr class="total"><td colspan="3">Rake: 10% of $127 = $12.70, capped at $5, plus $1 drop = $6. Hero receives $121.</td><td class="pot">$121</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">An example hand in a $2/$5 game with the assumed rake above. Not a real hand history. Pot: $15 x 3 + $2 = $47; $47 + $40 + $40 = $127. The river bet was folded to, so it never adds to the pot.</p>
+</figure>
+
+<p>The rake took $6 of a $127 pot, or 4.7% (6 / 127). Without the cap it would have taken $12.70 + $1 = $13.70. Compare that with the 12 to 15 percent the same structure takes from a $20 to $50 pot.</p>
+
+<p>Tips are the other cost. In many US rooms, winners tip the dealer, often $1 or so per pot at $2/$5. That is a custom, not a rule, but it comes out of the same winnings as the rake, so count it. The Table Math box at the end of the chapter adds the two together.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What David Sklansky might say</p>
+  <p class="said">He would treat the rake as a cost in expected value, to be counted like any other. Every hand you play has to beat the rake before it earns a profit, so marginal hands that win a small pot a little over half the time are losers once the house has been paid.</p>
+  <p class="note">An imagined voice: our reading of the expected-value approach in The Theory of Poker, not his words.</p>
+</aside>
+
+<h2>Choosing the game</h2>
+
+<p>The best decision in a live session is often made before the first hand: which game to sit in. The skill gap between you and the table matters more than a small edge in any one hand. Look for games that are loose (many players see the flop) and where players call too much and fold too little. The scatter below names the kinds of tables you will meet. The positions are a judgment of ours, not measured.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 30.5</span><h3 class="figure-title">Four kinds of table, and how they pay</h3></div>
+  <div data-fig="scatter"><script type="application/json">
+  {"label": "Four kinds of live table placed by how many players see the flop and how deep the stacks are. Loose and deep tables are the most profitable for a skilled player. Tight and short tables are the least.",
+   "x": {"label": "Players seeing the flop", "low": "Few", "high": "Many"},
+   "y": {"label": "Stack depth", "low": "Short", "high": "Deep"},
+   "quadrants": ["Deep, quiet", "Loose and deep", "Short, quiet", "Loose and short"],
+   "points": [
+     {"label": "Regulars, tight", "x": 22, "y": 66, "tone": "muted"},
+     {"label": "The soft game", "x": 82, "y": 78, "tone": "accent2"},
+     {"label": "Nit game", "x": 14, "y": 22, "tone": "accent"},
+     {"label": "Short and loose", "x": 78, "y": 24, "tone": "gold"}
+   ]}
+  </script></div>
+  <p class="figure-note">A sketch. Positions are illustrative judgments about most low-stakes live rooms, not measured data.</p>
+</figure>
+
+<p>A game with several weak players and deep stacks has the most money in play and the most mistakes to win. A game of tight regulars with short stacks has the least. For how to tell the types apart, see <a class="xref" href="25-live-player-types-and-population-tendencies.html">Chapter 25, Live Player Types and Population Tendencies</a>, and for taking notes on nine people, <a class="xref" href="09-watching-the-table.html">Chapter 9, Watching the Table</a>.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Chip Reese might say</p>
+  <p class="said">He would say the first skill in cash games is leaving a table. If you are not one of the best players there, you are paying the best players, and the cheapest fix is a different game. Pride is expensive.</p>
+  <p class="note">An imagined voice: our reading of his reputation for game selection and discipline, not his words.</p>
+</aside>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 30.6</span><h3 class="figure-title">Sit, or wait for a seat elsewhere</h3></div>
+  <div class="compare">
+    <div class="b"><h4>Sit down</h4><p>Several players call raises with weak hands. Pots are often three-way or more. Some stacks are deeper than yours. Players talk, drink, and play fast.</p></div>
+    <div class="a"><h4>Wait or move</h4><p>Everyone folds to raises and plays a few hands. Stacks are short. You are one of the best players at the table. The same faces have sat for hours.</p></div>
+  </div>
+  <p class="figure-note">A checklist, drawn from the judgments above. It is not a promise: a soft-looking game can still run against you.</p>
+</figure>
+
+<h2>The table and the seat</h2>
+
+<p>Once you pick a game, pick the table, then the seat. Position (see <a class="xref" href="03-position.html">Chapter 3, Position</a>) rewards acting last, and in a live game you can choose who acts before you. The player who raises often and plays wide is best on your right, so that he acts before you and you see what he does first. A tight player on your left is also helpful: he folds to your raises more often, so you steal the blinds and play more pots in position.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 30.7</span><h3 class="figure-title">A good seat at an example table</h3></div>
+  <div data-fig="table"><script type="application/json">
+  {"label": "Nine-handed table. Hero sits with a loose aggressive player immediately to the right, who acts before hero, and a tight player immediately to the left. Two deep stacks sit across the table.",
+   "button": 5, "pot": "",
+   "seats": [
+     {"pos": "Hero", "stack": "$500", "state": "hero"},
+     {"pos": "Nit", "stack": "$300", "note": "Folds a lot"},
+     {"pos": "Seat 3", "stack": "$450"},
+     {"pos": "Seat 4", "stack": "$200"},
+     {"pos": "Seat 5", "stack": "$1,200", "note": "Calls too much"},
+     {"pos": "Seat 6", "stack": "$800"},
+     {"pos": "Seat 7", "stack": "$350"},
+     {"pos": "Seat 8", "stack": "$600"},
+     {"pos": "Maniac", "stack": "$900", "state": "villain", "note": "Raises often"}
+   ]}
+  </script></div>
+  <p class="figure-note">An example table in a $2/$5 game, not a real one. Seats run clockwise, so the maniac in the last seat acts just before hero.</p>
+</figure>
+
+<p>Two more seat rules. Sit directly to the left of a loose player with a big stack, so he acts first and you respond. Avoid the seat directly to the right of a strong regular, who would then act after you on almost every hand. If the seat you want is taken, ask the floor for a seat change; most rooms keep a list and move you when it opens.</p>
+
+<details class="drill">
+  <summary>Two seats are open. Seat A is to the left of a deep-stacked loose player. Seat B is to his right. Which gives you more position on him, and why?</summary>
+  <p>Seat A. Action runs clockwise, so a player to your left acts after you and a player to your right acts before you. Sitting to his left means he sits on your right, so he acts before you on almost every hand and you act with the extra information. The exception is when he holds the button and you are in the small blind: then you act first after the flop.</p>
+</details>
+
+<h2>Reading the room before you sit</h2>
+
+<p>You can learn a lot in five minutes without playing a hand. Watch from the rail, ask the floor how long the game has been running, and note who is winning chips and who is buying more. Most rooms keep lists for the games they spread: ask which stakes have an open seat and what the minimum buy-in is. Etiquette matters here, and <a class="xref" href="f-live-etiquette-and-house-rules.html">Appendix F, Live Etiquette and House Rules</a> covers the rules that vary by room.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 30.8</span><h3 class="figure-title">Before you buy in</h3></div>
+  <ol class="flow">
+    <li><strong>Check the rake</strong><span>Percent, cap, drop, and any time charge.</span></li>
+    <li><strong>Watch two orbits</strong><span>How many players see each flop? How big are the raises?</span></li>
+    <li><strong>Count the stacks</strong><span>Who is deep? Who is short? Who is stuck?</span></li>
+    <li><strong>Pick the seat</strong><span>Loose-aggressive on your right, tight on your left.</span></li>
+    <li><strong>Set a plan</strong><span>Your buy-in, your stop, and when you will leave.</span></li>
+  </ol>
+  <p class="figure-note">A pre-session routine. Bankroll and stop rules are in <a class="xref" href="10-bankroll-and-variance-basics.html">Chapter 10, Bankroll and Variance Basics</a> and <a class="xref" href="36-bankroll-business-and-longevity.html">Chapter 36, Bankroll, Business, and Longevity</a>.</p>
+</figure>
+
+<p>Set the buy-in to match the game. In our judgment, a full buy-in is usually right when you have the edge, since only a deep stack lets you collect on strong hands. A short buy-in at a deep table gives away your main advantage. Your emotional state matters too. If you are tired, upset, or have just lost, <a class="xref" href="35-the-mental-game.html">Chapter 35, The Mental Game</a> explains why the best choice is often to wait.</p>
+
+<aside class="key">
+  <p class="label">Key idea</p>
+  <p>You win in live cash games by choosing where to play as much as by how you play. Count the rake, find the soft game, and take the seat that gives you position on the loosest player.</p>
+</aside>
+
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>What rake and tips cost you per hour</h2>
+  <p><strong>The shortcut.</strong> Total rake per hour = raked pots per hour x average rake per pot. Divide by the players, add your tips, then divide by the big blind.</p>
+  <p class="math">Example: 15 raked pots x $6 = $90. $90 / 9 players = $10. Add $2 in tips = $12 per hour. $12 / $5 = 2.4 big blinds per hour.</p>
+  <p><strong>Where it bends.</strong> Every input here is an assumption: 15 raked pots an hour, $6 a pot, and $2 in tips. The $6 is the most the example structure takes (any pot of $50 or more); smaller pots pay less, so this example leans high. The $1 jackpot drop comes back to some players as jackpot prizes, but not on any schedule you can count on. Rooms differ, and so does your share. The rake comes out of pots you win, so a player who wins more pots pays more than one ninth. A room that charges by the half hour has a different formula. Whatever you win, this is the amount you must beat before you profit.</p>
+</aside>
         </div>
       </article>
 
@@ -49,5 +260,6 @@
   </div>
 
   <script src="../js/version.js"></script>
+  <script src="../js/figures.js"></script>
 </body>
 </html>

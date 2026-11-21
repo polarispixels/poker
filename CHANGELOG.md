@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.19.0] - 2026-11-21
+
+### Added
+
+- Chapter 30, Live Cash Games: Chapter 30 prices deep stacks with set-mining and SPR math, shows what rake and tips cost under an example structure, and covers choosing the game, table, and seat.
+
 ## [0.18.0] - 2026-11-21
 
 ### Added
