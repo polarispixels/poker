@@ -1,0 +1,233 @@
+<p class="lead">A bluff wins a pot by making a better hand fold. This chapter shows you which hands to bluff with, how the cards in your own hand change the odds, and how many bluffs to bet for every value bet.</p>
+
+<h2>The price of a bluff</h2>
+<p>A <strong>bluff</strong> is a bet with a hand that will usually lose if it gets called. You make it to win the pot with the best hand folding. A <strong>value bet</strong> is the opposite: a bet you want worse hands to call. Every bet is one or the other, and you should know which before the chips leave your hand.</p>
+<p>A bluff is priced like any other bet. You risk a bet to win the pot. Say the pot is $100 and you bet $75. If the bet works, you win $100. If it fails, you lose $75. The bet breaks even when your opponent folds 75 / (100 + 75) = 42.86% of the time. The first half of this idea is in {{ch:8}}; here we use it to choose hands.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">A $75 bluff into a $100 pot</h3></div>
+  <ul class="tree">
+    <li><span class="node root">Bluff $75 into $100</span>
+      <ul>
+        <li><span class="edge">Villain folds 50% of the time</span><span class="node win">Win $100</span></li>
+        <li><span class="edge">Villain calls 50% of the time</span><span class="node lose">Lose $75</span></li>
+      </ul>
+    </li>
+  </ul>
+  <p class="math">EV = 0.50 x $100 + 0.50 x (-$75) = $50 - $37.50 = +$12.50</p>
+  <p class="figure-note">Arithmetic. The 50% fold rate is an assumption for the example. At 30% folds the same bet is 0.30 x $100 - 0.70 x $75 = -$22.50.</p>
+</figure>
+
+<p>The fold rate is a guess about a person, not a fact about the cards. Against a player who folds half the time, the bluff earns money. Against one who folds three times in ten, it burns it. So the first question is never "do I have a bluff?" It is "will this player fold enough?"</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What David Sklansky might say</p>
+  <p class="said">He would call a bluff a bet like any other: a price against a chance. The pot offers you some odds, your opponent either folds often enough or does not, and your mood has no vote. He would also point out that a bluff you should have checked is a gift of money to the people who can see that you were never strong.</p>
+  <p class="note">An imagined voice: our reading of the ideas in The Theory of Poker, not his words.</p>
+</aside>
+
+<h2>Choosing the hands to bluff with</h2>
+<p>You will not bluff with every weak hand. Three qualities make a good bluff.</p>
+<ul>
+  <li><strong>Little showdown value.</strong> If a hand can win by checking and calling, keep it that way. Second pair is a fine <strong>bluff-catcher</strong>, a hand that beats bluffs but loses to value. Turning it into a bluff throws away the pots it would have won.</li>
+  <li><strong>Some chance to improve.</strong> A <strong>semi-bluff</strong> is a bet with a hand that is probably behind now but can still become the best hand. It wins two ways: the fold, or the card.</li>
+  <li><strong>Cards that take away your opponent's calls.</strong> That is the next section.</li>
+</ul>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Where common hands sit as bluffs</h3></div>
+  <div data-fig="scatter"><script type="application/json">
+  {"label": "Seven hand types placed by showdown value and chance to improve. Draws sit at the top left and are the best semi-bluffs. Naked air is a pure bluff. A pair with a flush draw has both. Second pair and top pair sit at the bottom right and want to check or bet for value.",
+   "x": {"label": "Showdown value", "low": "None", "high": "A lot"},
+   "y": {"label": "Chance to improve", "low": "Little", "high": "A lot"},
+   "quadrants": ["Semi-bluff", "Pair plus draw", "Pure bluff", "Check or bet thin"],
+   "points": [
+     {"label": "Flush + straight draw", "x": 22, "y": 92, "tone": "accent"},
+     {"label": "Flush draw", "x": 26, "y": 74, "tone": "accent"},
+     {"label": "Gutshot", "x": 16, "y": 56, "tone": "accent"},
+     {"label": "Pair + flush draw", "x": 64, "y": 82, "tone": "ink"},
+     {"label": "Naked air", "x": 8, "y": 10, "tone": "muted"},
+     {"label": "Second pair", "x": 58, "y": 16, "tone": "gold"},
+     {"label": "Top pair", "x": 86, "y": 30, "tone": "accent2"}
+   ]}
+  </script></div>
+  <p class="figure-note">A sketch of the idea. Positions are illustrative, not measured.</p>
+</figure>
+
+<p>This is why the best river bluffs are usually busted draws. You bet the flush draw on the flop and turn as a semi-bluff. If the flush never comes, the hand has no showdown value left, and it already told a consistent story. Plan for that on the earlier streets ({{ch:17}}).</p>
+
+<h2>Blockers: cards that take away calls</h2>
+<p>A <strong>blocker</strong> is a card in your hand that makes it impossible for your opponent to hold certain hands. If you hold the ace of spades, nobody else has it. {{ch:14}} counts combinations in full; here is one count that matters for bluffing.</p>
+<p>You raised on the button with [[As 7c]] and the big blind called. The flop was [[Ks 9s 5s]]. You bet $24 and he called. The turn [[2d]] checked through, and the river is [[3h]]. The pot is $80. He checks, and you have ace-high, which has almost no showdown value here.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">The river, before the bluff</h3></div>
+  <div data-fig="table"><script type="application/json">
+  {"label": "Nine-handed table. Hero on the button holds the ace of spades and seven of clubs. The board is king of spades, nine of spades, five of spades, two of diamonds, three of hearts. The big blind has checked, and the pot is 80 dollars.",
+   "button": 0, "pot": "$80", "board": "Ks 9s 5s 2d 3h",
+   "seats": [
+     {"pos": "BTN", "stack": "$461", "cards": "As 7c", "state": "hero"},
+     {"pos": "SB", "state": "fold"},
+     {"pos": "BB", "stack": "$461", "note": "checks", "state": "villain"},
+     {"pos": "UTG", "state": "fold"},
+     {"pos": "UTG+1", "state": "fold"},
+     {"pos": "MP", "state": "fold"},
+     {"pos": "LJ", "state": "fold"},
+     {"pos": "HJ", "state": "fold"},
+     {"pos": "CO", "state": "fold"}
+   ]}
+  </script></div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history. Pot: $15 + $15 + $2 = $32 preflop, plus $24 + $24 on the flop = $80. Stacks: $500 - $15 - $24 = $461.</p>
+</figure>
+
+<p>Three spades are on the board, so he needs two more spades for a flush. Count the spades left. Thirteen spades exist and three are on the board, so ten are unseen. With ten spades, he can hold 10 x 9 / 2 = 45 flush combos. But you hold the ace of spades, so only nine are unseen: 9 x 8 / 2 = 36. Nine combos are gone, and they are every hand with the ace of spades, the nut flush.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">His flush combos, with and without the ace</h3></div>
+  <div data-fig="split"><script type="application/json">
+  {"label": "Villain's possible two-spade flush hands. With no spade in your hand there are 45. Holding the ace of spades, 9 of those 45 are blocked and 36 remain.",
+   "unit": " combos",
+   "rows": [
+     {"label": "You hold no spade", "note": "ten spades unseen", "parts": [{"label": "Flush combos he can hold", "value": 45, "tone": "ink"}]},
+     {"label": "You hold the ace of spades", "note": "nine spades unseen", "parts": [{"label": "Flush combos he can hold", "value": 36, "tone": "ink"}, {"label": "Blocked, includes the nut flush", "value": 9, "tone": "accent"}]}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: 10 x 9 / 2 = 45, and 9 x 8 / 2 = 36. The count is flushes only; he can also have sets and two pair.</p>
+</figure>
+
+<p>Nine of 45 is 20%. That is a small edge, not a license. A blocker breaks ties between bluffs: when two hands have no showdown value, bet the one that blocks his best calls. It does not turn a hopeless bluff into a good one. The mirror rule matters too: avoid bluffing with cards that block the hands you want him to fold, because then he has fewer folds to give.</p>
+
+<h2>Semi-bluffs: two ways to win</h2>
+<p>A draw is the best kind of bluff because it has a plan B. Here is a worked hand. You raise to $15 from the cutoff with [[Ah Jh]], and the big blind calls. The pot is $15 + $15 + $2 = $32.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">A nut flush draw as a semi-bluff</h3></div>
+  <div class="table-scroll">
+    <table class="hand-log">
+      <thead><tr><th>Street</th><th>Board</th><th>Action</th><th>Pot</th></tr></thead>
+      <tbody>
+        <tr><td>Preflop</td><td>Hero: [[Ah Jh]]</td><td>Hero raises to $15 in the cutoff. The big blind calls.</td><td class="pot">$32</td></tr>
+        <tr><td>Flop</td><td>[[Kh 9h 4d]]</td><td>The big blind checks. Hero bets $24. A pure bluff needs 24 / 56 = 42.86% folds.</td><td class="pot">$80 if called</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history. Equity: exact, from tools/poker.js, against the 60 combos left of 99 to QQ, KQ, KJ, KT, K9s, and AKo, a calling range chosen for the example.</p>
+</figure>
+
+<p>Against that calling range, [[Ah Jh]] has 43.66% equity with both cards to come. Now look at what a call is worth. Pot after the call is $32 + $24 + $24 = $80. Your share is 0.4366 x 80 = $34.93, and you paid $24 to get it: +$10.93. That beats giving up the pot, because 43.66% is more than the 24 / 80 = 30% your bet needs when called. But giving up is not your only choice. If you check and both of you check down to showdown, your share of the $32 pot is 0.4366 x 32 = $13.97. A called bet adds $48 to the pot, and you own only 0.4366 x 48 = $20.96 of it for your $24: you lose $3.04 each time he calls. A bet that gets called only gains with more than 50% equity. So the folds pay for the semi-bluff, and the equity keeps the calls cheap. A pure bluff loses the whole $24 when called; this draw loses about $3.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Doyle Brunson might say</p>
+  <p class="said">He would not let you check this hand. A draw that bets puts the decision on the other player and can win the pot without ever seeing another card. A draw that checks can only win by getting lucky. He would tell you to bet, and to make them pay to find out what you hold.</p>
+  <p class="note">An imagined voice: our reading of the aggressive approach in Super/System (1979), not his words.</p>
+</aside>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">The semi-bluff, played 100 times</h3></div>
+  <div data-fig="dots"><script type="application/json">
+  {"label": "Out of 100 semi-bluffs where he folds 30 percent of the time, you win 30 when he folds, win about 31 more at showdown after a call, and lose about 39.",
+   "parts": [
+     {"label": "He folds: you win $32", "value": 30, "tone": "accent2"},
+     {"label": "Called, and you win: +$56", "value": 31, "tone": "ink"},
+     {"label": "Called, and you lose: -$24", "value": 39, "tone": "accent"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic with a 30% fold rate, assumed. 70 calls x 43.66% = 30.6 wins and 39.4 losses, rounded. EV of the bet: 0.30 x 32 + 0.70 x 10.93 = +$17.25. Checking it down is worth about 0.4366 x 32 = $13.97, so the bet gains about $3.28. It matches checking at 3.04 / (32 - 10.93) = 14.4% folds. These treat your equity against his whole range as 43.66%, a simplification.</p>
+</figure>
+
+<p>Compare that 14.4% with the 42.86% a pure bluff of the same size needs. That gap is what the draw buys you. Treat these figures as rough. In a real hand he may raise, or you may face a second bet on the turn, and then you cannot always see the river for free. A draw is worth the most when you can keep betting it, so look for hands where your story holds up on the next street.</p>
+
+<h2>The ratio of value bets to bluffs</h2>
+<p>On the river you have no cards to come, so your bluffs are pure. How many should you have? The answer comes from your opponent's side of the table. He is facing a bet of B into a pot of P, and he needs equity of B / (P + 2B) to call. If your betting range has exactly that share of bluffs, a call with a bluff-catcher earns the same as a fold. That is the point of the ratio: you add bluffs until his bluff-catcher is indifferent.</p>
+<p class="math">Bluffs as a share of your bets = B / (P + 2B). Bluffs per value bet = B / (P + B).</p>
+<p>Bigger bets earn more bluffs, because a bigger bet gives the caller a worse price: he needs more equity to call, so your range can hold more bluffs before his call pays. Pot-size bets can carry one bluff for every two value bets. Half-pot bets carry one for every three.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">How many of your river bets can be bluffs</h3></div>
+  <div data-fig="bars"><script type="application/json">
+  {"label": "Share of a river betting range that can be bluffs, by bet size: 20 percent for a third of the pot, 25 for half, 29 for two thirds, 33 for the pot, and 40 for twice the pot.",
+   "unit": "%", "max": 50,
+   "items": [
+     {"label": "1/3 pot", "value": 20, "note": "1 bluff per 4 value"},
+     {"label": "1/2 pot", "value": 25, "note": "1 per 3"},
+     {"label": "2/3 pot", "value": 28.6, "note": "2 per 5"},
+     {"label": "Pot", "value": 33.3, "note": "1 per 2", "tone": "accent"},
+     {"label": "2x pot", "value": 40, "note": "2 per 3", "tone": "accent"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: B / (P + 2B), with the pot counted before the bet. The same fraction is the equity a caller needs, as listed in the cheat sheet in {{ch:A}}.</p>
+</figure>
+
+<p>Put it to work. Suppose you have 12 value combos on the river and you bet the pot. Bluffs: 12 x 100 / 200 = 6 combos. Bet half the pot and you want 12 x 50 / 150 = 4.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">Bluff combos to pair with 12 value combos</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Bet into $100</th><th>Bluffs per value bet</th><th>Bluff combos</th><th>Total bets</th></tr></thead>
+      <tbody>
+        <tr><td>$33 (1/3 pot)</td><td>0.25</td><td>3</td><td>15</td></tr>
+        <tr><td>$50 (1/2 pot)</td><td>0.33</td><td>4</td><td>16</td></tr>
+        <tr><td>$67 (2/3 pot)</td><td>0.40</td><td>4.8</td><td>16.8</td></tr>
+        <tr><td>$100 (pot)</td><td>0.50</td><td>6</td><td>18</td></tr>
+        <tr><td>$200 (2x pot)</td><td>0.67</td><td>8</td><td>20</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Arithmetic: 12 x B / (P + B), with a $100 pot. The $33 and $67 rows use exact thirds. Bluff combos are rounded in play.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Phil Galfond might say</p>
+  <p class="said">He would give you the ratio as a map and ask you to treat it that way. It tells you what a hard-to-exploit river looks like. It is a starting point you learn, then leave as soon as you know something about the person across from you.</p>
+  <p class="note">An imagined voice: our reading of the teaching approach behind Run It Once, not his words.</p>
+</aside>
+
+<aside class="key">
+  <p class="label">Key idea</p>
+  <p>A bluff needs a fold. A semi-bluff needs a fold or a card. A good bluffing range adds bluffs in proportion to the bet: more bluffs when you bet bigger.</p>
+</aside>
+
+<h2>Bluffing in a live game</h2>
+<p>The ratio assumes an opponent who defends correctly. Most live opponents do not. In most low-stakes live games, many players call too often with one pair and bluff too rarely. That is a judgment from the room, not a measured fact, but it matters: against a caller, bluffs lose more than the table says, and thin value bets win more. Move some of your river bluffs into checks, and keep your value bets.</p>
+<p>The opposite player exists too: a person who folds to any bet that looks big. Against him you can bluff more than the ratio says. The ratio is a baseline. The person decides where to stand ({{ch:25}} profiles the types; {{ch:19}} puts a range on a bet).</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Three opponents, three bluffing plans</h3></div>
+  <div class="compare">
+    <div class="a"><h4>Calls too much</h4><p>Cut river bluffs below the ratio. Bet thin for value. Semi-bluff only strong draws, and expect to win when the card comes, not when he folds.</p></div>
+    <div class="b"><h4>Folds too much</h4><p>Bluff more than the ratio. A small bet often works as well as a big one, and it risks less.</p></div>
+    <div class="c"><h4>Unknown</h4><p>Start at the ratio for your bet size. Watch what he shows down, then move toward the plan that fits him.</p></div>
+  </div>
+  <p class="figure-note">A summary of this section. The labels are judgments, not measurements.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Daniel Negreanu might say</p>
+  <p class="said">He would remind you that the question is who, not what. Before you fire a bluff, ask what this player did the last time he held a medium pair in this spot, and whether he has been paying attention. He plays many pots cheaply, so he would rather find the player who gives up than force a bluff through one who never does.</p>
+  <p class="note">An imagined voice: our reading of his public teaching on small ball and hand reading, not his words.</p>
+</aside>
+
+<p>Two more brakes. Bluff less against several opponents: every extra player is another chance that someone holds something, so a multiway bluff must work against all of them ({{ch:27}}). And watch the size you choose. Live players tend to react to bet size more than to your story, so a size that looks weak invites a call ({{ch:20}}). Balance as a theory is in {{ch:22}} and {{ch:23}}.</p>
+
+<h3>Drills</h3>
+<details class="drill">
+  <summary>The pot is $60 and you bet $40 as a pure bluff. How often must it work to break even? What share of your bets can be bluffs at that size?</summary>
+  <p>Break-even: 40 / (60 + 40) = 40%. Bluff share: 40 / (60 + 80) = 28.6%, about 2 in 7.</p>
+</details>
+<details class="drill">
+  <summary>You have 10 value combos on the river and bet the pot. How many bluff combos balance them?</summary>
+  <p>Bluffs per value bet at pot size is 100 / 200 = 0.5. Ten value combos call for 5 bluff combos.</p>
+</details>
+<details class="drill">
+  <summary>The board runs out [[Td 7d 2d 4s Jc]], and you hold [[Kd 3c]]. How many two-diamond flush combos can your opponent hold? How many of them are the nut flush?</summary>
+  <p>Ten diamonds are unseen without your hand. You hold one, so nine remain: 9 x 8 / 2 = 36 combos. The ace of diamonds is among them, so nut flush combos are the ace with each of the other 8: 8 combos. You block the king-high flushes, not the nuts.</p>
+</details>
+
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>Semi-bluff EV: draw equity plus fold equity</h2>
+  <p><strong>The shortcut.</strong> First ask whether the draw alone beats the price. Called, you win equity x (pot + 2 x bet) and pay the bet. If that is negative, call the gap the shortfall. The folds you need are the shortfall divided by (pot + shortfall).</p>
+  <p class="math">Turn flush draw, pot $100, bet $75, 9 outs of 46 is about 20%.<br>Called: 0.20 x 250 - 75 = -$25. Folds needed: 25 / (100 + 25) = 20%.<br>A pure bluff at this size needs 42.9%.</p>
+  <p><strong>Where it bends.</strong> The exact figures are 19.57% equity and 20.7% folds, so rounding is close. The shortcut assumes a call ends the betting and you see the river. If you face a raise or a river bet, the draw is worth less. If you hit and he pays, it is worth more. One more bend: "folds needed" here means the bet beats giving up. If you could check and see the river for free, checking is worth about 0.20 x 100 = $20, and the bet only matches that at (20 + 25) / (100 + 25) = 36% folds (36.2% exact). Treat it as a first estimate, and trust it least when the opponent bets again.</p>
+</aside>

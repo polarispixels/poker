@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.36.0] - 2026-11-21
+
+### Added
+
+- Chapter 18, Bluffing and Semi-Bluffing: Chapter 18 on bluffing and semi-bluffing: break-even folds, bluff selection, blockers, semi-bluff EV against checking, and the value-to-bluff ratio by bet size.
+
 ## [0.35.0] - 2026-11-21
 
 ### Added
