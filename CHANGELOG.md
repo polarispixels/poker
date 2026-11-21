@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.10.0] - 2026-11-21
+
+### Added
+
+- Chapter 3, Position: Chapter 3, Position: why acting last pays, the nine seats, how position widens opening ranges, and counting players left to act.
+
 ## [0.9.0] - 2026-11-21
 
 ### Added

@@ -22,13 +22,274 @@
     <main>
       <article class="chapter">
         <header class="chapter-head">
-          <p class="chapter-kicker label">Chapter 3 <span class="badge">To come</span></p>
+          <p class="chapter-kicker label">Chapter 3 <span class="badge">Preliminary draft</span></p>
           <h1 class="chapter-title">Position</h1>
           <p class="standfirst">Why acting last is an advantage, and how your seat changes every decision.</p>
         </header>
 
         <div class="prose chapter-body">
-<p class="lead">This page has not been written yet. The book is being written and published one chapter at a time.</p>
+<p class="lead">Your seat decides when you act, and when you act decides how much you know. This chapter names the nine seats, shows why the button is the best one, and explains how position changes the hands you play and the way you play them.</p>
+
+<h2>The last word</h2>
+
+<p>Poker is a game of incomplete information (<a class="xref" href="01-what-poker-really-is.html">Chapter 1, What Poker Really Is</a>). You never see your opponent's cards. What you can see is what they do. A player who acts after you gets to watch your action before choosing their own. A player who acts before you has to choose blind.</p>
+
+<p><strong>Position</strong> is your place in the order of action. Acting <strong>in position</strong> means acting after your opponent. Acting <strong>out of position</strong> means acting before them. The advantage is simple: the player in position sees what the other player does, every street, and then decides.</p>
+
+<p>Here is the best seat in the house. You are on the button in a $2/$5 game, nine-handed, with $500 stacks. Everyone folds to the cutoff, who raises to $15. The two blinds still act after you before the flop. If you call and they fold, you act last on every street that follows.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 3.1</span><h3 class="figure-title">Hero on the button, facing a cutoff raise</h3></div>
+  <div data-fig="table"><script type="application/json">
+  {"label": "Nine-handed table. Hero on the button holds ace seven of hearts. Five players have folded, the cutoff has raised to 15 dollars, and the small and big blinds have posted 2 and 5 dollars.",
+   "button": 0, "pot": "$22",
+   "seats": [
+     {"pos": "BTN", "stack": "$500", "cards": "Ah 7h", "state": "hero"},
+     {"pos": "SB", "stack": "$500", "bet": "$2"},
+     {"pos": "BB", "stack": "$500", "bet": "$5"},
+     {"pos": "UTG", "state": "fold"},
+     {"pos": "UTG+1", "state": "fold"},
+     {"pos": "MP", "state": "fold"},
+     {"pos": "LJ", "state": "fold"},
+     {"pos": "HJ", "state": "fold"},
+     {"pos": "CO", "stack": "$485", "bet": "$15", "state": "villain"}
+   ]}
+  </script></div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history. Pot: $15 + $2 + $5 = $22.</p>
+</figure>
+
+<p>Two things about this spot repeat all game. First, you have the information: the cutoff has told you something with the raise, and nobody behind you can answer your action except the two blinds. Second, you have the options: on later streets, you can bet, check, or fold with the full picture in front of you.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 3.2</span><h3 class="figure-title">Acting last against acting first</h3></div>
+  <div class="compare">
+    <div class="b"><h4>In position</h4><p>You see their action first. You can check back to see a free card, bet for value when they show weakness, and fold cheaply when they show strength. You control the size of the pot.</p></div>
+    <div class="a"><h4>Out of position</h4><p>You act first with no information. A check invites a bet. A bet can be raised. Every decision is a guess about what the other player will do next.</p></div>
+  </div>
+  <p class="figure-note">A summary of this section.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What David Sklansky might say</p>
+  <p class="said">He would call position an application of his Fundamental Theorem. Each time you must act before your opponent, you play more like a player who cannot see their cards. Acting last shrinks the gap between how you play and how you would play with the full information.</p>
+  <p class="note">An imagined voice: our reading of the Fundamental Theorem of Poker in The Theory of Poker, not his words.</p>
+</aside>
+
+<h2>The nine seats</h2>
+
+<p>A full table has nine seats. The dealer button moves one seat clockwise after every hand, so every seat takes its turn at every position. The two seats left of the button post the <strong>blinds</strong>, forced bets that start the pot (<a class="xref" href="02-rules-hands-and-the-flow-of-a-live-hand.html">Chapter 2, Rules, Hands, and the Flow of a Live Hand</a>). Seat names run in order of action preflop:</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table 3.1</span><h3 class="figure-title">The nine seats, in order of action</h3></div>
+  <div class="table-scroll">
+    <table class="wrap">
+      <thead><tr><th>Seat</th><th>Name</th><th>Group</th><th>Acts preflop</th><th>Acts after the flop (if in the hand)</th></tr></thead>
+      <tbody>
+        <tr><td>UTG</td><td>Under the gun</td><td>Early</td><td>First</td><td>Third</td></tr>
+        <tr><td>UTG+1</td><td>One past under the gun</td><td>Early</td><td>Second</td><td>Fourth</td></tr>
+        <tr><td>MP</td><td>Middle position</td><td>Middle</td><td>Third</td><td>Fifth</td></tr>
+        <tr><td>LJ</td><td>Lojack</td><td>Middle</td><td>Fourth</td><td>Sixth</td></tr>
+        <tr><td>HJ</td><td>Hijack</td><td>Late</td><td>Fifth</td><td>Seventh</td></tr>
+        <tr><td>CO</td><td>Cutoff</td><td>Late</td><td>Sixth</td><td>Eighth</td></tr>
+        <tr><td>BTN</td><td>Button</td><td>Late</td><td>Seventh</td><td class="good">Ninth, last</td></tr>
+        <tr><td>SB</td><td>Small blind</td><td>Blinds</td><td>Eighth</td><td class="bad">First</td></tr>
+        <tr><td>BB</td><td>Big blind</td><td>Blinds</td><td>Last</td><td class="bad">Second</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">The early, middle, late, and blinds groupings are a common way to sort the seats; rooms and authors differ on where one group ends. Order follows from the seating.</p>
+</figure>
+
+<p>Look at the last two columns. The seats flip. Preflop, the blinds act last. After the flop, the small blind acts first and the button acts last. The big blind has the cruelest deal: last to act before the flop, but second to act on every street after it, always out of position to everyone except the small blind.</p>
+
+<p>The simplest way to measure a seat is to count the players who still have to act behind you. Every one of them is a chance that someone wakes up with a strong hand.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 3.3</span><h3 class="figure-title">Players left to act behind you, preflop</h3></div>
+  <div data-fig="bars"><script type="application/json">
+  {"label": "Players still to act after you, before the flop, from eight for the player under the gun down to zero for the big blind.",
+   "unit": "", "max": 8,
+   "items": [
+     {"label": "UTG", "value": 8, "tone": "accent"},
+     {"label": "UTG+1", "value": 7},
+     {"label": "MP", "value": 6},
+     {"label": "LJ", "value": 5},
+     {"label": "HJ", "value": 4},
+     {"label": "CO", "value": 3, "tone": "accent2"},
+     {"label": "BTN", "value": 2, "tone": "accent2"},
+     {"label": "SB", "value": 1},
+     {"label": "BB", "value": 0}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: nine players minus your seat's place in the order. A raise from UTG must get past eight hands; a raise from the button must get past two.</p>
+</figure>
+
+<h2>The order changes after the flop</h2>
+
+<p>This is the part new players miss. The order of action after the flop is not the order before it. Postflop, action starts with the first live player to the left of the button, and the button acts last. Folded players drop out of the line, so the button acts last only if it is still in the hand.</p>
+
+<p>Take the hand from the first figure. You call on the button. The blinds fold. Now it is heads-up: you and the cutoff, pot $37 ($15 + $15 + $2 + $5). On the flop, the cutoff has to act first, and you act last on the flop, the turn, and the river.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 3.4</span><h3 class="figure-title">The flop, with the cutoff to act first</h3></div>
+  <div data-fig="table"><script type="application/json">
+  {"label": "Flop of king of hearts, eight of diamonds, three of hearts. Hero on the button holds ace seven of hearts. The cutoff is the only other player and must act first. The blinds and everyone else have folded.",
+   "button": 0, "pot": "$37", "board": "Kh 8d 3h",
+   "seats": [
+     {"pos": "BTN", "stack": "$485", "cards": "Ah 7h", "state": "hero"},
+     {"pos": "SB", "state": "fold"},
+     {"pos": "BB", "state": "fold"},
+     {"pos": "UTG", "state": "fold"},
+     {"pos": "UTG+1", "state": "fold"},
+     {"pos": "MP", "state": "fold"},
+     {"pos": "LJ", "state": "fold"},
+     {"pos": "HJ", "state": "fold"},
+     {"pos": "CO", "stack": "$485", "state": "villain", "note": "acts first"}
+   ]}
+  </script></div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history. Stacks: $500 minus the $15 call.</p>
+</figure>
+
+<p>You hold four hearts after the flop: two in your hand and two on the board. Nine hearts remain unseen. That is a flush draw with 9 outs (cards that complete it), and what it costs you to see more cards depends on who acts first.</p>
+
+<h2>What acting last is worth</h2>
+
+<p>Position pays in three ways. You get information, you get free cards, and you get control of the pot size. Here is the hand, street by street.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 3.5</span><h3 class="figure-title">Two free cards with a flush draw</h3></div>
+  <div class="table-scroll">
+    <table class="hand-log">
+      <thead><tr><th>Street</th><th>Board</th><th>Action</th><th>Pot</th></tr></thead>
+      <tbody>
+        <tr><td>Preflop</td><td>Hero: <span class="cards" role="img" aria-label="Ace of hearts, 7 of hearts"><span class="pc r">A<i>♥</i></span><span class="pc r">7<i>♥</i></span></span></td><td>Cutoff raises to $15. Hero calls on the button. Blinds fold.</td><td class="pot">$37</td></tr>
+        <tr><td>Flop</td><td><span class="cards" role="img" aria-label="King of hearts, 8 of diamonds, 3 of hearts"><span class="pc r">K<i>♥</i></span><span class="pc r">8<i>♦</i></span><span class="pc r">3<i>♥</i></span></span></td><td>Cutoff checks. Hero checks back with a flush draw.</td><td class="pot">$37</td></tr>
+        <tr><td>Turn</td><td><span class="cards" role="img" aria-label="King of hearts, 8 of diamonds, 3 of hearts, 2 of clubs"><span class="pc r">K<i>♥</i></span><span class="pc r">8<i>♦</i></span><span class="pc r">3<i>♥</i></span><span class="pc">2<i>♣</i></span></span></td><td>Cutoff checks. Hero checks back again.</td><td class="pot">$37</td></tr>
+        <tr><td>River</td><td><span class="cards" role="img" aria-label="King of hearts, 8 of diamonds, 3 of hearts, 2 of clubs, 9 of hearts"><span class="pc r">K<i>♥</i></span><span class="pc r">8<i>♦</i></span><span class="pc r">3<i>♥</i></span><span class="pc">2<i>♣</i></span><span class="pc r">9<i>♥</i></span></span></td><td>A heart arrives: Hero has the nut flush. Cutoff checks. Hero bets $30, cutoff calls.</td><td class="pot">$97</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history. Pot: $37 + $30 + $30 = $97.</p>
+</figure>
+
+<p>Hero saw both cards for nothing. The chance of finishing the flush with two cards to come is 34.97%, about 35%, from tools/poker.js. One card is 19.15% (9 outs out of 47 unseen cards). A player who acts first with the same draw cannot count on that: every check hands the opponent the choice to bet.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 3.6</span><h3 class="figure-title">The same draw, two seats</h3></div>
+  <ul class="tree">
+    <li><span class="node root">Flush draw on the flop, pot $37</span>
+      <ul>
+        <li><span class="edge">You act last, and villain checks</span><span class="node win">Check back: see the turn for $0</span></li>
+        <li><span class="edge">You act first, check, and villain bets $25</span><span class="node lose">Pay $25 to see one card, or fold</span></li>
+      </ul>
+    </li>
+  </ul>
+  <p class="math">Price of the call: 25 / (37 + 25 + 25) = 25 / 87 = 28.7%. Your chance to hit on the turn: 9 / 47 = 19.15%.</p>
+  <p class="figure-note">Arithmetic. The $25 bet is an assumption for the example. Pot odds are the subject of <a class="xref" href="05-odds-and-outs.html">Chapter 5, Odds and Outs</a>.</p>
+</figure>
+
+<p>The call is short of break-even on direct odds: 28.7% is the price, and you have 19.15% for one card. You may still call if you expect to win more on later streets (implied odds, <a class="xref" href="05-odds-and-outs.html">Chapter 5, Odds and Outs</a>), but you have been pushed to choose. In position, you were not.</p>
+
+<p>Position also gives you control of the pot size. When the cutoff checks, you decide how big the pot gets. With a strong hand, you can bet for value, since a check often (not always) means a medium or weak hand. With a weak hand, you can bet to take the pot, and in a heads-up pot nobody else is left to wake up. With a medium hand, you can check back and keep the pot small. With a draw, you choose between a free card and a <strong>semi-bluff</strong>, a bet that can win the pot now or improve later. Each of these is a choice you get with the last word. (<a class="xref" href="08-aggression.html">Chapter 8, Aggression</a> covers why betting usually beats calling.)</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Daniel Negreanu might say</p>
+  <p class="said">He would point out that position is what makes his small-ball approach work. Playing many hands cheaply before the flop only pays if you can use what you see after the flop, and the player who acts last sees the most.</p>
+  <p class="note">An imagined voice: our reading of the small-ball approach he is known for, not his words.</p>
+</aside>
+
+<h2>Position changes your starting hands</h2>
+
+<p>Because later seats have fewer players left to act, and because they win more after the flop, they can open more hands. This is the single biggest adjustment in preflop play. <a class="xref" href="04-starting-hands.html">Chapter 4, Starting Hands</a> builds the full guide, and <a class="xref" href="12-preflop-strategy-for-live-games.html">Chapter 12, Preflop Strategy for Live Games</a> and <a class="xref" href="c-preflop-range-charts.html">Appendix C, Preflop Range Charts</a> give charts. Here is the shape of it.</p>
+
+<p>The Sklansky-Malmuth groups sort the 169 starting hand types from strongest (Group 1) to weakest (Group 8). The groups were built for full-ring limit hold'em, so treat them as a baseline. Our judgment, as a simple baseline and not solver output: the early seats stay near Groups 1 to 3, and the late seats stretch down to Group 6 or beyond.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 3.7</span><h3 class="figure-title">Early-seat hands and the extra late-seat hands</h3></div>
+  <div data-fig="range"><script type="application/json">
+  {"label": "The starting hand grid with Sklansky-Malmuth Groups 1 to 3 shaded as the early-seat baseline, and Groups 4 to 6 shaded as the hands added in later seats.",
+   "groups": [
+     {"name": "Groups 1 to 3", "tone": "ink", "hands": "JJ+,AKs,TT,AQs,AJs,KQs,AKo,99,JTs,QJs,KJs,ATs,AQo"},
+     {"name": "Groups 4 to 6", "tone": "gold", "hands": "88,77,66,55,T9s,QTs,98s,J9s,KTs,Q9s,T8s,87s,76s,97s,A2s-A9s,65s,86s,54s,K9s,J8s,75s,KQo,AJo,KJo,QJo,JTo,ATo,KTo,QTo"}
+   ]}
+  </script></div>
+  <p class="figure-note">Groups from Sklansky and Malmuth, as listed in the starting hands reference. A suited A-x hand is listed in Group 5 as Axs, entered here as A2s to A9s.</p>
+</figure>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 3.8</span><h3 class="figure-title">How many starting hands each range holds</h3></div>
+  <ul class="stats">
+    <li><b>92</b><span>combos in Groups 1 to 3</span></li>
+    <li><b>6.9%</b><span>of all starting hands</span></li>
+    <li><b>23.2%</b><span>for Groups 1 to 6</span></li>
+  </ul>
+  <p class="figure-note">Exact, from tools/poker.js: 92 of 1,326 combos for Groups 1 to 3, plus 216 for Groups 4 to 6 as entered above, so 308 of 1,326.</p>
+</figure>
+
+<p>Groups 1 to 3 are fewer than one hand in fourteen. Groups 1 to 6 are nearly one in four, about three times as many. Do not memorize those numbers as rules. Many good players open far wider than this on the button when the blinds are weak. The numbers show the shape of the idea: the later you act, the more you open.</p>
+
+<p>The reasons are the two in the first section. A late-seat hand makes money after the flop because you act last, and it faces fewer players who might hold a better hand before the flop. The same hand from UTG loses both advantages.</p>
+
+<h2>Playing out of position</h2>
+
+<p>You will be out of position often. The blinds are always out of position after the flop, and every hand you play from an early seat risks facing a later caller. Out of position is not a reason to panic. It is a reason to be pickier and to plan ahead. (The big blind, which already has money in the pot, is a special case that <a class="xref" href="12-preflop-strategy-for-live-games.html">Chapter 12, Preflop Strategy for Live Games</a> covers.)</p>
+
+<p>Three habits help. Play fewer hands from early seats, as above. Prefer hands that make strong, clear hands, such as top pairs with good kickers and big pairs, because a medium hand is hard to play when you act first. And when you do bet out of position, bet because you have a reason (value or a good bluff), not because a check feels weak.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Doyle Brunson might say</p>
+  <p class="said">He would not let position make you timid. The player in position has an edge, but the player who bets with a plan can take that edge away. Out of position, he would still prefer a bet or a raise to a passive call.</p>
+  <p class="note">An imagined voice: our reading of the aggressive style he is known for in Super/System, not his words.</p>
+</aside>
+
+<p>In our reading, the three voices differ only in degree. Sklansky's lens counts the cost of acting first in expected value (<a class="xref" href="07-expected-value.html">Chapter 7, Expected Value</a>). Negreanu's small ball plays more hands in position and fewer out of it. Brunson's style still looks for pressure. All three start from the same place: know your seat before you look at your cards.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 3.9</span><h3 class="figure-title">A seat-aware routine</h3></div>
+  <ol class="flow">
+    <li><strong>Find your seat</strong><span>Count from the button.</span></li>
+    <li><strong>Count players behind</strong><span>Each one can wake up with a hand.</span></li>
+    <li><strong>Pick your range</strong><span>Tight early, wider late.</span></li>
+    <li><strong>Plan the flop</strong><span>Will you act first or last?</span></li>
+  </ol>
+  <p class="figure-note">A summary of this section.</p>
+</figure>
+
+<aside class="key">
+  <p class="label">Key idea</p>
+  <p>Acting last is worth information, free cards, and control of the pot. Because it is worth so much, the same hand is worth more on the button than under the gun.</p>
+</aside>
+
+<details class="drill">
+  <summary>You are in the hijack. How many players are left to act behind you before the flop?</summary>
+  <p>Four: the cutoff, the button, the small blind, and the big blind.</p>
+</details>
+
+<details class="drill">
+  <summary>Four players see the flop. The button and the cutoff are both in. Who acts last after the flop?</summary>
+  <p>The button, as long as it is still in the hand. The cutoff acts second to last.</p>
+</details>
+
+<details class="drill">
+  <summary>You are in the big blind. The button raises, the small blind folds, and you call. Who acts first on the flop?</summary>
+  <p>You do. With the small blind out, the big blind is the first live player left of the button. The button acts last.</p>
+</details>
+
+<details class="drill">
+  <summary>You hold a flush draw (9 outs) on the flop, in position, and your opponent checks. You check back. What is your chance to hit by the river?</summary>
+  <p>34.97%, about 35%, if you see both cards. The turn alone is 9 out of 47, or 19.15%.</p>
+</details>
+
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>Count the players behind you</h2>
+  <p><strong>The shortcut.</strong> Before you act preflop, count the players left to act. Each one has about a 1 in 21 chance of holding TT or better, or AQ or better. Call it 5 points of risk per player.</p>
+  <p class="math">Per player: 62 combos / 1,326 = 4.68%, about 1 in 21.</p>
+  <p><strong>Worked example.</strong> Under the gun, eight players are behind you. Treating each player as a separate draw, the chance that at least one holds TT+ or AQ+ is 1 - (1 - 0.0468)^n.</p>
+  <p class="math">n = 2 (button): 9.1%. n = 3 (cutoff): 13.4%. n = 4 (hijack): 17.4%. n = 8 (UTG): 31.8%.</p>
+  <p>That is the risk your open runs into before the flop: close to one time in three from UTG, under one in ten from the button. Your hand is less likely to be best with every player still to act.</p>
+  <p><strong>Where it bends.</strong> Adding 5 points per player works for two to four players (10%, 15%, 20%) but runs high after that: eight players would give 40%, against 31.8%. The formula also ignores the cards in your own hand. In a throwaway simulation of 2,000,000 deals for each hand, eight players behind gave about 35% with <span class="cards" role="img" aria-label="7 of clubs, 2 of diamonds"><span class="pc">7<i>♣</i></span><span class="pc r">2<i>♦</i></span></span> in your hand and about 26% with <span class="cards" role="img" aria-label="Ace of clubs, King of diamonds"><span class="pc">A<i>♣</i></span><span class="pc r">K<i>♦</i></span></span>. Low cards in your hand leave the strong cards in the deck; an ace and a king in your hand block many of the hands you fear. Count only the players still to act, not the ones who have folded.</p>
+</aside>
         </div>
       </article>
 
@@ -49,5 +310,6 @@
   </div>
 
   <script src="../js/version.js"></script>
+  <script src="../js/figures.js"></script>
 </body>
 </html>
