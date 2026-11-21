@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.46.1] - 2026-11-20
+
+### Fixed
+
+- Figure gallery: the table example's pot now adds up ($2 + $5 + $15 = $22).
+
 ## [0.46.0] - 2026-11-21
 
 ### Added
