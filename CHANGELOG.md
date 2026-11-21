@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-11-21
+
+### Added
+
+- Chapter 5, Odds and Outs: Chapter 5 teaches counting outs, discounting tainted outs, pot odds, and the call-or-fold decision, with a worked flush draw hand and the rule of 2 and 4.
+
 ## [0.3.0] - 2026-11-21
 
 ### Added

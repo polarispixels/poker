@@ -1,0 +1,255 @@
+<p class="lead">Most hands you play on the flop are not made yet. This chapter gives you a way to count the cards that finish your hand, turn that count into a chance, and compare it with the price the pot is asking.</p>
+
+<h2>Counting outs</h2>
+<p>An <strong>out</strong> is an unseen card that turns your hand into the best hand. You are drawing when you hold a hand that is not good enough yet but could be after one more card. The count is simple: look at the cards you cannot see, and count the ones that help you.</p>
+<p>You can see five cards on the flop: your two and the three on the board. That leaves 47 unseen cards. On the turn you can see six, so 46 are unseen. Every chance in this chapter is a count of good cards over that pool.</p>
+<p>Take a flush draw. You hold [[Ad 8d]] and the flop is [[Kd 9d 4c]]. Thirteen diamonds are in the deck. You can see four of them (two in your hand, two on the board), so nine are left. Nine outs.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">The flop, with a flush draw</h3></div>
+  <div data-fig="table"><script type="application/json">
+  {"label": "Nine-handed table. Hero on the button holds the ace and eight of diamonds on a flop of king of diamonds, nine of diamonds, four of clubs. The cutoff has bet 25 into a pot of 37.",
+   "button": 0, "pot": "$62", "board": "Kd 9d 4c",
+   "seats": [
+     {"pos": "BTN", "stack": "$485", "cards": "Ad 8d", "state": "hero"},
+     {"pos": "SB", "state": "fold"},
+     {"pos": "BB", "state": "fold"},
+     {"pos": "UTG", "state": "fold"},
+     {"pos": "UTG+1", "state": "fold"},
+     {"pos": "MP", "state": "fold"},
+     {"pos": "LJ", "state": "fold"},
+     {"pos": "HJ", "state": "fold"},
+     {"pos": "CO", "stack": "$460", "bet": "$25", "state": "villain"}
+   ]}
+  </script></div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history. Pot before the bet: $15 + $15 + $2 + $5 = $37.</p>
+</figure>
+
+<p>Different draws have different counts, and the counts matter a great deal. Here are the common ones, with the chance of hitting by the river when you see both remaining cards.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Common draws, flop to river</h3></div>
+  <div data-fig="bars"><script type="application/json">
+  {"label": "Chance of completing seven common draws by the river, from 54 percent for a flush draw plus an open-ended straight draw down to 8 percent for two outs.",
+   "unit": "%", "max": 100,
+   "items": [
+     {"label": "Flush + open-ender", "value": 54.1, "note": "15 outs", "tone": "accent2"},
+     {"label": "Flush + gutshot", "value": 45.0, "note": "12 outs", "tone": "accent2"},
+     {"label": "Flush draw", "value": 35.0, "note": "9 outs"},
+     {"label": "Open-ended straight draw", "value": 31.5, "note": "8 outs"},
+     {"label": "Two overcards", "value": 24.1, "note": "6 outs"},
+     {"label": "Gutshot", "value": 16.5, "note": "4 outs", "tone": "accent"},
+     {"label": "Pocket pair to a set", "value": 8.4, "note": "2 outs", "tone": "accent"}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact, from tools/poker.js (draw command): 1 minus (47 minus outs)(46 minus outs) over 47 x 46. Outs per draw are the usual counts: two overcards assumes a pair of either one wins, and the set draw assumes you hold a pocket pair.</p>
+</figure>
+
+<p>Notice how fast the combination draws grow. A flush draw alone is a 35% shot. Add an open-ended straight draw and you are better than 54%, which is a favorite against many made hands. The combined 15 outs are 9 flush cards plus 6 straight cards that are not also diamonds. (You count each card once.)</p>
+
+<h2>From outs to a chance</h2>
+<p>With one card to come (on the turn), the chance of hitting is outs over unseen cards. Nine outs over 46 cards is 9 / 46 = 19.57%, or about 1 in 5. With two cards to come (on the flop), you get two tries, so the chance is a little less than double.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">A flush draw on the turn, played 100 times</h3></div>
+  <div data-fig="dots"><script type="application/json">
+  {"label": "Out of 100 flush draws on the turn, about 20 complete on the river and 80 miss.",
+   "parts": [
+     {"label": "The flush arrives on the river", "value": 20, "tone": "accent2"},
+     {"label": "It misses", "value": 80, "tone": "paper"}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact, from tools/poker.js: 9 / 46 = 19.57%, rounded to 20.</p>
+</figure>
+
+<p>Most draws miss. Even the nut flush draw misses four times in five on the next card. That is fine, because the pot pays you when you hit. The question is always whether the pot pays enough. We get to that below.</p>
+
+<p>You rarely want to divide by 46 at the table. The shortcut is the <strong>rule of 2 and 4</strong>: multiply outs by 2 with one card to come, or by 4 with two. It is close on the turn and a little low. Here is how close.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">The rule of 2 against the exact odds, turn</h3></div>
+  <div data-fig="columns"><script type="application/json">
+  {"label": "Rule of 2 estimates compared with exact turn-to-river odds for 4, 8, 9, 12, and 15 outs. The rule runs a little low, and more so as outs grow.",
+   "unit": "%", "categories": ["4 outs", "8 outs", "9 outs", "12 outs", "15 outs"],
+   "series": [
+     {"name": "Rule of 2", "values": [8, 16, 18, 24, 30], "tone": "gold"},
+     {"name": "Exact", "values": [8.7, 17.4, 19.6, 26.1, 32.6], "tone": "ink"}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact, from tools/poker.js. Arithmetic for the rule: outs x 2. Exact: outs / 46.</p>
+</figure>
+
+<p>On the turn, the rule of 2 is never off by more than three points in this range, and it errs on the safe side. On the flop the story is different: the rule of 4 runs high as outs grow. The Table Math box at the end of the chapter shows by how much. For more shortcuts, see {{ch:6}}.</p>
+
+<h2>Discounting tainted outs</h2>
+<p>A count of outs is a promise: these cards win. That promise is often too generous. A <strong>tainted out</strong> is a card that completes your hand but also completes a better one for your opponent. Count it at full value and you overpay for a draw.</p>
+<p>Here is an invented example. You hold [[Jd Td]]. The turn has come and the board is [[Qs 9h 2s 3c]]. Any king or eight gives you a straight, so you count eight outs. But your opponent holds [[As 5s]], a flush draw. The [[Ks]] and the [[8s]] also give him a flush, so they are tainted. They would make you a straight and him a flush, and you would lose.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">Sorting your outs</h3></div>
+  <div class="table-scroll">
+    <table class="wrap">
+      <thead><tr><th>Group</th><th>Cards</th><th>Count</th><th>Verdict</th></tr></thead>
+      <tbody>
+        <tr><td>Straight cards, clean</td><td>[[Kh Kd Kc]] [[8h 8d 8c]]</td><td>6</td><td class="good">Out</td></tr>
+        <tr><td>Straight cards, tainted</td><td>[[Ks 8s]]</td><td>2</td><td class="bad">Not an out: he makes a flush</td></tr>
+        <tr><td>Pair cards, clean</td><td>[[Jh Jc]] [[Th Tc]]</td><td>4</td><td class="good">Out, but only against a hand like ace high</td></tr>
+        <tr><td>Pair cards, tainted</td><td>[[Js Ts]]</td><td>2</td><td class="bad">Not an out: he makes a flush</td></tr>
+        <tr class="total"><td>Live outs</td><td></td><td>10</td><td>10 / 44 = 22.7%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Exact, from tools/poker.js: equity of [[Jd Td]] against [[As 5s]] on this turn is 22.73%, which matches 10 / 44. Unseen cards: 52 minus 8 known = 44. The verdict on each card is arithmetic on these exact hands.</p>
+</figure>
+
+<p>Look at what the discount did. Counting eight straight outs at face value is wrong two ways. Two of the eight are tainted. And the pair cards are real outs against this hand, though they would be worthless against a pair of queens. Outs depend on what your opponent holds. You do not know that, so you count against the hands he is likely to have.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Daniel Negreanu might say</p>
+  <p class="said">He would say the count is only as good as your read. Before you count a single out, ask what the other player would bet this way, and then ask which of your outs that hand kills. He would trust a read built over a few orbits more than a formula applied to a guess.</p>
+  <p class="note">An imagined voice: our reading of the hand-reading approach in his teaching and writing, not his words.</p>
+</aside>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Clean and tainted outs</h3></div>
+  <div class="compare">
+    <div class="b"><h4>A clean out</h4><p>It makes your hand best against everything he can hold. Count it fully.</p></div>
+    <div class="a"><h4>A tainted out</h4><p>It makes your hand, and a better one for him. Count it at zero, or at half if you are unsure what he has.</p></div>
+  </div>
+  <p class="figure-note">A summary of this section. The half-out rule is a judgment, not a computed number.</p>
+</figure>
+
+<aside class="key">
+  <p class="label">Key idea</p>
+  <p>Count every card that helps you, then remove the ones that help him more. The first count flatters you. The second one is honest.</p>
+</aside>
+
+<h2>Pot odds: the price of the draw</h2>
+<p>Your chance is half the decision. The other half is the <strong>price</strong>: what you pay to call, compared with what you can win. Poker players call this <strong>pot odds</strong>.</p>
+<p>Say the pot is $100 and your opponent bets $50. The pot now holds $150. You must put in $50 to win $150, which is 3 to 1. Over many tries, you break even if you win 1 time in 4. So the equity you need is your call divided by the final pot:</p>
+<p class="math">Equity needed = bet / (pot + 2 x bet) = 50 / (100 + 100) = 25%</p>
+<p>Here "pot" means the pot before his bet. The "2 x bet" is his bet plus your call.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">What each bet asks, and the turn outs you need</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Bet size</th><th>Equity to call</th><th>Outs needed on the turn</th></tr></thead>
+      <tbody>
+        <tr><td>1/4 pot</td><td>16.7%</td><td>8</td></tr>
+        <tr><td>1/3 pot</td><td>20.0%</td><td>10</td></tr>
+        <tr><td>1/2 pot</td><td>25.0%</td><td>12</td></tr>
+        <tr><td>3/4 pot</td><td>30.0%</td><td>14</td></tr>
+        <tr><td>Pot</td><td>33.3%</td><td>16</td></tr>
+        <tr><td>1.5 x pot</td><td>37.5%</td><td>18</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Exact, from tools/poker.js (odds command). Outs needed: equity to call x 46, rounded up. This counts only the next card. Pot is counted before the bet.</p>
+</figure>
+
+<p>The rightmost column is sobering. On the turn, a half-pot bet needs about 12 outs. Even a flush draw (9 outs, 19.6%) is short. It needs a bet of about 32% of the pot or smaller to be a pure call on its own cards (arithmetic: 0.196 / (1 - 2 x 0.196) = 0.32).</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">How big a bet can each draw call, on the turn?</h3></div>
+  <div data-fig="line"><script type="application/json">
+  {"label": "Equity needed to call as the bet grows from a quarter of the pot to twice the pot, with dashed lines at the turn chances of a four-out draw, a nine-out draw, and a fifteen-out draw.",
+   "xLabel": "Bet as a share of the pot", "xUnit": "x", "yUnit": "%", "yMin": 0, "yMax": 45,
+   "series": [
+     {"name": "Equity needed to call", "tone": "ink", "points": [[0.25, 16.7], [0.5, 25], [0.75, 30], [1, 33.3], [1.5, 37.5], [2, 40]]}
+   ],
+   "refs": [
+     {"y": 8.7, "label": "4 outs: 8.7%"},
+     {"y": 19.6, "label": "9 outs: 19.6%"},
+     {"y": 32.6, "label": "15 outs: 32.6%"}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact, from tools/poker.js. Where the solid line is below a dashed line, the draw is getting a good enough price on the next card alone.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What David Sklansky might say</p>
+  <p class="said">He would call pot odds a matter of arithmetic, not courage. Every call is a small purchase. If your chance of winning beats the price, buy it, and if not, pass, whatever the last hand did to you. He would remind you that the decision is judged by the price you paid, not by the card that came.</p>
+  <p class="note">An imagined voice: our reading of the expected value approach in The Theory of Poker, not his words.</p>
+</aside>
+
+<h2>The call-or-fold decision</h2>
+<p>Put the pieces together and the decision is four steps. The order matters: count first, then price, and only then compare.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">The call-or-fold decision</h3></div>
+  <ol class="flow">
+    <li><strong>Count outs</strong><span>Cards that make you best. Remove tainted ones.</span></li>
+    <li><strong>Turn outs into a chance</strong><span>Times 2 with one card to come. Times 4 with two, with care.</span></li>
+    <li><strong>Find the price</strong><span>Bet / (pot + 2 x bet).</span></li>
+    <li><strong>Compare</strong><span>Call when your chance beats the price. Fold when it does not.</span></li>
+  </ol>
+  <p class="figure-note">A summary of this section.</p>
+</figure>
+
+<p>Now run it on one hand, street by street. You hold [[Ad 8d]] on the button. The pot arithmetic is in the log. Villain's range here is an assumption for the example, not a measured fact: top pair or better. That means ace-king, king-queen, king-jack, king-ten, pocket aces, and the three sets (kings, nines, fours).</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">The same draw at two prices</h3></div>
+  <div class="table-scroll">
+    <table class="hand-log">
+      <thead><tr><th>Street</th><th>Board</th><th>Action</th><th>Pot</th></tr></thead>
+      <tbody>
+        <tr><td>Preflop</td><td>Hero: [[Ad 8d]]</td><td>Villain raises to $15 in the cutoff. Hero calls on the button. The blinds fold.</td><td class="pot">$37</td></tr>
+        <tr><td>Flop</td><td>[[Kd 9d 4c]]</td><td>Villain bets $25. Hero needs 25 / (37 + 50) = 28.7%. Hero has 39.4% against his range. Hero calls.</td><td class="pot">$87</td></tr>
+        <tr><td>Turn</td><td>[[Kd 9d 4c 2s]]</td><td>Villain bets $60. Hero needs 60 / (87 + 120) = 29.0%. Hero has 23.7% against his range. On direct odds alone, Hero folds.</td><td class="pot">$147</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history. Equities are exact, from tools/poker.js (vsrange), against AA, KK, 99, 44, AK, KQ, KJ, and KT (57 combos). Stacks start at $500 (100 big blinds).</p>
+</figure>
+
+<p>The flop call is easy: 39.4% beats 28.7%. The turn is a fold on direct odds: the bet is bigger compared with the pot, the draw has one card left instead of two, and 23.7% does not reach 29.0%. The draw did not change. The price did.</p>
+<p>The gap on the turn is small, though, and stacks are deep. Hero has $460 behind. Calling $60 loses about $11 on average if no more money goes in (arithmetic: 0.237 x $147 minus 0.763 x $60 = minus $11). To break even, Hero must win about $46 more, on average, in the hands he wins (arithmetic: $11 / 0.237). A nut flush often collects that from top pair, so many players call here. Whether this opponent pays off is a read, not a number.</p>
+
+<p>One more point. A draw that calls on the flop should think one card at a time. If your opponent will bet again on the turn, the flop call is really a payment for one card, not two. Some of that is paid back when you hit and he pays you off, which is called <strong>implied odds</strong>. We build that idea properly in {{ch:7}}. For now, use this test: implied odds can close a small gap, like the one above, but not a large one. A gutshot facing a pot-sized bet is a fold however deep you are.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Doyle Brunson might say</p>
+  <p class="said">He would warn against letting the math talk you into passivity. A draw that only calls needs the right price. A draw that bets or raises can win without hitting, and that is a second way to profit. He would want you to know the numbers, then ask whether leading or raising is better than calling.</p>
+  <p class="note">An imagined voice: our reading of the aggressive approach in Super/System (1979), not his words. The book takes this up in {{ch:8}}.</p>
+</aside>
+
+<h3>Drills</h3>
+<details class="drill">
+  <summary>You hold a flush draw on the turn. The pot is $60 and your opponent bets $30. Do you have the price on the next card alone?</summary>
+  <p>Equity needed: 30 / (60 + 60) = 25%. A flush draw (9 outs) is 9 / 46 = 19.6%. No. The price is too high for the next card alone.</p>
+</details>
+<details class="drill">
+  <summary>You hold an open-ended straight draw on the turn. The pot is $90 and he bets $30. Price or no price?</summary>
+  <p>Equity needed: 30 / (90 + 60) = 20%. Eight outs is 8 / 46 = 17.4%. Slightly short on the next card alone. A call needs a little help from implied odds.</p>
+</details>
+<details class="drill">
+  <summary>You hold a gutshot (4 outs) and a flush draw (9 outs). How many outs do you have, and what is your chance on the turn?</summary>
+  <p>4 + 9 - 1 = 12 outs. One of the four gutshot cards is your suit, so it sits in both groups and you count it once. On the turn: 12 / 46 = 26.1%.</p>
+</details>
+<details class="drill">
+  <summary>You count 8 straight outs, but 2 would also give your opponent a flush. How many outs do you have, and what is your chance on the turn?</summary>
+  <p>6 clean outs. 6 / 46 = 13.0%, or 6 x 2 = 12% with the rule of 2.</p>
+</details>
+
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>The rule of 2 and 4</h2>
+  <figure class="figure">
+    <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">The rule of 4 against the exact odds, flop</h3></div>
+    <div data-fig="columns"><script type="application/json">
+    {"label": "Rule of 4 estimates compared with exact flop-to-river odds for 4, 8, 9, 12, and 15 outs. The rule runs high once outs pass 8.",
+     "unit": "%", "categories": ["4 outs", "8 outs", "9 outs", "12 outs", "15 outs"],
+     "series": [
+       {"name": "Rule of 4", "values": [16, 32, 36, 48, 60], "tone": "gold"},
+       {"name": "Exact", "values": [16.5, 31.5, 35.0, 45.0, 54.1], "tone": "ink"}
+     ]}
+    </script></div>
+    <p class="figure-note">Exact, from tools/poker.js. Arithmetic for the rule: outs x 4.</p>
+  </figure>
+  <p><strong>The shortcut.</strong> Multiply your outs by 4 on the flop, or by 2 on the turn.</p>
+  <p class="math">Open-ender on the flop: 8 x 4 = 32% (exact: 31.5%)</p>
+  <p class="math">Open-ender on the turn: 8 x 2 = 16% (exact: 17.4%)</p>
+  <p><strong>Where it bends.</strong> On the flop the rule runs high once you have more than 8 outs: 12 outs gives 48% (exact: 45.0%) and 15 outs gives 60% (exact: 54.1%). Take off one point for each out above 8 and you land close: 12 outs is 48 - 4 = 44%, and 15 outs is 60 - 7 = 53%. The rule of 4 also assumes you see both cards. If your opponent will bet the turn too, you are paying for one card at a time, so use the rule of 2. On the turn the rule runs a little low, never by more than a few points. And it counts every out you give it, so discount tainted outs first.</p>
+</aside>
