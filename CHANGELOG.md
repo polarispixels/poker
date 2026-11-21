@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.23.0] - 2026-11-21
+
+### Added
+
+- Chapter 36, Bankroll, Business, and Longevity: Chapter 36 covers bankroll at scale, move-up and move-down rules, staking and markup arithmetic, session records, travel costs, and health for a long career.
+
 ## [0.22.0] - 2026-11-21
 
 ### Added

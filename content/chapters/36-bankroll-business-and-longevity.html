@@ -1,0 +1,237 @@
+<p class="lead">{{ch:10}} showed how big the swings are and how many buy-ins keep you alive. This chapter runs poker as a small business: when to move up or down, how staking and selling action work in dollars, what to record, and how to keep your body in the game for decades.</p>
+
+<h2>Bankroll at scale</h2>
+
+<p>A bankroll is money set aside for poker that you can lose without changing how you live. It is not your rent, your savings, or the money in your checking account. Keep it in its own place so you can see it. If a loss at the table means a missed bill, you will play scared, and scared play costs money (see {{ch:35}}).</p>
+
+<p>Counting in buy-ins makes the idea scale. In a live $2/$5 game a full buy-in is $500 (100 big blinds). At $5/$10 it is $1,000. Move up a level and the same count of buy-ins costs twice as much cash. The table below turns three common targets into dollars.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">What a bankroll costs, by stakes</h3></div>
+  <div data-fig="heat"><script type="application/json">
+  {"label": "Bankroll in dollars for 15, 20, and 30 buy-ins at four live stakes. A 30 buy-in bankroll at $2/$5 is $15,000. At $10/$20 it is $60,000.",
+   "corner": "Stakes", "tone": "accent2",
+   "cols": ["15 buy-ins", "20 buy-ins", "30 buy-ins"],
+   "rows": ["$1/$2", "$2/$5", "$5/$10", "$10/$20"],
+   "values": [[3000, 4000, 6000], [7500, 10000, 15000], [15000, 20000, 30000], [30000, 40000, 60000]],
+   "cells": [["$3,000", "$4,000", "$6,000"], ["$7,500", "$10,000", "$15,000"], ["$15,000", "$20,000", "$30,000"], ["$30,000", "$40,000", "$60,000"]]}
+  </script></div>
+  <p class="figure-note">Arithmetic: a full buy-in is 100 big blinds ($200, $500, $1,000, $2,000) times the number of buy-ins.</p>
+</figure>
+
+<p>These counts are conventions, not laws. {{ch:10}} showed why: the buy-ins you need depend on your win rate, and you rarely know your win rate well. Treat the table as a menu of risk levels, not a promise of safety.</p>
+
+<h2>Moving up and down</h2>
+
+<p>More buy-ins means less risk of ruin (the chance of losing the whole bankroll). Using the model from {{ch:10}} (steady win rate, a standard deviation of 50 big blinds an hour, one stake, no money added or taken out), the risk falls fast as the bankroll grows, and it falls slower the weaker your edge is.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Risk of ruin as buy-ins grow</h3></div>
+  <div data-fig="line"><script type="application/json">
+  {"label": "Risk of ruin for win rates of 4, 2, and 1 big blinds an hour, with 10 to 40 buy-ins. At 10 buy-ins the risks are 4, 20, and 45 percent. At 40 buy-ins they are near 0, 0.2, and 4 percent.",
+   "xLabel": "Buy-ins in the bankroll", "yUnit": "%", "yMin": 0, "yMax": 50,
+   "series": [
+     {"name": "4 BB/hour", "tone": "ink", "points": [[10, 4.08], [15, 0.82], [20, 0.17], [25, 0.03], [30, 0.01], [40, 0]]},
+     {"name": "2 BB/hour", "tone": "accent2", "points": [[10, 20.19], [15, 9.07], [20, 4.08], [25, 1.83], [30, 0.82], [40, 0.17]]},
+     {"name": "1 BB/hour", "tone": "accent", "points": [[10, 44.93], [15, 30.12], [20, 20.19], [25, 13.53], [30, 9.07], [40, 4.08]]}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: e^(-2 x win rate x bankroll in BB / 2,500), with a standard deviation of 50 BB an hour. A model, not a forecast.</p>
+</figure>
+
+<p>Now the rules for moving. Two numbers are enough. Move up only when you hold 25 buy-ins of the higher game. Move down when you fall below 15 buy-ins of the game you play. The gap between 25 and 15 matters: without it, one good week moves you up and one bad week moves you back, and you pay for the swing both ways. Both numbers are conventions you can tune. The 25 is set high on purpose: in most live rooms (a judgment, not a measured fact) the players get tougher as the stakes rise, so expect your win rate in big blinds to be lower in the bigger game than in the one you beat now.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">The move-up check</h3></div>
+  <ol class="flow">
+    <li><strong>Count buy-ins</strong><span>Bankroll divided by the next game's buy-in.</span></li>
+    <li><strong>Need 25</strong><span>$25,000 for $5/$10.</span></li>
+    <li><strong>Add a shot fund</strong><span>A fixed sum you may lose trying the game.</span></li>
+    <li><strong>Review at the floor</strong><span>Under 15 buy-ins of your game, step down.</span></li>
+  </ol>
+  <p class="figure-note">Arithmetic: 25 x $1,000 = $25,000. The 25 and 15 are conventions, not computed optimums.</p>
+</figure>
+
+<p>Many players want to take a shot: play a higher game with money you have ruled off in advance. Say you hold $15,000 (30 buy-ins at $2/$5) and set aside $5,000 for a $5/$10 shot. The shot has a built-in exit. Lose the $5,000 and you are back at $2/$5 with $10,000, which is 20 buy-ins. Win $5,000 and you have $20,000, which is 20 buy-ins of $5/$10 and still short of the 25 target, so $2/$5 stays your main game and you can rule off another shot. Either result leaves a plan.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">A $5,000 shot from a $15,000 bankroll</h3></div>
+  <ul class="tree">
+    <li><span class="node root">Take a $5/$10 shot with $5,000</span>
+      <ul>
+        <li><span class="edge">The shot fund is gone</span><span class="node lose">Back to $2/$5 with $10,000 (20 buy-ins)</span></li>
+        <li><span class="edge">The shot fund doubles</span><span class="node win">$20,000: 20 buy-ins of $5/$10, not yet 25</span></li>
+      </ul>
+    </li>
+  </ul>
+  <p class="figure-note">Arithmetic: $15,000 - $5,000 = $10,000, and $10,000 / $500 = 20. $15,000 + $5,000 = $20,000, and $20,000 / $1,000 = 20. Outcomes shown, not probabilities.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Doyle Brunson might say</p>
+  <p class="said">He would tell you the game is long and the bankroll is what lets you stay in it. Sixty years at the table is not built on one big score. Keep enough in reserve that a bad stretch is boring, and never let a shot become your whole life savings.</p>
+  <p class="note">An imagined voice: our reading of his reputation for staying power across a very long career, not his words.</p>
+</aside>
+
+<h2>Staking and selling action</h2>
+
+<p>You can share risk with other people. Selling action means a backer pays a share of your buy-in and receives the same share of your result. The price often carries a markup: a number above 1 that you multiply by the face value. A markup of 1.2 means a 10 percent share of a $1,000 buy-in costs 10 percent of $1,000 x 1.2, which is $120.</p>
+
+<p>Here is a full example in a $1,100 live tournament. You sell 20 percent at a markup of 1.2.</p>
+
+<p class="math">Price = 20% x $1,100 x 1.2 = $220 x 1.2 = $264</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">Selling 20 percent of an $1,100 buy-in at 1.2</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Result</th><th>Backer (20%)</th><th>You (80%)</th></tr></thead>
+      <tbody>
+        <tr><td>Money in</td><td>$264</td><td>$1,100 - $264 = $836</td></tr>
+        <tr><td>Bust, cash $0</td><td class="bad">-$264</td><td class="bad">-$836</td></tr>
+        <tr><td>Cash $5,000</td><td class="good">$1,000 - $264 = +$736</td><td class="good">$4,000 - $836 = +$3,164</td></tr>
+        <tr><td>Cash $1,320</td><td>$264 - $264 = $0</td><td>$1,056 - $836 = +$220</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Arithmetic. The backer gets 20% of any prize. At 1.2 the backer breaks even when the prize is 1.2 x $1,100 = $1,320.</p>
+</figure>
+
+<p>Who benefits from the markup? Suppose you expect to average a $1,210 return on each $1,100 entry, a 10 percent edge. Your 20 percent share of that return is $242, but the backer paid $264, so the backer expects to lose $22. You gain. Without selling, you expect $110. With the sale you expect 80% x $1,210 + $264 - $1,100 = $132. The markup pays you $22 of expected value for sharing your variance. If your real edge were above 20 percent, the same sale would cost you.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Who gets what from a $5,000 cash</h3></div>
+  <div data-fig="split"><script type="application/json">
+  {"label": "A $5,000 prize shared 80 percent to the player and 20 percent to the backer, which is $4,000 and $1,000.",
+   "rows": [
+     {"label": "$5,000 prize", "note": "before the price paid", "parts": [{"label": "You, $4,000", "value": 80, "tone": "ink"}, {"label": "Backer, $1,000", "value": 20, "tone": "accent2"}]}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: 80% x $5,000 = $4,000. 20% x $5,000 = $1,000.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Bryn Kenney might say</p>
+  <p class="said">He would call selling action a tool, not a confession. At high buy-ins the swings are too big to carry alone, so you sell pieces, price them fairly, and keep the books honest. A backer who gets a clean count of the money keeps coming back.</p>
+  <p class="note">An imagined voice: our reading of his reputation as a high-roller who buys and sells action, not his words.</p>
+</aside>
+
+<p>Backing a cash game works another way. A backer funds your buy-ins and takes a share of the profit, often with makeup: you must win back the backer's losses before any profit is split. Take a 50/50 deal with $1,000 buy-ins.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">A 50/50 stake with makeup</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Session</th><th>Result</th><th>Makeup after</th><th>Profit to split</th><th>Backer</th><th>You</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td class="bad">-$1,000</td><td>$1,000</td><td>$0</td><td>-$1,000</td><td>$0</td></tr>
+        <tr><td>2</td><td class="bad">-$1,000</td><td>$2,000</td><td>$0</td><td>-$1,000</td><td>$0</td></tr>
+        <tr><td>3</td><td class="good">+$1,500</td><td>$500</td><td>$0</td><td>+$1,500</td><td>$0</td></tr>
+        <tr><td>4</td><td class="good">+$1,300</td><td>$0</td><td>$800</td><td>+$900 ($500 + $400)</td><td>+$400</td></tr>
+        <tr class="total"><td>Total</td><td>+$800</td><td></td><td></td><td>+$400</td><td>+$400</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Arithmetic. In session 4 the first $500 clears the makeup, and the other $800 is split $400 each. Terms vary; this is an example, not a standard contract.</p>
+</figure>
+
+<p>Get any staking deal in writing, with the split, the makeup rule, and when it ends. Rules about what a deal means legally vary by place, so ask a professional before you sign.</p>
+
+<h2>Records and the business</h2>
+
+<p>You cannot manage what you do not count. Log every session: date, stakes, hours, money in, money out. That gives you the only honest picture of your results, and it feeds the review habits in {{ch:38}}. Here are six sessions at $2/$5, where one big blind is $5.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">Six sessions in a log</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Session</th><th>Hours</th><th>In</th><th>Out</th><th>Net</th></tr></thead>
+      <tbody>
+        <tr><td>Fri</td><td>5.0</td><td>$500</td><td>$810</td><td class="good">+$310</td></tr>
+        <tr><td>Sat</td><td>8.0</td><td>$1,000</td><td>$360</td><td class="bad">-$640</td></tr>
+        <tr><td>Sun</td><td>6.5</td><td>$500</td><td>$685</td><td class="good">+$185</td></tr>
+        <tr><td>Tue</td><td>4.0</td><td>$500</td><td>$275</td><td class="bad">-$225</td></tr>
+        <tr><td>Fri</td><td>7.0</td><td>$500</td><td>$1,020</td><td class="good">+$520</td></tr>
+        <tr><td>Sat</td><td>5.5</td><td>$500</td><td>$410</td><td class="bad">-$90</td></tr>
+        <tr class="total"><td>Total</td><td>36.0</td><td>$3,500</td><td>$3,560</td><td>+$60</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">An invented example log, not real results. $60 / 36 hours = $1.67 an hour, or $1.67 / $5 = 0.33 big blinds an hour.</p>
+</figure>
+
+<p>Look at what the log says. Three winning sessions and three losing ones, and the total is $60 over 36 hours. That is close to zero, and six sessions say almost nothing about skill (see {{ch:10}}). A log is for trends over hundreds of hours, not for judging a week.</p>
+
+<p>Also track costs that sit outside the table: dealer tips, food, parking, gas, hotel. Count them as part of your business, so your true hourly rate is honest. Tax rules differ by country, state, and your situation, and this book makes no claims about them. Ask a qualified tax professional what you must report, what you may track, and how to keep records so they hold up. Keeping a clean log from the first day makes that conversation short and cheap.</p>
+
+<h2>Travel, health, and the long career</h2>
+
+<p>Travel has a price you can compute. Say you win $20 an hour at $2/$5 (4 big blinds an hour, the same generous assumption {{ch:10}} uses). You live 1.5 hours from the room, so each trip costs 3 hours of driving and $25 in gas and parking. The same player earns different amounts per hour of life depending on session length.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Dollars an hour, table time versus door to door</h3></div>
+  <div data-fig="columns"><script type="application/json">
+  {"label": "A $20 an hour player's earnings per hour, counting table hours only versus counting drive time and $25 of costs, for sessions of 4, 8, and 12 hours. Door to door the figures are $7.90, $12.30, and $14.30.",
+   "unit": "$", "xLabel": "Session length", "yLabel": "Dollars per hour",
+   "categories": ["4 hours", "8 hours", "12 hours"],
+   "series": [
+     {"name": "Table hours only", "values": [20, 20, 20], "tone": "gold"},
+     {"name": "Door to door", "values": [7.9, 12.3, 14.3], "tone": "ink"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: ($20 x hours - $25) / (hours + 3). Example: (80 - 25) / 7 = $7.86, rounded to $7.90. Win rate, drive time, and costs are assumptions. Fatigue is not modeled.</p>
+</figure>
+
+<p>Long sessions soften the cost of travel, but they have a cost the arithmetic hides: you get tired, and tired players make worse decisions. A game that is good only while you are fresh is worth leaving when you are not.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Jason Koon might say</p>
+  <p class="said">He would treat the body as part of the edge. Long live sessions are endurance events, so sleep, training, and food are part of preparation, not extras you add when life is calm. A sharp player at hour ten beats a sloppy one at hour ten.</p>
+  <p class="note">An imagined voice: our reading of his public pairing of solver study with athletic training, not his words.</p>
+</aside>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Doyle Brunson might say</p>
+  <p class="said">He would agree that the body matters, then push on a different point. A long career is also a money problem. A player who is healthy but broke is out of the game, and a player who is rich but worn out is out of it too. You need both.</p>
+  <p class="note">An imagined voice: our reading of his reputation for staying power, not his words.</p>
+</aside>
+
+<p>Health guidance here stays general. Sleep, regular movement, decent food, water, and breaks from the chair are the basics, and none of it is poker-specific. If you have a medical concern, or a question about a long sitting schedule, ask a doctor. A session day can be planned the way an athlete plans a competition day.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">A planned session day</h3></div>
+  <ol class="timeline">
+    <li><b>Before</b><span>Sleep first. Eat a real meal. Set a quit time and a stop-loss.</span></li>
+    <li><b>Early</b><span>Play your best game while fresh. Stand and stretch each hour.</span></li>
+    <li><b>Mid</b><span>Eat, drink water, step outside. Check your state against {{ch:35}}.</span></li>
+    <li><b>Late</b><span>If focus slips, leave at your quit time, not after one more orbit.</span></li>
+    <li><b>After</b><span>Log the session. Rest before you drive.</span></li>
+  </ol>
+  <p class="figure-note">A planning sketch, not medical advice.</p>
+</figure>
+
+<p>The table is one part of a long game. A player who keeps the bankroll honest, the records clean, the deals written down, and the body rested is still there when the swings turn. That is the edge the cards cannot give you.</p>
+
+<details class="drill">
+  <summary>Your bankroll is $12,500 and you play $2/$5. How many buy-ins is that, and can you move up to $5/$10 by the 25 buy-in rule?</summary>
+  <p>$12,500 / $500 = 25 buy-ins of $2/$5. For $5/$10 you need 25 x $1,000 = $25,000, so not yet.</p>
+</details>
+
+<details class="drill">
+  <summary>You sell 10 percent of a $2,000 buy-in at a markup of 1.1. What does the backer pay?</summary>
+  <p>10% x $2,000 x 1.1 = $200 x 1.1 = $220.</p>
+</details>
+
+<details class="drill">
+  <summary>In the 50/50 makeup deal, a session result is +$900 while the makeup is $400. How is it split?</summary>
+  <p>The first $400 clears the makeup and goes to the backer. The remaining $500 is split $250 each. The backer collects $650 and you collect $250.</p>
+</details>
+
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>The stop-loss and move-up rules as numbers</h2>
+  <p><strong>The shortcut.</strong> Divide your bankroll by your buy-in to get buy-ins. Set a stop-loss of 2 buy-ins for a session (a convention, like the 25 and the 15). Move up at 25 buy-ins of the next game, and move down below 15 buy-ins of your own.</p>
+  <p class="math">Bankroll $15,000, buy-in $500: 15,000 / 500 = 30 buy-ins. Stop-loss = 2 x $500 = $1,000, which is 1,000 / 15,000 = 6.7% of the bankroll.</p>
+  <p class="math">Move up to $5/$10 at 25 x $1,000 = $25,000. Move down from $5/$10 below 15 x $1,000 = $15,000.</p>
+  <p><strong>Where it bends.</strong> Being down 2 buy-ins does not change the value of the next hand, so use the stop-loss as a guard for your own state and the game quality, not as a law. The 25 and 15 depend on your real win rate, which you only know roughly (see {{ch:10}}). If your edge is smaller than you think, say 1 big blind an hour instead of 4, the risk of ruin at 15 buy-ins is 30 percent instead of 0.8 percent. When in doubt, hold more buy-ins. The full list of shortcuts is in {{ch:A}}.</p>
+</aside>
