@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.43.0] - 2026-11-21
+
+### Added
+
+- Appendix D, Glossary: Appendix D: an alphabetical glossary of about 140 terms with chapter links, plus shorthand, formula, and combo-count tables.
+
 ## [0.42.0] - 2026-11-21
 
 ### Added
