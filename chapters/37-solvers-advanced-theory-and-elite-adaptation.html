@@ -22,13 +22,242 @@
     <main>
       <article class="chapter">
         <header class="chapter-head">
-          <p class="chapter-kicker label">Chapter 37 <span class="badge">To come</span></p>
+          <p class="chapter-kicker label">Chapter 37 <span class="badge">Preliminary draft</span></p>
           <h1 class="chapter-title">Solvers, Advanced Theory, and Elite Adaptation</h1>
           <p class="standfirst">How solvers work, simplifying for live play, and adapting to strong opponents.</p>
         </header>
 
         <div class="prose chapter-body">
-<p class="lead">This page has not been written yet. The book is being written and published one chapter at a time.</p>
+<p class="lead">A solver is a calculator for game theory, and it is only as useful as your ability to read what it says and shrink it to a plan you can run with chips in your hands. This chapter shows how solvers work, solves a tiny game by hand, and then turns it into rules for a live game and for opponents who adjust.</p>
+
+<h2>What a solver does</h2>
+
+<p>A <strong>solver</strong> is a program that searches for an equilibrium strategy in a poker spot (the idea from <a class="xref" href="22-game-theory-basics.html">Chapter 22, Game Theory Basics</a> and <a class="xref" href="23-balance-and-unexploitability.html">Chapter 23, Balance and Unexploitability</a>: a plan neither side can beat by changing only its own play). You do not give it opinions. You give it four things: the <strong>board</strong>, the <strong>ranges</strong> each player holds when the spot starts, the <strong>stack and pot</strong>, and a short list of allowed <strong>bet sizes</strong>. Together those are the <strong>game tree</strong>, every path the hand can take.</p>
+
+<p>Then it plays against itself, over and over. Many solvers use a family of methods called regret minimization (as we understand it, a common one is counterfactual regret minimization). Each pass, the program notes which actions it wishes it had taken more often and shifts toward them. After enough passes the mix settles. At that point, no hand in either range gains more than a sliver by switching (solvers report how big that sliver still is). That settled mix is the output.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 37.1</span><h3 class="figure-title">How a solver gets from inputs to a strategy</h3></div>
+  <ol class="flow">
+    <li><strong>Build the tree</strong><span>Ranges, pot, stacks, bet sizes.</span></li>
+    <li><strong>Play itself</strong><span>Both sides pick actions by their current mix.</span></li>
+    <li><strong>Track regret</strong><span>Shift toward actions that would have paid more.</span></li>
+    <li><strong>Repeat until stable</strong><span>No hand gains by switching.</span></li>
+  </ol>
+  <p class="figure-note">A simplified outline of the method, not any one product's workings.</p>
+</figure>
+
+<p>Know what a solver does not do. It does not know your opponent. It assumes he is perfect. It also answers only the question you typed in: if your range was wrong, or you offered it three bet sizes when the table uses five, the answer is a correct solution to the wrong problem.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 37.2</span><h3 class="figure-title">What a solver gives you and what it leaves to you</h3></div>
+  <div class="compare">
+    <div class="b"><h4>It gives you</h4><p>Which hands bet, check, or fold at each node. The mix of bets and bluffs that cannot be exploited. How much each choice is worth against a perfect opponent.</p></div>
+    <div class="a"><h4>You supply</h4><p>The starting ranges. The bet sizes worth studying. The read on how this table actually plays. The decision to deviate, and how far.</p></div>
+  </div>
+  <p class="figure-note">A summary of this section.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Phil Galfond might say</p>
+  <p class="said">He would tell you not to memorize outputs. Ask why a hand bluffs: what it blocks, what it does when called, which hands it stands in for. Once you know the reason, you can rebuild the answer in a spot the solver never showed you.</p>
+  <p class="note">An imagined voice: our reading of his teaching approach at Run It Once, not his words.</p>
+</aside>
+
+<h2>A toy game you can solve by hand</h2>
+
+<p>No solver is needed to see the core idea. This is a toy, built to be computed on paper. It is not solver output, and the combo counts are chosen for tidy arithmetic.</p>
+
+<p>Take the river. The pot is $100. You act first and your range is <strong>polar</strong>: it holds only very strong hands and pure bluffs, nothing in between. Your opponent holds a <strong>bluff-catcher</strong>, a hand that beats every bluff and loses to every value hand. You may bet $100, the size of the pot. He may call or fold.</p>
+
+<p>The question: how many bluffs per value hand? Try one bluff for every two value hands, so your bet range is one third bluffs.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 37.3</span><h3 class="figure-title">Calling a pot-sized river bet with a bluff-catcher</h3></div>
+  <ul class="tree">
+    <li><span class="node root">Call $100 into $100 facing 2 value : 1 bluff</span>
+      <ul>
+        <li><span class="edge">He has value, 2 times in 3</span><span class="node lose">Lose $100</span></li>
+        <li><span class="edge">He has a bluff, 1 time in 3</span><span class="node win">Win $200 (pot plus bet)</span></li>
+      </ul>
+    </li>
+  </ul>
+  <p class="math">EV of calling = (1/3) x $200 + (2/3) x (-$100) = $66.67 - $66.67 = $0</p>
+  <p class="figure-note">Arithmetic. Folding is also worth $0, so he is indifferent between calling and folding. That is the point.</p>
+</figure>
+
+<p>The calling EV is exactly zero. A one-third bluff share makes the opponent indifferent. Bluff less and calling loses money, so he does better by folding every time. Bluff more and calling makes money, so he does better by calling every time. A solver finds this same balance point across thousands of spots at once. The size of your bet sets the share.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 37.4</span><h3 class="figure-title">Bigger bets earn more bluffs</h3></div>
+  <div data-fig="line"><script type="application/json">
+  {"label": "Share of the betting range that can be bluffs, and how often the caller must defend, as the river bet grows from a quarter of the pot to twice the pot. Bluffs rise from 17 to 40 percent while defense falls from 80 to 33 percent.",
+   "xLabel": "Bet as a share of the pot", "xUnit": "x", "yUnit": "%", "yMin": 0, "yMax": 100,
+   "series": [
+     {"name": "Bluffs in the bet range", "tone": "accent", "points": [[0.25, 16.7], [0.5, 25], [1, 33.3], [1.5, 37.5], [2, 40]]},
+     {"name": "Minimum defense", "tone": "ink", "points": [[0.25, 80], [0.5, 66.7], [1, 50], [1.5, 40], [2, 33.3]]}
+   ],
+   "marks": [{"x": 1, "y": 33.3, "label": "Pot bet: 1 bluff in 3"}]}
+  </script></div>
+  <p class="figure-note">Arithmetic, checked with tools/poker.js odds. Bluff share = bet / (pot + 2 x bet). Minimum defense = pot / (pot + bet).</p>
+</figure>
+
+<h2>Reading what the output looks like</h2>
+
+<p>Real solver output is a grid: each hand in the range, with the share of the time it bets, checks, or folds, colored by action. Add the combos in each color and you get the range's overall frequencies. The strategy for one hand is a <strong>mixed strategy</strong>, a mix like bluff 40 percent, check 60 percent. Mixing is not hesitation. It is how the range lands on the right ratio when you hold more bluff candidates than the ratio allows.</p>
+
+<p>Here is our toy in the same shape. You hold 12 value combos, and the bet size decides how many bluff combos you may bet.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 37.5</span><h3 class="figure-title">The toy betting range at three bet sizes</h3></div>
+  <div data-fig="split"><script type="application/json">
+  {"label": "The toy river betting range with 12 value combos. A half-pot bet pairs them with 4 bluffs, a pot bet with 6, and a bet of twice the pot with 8, giving bluff shares of 25, 33, and 40 percent.",
+   "rows": [
+     {"label": "Half pot, $50", "note": "12 value, 4 bluffs", "parts": [{"label": "Value", "value": 75, "tone": "accent2"}, {"label": "Bluffs", "value": 25, "tone": "accent"}]},
+     {"label": "Pot, $100", "note": "12 value, 6 bluffs", "parts": [{"label": "Value", "value": 66.7, "tone": "accent2"}, {"label": "Bluffs", "value": 33.3, "tone": "accent"}]},
+     {"label": "Two pots, $200", "note": "12 value, 8 bluffs", "parts": [{"label": "Value", "value": 60, "tone": "accent2"}, {"label": "Bluffs", "value": 40, "tone": "accent"}]}
+   ]}
+  </script></div>
+  <p class="figure-note">Toy arithmetic, not solver output. Bluffs = value x bet / (pot + bet): 12 x 50/150 = 4, 12 x 100/200 = 6, 12 x 200/300 = 8.</p>
+</figure>
+
+<p>Suppose you hold 10 bluff candidates but the pot bet allows only 6. The solver bets six of them and checks four. Or it bets each bluff candidate 60 percent of the time. Both do the same job. Which hands it picks first tells you something: the best bluffs usually hold cards that block the opponent's calling hands, or hands with no showdown value at all, since a hand that can win by checking is wasted as a bluff.</p>
+
+<aside class="key">
+  <p class="label">Key idea</p>
+  <p>The solver's strategy is a set of ratios. Learn the ratios and the reasons, and you can rebuild most of its answers without the screen.</p>
+</aside>
+
+<h2>Node locking: asking a better question</h2>
+
+<p><strong>Node locking</strong> means freezing one player's choices at a point in the tree to what you believe he really does, then letting the solver re-solve everything else. You are saying: do not assume he defends 50 percent. Assume he defends 40, and tell me my best play.</p>
+
+<p>You can do the first step on paper. Our toy bluff, a $100 bet into $100, wins the pot when he folds and loses the bet when he calls. Its value depends only on how often he defends.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 37.6</span><h3 class="figure-title">What each pot-sized bluff earns when he over-folds</h3></div>
+  <div data-fig="columns"><script type="application/json">
+  {"label": "Expected value of a $100 bluff into a $100 pot when the opponent defends 30, 40, or 50 percent of the time. The bluff earns 40 dollars at 30 percent, 20 dollars at 40 percent, and nothing at 50 percent.",
+   "unit": "$", "categories": ["Defends 30%", "Defends 40%", "Defends 50%"],
+   "series": [
+     {"name": "EV per bluff", "values": [40, 20, 0], "tone": "accent2"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: EV = (1 - d) x $100 - d x $100 = $100 - $200 x d, where d is how often he defends. At 60 percent it turns negative: -$20.</p>
+</figure>
+
+<p>Each ten points of defense he gives up is worth $20 per bluff. That is the whole logic of exploitation (<a class="xref" href="24-exploitative-play.html">Chapter 24, Exploitative Play</a>) in one line. A node lock is the same arithmetic over a full tree, and it also shows what breaks. If he folds too much to the river bet, he may also be calling too wide earlier, and a lock at one node can change the right play at nodes before it.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Daniel Negreanu might say</p>
+  <p class="said">He would say the screen shows what the baseline is and the person across from you shows where to leave it. After rebuilding his game around solver work, he would still want you to use what you learn about a specific opponent, not hide behind the baseline.</p>
+  <p class="note">An imagined voice: our reading of his public account of studying with solvers after his slump, not his words.</p>
+</aside>
+
+<h2>Simplifying for live play</h2>
+
+<p>You cannot run a solver in your head, and in most live games you do not need to. Live opponents leave bigger gaps than a perfect baseline closes. So you compress the strategy into a few rules. Each rule gives up a little theory for something you can do while the dealer waits.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table 37.1</span><h3 class="figure-title">Five ways to shrink a solver plan</h3></div>
+  <div class="table-scroll">
+    <table class="wrap">
+      <thead><tr><th>Simplification</th><th>What you keep</th><th>What you give up</th></tr></thead>
+      <tbody>
+        <tr><td>Use one or two bet sizes</td><td>Clean ratios to work from</td><td>Some value from size variety (<a class="xref" href="20-bet-sizing.html">Chapter 20, Bet Sizing</a>)</td></tr>
+        <tr><td>Round mixes to 0, half, or all</td><td>Bluff this hand or do not</td><td>Exact frequencies</td></tr>
+        <tr><td>Pick bluffs by blockers</td><td>Which hands to bet first</td><td>Fine ranking of the rest</td></tr>
+        <tr><td>Plan streets in a pair</td><td>One plan for flop and turn</td><td>Per-card detail</td></tr>
+        <tr><td>Defend by the minimum-defense number</td><td>An anchor for calling</td><td>Read-based folds and calls</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">A summary of this section. The rows are common study habits, not output from a solver.</p>
+</figure>
+
+<p>Take the first one. If you bet only half pot or pot on the river, you need two ratios: one bluff to three value, or one to two. You can hold both in your head. Next, make hands decide. Can the hand win at showdown when checked? Then check it. Does it block the hands that would call? Then it is a bluff candidate. Everything in the middle of the range checks.</p>
+
+<p>The last row matters most live. In our judgment, the biggest edges in most low-stakes live games come from opponents who fold too much or call too much, not from fine-tuning a mix by a few percent. Count first what he must do to break even, then ask whether this player does it. Chapters <a class="xref" href="25-live-player-types-and-population-tendencies.html">Chapter 25, Live Player Types and Population Tendencies</a> and <a class="xref" href="12-preflop-strategy-for-live-games.html">Chapter 12, Preflop Strategy for Live Games</a> cover what live fields tend to do, and what you start from.</p>
+
+<details class="drill">
+  <summary>The river pot is $60 and you bet $60 with 10 value combos. How many bluff combos balance you?</summary>
+  <p>Bluffs = value x bet / (pot + bet) = 10 x 60 / 120 = 5. One bluff per two value hands, a one-third bluff share.</p>
+</details>
+
+<details class="drill">
+  <summary>The pot is $100 and you bet $50. How often must he defend, and what share of your bets can be bluffs?</summary>
+  <p>Defense = 100 / 150 = 66.7%. Bluff share = 50 / (100 + 100) = 25%, one bluff for every three value hands.</p>
+</details>
+
+<h2>Adapting to strong opponents</h2>
+
+<p>A strong regular has studied the same ideas you have. He does not fold too much or call too much, so the free money from a weak table is gone. What is left is edges you earn: in the ranges you choose, in the spots where he leans, and in how fast you notice when he changes.</p>
+
+<p>Poker players describe thinking in <strong>levels</strong>. Each level is a guess about the level below. Against a thoughtful opponent, the useful skill is to know which level he is on and to play one step above it, not three.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 37.7</span><h3 class="figure-title">Thinking in levels</h3></div>
+  <ol class="timeline">
+    <li><b>Level 1</b><span>What do I have?</span></li>
+    <li><b>Level 2</b><span>What does he have?</span></li>
+    <li><b>Level 3</b><span>What does he think I have?</span></li>
+    <li><b>Level 4</b><span>What does he think I think he has?</span></li>
+  </ol>
+  <p class="figure-note">A common way to name the steps, not a formal scale. Our judgment: in most $2/$5 games, decisions are settled at level 2 or 3, because few opponents think at level 4.</p>
+</figure>
+
+<p>Level four needs a read and the habit of checking it. A solver baseline helps here. It says where you are safe, so when a regular starts to bluff you more than the baseline would, you know his line is out of the zone and you can adjust in a specific direction.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 37.8</span><h3 class="figure-title">Who you are playing</h3></div>
+  <div data-fig="scatter"><script type="application/json">
+  {"label": "Four opponents placed by how closely they follow a theory baseline and how much they adjust to you. The recreational player is far from baseline and does not adjust. The elite regular adjusts a lot and stays near baseline. The exploitative pro adjusts and plays far from baseline on purpose.",
+   "x": {"label": "Distance from baseline", "low": "Near it", "high": "Far from it"},
+   "y": {"label": "Adjusts to you", "high": "Often", "low": "Rarely"},
+   "quadrants": ["Baseline, adapts", "Exploits, adapts", "Baseline, static", "Leaks, static"],
+   "points": [
+     {"label": "The recreational caller", "x": 84, "y": 12, "tone": "gold"},
+     {"label": "The study-group reg", "x": 20, "y": 28, "tone": "ink"},
+     {"label": "The elite regular", "x": 30, "y": 86, "tone": "accent"},
+     {"label": "The exploitative pro", "x": 74, "y": 66, "tone": "muted"}
+   ]}
+  </script></div>
+  <p class="figure-note">A sketch of types. Positions are illustrative, not measured.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Phil Ivey might say</p>
+  <p class="said">He would care less about the chart than about the live read: how this one person is playing right now, and whether he has noticed that you have noticed. The baseline sets a floor, and the table tells you when to leave it.</p>
+  <p class="note">An imagined voice: our reading of his reputation for real-time adjustment, not his words.</p>
+</aside>
+
+<p>Here is an invented example. It is not a real hand. $2/$5, nine-handed, $500 stacks. A regular in the big blind has seen you bluff the river twice in one hour.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 37.9</span><h3 class="figure-title">A river bluff, weighed against a regular</h3></div>
+  <div class="table-scroll">
+    <table class="hand-log">
+      <thead><tr><th>Street</th><th>Board</th><th>Action</th><th>Pot</th></tr></thead>
+      <tbody>
+        <tr><td>Preflop</td><td>Hero: <span class="cards" role="img" aria-label="Ace of spades, 5 of spades"><span class="pc">A<i>♠</i></span><span class="pc">5<i>♠</i></span></span></td><td>Hero raises to $15 on the button. The small blind folds. The regular calls in the big blind.</td><td class="pot">$32</td></tr>
+        <tr><td>Flop</td><td><span class="cards" role="img" aria-label="King of spades, 9 of spades, 4 of diamonds"><span class="pc">K<i>♠</i></span><span class="pc">9<i>♠</i></span><span class="pc r">4<i>♦</i></span></span></td><td>Hero bets $16 with the nut flush draw. He calls.</td><td class="pot">$64</td></tr>
+        <tr><td>Turn</td><td><span class="cards" role="img" aria-label="King of spades, 9 of spades, 4 of diamonds, 2 of hearts"><span class="pc">K<i>♠</i></span><span class="pc">9<i>♠</i></span><span class="pc r">4<i>♦</i></span><span class="pc r">2<i>♥</i></span></span></td><td>Hero bets $32. He calls.</td><td class="pot">$128</td></tr>
+        <tr><td>River</td><td><span class="cards" role="img" aria-label="King of spades, 9 of spades, 4 of diamonds, 2 of hearts, 7 of clubs"><span class="pc">K<i>♠</i></span><span class="pc">9<i>♠</i></span><span class="pc r">4<i>♦</i></span><span class="pc r">2<i>♥</i></span><span class="pc">7<i>♣</i></span></span></td><td>The flush misses. Hero, with ace high, considers a $128 bet into $128. Against it he must defend 128 / 256 = 50% of the time.</td><td class="pot">$128</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history. Pot math: 15 + 15 + 2 = 32; flop 32 + 16 + 16 = 64; turn 64 + 32 + 32 = 128. A $128 river bet would make it $256.</p>
+</figure>
+
+<p>You have ace high and no pair. With no flush on the board, the ace of spades no longer blocks a flush, and as a blocker it cuts both ways. It removes some of his best kings (ace-king), which helps a bluff. It also removes the ace-high spade draws he might have missed with, and those are hands that would fold, which hurts. And ace high can beat his other missed draws at showdown, a reason to check. Against a stranger this is a close spot. Now add the read: he has seen you bluff twice, so a thoughtful regular may call more against you than against a stranger. Lean toward checking this hand back, and bet thinner for value with the hands he will now pay off. The baseline gives you the ratio, and your read decides which side of it to lean on.</p>
+
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>A river plan you can run in your head</h2>
+  <p><strong>The shortcut.</strong> Shrink the solver to one ratio and two questions. The ratio: bluffs per value hand = bet / (pot + bet). A pot bet earns one bluff for every two value hands, a half-pot bet one for every three, a third-pot bet one for every four. Then sort each hand that is not strong value: can it win at showdown? Check it. Does it block his calls and have no showdown value? It is a bluff candidate. Bet bluff candidates only up to the ratio.</p>
+  <p class="math">Pot $80, bet $80, 8 value hands: 8 x 80 / 160 = 4 bluffs. Half pot ($40): 8 x 40 / 120 = 2.67, so 2 or 3 bluffs.</p>
+  <p><strong>Where it bends.</strong> It assumes a polar range and a bluff-catcher that beats every bluff. Real ranges have hands in the middle, and live opponents fold too much or call too much. Treat the ratio as the balanced starting point: bluff fewer when he calls too often, and more when he folds too often.</p>
+</aside>
         </div>
       </article>
 
@@ -49,5 +278,6 @@
   </div>
 
   <script src="../js/version.js"></script>
+  <script src="../js/figures.js"></script>
 </body>
 </html>

@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.31.0] - 2026-11-21
+
+### Added
+
+- Chapter 37, Solvers, Advanced Theory, and Elite Adaptation: Chapter 37 explains how solvers work, solves a toy river game by hand, turns solver ideas into live rules, and covers adapting to strong regulars.
+
 ## [0.30.0] - 2026-11-21
 
 ### Added
