@@ -1,0 +1,216 @@
+<p class="lead">Most players at a live table give away their habits for free, and few players bother to collect them. This chapter shows you what to watch, how to keep notes on nine people without a notebook, and how much a few hands of evidence can really tell you.</p>
+
+<h2>Why you watch from the first hand</h2>
+<p>You sit down in a live $2/$5 game with $500, nine-handed. You will not play most of the hands you see. In most low-stakes live games, a good player folds the large majority of hands before the flop. That leaves you with hours of free time, and you can spend it in two ways: scrolling your phone, or learning the eight other people at the table.</p>
+<p>This is <strong>first-level observation</strong>: writing down what players do, not what they might be thinking. Which hands they play, how often they bet, how big they bet, and what they show at the end. It needs no theory and no tells. It needs attention. Later chapters build on it: {{ch:19}} turns these notes into ranges, {{ch:25}} covers the types of players you will meet most, and {{ch:26}} covers physical tells and table talk.</p>
+<p>The book's thesis is that GTO (game theory optimal play, the baseline that cannot be exploited) is the starting point and exploitation is how you win. You cannot exploit someone you have not noticed. Observation is where every exploit begins.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Daniel Negreanu might say</p>
+  <p class="said">He would tell a beginner to start watching on the first hand, not after the math is mastered. A player who has not entered a pot in an hour has told you something, and you can use it today.</p>
+  <p class="note">An imagined voice: our reading of Negreanu's public emphasis on hand reading, not his words.</p>
+</aside>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Where four players sit in your notes</h3></div>
+  <div data-fig="scatter"><script type="application/json">
+  {"label": "Four opponents placed on two axes: how many hands they play and how often they bet and raise. The nit is tight and passive, the regular is tight and aggressive, the maniac is loose and aggressive, and the station is loose and passive.",
+   "x": {"label": "Hands played", "low": "Few", "high": "Many"},
+   "y": {"label": "Aggression", "high": "Bets and raises"},
+   "quadrants": ["Tight, aggressive", "Loose, aggressive", "Tight, passive", "Loose, passive"],
+   "points": [
+     {"label": "Seat 3, the nit", "x": 12, "y": 24, "tone": "muted"},
+     {"label": "Seat 6, the regular", "x": 30, "y": 74, "tone": "ink"},
+     {"label": "Seat 8, the maniac", "x": 84, "y": 88, "tone": "accent"},
+     {"label": "Seat 1, the station", "x": 80, "y": 16, "tone": "gold"}
+   ]}
+  </script></div>
+  <p class="figure-note">An example table, not measured data. Two axes are enough for a first note on anyone.</p>
+</figure>
+
+<h2>Three things to track</h2>
+<p>You cannot track everything, and trying is how people end up tracking nothing. Start with three questions per player. They are cheap to answer and they predict the most.</p>
+<ol>
+  <li><strong>How many hands does this player play?</strong> A player who enters many pots has a wide range. One who enters few has a narrow one.</li>
+  <li><strong>Do they bet and raise, or check and call?</strong> Aggressive players often put in chips without a strong hand. Passive players mostly put chips in when they have one.</li>
+  <li><strong>How big do they bet, and what did they show?</strong> Sizes that change with hand strength are information. Showdowns are the only time you see the truth, so every card turned over is worth a note. They are also how you find the player who never bluffs: every big bet that reaches showdown turns up a strong hand.</li>
+</ol>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">Three questions and what the answers mean</h3></div>
+  <div class="table-scroll">
+    <table class="wrap">
+      <thead><tr><th>Question</th><th>What you see</th><th>First conclusion</th></tr></thead>
+      <tbody>
+        <tr><td>Hands played</td><td>Folds nearly every hand for an orbit or more</td><td>A narrow range: a raise from this player means a strong hand</td></tr>
+        <tr><td>Hands played</td><td>Limps or calls in most orbits</td><td>A wide range, so most of what they hold is weak or medium</td></tr>
+        <tr><td>Aggression</td><td>Raises often, bets most flops</td><td>Some bets are bluffs, so a medium hand can call</td></tr>
+        <tr><td>Aggression</td><td>Calls bets, rarely raises</td><td>A raise is rare and strong, so respect it</td></tr>
+        <tr><td>Sizing and showdown</td><td>Small bet with a draw, big bet with a made hand</td><td>The size gives away the hand, so use it</td></tr>
+        <tr><td>Sizing and showdown</td><td>Every big bet shown down is a strong hand</td><td>Likely never bluffs: fold medium hands to big bets</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">A summary of this section. These are judgments about how live players tend to behave, not rules.</p>
+</figure>
+
+<aside class="key">
+  <p class="label">Key idea</p>
+  <p>Track what you can see, not what you can guess. A note says "raised from UTG, showed kings." It does not say "probably a bluffer."</p>
+</aside>
+
+<h2>How many hands is enough</h2>
+<p>New players make the same mistake in both directions. Some see one bluff and label a player a maniac. Others wait for a hundred hands and never act. The honest answer is in between, and you can put numbers on it.</p>
+<p>An <strong>orbit</strong> is one trip around the table, so at a full nine-handed table you see nine hands. Suppose a player truly enters 15% of hands. That is a tight player. In one orbit, how many hands will you see them play? On average 1.35, but what you see is a whole number, and it is random. The chance of each result is a binomial probability: for example, the chance of zero entries is 0.85 to the ninth power, which is 0.232.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">One orbit of a 15% player, 100 times</h3></div>
+  <div data-fig="dots"><script type="application/json">
+  {"label": "Out of 100 orbits of nine hands watching a player who truly plays 15 percent of hands, about 23 show no hands played, 37 show one, 26 show two, and 14 show three or more.",
+   "parts": [
+     {"label": "Zero hands played", "value": 23, "tone": "paper"},
+     {"label": "One hand", "value": 37, "tone": "accent2"},
+     {"label": "Two hands", "value": 26, "tone": "gold"},
+     {"label": "Three or more", "value": 14, "tone": "accent"}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact, binomial with 9 hands at 15%: 23.2, 36.8, 26.0, and 14.0 percent (3 or more is 10.7 plus 3.4), rounded to whole dots.</p>
+</figure>
+
+<p>One orbit is a weak instrument. Compare a 15% player to a 30% player, who is loose by most standards, and the two overlap a lot.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Hands played in one orbit: tight against loose</h3></div>
+  <div data-fig="columns"><script type="application/json">
+  {"label": "Chance of seeing 0, 1, 2, 3, 4, or 5 or more hands played in one nine-hand orbit, for a player who truly plays 15 percent and one who truly plays 30 percent. The two shapes overlap heavily at 1, 2, and 3 hands.",
+   "unit": "%", "categories": ["0", "1", "2", "3", "4", "5+"],
+   "xLabel": "Hands played in the orbit", "yLabel": "Chance",
+   "series": [
+     {"name": "Truly 15%", "values": [23.2, 36.8, 26.0, 10.7, 2.8, 0.6], "tone": "accent2"},
+     {"name": "Truly 30%", "values": [4.0, 15.6, 26.7, 26.7, 17.2, 9.9], "tone": "accent"}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact, binomial with 9 hands. Two hands in an orbit is nearly as likely for either player (26.0 and 26.7 percent).</p>
+</figure>
+
+<p>Look at the middle of the chart. Two hands played in one orbit fits a tight player and a loose one about equally. Zero or one points toward tight, and four or more points toward loose, but even those are not proof. After three orbits (27 hands) the picture sharpens a lot. The Table Math box at the end of this chapter shows the size of that improvement.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What David Sklansky might say</p>
+  <p class="said">He would tell you to judge a decision by its expected value, not by one result. One shown bluff is one result. Treat a read as an estimate you keep updating, and weigh it by how much evidence stands behind it.</p>
+  <p class="note">An imagined voice: our reading of the expected-value thinking in The Theory of Poker, not his words.</p>
+</aside>
+
+<h2>Keeping notes on nine people</h2>
+<p>You do not need a notebook, and in most live rooms writing at the table draws attention you do not want. You need a habit. Walk the table in seat order once an orbit and ask the same three questions of each player. Seats you have not noted yet are a to-do list.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Your table after about thirty minutes</h3></div>
+  <div data-fig="table"><script type="application/json">
+  {"label": "Nine-handed table seen from the button, with a short mental note beside each opponent: the small blind limps a lot, the big blind folds to raises, UTG has not played a hand, UTG+1 raised twice, MP calls but rarely bets, the lojack is new, the hijack is loose but folds to 3-bets, and the cutoff bets big with strong hands.",
+   "button": 0,
+   "seats": [
+     {"pos": "BTN", "stack": "$500", "cards": "?? ??", "note": "You", "state": "hero"},
+     {"pos": "SB", "stack": "$310", "note": "Limps a lot"},
+     {"pos": "BB", "stack": "$220", "note": "Folds to raises"},
+     {"pos": "UTG", "stack": "$480", "note": "Nit, 0 hands", "state": "villain"},
+     {"pos": "UTG+1", "stack": "$650", "note": "Raised twice"},
+     {"pos": "MP", "stack": "$400", "note": "Calls, rarely bets"},
+     {"pos": "LJ", "stack": "$300", "note": "New, no read"},
+     {"pos": "HJ", "stack": "$520", "note": "Loose, folds to 3-bets"},
+     {"pos": "CO", "stack": "$900", "note": "Big bet, strong"}
+   ]}
+  </script></div>
+  <p class="figure-note">An example table in a $2/$5 game. Not a real hand history.</p>
+</figure>
+
+<p>Four habits keep this manageable.</p>
+<ul>
+  <li><strong>Use short labels.</strong> "Nit," "station," "raises light," "bets big with strong hands." Three words per player is enough.</li>
+  <li><strong>Notice what is surprising.</strong> The first time a player does something is the most useful. A fifth repeat adds less.</li>
+  <li><strong>Watch showdowns and watch hands you are not in.</strong> When you fold, you are free to watch. A table of nine only shows its cards when a hand ends, so do not look away.</li>
+  <li><strong>Keep reads loose.</strong> Revise a label when a new fact contradicts it. Players tilt, tire, and change.</li>
+</ul>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">The one-orbit routine</h3></div>
+  <ol class="flow">
+    <li><strong>Count entries</strong><span>Who put chips in voluntarily this orbit?</span></li>
+    <li><strong>Check the bets</strong><span>Who raised, and who only called?</span></li>
+    <li><strong>Watch the sizes</strong><span>Did size match the hand shown?</span></li>
+    <li><strong>Update labels</strong><span>Keep, change, or mark unknown.</span></li>
+  </ol>
+  <p class="figure-note">A summary of this section. It takes a few seconds per hand once it is a habit.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Phil Ivey might say</p>
+  <p class="said">He would point out that you can only notice what you are paying attention to. Total focus is a skill, and it means watching the table during hands you have already folded.</p>
+  <p class="note">An imagined voice: our reading of Ivey's public reputation for focus at the table, not his words.</p>
+</aside>
+
+<h2>From notes to decisions</h2>
+<p>Notes matter only if they change what you do. The simplest change is to put a range on the player, a set of hands they could hold, and see how your hand does against it. Here are three example ranges, one for each kind of player in your notes. They are illustrations, not measurements of any real person.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Three ranges for three kinds of raiser</h3></div>
+  <div data-fig="range"><script type="application/json">
+  {"label": "The starting hand grid showing three nested raising ranges: a tight player's 34 hands, a regular's additional hands to reach 104, and a loose player's additional hands to reach 290.",
+   "groups": [
+     {"name": "Nit: TT+, AKs", "tone": "ink", "hands": "TT+,AKs"},
+     {"name": "Regular adds", "tone": "accent2", "hands": "77-99,ATs-AQs,KQs,AJo+"},
+     {"name": "Loose player adds", "tone": "gold", "hands": "22-66,A2s-A9s,K9s-KJs,QTs,QJs,J9s,JTs,T9s,98s,87s,A8o-ATo,KTo-KQo,QJo"}
+   ]}
+  </script></div>
+  <p class="figure-note">Example ranges, a judgment for teaching, not measured from any player. Combo counts from tools/poker.js: the nit has 34 combos (2.6% of hands), the nit plus regular band 104 (7.8%), and all three 290 (21.9%).</p>
+</figure>
+
+<p>Now give yourself [[Jh Jd]] on the button, a hand that looks strong. Against each range, all-in before the flop:</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Jacks against each kind of raiser</h3></div>
+  <div data-fig="split"><script type="application/json">
+  {"label": "All-in preflop equity of a pair of jacks against three ranges: 38 percent against the nit's range, 57 percent against the regular's range, and 66 percent against the loose player's range.",
+   "rows": [
+     {"label": "Against the nit", "note": "34 combos", "parts": [{"label": "Jacks", "value": 37.5, "tone": "ink"}, {"label": "Range", "value": 62.5, "tone": "accent"}]},
+     {"label": "Against the regular", "note": "104 combos", "parts": [{"label": "Jacks", "value": 56.9, "tone": "ink"}, {"label": "Range", "value": 43.1, "tone": "accent"}]},
+     {"label": "Against the loose player", "note": "290 combos", "parts": [{"label": "Jacks", "value": 66.2, "tone": "ink"}, {"label": "Range", "value": 33.8, "tone": "accent"}]}
+   ]}
+  </script></div>
+  <p class="figure-note">From tools/poker.js. The two jacks in your hand are removed from the opponent's range, so the three ranges count 29, 91, and 257 combos, not 34, 104, and 290. Sampled over 400,000 deals, good to about 0.2 points.</p>
+</figure>
+
+<p>The same hand is a favorite against one player and a big underdog against another. That gap is the whole value of a note. Here is how it plays out in a hand. This is an invented example.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Jacks against a raise from the nit</h3></div>
+  <div class="table-scroll">
+    <table class="hand-log">
+      <thead><tr><th>Street</th><th>Board</th><th>Action</th><th>Pot</th></tr></thead>
+      <tbody>
+        <tr><td>Preflop</td><td>Hero: [[Jh Jd]]</td><td>The nit in UTG has played 0 of the last 18 hands. He raises to $20. Hero calls on the button. The blinds fold.</td><td class="pot">$47</td></tr>
+        <tr><td>Flop</td><td>[[As 7d 2c]]</td><td>The nit bets $25. Hero holds jacks under an ace. Of the nit's 25 possible combos here, 18 beat jacks.</td><td class="pot">$72</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history. Pot: $2 + $5 + $20 + $20 = $47. After the $25 bet it is $72, and the call costs $25 to win $72, so hero needs 25 / (72 + 25) = 25.8%. Against this nit's range (TT+, AKs) on this board, jacks have 29.1% (exact, tools/poker.js), so one call has the price, barely. Jacks rarely improve (two outs), and a nit who bets again on the turn usually has them beat, so plan to fold to a second big bet unless a jack comes.</p>
+</figure>
+
+<details class="drill">
+  <summary>Practice: the nit raises under the gun and you hold [[Qh Qd]]. His range is TT+ and AKs. Is that a good spot?</summary>
+  <p>Queens have 50.5% against that range (tools/poker.js, sampled, good to about 0.2 points). They are a coin flip, not a big favorite, because KK, AA, and AKs are all in the range. A raise from a player who has folded for an hour is a very strong hand, so a call is fine and a big pot is a worry.</p>
+</details>
+
+<details class="drill">
+  <summary>A player has been in 1 pot in the last 18 hands (two orbits). What can you say about how tight they are?</summary>
+  <p>1 of 18 is about 6%, but a sample this small is noisy. You can say "tight so far," not "6% player." Watch another orbit before you lean on it.</p>
+</details>
+
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>Estimating hand frequency from one orbit</h2>
+  <p><strong>The shortcut.</strong> At a nine-handed table, one orbit is nine hands, and one hand out of nine is about 11%. Count the hands a player entered voluntarily and multiply by 11.</p>
+  <p class="math">2 hands in one orbit: 2 x 11 = 22%. Exact: 2 / 9 = 22.2%.</p>
+  <p>Count a limp or a call as entering. Do not count a blind that checks, because the player had no choice. Use 11 per hand for nine players. For a ten-handed table use 10.</p>
+  <p><strong>Where it bends.</strong> The estimate is noisy. The standard error of a proportion is the square root of p x (1 - p) / n. For p = 22% and n = 9, that is about 14 percentage points, so the true rate could easily be 10% or 35%. After three orbits (n = 27, six hands entered, 6 x 100 / 27 = 22%) the error falls to about 8 points. More orbits shrink it slowly. Treat a one-orbit number as a label (tight, middle, loose), not a measurement.</p>
+</aside>

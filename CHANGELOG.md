@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.45.0] - 2026-11-21
+
+### Added
+
+- Chapter 9, Watching the Table: First-level observation at a live table: who plays many hands, who plays few, who bets big, and who never bluffs, with a way to keep mental notes on nine people and Table Math on estimating a player's hand frequency from one orbit.
+
 ## [0.44.0] - 2026-11-21
 
 ### Added
