@@ -1,0 +1,247 @@
+<p class="lead">Before you decide what to bet, look at what the three flop cards did to both players' ranges. This chapter gives you a way to sort any flop as dry or wet, and to ask who has more equity and who has more of the best hands.</p>
+
+<h2>What the flop does</h2>
+<p>The <strong>board texture</strong> is the shape of the community cards: how high they are, how close in rank, and how many share a suit. The flop is three cards from 22,100 possible flops (52 choose 3), so its shape is worth reading every time. Texture matters because it decides which hands improve, which hands lose value, and how much damage one more card can do.</p>
+<p>Start with suits. Count the flops by how many suits they show.</p>
+<p class="math">Monotone (one suit): 4 x C(13,3) = 4 x 286 = 1,144 flops, or 5.18%</p>
+<p class="math">Two-tone (two suits): 4 x C(13,2) x 39 = 4 x 78 x 39 = 12,168 flops, or 55.06%</p>
+<p class="math">Rainbow (three suits): 22,100 - 1,144 - 12,168 = 8,788 flops, or 39.76%</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">The suits of 100 flops</h3></div>
+  <div data-fig="dots"><script type="application/json">
+  {"label": "Out of 100 flops, about 40 are rainbow, 55 show two of one suit, and 5 are all one suit.",
+   "parts": [
+     {"label": "Rainbow: no flush draw is possible", "value": 40, "tone": "paper"},
+     {"label": "Two-tone: a flush draw is possible", "value": 55, "tone": "gold"},
+     {"label": "Monotone: a flush is possible", "value": 5, "tone": "accent"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic above, rounded to whole flops per 100: 39.76, 55.06, and 5.18 percent.</p>
+</figure>
+
+<p>More than half of all flops are two-tone, so a flush draw is possible on most boards. Rank shape matters too. About one flop in six is paired: 13 x 6 x 48 = 3,744 flops, or 16.9%, plus 52 trips flops (0.2%). And a board with three cards in a five-rank window, like [[9s 8s 6d]], allows straights. Counting rank sets and suits together gives you the whole picture: texture is not one trait but a mix.</p>
+
+<h2>Dry and wet boards</h2>
+<p>A <strong>dry</strong> board has few draws. The cards are far apart in rank and in mixed suits, like [[Kh 7d 2c]]. Few hands improve, so the hand that is best on the flop usually stays best. A <strong>wet</strong> board has many draws: connected ranks, two or three of a suit, middle cards. On [[9s 8s 6d]] a lot of hands hold a draw, and the lead changes hands often.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">Six flops and how they behave</h3></div>
+  <div class="table-scroll">
+    <table class="wrap">
+      <thead><tr><th>Flop</th><th>Texture</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td>[[Kh 7d 2c]]</td><td>Dry, high card, rainbow</td><td>Few draws. Top pair stays strong.</td></tr>
+        <tr><td>[[7s 7d 2c]]</td><td>Dry, paired</td><td>Few draws. Hard to hit, so little changes.</td></tr>
+        <tr><td>[[Ah 7d 2c]]</td><td>Dry, ace high</td><td>Few draws. Favors whoever holds the aces.</td></tr>
+        <tr><td>[[9s 8s 6d]]</td><td>Wet, middle, two-tone</td><td>Straights and flush draws. Many hands connect.</td></tr>
+        <tr><td>[[Js Th 9s]]</td><td>Wet, high, connected</td><td>Many straights and draws, plus top pairs.</td></tr>
+        <tr><td>[[Ks 7s 2s]]</td><td>Monotone</td><td>Any one spade makes a draw. Made flushes are rare but decisive.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">A sorting of example flops, by our judgment of how many draws each allows.</p>
+</figure>
+
+<p>You can put a number on wetness. Take every two-card hand that could hold these cards (1,176 of them once three board cards are dead). Count those that already have a straight or flush, or hold a draw with at least 8 outs to make one on the turn.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">How wet is each flop?</h3></div>
+  <div data-fig="bars"><script type="application/json">
+  {"label": "Share of all two-card hands that hold a straight or flush, or a draw with at least 8 outs to one, on five flops: 0 percent on K72 rainbow, 22 on 9-8-6 two-tone, 35 on 6-5-4 and J-T-9, and 37 on a monotone K-7-2.",
+   "unit": "%", "max": 50,
+   "items": [
+     {"label": "K72 rainbow", "value": 0, "note": "0 of 1,176", "tone": "paper"},
+     {"label": "9-8-6 two-tone", "value": 22.2, "note": "261 of 1,176", "tone": "gold"},
+     {"label": "6-5-4 two-tone", "value": 34.6, "note": "407 of 1,176", "tone": "gold"},
+     {"label": "J-T-9 two-tone", "value": 34.6, "note": "407 of 1,176", "tone": "gold"},
+     {"label": "K72 monotone", "value": 37.0, "note": "435 of 1,176", "tone": "accent"}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact count by a throwaway script, not a table of real play. A made straight or flush on the flop, or at least 8 cards on the turn that make one. Suits of the examples: K72 rainbow is [[Kh 7d 2c]], 9-8-6 is [[9s 8s 6d]], 6-5-4 is [[6h 5h 4c]], J-T-9 is [[Js Th 9s]], monotone is [[Ks 7s 2s]].</p>
+</figure>
+
+<p>The rainbow K-7-2 scores zero: no two-card hand has a straight or an 8-out draw on it. The wet boards put between a fifth and over a third of all hands in contact with a made straight, a flush, or a big draw. That is what wet means in practice. Many hands your opponent might hold can catch up, so your bet has to do more work.</p>
+
+<h2>How often your hand connects</h2>
+<p>Most flops miss most hands. That is why texture is so useful: it tells you which of the few hands that connected are worth betting. Here are four common cases, computed from the 19,600 flops that remain after your two cards are out (50 choose 3).</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">How often you flop something</h3></div>
+  <div data-fig="bars"><script type="application/json">
+  {"label": "Chances to connect with the flop: 32.4 percent for an unpaired hand to pair a hole card, 11.8 percent for a pocket pair to flop a set or better, 10.9 percent for a suited hand to flop a flush draw, and 0.8 percent to flop a made flush.",
+   "unit": "%", "max": 40,
+   "items": [
+     {"label": "Unpaired hand: pair or better", "value": 32.4, "note": "about 1 in 3"},
+     {"label": "Pocket pair flops a set or better", "value": 11.8, "note": "about 1 in 8.5", "tone": "accent2"},
+     {"label": "Suited hand flops a flush draw", "value": 10.9, "note": "about 1 in 9", "tone": "gold"},
+     {"label": "Suited hand flops a made flush", "value": 0.8, "note": "about 1 in 119", "tone": "accent"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic. Pair: 1 - C(44,3) / C(50,3) = 1 - 13,244 / 19,600. Set: (2 x C(48,2) + 48) / 19,600. Flush draw: C(11,2) x 39 / 19,600. Flush: C(11,3) / 19,600.</p>
+</figure>
+
+<p>Two lessons follow. A pair-or-better flop for an unpaired hand is a one-in-three event, so on average you are missing two flops in three. And a flush draw is not rare: a suited hand flops one about once in nine tries. On a two-tone board, assume flush draws are part of every range that sees the flop, and the more players in the pot, the likelier one of them holds one.</p>
+
+<h2>Range advantage</h2>
+<p>A <strong>range</strong> is the set of hands a player could hold (see {{ch:13}}). The flop changes those ranges unevenly. <strong>Range advantage</strong> means one player's whole range has more equity on this flop than the other's. It is a group property: your specific hand can be weak and your range still ahead.</p>
+<p>Here is an invented but plain setup. In a live $2/$5 game, nine-handed, the cutoff raises to $15 and only the big blind calls. The pot is $15 + $15 + $2 = $32. To make the numbers concrete we give each player a range (200 combos for the raiser, 316 for the caller). They are examples, not claims about any real player. They are also deliberately narrow: in our judgment most live players open and defend wider than this, which changes the exact numbers below but not the pattern.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">The setup: cutoff against big blind</h3></div>
+  <div data-fig="table"><script type="application/json">
+  {"label": "Nine-handed $2/$5 table. The cutoff raised to $15 and the big blind called, so the flop of king of hearts, seven of diamonds, two of clubs sees a pot of $32. Everyone else folded.",
+   "button": 1, "pot": "$32", "board": "Kh 7d 2c",
+   "seats": [
+     {"pos": "CO", "stack": "$485", "note": "raiser", "state": "hero"},
+     {"pos": "BTN", "state": "fold"},
+     {"pos": "SB", "state": "fold"},
+     {"pos": "BB", "stack": "$485", "note": "caller", "state": "villain"},
+     {"pos": "UTG", "state": "fold"},
+     {"pos": "UTG+1", "state": "fold"},
+     {"pos": "MP", "state": "fold"},
+     {"pos": "LJ", "state": "fold"},
+     {"pos": "HJ", "state": "fold"}
+   ]}
+  </script></div>
+  <p class="figure-note">An example hand, not a real hand history. Raiser range: 55+, A2s+, KTs+, QTs+, JTs, T9s, 98s, ATo+, KQo (200 combos, 15.1% of hands). Caller range: 22-99, A2s-AJs, K7s+, Q9s+, J9s+, T8s+, 97s+, 86s+, 75s+, 65s, 54s, A8o+, KTo+, QTo+, JTo (316 combos, 23.8%). Counts from tools/poker.js.</p>
+</figure>
+
+<p>The raiser has the top of the deck: more aces, kings, and big pairs. The caller has more small suited connectors and small pairs. Now deal four different flops and measure how much of the pot each range owns.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Who owns each flop</h3></div>
+  <div data-fig="split"><script type="application/json">
+  {"label": "Equity of the raiser's range against the caller's on four flops: 62 to 38 on ace-seven-deuce, 58 to 42 on king-seven-deuce, 57 to 43 on six-five-four, and 54 to 46 on nine-eight-six.",
+   "rows": [
+     {"label": "A-7-2 rainbow", "note": "[[Ah 7d 2c]]", "parts": [{"label": "Raiser", "value": 62.0, "tone": "ink"}, {"label": "Caller", "value": 38.0, "tone": "accent"}]},
+     {"label": "K-7-2 rainbow", "note": "[[Kh 7d 2c]]", "parts": [{"label": "Raiser", "value": 57.8, "tone": "ink"}, {"label": "Caller", "value": 42.2, "tone": "accent"}]},
+     {"label": "6-5-4 two-tone", "note": "[[6h 5h 4c]]", "parts": [{"label": "Raiser", "value": 57.4, "tone": "ink"}, {"label": "Caller", "value": 42.6, "tone": "accent"}]},
+     {"label": "9-8-6 two-tone", "note": "[[9s 8s 6d]]", "parts": [{"label": "Raiser", "value": 53.7, "tone": "ink"}, {"label": "Caller", "value": 46.3, "tone": "accent"}]}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact, by a throwaway script built on tools/poker.js: every pair of hands from the two ranges that shares no card, run through every turn and river. Ranges as listed above.</p>
+</figure>
+
+<p>The raiser is ahead everywhere, but the lead shrinks as the board gets lower and more connected. On A-7-2 the raiser's range owns about 62 percent. On 9-8-6 it owns about 54. The reason is in the shapes of the ranges: how many hands in each have at least a pair.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Hands with a pair or better</h3></div>
+  <div data-fig="columns"><script type="application/json">
+  {"label": "Share of each range holding at least a pair on four flops. The raiser leads on ace-seven-deuce, 74 to 51, and king-seven-deuce, 50 to 40, and six-five-four, 33 to 22. The caller edges ahead on nine-eight-six, 37 to 36.",
+   "unit": "%", "categories": ["A-7-2", "K-7-2", "6-5-4", "9-8-6"],
+   "series": [
+     {"name": "Raiser", "values": [73.8, 49.5, 33.0, 35.5], "tone": "ink"},
+     {"name": "Caller", "values": [50.5, 39.6, 22.1, 36.8], "tone": "accent"}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact count of combos with a pair or better on each flop, from the ranges listed above. Pocket pairs count, even below the board. Straights and flushes count as better.</p>
+</figure>
+
+<p>On 9-8-6 the caller's 87s, 76s, 97s, 86s, and 75s connect hard, and the raiser's unpaired high cards miss. That is the pattern: <strong>high, dry boards favor the player with the high cards (usually the raiser). Low, connected boards give the caller a share.</strong> This idea carries into {{ch:16}}, where it drives how often you bet a flop.</p>
+
+<h2>Nut advantage</h2>
+<p>The <strong>nuts</strong> is the best possible hand on a board. <strong>Nut advantage</strong> means one range holds more of the very best hands than the other. It is separate from range advantage, and the two can point in opposite directions. A range can lead in equity because it has many pairs, while the opponent holds more of the monsters.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Who holds the monsters</h3></div>
+  <div data-fig="columns"><script type="application/json">
+  {"label": "Share of each range with three of a kind or better on four flops. On six-five-four the caller has 4.4 percent against 3.1; on nine-eight-six it is 4.6 against 4.8; on king-seven-deuce 2.1 against 3.3, and on ace-seven-deuce 2.2 against 3.6.",
+   "unit": "%", "categories": ["A-7-2", "K-7-2", "6-5-4", "9-8-6"],
+   "series": [
+     {"name": "Raiser", "values": [3.6, 3.3, 3.1, 4.8], "tone": "ink"},
+     {"name": "Caller", "values": [2.2, 2.1, 4.4, 4.6], "tone": "accent2"}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact count: sets, straights, flushes, and full houses as a share of each range's combos. Same ranges as above. Examples only.</p>
+</figure>
+
+<p>Compare the last two charts. On 6-5-4, the raiser holds more pairs of some kind (33 percent against 22) and a clear equity lead (57 against 43), yet the caller holds more monsters (4.4 percent against 3.1). On 9-8-6 the two ranges are nearly even in both. On the high boards the raiser leads in both. The 6-5-4 flop is the interesting one: a split between the two kinds of advantage.</p>
+
+<aside class="key">
+  <p class="label">Key idea</p>
+  <p>Ask two questions of every flop. Whose range has more equity? Whose range has more of the best hands? As a baseline, range advantage lets you bet often and nut advantage lets you bet big. Slow down when the answers point to different players.</p>
+</aside>
+
+<p>Why does the split matter? A player whose range holds more of the nuts can bet large, because the other player has few hands that can raise back. A player with range advantage but no nut advantage usually does better with smaller, more frequent bets. Even with both, a small bet is often enough on a dry board like K-7-2, where the other range has little that can stand a bet and few cards change the picture. These are common baselines from theory, not rules. We take up how bet size interacts with this in {{ch:20}}. For now, look at an example of a nut hand on a wet board.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Phil Galfond might say</p>
+  <p class="said">He would call range advantage and nut advantage the two questions a student should ask before anything else, and he would sequence them in that order. First learn what the board does to the ranges, then pick a bet size to match it. He would also warn that a number from a solver is a starting point you should be able to explain, not a rule to memorize.</p>
+  <p class="note">An imagined voice: our reading of Galfond's teaching approach at Run It Once, not his words.</p>
+</aside>
+
+<h2>Reading a flop in ten seconds</h2>
+<p>At a live table you do not have a solver. You have about ten seconds before the action comes back to you. Use four quick looks.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Ten seconds on a new flop</h3></div>
+  <ol class="flow">
+    <li><strong>Suits</strong><span>Rainbow, two-tone, or monotone? A flush draw exists on 60 percent of flops.</span></li>
+    <li><strong>Ranks</strong><span>High and apart, or middle and connected? Paired?</span></li>
+    <li><strong>Who has it</strong><span>Whose range has more pairs, and who holds more of the nuts?</span></li>
+    <li><strong>The player</strong><span>Does he fold to a bet here, or call everything?</span></li>
+  </ol>
+  <p class="figure-note">A summary of this chapter. A flush draw is possible on two-tone plus monotone flops: 55.06 + 5.18 = 60.24 percent.</p>
+</figure>
+
+<p>The fourth look is the live one. A texture rule is a baseline. In most low-stakes live games, the people across from you do not fold the way a solver's ranges do, so a flop that calls for a bet in theory may do better as a check against a caller, or as a larger bet against someone who folds too much. {{ch:16}} and {{ch:24}} take that up.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Daniel Negreanu might say</p>
+  <p class="said">He would agree with the two questions, and then ask a third: what does this particular player do on this particular board? He built his name on reading hands, and he rebuilt his game with solver study, so he would say the table tells you the baseline and the person tells you how far to move off it.</p>
+  <p class="note">An imagined voice: our reading of Negreanu's public emphasis on hand reading and his later solver work, not his words.</p>
+</aside>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Doyle Brunson might say</p>
+  <p class="said">He would lean on aggression. A wet flop is where a draw can take the pot from you for one more card, so the player who bets and raises now makes the other side pay for that chance. He would be uneasy with a plan that checks the nuts to be sneaky.</p>
+  <p class="note">An imagined voice: our reading of the aggressive approach in Super/System (1979), not his words.</p>
+</aside>
+
+<p>These three views disagree on how much weight to give the board and how much to give the player. The book's answer is the thesis: the board sets the baseline, and the person across from you decides how far to leave it.</p>
+
+<p>Here is a worked hand. The big blind calls from the setup above with [[7h 5h]]. The flop is [[9s 8s 6d]], a wet board where the caller's range holds nearly as many monsters as the raiser's.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">A straight on a wet flop</h3></div>
+  <div class="table-scroll">
+    <table class="hand-log">
+      <thead><tr><th>Street</th><th>Board</th><th>Action</th><th>Pot</th></tr></thead>
+      <tbody>
+        <tr><td>Preflop</td><td>BB: [[7h 5h]]</td><td>Cutoff raises to $15. Everyone else folds. BB calls.</td><td class="pot">$32</td></tr>
+        <tr><td>Flop</td><td>[[9s 8s 6d]]</td><td>BB checks. Cutoff bets $22 (about two thirds of the pot). BB has a made straight and raises to $66.</td><td class="pot">$120</td></tr>
+        <tr><td>Flop</td><td>[[9s 8s 6d]]</td><td>Cutoff calls $44 more.</td><td class="pot">$164</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history. Pot: $32 + $22 + $66 = $120, then + $44 = $164. Against the cutoff's 178 combos left on this flop, [[7h 5h]] has 86.56 percent equity (exact, tools/poker.js).</p>
+</figure>
+
+<p>The big blind raises for two reasons. The hand is a big favorite against the cutoff's range, and a raise charges draws such as flush draws, which a call would let see the turn cheaply. The straight is not the nuts in theory (ten-seven makes a higher one), but this example cutoff range holds no ten-seven. The raise also fits the board. On [[9s 8s 6d]] about as large a share of the big blind's range is monsters as of the raiser's (4.6 percent against 4.8, and 13 combos against 9), so a check-raise is believable. On [[Kh 7d 2c]] the caller holds fewer strong hands than the raiser (2.1 percent against 3.3), and a check-raise carries less weight.</p>
+
+<details class="drill">
+  <summary>You hold [[Qs Js]]. About how often does the flop bring exactly two spades?</summary>
+  <p>C(11,2) x 39 / C(50,3) = 55 x 39 / 19,600 = 2,145 / 19,600 = 10.94%, about 1 time in 9.</p>
+</details>
+<details class="drill">
+  <summary>Out of 100 flops, how many are monotone?</summary>
+  <p>4 x 286 / 22,100 = 5.18%, so about 5.</p>
+</details>
+<details class="drill">
+  <summary>The cutoff bets $22 into a pot of $32 on [[9s 8s 6d]]. What equity does the big blind need to call?</summary>
+  <p>22 / (32 + 22 + 22) = 22 / 76 = 28.95%, about 29 percent. That is the price, before position and what the rest of the range looks like.</p>
+</details>
+<details class="drill">
+  <summary>On which of the four flops in this chapter does the caller hold a bigger share of monsters than the raiser?</summary>
+  <p>Only on 6-5-4 (4.4 percent against 3.1). On 9-8-6 the two are close, 4.6 against 4.8, and the raiser leads on the high boards. Share of the range is what counts: it is how often the player across from you holds one.</p>
+</details>
+
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>Flopping flush draws and flushes</h2>
+  <p><strong>The shortcut.</strong> With a suited hand, you flop a flush draw about 1 time in 9, and a made flush about 1 time in 120. Any four-flush or better is about 12 percent.</p>
+  <p class="math">Hold [[Ah 9h]]: 11 hearts left in 50 cards. Two hearts and one other: C(11,2) x 39 / 19,600 = 2,145 / 19,600 = 10.94%</p>
+  <p class="math">Three hearts: C(11,3) / 19,600 = 165 / 19,600 = 0.84%, or 1 in 119</p>
+  <p><strong>Where it bends.</strong> One in 9 is 11.1 percent, a touch above the exact 10.94, and the made flush is one in 119, not exactly 120. The bigger bend is what the shortcut does not say: it counts only your own flush draws. On a two-tone flop your opponent can be on one too, and a flush draw does not win by itself. Count your outs ({{ch:5}}) before you lean on it.</p>
+</aside>

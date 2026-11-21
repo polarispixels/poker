@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.26.0] - 2026-11-21
+
+### Added
+
+- Chapter 15, Board Texture: Chapter 15 sorts flops as dry or wet and compares range and nut advantage, with exact range equities and flush-draw odds.
+
 ## [0.25.0] - 2026-11-21
 
 ### Added
