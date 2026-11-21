@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.11.0] - 2026-11-21
+
+### Added
+
+- Chapter 22, Game Theory Basics: Chapter 22 builds Nash equilibrium from rock, paper, scissors and a nuts-or-air river game, then derives MDF and alpha with a $2/$5 example.
+
 ## [0.10.0] - 2026-11-21
 
 ### Added

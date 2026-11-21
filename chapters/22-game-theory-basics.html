@@ -22,13 +22,252 @@
     <main>
       <article class="chapter">
         <header class="chapter-head">
-          <p class="chapter-kicker label">Chapter 22 <span class="badge">To come</span></p>
+          <p class="chapter-kicker label">Chapter 22 <span class="badge">Preliminary draft</span></p>
           <h1 class="chapter-title">Game Theory Basics</h1>
           <p class="standfirst">Equilibrium in plain language, indifference, and minimum defense frequency.</p>
         </header>
 
         <div class="prose chapter-body">
-<p class="lead">This page has not been written yet. The book is being written and published one chapter at a time.</p>
+<p class="lead">Game theory sounds like a math course, but the working parts fit in your head: a strategy nobody can exploit, the idea of indifference that builds it, and two fractions, minimum defense and alpha, that tell you how often to call and how often a bluff must work.</p>
+
+<h2>Equilibrium in plain language</h2>
+
+<p>Start with a game with no cards. In rock, paper, scissors you pick one of three throws and so does your opponent. Rock beats scissors, scissors beat paper, paper beats rock. Here is the payoff to you for each pairing: +1 for a win, 0 for a tie, -1 for a loss.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table 22.1</span><h3 class="figure-title">Rock, paper, scissors: your payoff</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>You throw</th><th>vs Rock</th><th>vs Paper</th><th>vs Scissors</th></tr></thead>
+      <tbody>
+        <tr><td>Rock</td><td>0</td><td>-1</td><td>+1</td></tr>
+        <tr><td>Paper</td><td>+1</td><td>0</td><td>-1</td></tr>
+        <tr><td>Scissors</td><td>-1</td><td>+1</td><td>0</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">The standard payoffs, one unit per game. Each row sums to zero.</p>
+</figure>
+
+<p>What is the best strategy? Throwing each option one time in three, at random. That mix is an <strong>equilibrium</strong>: a pair of strategies where neither player can do better by changing only their own. The mathematician John Nash proved that every finite game has at least one, once players are allowed to mix their choices at random, so a game theorist calls it a <strong>Nash equilibrium</strong>. In a two-player zero-sum game (what one wins, the other loses) it has a bonus. You can play your equilibrium strategy blind, and you are guaranteed the value of the game, no matter what the opponent does. In a fair game like rock, paper, scissors, that value is zero: the worst you can do is break even. A live poker table is looser than this. Most pots have more than two players, the rake comes out of every pot, and no one plays a true equilibrium, so treat the guarantee as a guide for heads-up spots, not a promise.</p>
+
+<p>Test it. Say your opponent throws rock half the time, paper a quarter, scissors a quarter. Your one-in-three mix earns zero against that, just as it would against anyone. But a player who spots the lean can do better by always throwing paper.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 22.1</span><h3 class="figure-title">Exploiting a lean: always throw paper</h3></div>
+  <ul class="tree">
+    <li><span class="node root">Throw paper against a 50/25/25 opponent</span>
+      <ul>
+        <li><span class="edge">Opponent throws rock, 50%</span><span class="node win">+1</span></li>
+        <li><span class="edge">Opponent throws paper, 25%</span><span class="node">0</span></li>
+        <li><span class="edge">Opponent throws scissors, 25%</span><span class="node lose">-1</span></li>
+      </ul>
+    </li>
+  </ul>
+  <p class="math">EV = 0.50 x (+1) + 0.25 x 0 + 0.25 x (-1) = +0.25 per game</p>
+  <p class="figure-note">Arithmetic. The 50/25/25 lean is an assumption for the example.</p>
+</figure>
+
+<p>That gap is the whole book in miniature. Equilibrium is the floor: safe, and in rock, paper, scissors it never wins more than zero. (In poker an equilibrium strategy does profit from many mistakes, but it never goes after a lean on purpose.) Exploitation takes the lean and earns a profit, at a price: your fixed paper is now itself a lean that a smart opponent can punish. The thesis of this book (GTO is the baseline, exploitation is how you win) is this picture in poker clothes. <a class="xref" href="24-exploitative-play.html">Chapter 24, Exploitative Play</a> covers the exploiting. This chapter builds the floor.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Linus Loeliger might say</p>
+  <p class="said">He would call the equilibrium strategy the baseline every student should learn first. Know the unexploitable play before you decide to leave it, so you always know what a deviation costs.</p>
+  <p class="note">An imagined voice: our reading of his reputation for theory-first play at the highest online cash stakes, not his words.</p>
+</aside>
+
+<h2>Indifference: the toy game</h2>
+
+<p>Poker has hidden cards, so equilibrium there needs one more idea. A player is <strong>indifferent</strong> between two actions when both earn the same expected value (<a class="xref" href="07-expected-value.html">Chapter 7, Expected Value</a> covers EV). Equilibrium mixes work because each player picks the mix that makes the other player indifferent. Then the other player gains nothing by leaning one way.</p>
+
+<p>Here is the smallest poker game that shows it. It is a river spot, heads-up. The pot is $100. You hold a <strong>bluff-catcher</strong>: a hand that beats every bluff and loses to every value bet. You are first to act and check. The villain holds one of two kinds of hand: the nuts, or nothing (air). He may bet $100 (the pot) or check. If he checks, the hands are shown down and we ignore it. If he bets, you either call or fold. The nuts always beat your bluff-catcher and air always loses to it.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 22.2</span><h3 class="figure-title">The toy game in numbers</h3></div>
+  <ul class="stats">
+    <li><b>$100</b><span>pot on the river</span></li>
+    <li><b>$100</b><span>the villain's bet</span></li>
+    <li><b>2 kinds</b><span>of hand: nuts or air</span></li>
+  </ul>
+  <p class="figure-note">An invented teaching game. Real rivers have many more hand types.</p>
+</figure>
+
+<p>First, the villain's side. How many bluffs should he bet? Find the call frequency that makes his bluff break even. If you call a fraction <em>c</em> of the time, his bluff loses $100 when called and wins the $100 pot when you fold.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 22.3</span><h3 class="figure-title">The villain bluffs $100 into $100: when is he indifferent?</h3></div>
+  <ul class="tree">
+    <li><span class="node root">Villain bluffs $100 with air</span>
+      <ul>
+        <li><span class="edge">You fold, with frequency 1 - c</span><span class="node win">Win $100</span></li>
+        <li><span class="edge">You call, with frequency c</span><span class="node lose">Lose $100</span></li>
+      </ul>
+    </li>
+  </ul>
+  <p class="math">EV = (1 - c) x $100 + c x (-$100) = $100 - $200c = 0, so c = 50%</p>
+  <p class="figure-note">Arithmetic. At exactly 50%, bluffing earns him the same as giving up. Call more and bluffs lose. Call less and bluffs win.</p>
+</figure>
+
+<p>So your equilibrium call frequency is one in two. Now your side. How many bluffs must be in his betting range to make you indifferent between calling and folding? Call $100 more: you lose it against the nuts, and against a bluff you win the $100 pot plus his $100 bet, so $200. Let <em>b</em> be the share of his bets that are bluffs.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 22.4</span><h3 class="figure-title">You call $100 with a bluff-catcher: when are you indifferent?</h3></div>
+  <ul class="tree">
+    <li><span class="node root">You call $100</span>
+      <ul>
+        <li><span class="edge">He is bluffing, with share b</span><span class="node win">Win $200</span></li>
+        <li><span class="edge">He has the nuts, with share 1 - b</span><span class="node lose">Lose $100</span></li>
+      </ul>
+    </li>
+  </ul>
+  <p class="math">EV = b x $200 + (1 - b) x (-$100) = $300b - $100 = 0, so b = 1/3</p>
+  <p class="figure-note">Arithmetic. Folding earns $0, so at b = 1/3 your call and your fold are worth the same.</p>
+</figure>
+
+<p>One bluff for every two value bets. Picture 18 betting hands: 12 nuts and 6 air. Against that mix, a call wins $200 six times in 18 and loses $100 twelve times in 18. That is $1,200 won and $1,200 lost, so you break even.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 22.5</span><h3 class="figure-title">One hundred pot-size bets in equilibrium</h3></div>
+  <div data-fig="dots"><script type="application/json">
+  {"label": "Out of 100 pot-size river bets in the toy game, about 67 are value hands and 33 are bluffs, so one third are bluffs.",
+   "parts": [
+     {"label": "Value: the nuts", "value": 67, "tone": "accent2"},
+     {"label": "Bluff: air", "value": 33, "tone": "accent"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: a bluff share of bet / (pot + 2 x bet) = 100 / 300 = 1/3, so 33.3 of every 100 bets, rounded to 33 and 67 dots.</p>
+</figure>
+
+<p>Notice something odd. Neither mix is chosen to win the most. Each is chosen to make the other player's two choices worth exactly the same. That is the sign of a mixed equilibrium. If you ever find your opponent has a clear best reply to your strategy, you are not at equilibrium. <a class="xref" href="23-balance-and-unexploitability.html">Chapter 23, Balance and Unexploitability</a> asks how much this balance matters in real games.</p>
+
+<aside class="key">
+  <p class="label">Key idea</p>
+  <p>Equilibrium strategies make your opponent indifferent. Your bluff share sets his call price. His call frequency sets your bluff price.</p>
+</aside>
+
+<h2>Minimum defense frequency</h2>
+
+<p>The call frequency we just found has a name. The <strong>minimum defense frequency</strong> (MDF) is the share of your range that must continue against a bet so the bettor cannot profit by bluffing with every hand. Against a $100 bet into $100, it is 50%. The formula is simple: pot divided by (pot plus bet).</p>
+
+<p class="math">MDF = pot / (pot + bet) = 100 / (100 + 100) = 50%</p>
+
+<p>Why that fraction? A bettor risks the bet to win the pot. If you let the bettor win the pot more often than bet / (pot + bet) of the time, any bluff shows a profit. So you must fold no more than that share. The bigger the bet, the more you may fold.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 22.6</span><h3 class="figure-title">How much you must defend, by bet size</h3></div>
+  <div data-fig="line"><script type="application/json">
+  {"label": "Minimum defense frequency falls from 80 percent against a quarter-pot bet to 33 percent against a bet of twice the pot, while the share a bluff must work rises from 20 to 67 percent.",
+   "xLabel": "Bet as a share of the pot", "xUnit": "x", "yUnit": "%", "yMin": 0, "yMax": 100,
+   "series": [
+     {"name": "You must defend", "tone": "ink", "points": [[0.25, 80], [0.33, 75], [0.5, 66.7], [0.67, 60], [1, 50], [1.5, 40], [2, 33.3]]},
+     {"name": "Bluff must work", "tone": "accent", "points": [[0.25, 20], [0.33, 25], [0.5, 33.3], [0.67, 40], [1, 50], [1.5, 60], [2, 66.7]]}
+   ],
+   "marks": [{"x": 1, "y": 50, "label": "Pot bet: both 50%"}]}
+  </script></div>
+  <p class="figure-note">Exact, from js/figures.js betMath (the same math as tools/poker.js odds). The two lines add to 100% at every bet size. Bet sizes of 0.33 and 0.67 are rounded.</p>
+</figure>
+
+<p>Take a bet of half the pot. You must defend 66.7%, about two hands in three. A pot-size bet lets you defend half. A two-pot overbet lets you defend a third. Small bets are the ones that ask the most of you, which is why a player who folds too much to small bets hands money to the people betting them. Bet sizing itself is the subject of <a class="xref" href="20-bet-sizing.html">Chapter 20, Bet Sizing</a>.</p>
+
+<p>The MDF is about your whole range, not each hand. You choose which hands make up the defending slice. Put the best ones in, and let the weakest fold.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 22.7</span><h3 class="figure-title">What you can fold, by bet size</h3></div>
+  <div data-fig="columns"><script type="application/json">
+  {"label": "For bets of one third, one half, two thirds, one times, and two times the pot, the share of your range you must continue with and the share you may fold.",
+   "unit": "%", "categories": ["1/3 pot", "1/2 pot", "2/3 pot", "Pot", "2x pot"],
+   "series": [
+     {"name": "Defend", "values": [75, 66.7, 60, 50, 33.3], "tone": "accent2"},
+     {"name": "May fold", "values": [25, 33.3, 40, 50, 66.7], "tone": "gold"}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact, from js/figures.js betMath. The fold share is also alpha, in the next section.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What David Sklansky might say</p>
+  <p class="said">He would remind you that a defense frequency is a tool, not a goal. His Fundamental Theorem says you lose whenever you play differently than you would with the opponent's cards face up, so the right defense depends on what the bettor actually holds.</p>
+  <p class="note">An imagined voice: our reading of the Fundamental Theorem of Poker in The Theory of Poker, not his words.</p>
+</aside>
+
+<h2>Alpha: what your bluff needs</h2>
+
+<p>MDF has a mirror twin. <strong>Alpha</strong> is the share of the time a bluff must work (the opponent folds) for the bluff to break even. Its formula is bet divided by (pot plus bet). For a $100 bet into a $100 pot, it is 50%. Compare the two formulas: MDF is pot over (pot plus bet), and alpha is bet over (pot plus bet). They share a denominator and their numerators add up to it, so <strong>MDF plus alpha always equals 100%</strong>. Your opponent's alpha is your fold budget.</p>
+
+<p>Here is how it looks at a live $2/$5 table. The pot is $60 on the river and the villain bets $40, two-thirds of the pot.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 22.8</span><h3 class="figure-title">A river bet, from both seats</h3></div>
+  <div class="table-scroll">
+    <table class="hand-log">
+      <thead><tr><th>Street</th><th>Board</th><th>Action</th><th>Pot</th></tr></thead>
+      <tbody>
+        <tr><td>Preflop</td><td>Hero: <span class="cards" role="img" aria-label="King of diamonds, Queen of diamonds"><span class="pc r">K<i>♦</i></span><span class="pc r">Q<i>♦</i></span></span></td><td>Villain raises to $15 in the cutoff. Hero calls on the button. The blinds fold.</td><td class="pot">$37</td></tr>
+        <tr><td>Flop</td><td><span class="cards" role="img" aria-label="King of clubs, 8 of hearts, 3 of spades"><span class="pc">K<i>♣</i></span><span class="pc r">8<i>♥</i></span><span class="pc">3<i>♠</i></span></span></td><td>Villain bets $12 and Hero calls.</td><td class="pot">$61</td></tr>
+        <tr><td>Turn</td><td><span class="cards" role="img" aria-label="King of clubs, 8 of hearts, 3 of spades, 6 of diamonds"><span class="pc">K<i>♣</i></span><span class="pc r">8<i>♥</i></span><span class="pc">3<i>♠</i></span><span class="pc r">6<i>♦</i></span></span></td><td>Both check.</td><td class="pot">$61</td></tr>
+        <tr><td>River</td><td><span class="cards" role="img" aria-label="King of clubs, 8 of hearts, 3 of spades, 6 of diamonds, 2 of clubs"><span class="pc">K<i>♣</i></span><span class="pc r">8<i>♥</i></span><span class="pc">3<i>♠</i></span><span class="pc r">6<i>♦</i></span><span class="pc">2<i>♣</i></span></span></td><td>Villain bets $40 into $61. The call price is $40 to win $101.</td><td class="pot">$101</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history. Pot: $5 + $15 + $15 + $2 = $37 after the call, then $37 + $12 + $12 = $61.</p>
+</figure>
+
+<p>The river bet is $40 into $61, close to two-thirds. Exact first, from tools/poker.js odds: alpha = 40 / 101 = 39.6% and MDF = 61 / 101 = 60.4%. At the table, round the pot to $60 and the bet to $40.</p>
+
+<p class="math">Alpha = 40 / (60 + 40) = 40%. MDF = 60 / (60 + 40) = 60%.</p>
+
+<p>The villain's bluffs profit if you fold more than 40% of your range. So you defend 60%. If your range at this point has 20 hands, you continue with 12 and fold the 8 weakest. If the villain bluffs and you fold 55% of the time, his bluff earns real money: 0.55 x $60 - 0.45 x $40 = $33 - $18 = +$15 each time (with the exact $61 pot, about +$15.55).</p>
+
+<ol class="flow">
+  <li><strong>Read the bet</strong><span>Pot before the bet, and the bet itself.</span></li>
+  <li><strong>Find the fraction</strong><span>Bet over (pot + bet) is alpha. Its complement is MDF.</span></li>
+  <li><strong>Count your range</strong><span>Which hands reach this spot? How many continue?</span></li>
+  <li><strong>Adjust to the bettor</strong><span>Call less against value-heavy lines. Call more against bluff-heavy ones.</span></li>
+</ol>
+
+<h2>How much this matters live</h2>
+
+<p>If equilibrium is so clean, why not play it forever? Three reasons. First, you cannot compute it at a live table: real ranges have hundreds of hands, and solvers need computers. Second, equilibrium assumes your opponent plays well too. Third, a player who defends exactly MDF against someone who never bluffs is giving away money.</p>
+
+<p>The last point matters most. Defending MDF assumes the bettor bluffs enough to make you indifferent. In most low-stakes live games (a judgment, not a measurement) players bluff the river less than equilibrium needs. Against a bettor who never bluffs, the right defense is far below MDF. You fold every bluff-catcher. Against a bettor who bluffs with everything, it is far above. The MDF fraction is where you start thinking, not where you stop.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 22.9</span><h3 class="figure-title">Equilibrium is the baseline, the read is the decision</h3></div>
+  <div class="compare">
+    <div class="a"><h4>Play the baseline</h4><p>Defend MDF. Bet the bluff share that fits your size. Nobody can exploit you, but you do not press on the leaks you see.</p></div>
+    <div class="b"><h4>Deviate on a read</h4><p>Fold more against a bettor who rarely bluffs. Bluff more against a player who folds too much. You can lose to a good opponent, but you earn from a weak one.</p></div>
+  </div>
+  <p class="figure-note">A summary of the book's thesis. The deviation needs a reason: see <a class="xref" href="24-exploitative-play.html">Chapter 24, Exploitative Play</a> and <a class="xref" href="25-live-player-types-and-population-tendencies.html">Chapter 25, Live Player Types and Population Tendencies</a>.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Daniel Negreanu might say</p>
+  <p class="said">He would say the solver numbers are a map you check your instincts against, not a script. Feel and hand reading tell you which way to lean, and the equilibrium tells you how far you can lean before it costs you.</p>
+  <p class="note">An imagined voice: our reading of his public account of rebuilding his game with solver study alongside his reads-based approach, not his words.</p>
+</aside>
+
+<details class="drill">
+  <summary>The pot is $90 and the villain bets $30 on the river. What is your MDF, and what is his alpha?</summary>
+  <p>MDF = 90 / (90 + 30) = 75%. Alpha = 30 / (90 + 30) = 25%. They add to 100%.</p>
+</details>
+
+<details class="drill">
+  <summary>The pot is $50 and the villain bets $100 (an overbet). What must you defend? How often must his bluffs work?</summary>
+  <p>MDF = 50 / 150 = 33.3%, about one hand in three. Alpha = 100 / 150 = 66.7%. A bluff with an overbet needs to work two times in three.</p>
+</details>
+
+<details class="drill">
+  <summary>In the toy game the bet is half the pot instead of the full pot. What share of his bets must be bluffs, and how often do you call?</summary>
+  <p>Take pot 100, bet 50. Bluff share = 50 / (100 + 100) = 25%, so one bluff for every three value bets. You call MDF = 100 / 150 = 66.7%.</p>
+</details>
+
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>MDF and alpha as two sides of one fraction</h2>
+  <p><strong>The shortcut.</strong> Add the pot and the bet. Put the bet on top and you have alpha, the share of folds that makes a bluff break even. Put the pot on top and you have MDF, the share of your range that must continue. They always add to 100%, so find one and subtract.</p>
+  <p class="math">Pot $60, bet $40: alpha = 40 / 100 = 40%, MDF = 60 / 100 = 60%</p>
+  <p><strong>Where it bends.</strong> The fractions assume one opponent and a bettor who bluffs the right amount. Against several players, or a bettor who rarely bluffs, defend less than MDF. When the bet is bigger than your stack, use only the amount you can call as the bet. And the rake shrinks the pot the winner takes, so a bluff needs slightly more folds than alpha says.</p>
+</aside>
         </div>
       </article>
 
@@ -49,5 +288,6 @@
   </div>
 
   <script src="../js/version.js"></script>
+  <script src="../js/figures.js"></script>
 </body>
 </html>
