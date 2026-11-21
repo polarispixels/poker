@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.35.0] - 2026-11-21
+
+### Added
+
+- Chapter 28, Mental Math at the Table II: EV on the Fly: Chapter 28 ties equity, fold equity, and pot size into one EV estimate, with implied odds, reverse implied odds, and reading a river bet backward into bluff combos.
+
 ## [0.34.0] - 2026-11-21
 
 ### Added

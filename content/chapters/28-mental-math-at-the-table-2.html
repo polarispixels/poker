@@ -1,0 +1,234 @@
+<p class="lead">A bet is a bundle of three things: the pot you might win right now, the cards you might catch, and the money you might win or lose later. This chapter ties them into one estimate you can finish in the time it takes the dealer to burn a card.</p>
+
+<h2>One estimate from three numbers</h2>
+<p>{{ch:7}} gave you expected value (EV), the average result of a decision if you could play it many times. {{ch:6}} gave you fast ways to turn outs into percentages. Here we join them. Every bet you make has three numbers behind it: how often the other player folds, how often you win if he calls, and how big the pot is compared to your bet.</p>
+<p>Take an example hand in a $2/$5 game, $500 stacks. The pot is $40 on the flop. You hold [[Ah 7h]] on a board of [[Ks 9h 4h]], so you have four hearts and need one more. Your opponent checks, and you bet $30. Say he folds 40 percent of the time. When he calls, say his range is 57 combos: aces as an overpair, sets of kings, nines, and fours, and top pair with AK, KQ, KJ, or KT. Your exact equity against that range is 38.46 percent, from tools/poker.js. That assumes you see both the turn and the river with no more betting.</p>
+<p>When he calls, the pot will be $40 + $30 + $30 = $100. You own 38.46 percent of it and paid $30 to get there. Call that your edge when called: 0.3846 x $100 - $30 = +$8.46.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">A $30 semi-bluff into a $40 pot</h3></div>
+  <ul class="tree">
+    <li><span class="node root">Bet $30 with a flush draw</span>
+      <ul>
+        <li><span class="edge">He folds 40% of the time</span><span class="node win">Win the $40 pot</span></li>
+        <li><span class="edge">He calls 60% of the time</span><span class="node win">Average +$8.46 when called</span></li>
+      </ul>
+    </li>
+  </ul>
+  <p class="math">EV = 0.40 x $40 + 0.60 x $8.46 = $16.00 + $5.08 = +$21.08</p>
+  <p class="figure-note">Arithmetic. Equity from tools/poker.js: Ah7h against AA, KK, 99, 44, AK, KQ, KJ, KT (57 combos) on Ks 9h 4h. The 40 percent fold rate is an assumption for the example.</p>
+</figure>
+
+<p>Strip out the draw and see what it adds. A pure bluff of $30 into $40 only works 30 / 70 = 42.9 percent of the time to break even, and at a 40 percent fold rate it loses: 0.40 x $40 - 0.60 x $30 = -$2. The draw turns a losing bluff into a +$21 bet. That is the whole idea of a semi-bluff (a bet with a hand that is behind now but can improve): two ways to win, so you need less from each.</p>
+
+<p class="math">EV = fold x pot + (1 - fold) x (equity x (pot + 2 x bet) - bet)</p>
+
+<aside class="key">
+  <p class="label">Key idea</p>
+  <p>Keep the two halves apart. The first half is what a fold pays. The second half is what a call is worth. If the second half is positive, you do not need him to fold at all.</p>
+</aside>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What David Sklansky might say</p>
+  <p class="said">He would say the formula is the Fundamental Theorem in arithmetic. You gain when the other player folds a hand that would have beaten you, and when he calls, your draw still owns a share of a bigger pot. Count both gains, and write the weaker assumption down so you know which number you guessed.</p>
+  <p class="note">An imagined voice: our reading of the ideas in The Theory of Poker, not his words.</p>
+</aside>
+
+<h2>How much folding a draw needs</h2>
+<p>You rarely know the fold rate. So ask the opposite question: how little folding do I need? Run the same hand with three levels of equity when called and four fold rates, all on the $40 pot and $30 bet. The table shows EV in dollars.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">EV of a $30 bet into $40, by equity and folds</h3></div>
+  <div data-fig="heat"><script type="application/json">
+  {"label": "EV in dollars of a 30 dollar bet into a 40 dollar pot, for 20, 30, and 40 percent equity when called, and for villain fold rates of 0, 20, 40, and 60 percent. Only the 20 percent equity row loses money, and only at the lowest fold rate.",
+   "corner": "Equity", "tone": "accent2",
+   "cols": ["0% folds", "20%", "40%", "60%"],
+   "rows": ["20% equity", "30% equity", "40% equity"],
+   "values": [[-10, 0, 10, 20], [0, 8, 16, 24], [10, 16, 22, 28]],
+   "cells": [["-$10", "$0", "+$10", "+$20"], ["$0", "+$8", "+$16", "+$24"], ["+$10", "+$16", "+$22", "+$28"]]}
+  </script></div>
+  <p class="figure-note">Arithmetic: fold x $40 + (1 - fold) x (equity x $100 - $30). Equity is raw, with no later betting.</p>
+</figure>
+
+<p>Read the left column first. With 40 percent equity, the bet is worth +$10 even if nobody ever folds, because $30 buys you 40 percent of a $100 pot. With 20 percent you need folds. How many? Solve for zero: the break-even fold rate is the call loss divided by the pot plus that loss. At 20 percent equity the call loses $10, so the fold rate is 10 / (40 + 10) = 20 percent, which matches the table.</p>
+<p>Raw equity assumes you see every card for free. Out of position, or against a player who bets the turn, you will sometimes fold before the river and realize less of it. When you hit and he pays you off, you realize more. Treat the table as a rough guide, not a promise. For the full treatment of when to bluff and how often, see {{ch:18}}. Multiway pots shrink the fold rate fast, which {{ch:27}} covers.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Doyle Brunson might say</p>
+  <p class="said">He would point at the left column and smile. A draw that can bet and win without a fold is a draw that should bet, and the player who only calls gives up the second way to win. He would add that you pick these spots against people who fold.</p>
+  <p class="note">An imagined voice: our reading of the ideas in Super/System (1979), not his words.</p>
+</aside>
+
+<h2>Implied odds: the money behind the hit</h2>
+<p>A set-mining call (a small pocket pair called preflop to flop three of a kind) is a draw with only one out type. Pocket fives have two cards left that make a set, and the chance to hit on the flop is 1 - (47 x 46) / (50 x 49) = 11.76 percent, about 1 time in 8.5, or 7.5 to 1 against. The pot does not pay 7.5 to 1. The rest has to come from your opponent's stack: the implied odds.</p>
+<p>Here is the arithmetic. A cutoff raiser makes it $15, you call on the button with the blinds still in. The pot before your call is $22 plus your $15 makes $37. When you hit, you take the $22 that is already in, plus an extra amount W from the later streets. When you miss, you lose your $15. Set the EV to zero:</p>
+<p class="math">0.1176 x ($22 + W) = 0.8824 x $15, so W = $112.6 - $22 = $90.6</p>
+<p>You need to win about $91 more from him after the flop, every time you hit, to break even. Here is one way an invented hand pays that, and then some.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">A set mine that pays its way</h3></div>
+  <div class="table-scroll">
+    <table class="hand-log">
+      <thead><tr><th>Street</th><th>Board</th><th>Action</th><th>Pot</th></tr></thead>
+      <tbody>
+        <tr><td>Preflop</td><td>Hero: [[5h 5d]]</td><td>Cutoff raises to $15. Hero calls on the button. Blinds fold.</td><td class="pot">$37</td></tr>
+        <tr><td>Flop</td><td>[[5c Kd 8s]]</td><td>Cutoff bets $25. Hero raises to $80. Cutoff calls.</td><td class="pot">$197</td></tr>
+        <tr><td>Turn</td><td>[[5c Kd 8s 2h]]</td><td>Cutoff checks. Hero bets $120. Cutoff calls.</td><td class="pot">$437</td></tr>
+        <tr><td>River</td><td>[[5c Kd 8s 2h 3c]]</td><td>Cutoff checks. Hero bets $150. Cutoff folds.</td><td class="pot">$437</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history. Arithmetic: $37 + $80 + $80 = $197 after the flop, $197 + $120 + $120 = $437 after the turn. Hero put in $215 and wins the $437 pot. Beyond the $22 already in the pot before his call, the extra win is $80 + $120 = $200, against the $91 needed.</p>
+</figure>
+
+<p>The need grows with the price. A bigger raise costs more to call and also needs a bigger payday. The rule that falls out of the arithmetic, when you call a single raise with only the blinds in: the extra money you must win, on top of the pot, is roughly six and a half times your call, minus the blinds. At $15 that is about 6.5 x 15 - 7 = $90.5.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Extra money a set must win, by raise size</h3></div>
+  <div data-fig="columns"><script type="application/json">
+  {"label": "Extra dollars a pocket pair must win after hitting a set, beyond the pot already there, to break even: about 58 dollars when the raise is 10, 91 for 15, 156 for 25, and 253 for 40.",
+   "unit": "$", "xLabel": "Raise to call", "yLabel": "Extra win needed",
+   "categories": ["$10", "$15", "$25", "$40"],
+   "series": [{"name": "Extra win needed", "values": [58.1, 90.6, 155.7, 253.3], "tone": "accent2"}]}
+  </script></div>
+  <p class="figure-note">Arithmetic: W = call x (1 - 0.1176) / 0.1176 - (raise + $7 in blinds). Set chance 11.76 percent. Only the $7 of blinds and the raise are counted as dead money.</p>
+</figure>
+
+<p>These are break-even floors, and the real need is higher. They assume you win every time you flop a set and fold every time you miss. In practice a set sometimes loses (to a bigger set, a straight, or a flush), and some flops pay you nothing. Then ask whether this opponent can pay it. With $500 stacks and a $40 raise, he has $460 left, and $253 of it, more than half, must come to you every time you hit. That is a lot to ask. A common rule of thumb, a baseline and not a calculation, is to set-mine only when the smaller stack holds at least 15 to 20 times your call. At $15 that is $225 to $300, which $500 stacks cover easily. At $40 it is $600 to $800, which they do not. Who the player is matters too: in most low-stakes live games, a loose player who hates to fold top pair pays off sets far more often than a tight one. That last part is a judgment about people, not arithmetic.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Daniel Negreanu might say</p>
+  <p class="said">He would say the math tells you the price and the reads tell you whether the money exists. A call that looks fine on paper needs a player who will actually give you the second half. Before you pay to see a flop, ask who is likely to pay you after it.</p>
+  <p class="note">An imagined voice: our reading of his public teaching on hand reading and small ball, not his words.</p>
+</aside>
+
+<h2>Reverse implied odds: the money behind the miss</h2>
+<p>Implied odds assume you win more when you hit. Reverse implied odds are the mirror: you hit a hand that looks good but is second best, and you lose more than the pot. The classic case is a dominated ace. You hold [[Ah 8d]] on [[As 7c 3d]]. You have top pair, and it feels strong.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Ace-eight on an ace-high flop</h3></div>
+  <div data-fig="bars"><script type="application/json">
+  {"label": "Equity of ace-eight on a board of ace, seven, three against five opposing hands: 12.7 percent against ace-king, 13.9 against ace-queen, 17.6 against ace-nine, 78.9 against ace-five, and 1.6 against a set of sevens.",
+   "unit": "%", "max": 100,
+   "items": [
+     {"label": "Against AKo", "value": 12.7, "note": "kicker beats you", "tone": "accent"},
+     {"label": "Against AQo", "value": 13.9, "tone": "accent"},
+     {"label": "Against A9o", "value": 17.6, "tone": "accent"},
+     {"label": "Against A5o", "value": 78.9, "note": "you dominate", "tone": "accent2"},
+     {"label": "Against 77", "value": 1.6, "note": "a set", "tone": "accent"}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact, from tools/poker.js, one hand at a time on the flop As 7c 3d with Ah 8d.</p>
+</figure>
+
+<p>Only one of those five hands is worse than yours, and it is the one least willing to put in much money: a weak ace calls a street or two, then slows down. The hands happy to call three streets, or to raise, are mostly the ones that beat you. Against all five at once, counted equally by combo, the 27 combos that remain give you 27.54 percent, from tools/poker.js.</p>
+
+<div class="compare">
+  <div class="a"><h4>Reverse implied</h4><p>Ahead: you win about $45, because worse hands fold early. Behind: you lose about $120 over three streets. You need to be ahead 72.7 percent of the time to break even: 120 / (120 + 45).</p></div>
+  <div class="b"><h4>Implied</h4><p>Missing costs you a small, fixed call. Hitting wins a pot plus a large part of his stack. A small price buys a large, hidden payout.</p></div>
+</div>
+<p>The figures above are invented, but the shape is real: with a dominated hand, your wins are small and your losses are big. The fix is pot control. Check back, call one street, and do not build a pot you cannot win. The same logic is why the nut flush draw in the first section is worth more than a low one: when a low flush gets there, it can still lose a big pot to a higher flush.</p>
+
+<h2>Working backward from a bet</h2>
+<p>Everything so far starts with your hand. Now start with his bet. A bet is evidence about a range, and you can read the range the bet needs. The price of a call is the share of bluffs his betting range must hold for you to break even. The formula is the one from {{ch:5}}: bet / (pot + 2 x bet), applied to the other side of the table.</p>
+<p>An example. It is the river on [[Ks 9h 4c 2d 3s]]. The pot is $100, you hold [[Kd Jc]], and the player in the big blind bets $100. You must beat 33.3 percent of his bets to break even, because $100 / $300 = 33.3 percent. In combos (the number of specific two-card hands, see {{ch:14}}), that means one bluff for every two value hands.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">A pot-size bet on the river</h3></div>
+  <div data-fig="table"><script type="application/json">
+  {"label": "Nine-handed table, river. Hero on the button holds king-jack with a pot of 100 dollars. The big blind bets 100. Everyone else has folded. Board: king of spades, nine of hearts, four of clubs, two of diamonds, three of spades.",
+   "button": 0, "pot": "$100", "board": "Ks 9h 4c 2d 3s",
+   "seats": [
+     {"pos": "BTN", "stack": "$450", "cards": "Kd Jc", "state": "hero"},
+     {"pos": "SB", "state": "fold"},
+     {"pos": "BB", "stack": "$350", "bet": "$100", "state": "villain"},
+     {"pos": "UTG", "state": "fold"},
+     {"pos": "UTG+1", "state": "fold"},
+     {"pos": "MP", "state": "fold"},
+     {"pos": "LJ", "state": "fold"},
+     {"pos": "HJ", "state": "fold"},
+     {"pos": "CO", "state": "fold"}
+   ]}
+  </script></div>
+  <p class="figure-note">An example hand in a $2/$5 game with $500 stacks. Not a real hand history. Stacks are what each player has behind.</p>
+</figure>
+
+<p>Now count. Suppose he bets this river with 9 combos that beat you (sets, two pair, and better kings) and with 4 combos of missed draws, such as QT and JT. That is 4 bluffs in 13 bets, or 30.8 percent. You need 33.3 percent, so a call is a small loser:</p>
+<p class="math">EV = (4 x $200 - 9 x $100) / 13 = ($800 - $900) / 13 = -$7.69</p>
+<p>The combo counts here are an assumption for the example. Add one more bluff and the call flips to a win: (5 x $200 - 9 x $100) / 14 = +$7.14, which is why reads matter more than the formula. The steps are always the same.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Backward from the bet</h3></div>
+  <ol class="flow">
+    <li><strong>Price the bet</strong><span>Bet / (pot + 2 x bet) is the bluff share he needs.</span></li>
+    <li><strong>Count value</strong><span>Hands that beat you, in combos.</span></li>
+    <li><strong>Count bluffs</strong><span>Hands he would bet that you beat.</span></li>
+    <li><strong>Compare</strong><span>Call if the bluff share clears the price.</span></li>
+  </ol>
+  <p class="figure-note">A summary of this section.</p>
+</figure>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Bluff share a call needs, by bet size</h3></div>
+  <div data-fig="line"><script type="application/json">
+  {"label": "Share of his betting range that must be bluffs for a call to break even, as the bet grows from a quarter of the pot to twice the pot: from 17 percent up to 40 percent.",
+   "xLabel": "Bet as a share of the pot", "xUnit": "x", "yUnit": "%", "yMin": 0, "yMax": 50,
+   "series": [
+     {"name": "Bluff share needed", "tone": "ink", "points": [[0.25, 16.7], [0.5, 25], [0.75, 30], [1, 33.3], [1.5, 37.5], [2, 40]]}
+   ],
+   "refs": [{"y": 33.3, "label": "Pot bet: 1 bluff per 2 value"}]}
+  </script></div>
+  <p class="figure-note">Arithmetic: bet / (pot + 2 x bet). Half pot gives 25 percent, or 1 bluff per 3 value hands.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Phil Galfond might say</p>
+  <p class="said">He would teach the shortcut first and the check second. The bluff share is a good map, but the map is only as good as the counts you put in it. Practice the counting away from the table until the numbers are fast, then take them to a real opponent.</p>
+  <p class="note">An imagined voice: our reading of his approach as a teacher at Run It Once, not his words.</p>
+</aside>
+
+<h2>Drills and the five-second kit</h2>
+<p>Do these with a pen, then with your head. Answers are folded away.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Numbers to carry</h3></div>
+  <ul class="stats">
+    <li><b>11.8%</b><span>to flop a set with a pocket pair</span></li>
+    <li><b>6.5x</b><span>your call, minus $7: what a set must win</span></li>
+    <li><b>1 in 3</b><span>bets must be bluffs to call a pot bet</span></li>
+  </ul>
+  <p class="figure-note">Arithmetic: 1 - (47 x 46) / (50 x 49) = 11.76%. Extra win = 7.5 x call - (raise + 7). Pot bet: 100 / 300 = 33%.</p>
+</figure>
+
+<details class="drill">
+  <summary>Turn, pot $60. You hold a flush draw (9 outs) and bet $45. He folds 30 percent of the time. If called, you have about 20 percent equity with one card to come. What is the EV?</summary>
+  <p>Call part: 0.20 x ($60 + $90) - $45 = $30 - $45 = -$15. Total: 0.30 x $60 + 0.70 x (-$15) = $18 - $10.50 = +$7.50. With 9 clean outs the exact equity is 9 / 46 = 19.57 percent (tools/poker.js), so the exact answer is +$7.04. The bet works because of the folds, and the draw cuts the loss when he calls.</p>
+</details>
+<details class="drill">
+  <summary>Same bet. How often must he fold for the bet to break even?</summary>
+  <p>The call loses $15. Break-even fold = 15 / (60 + 15) = 20 percent. With no draw at all, the pure bluff needs 45 / (60 + 45) = 42.9 percent.</p>
+</details>
+<details class="drill">
+  <summary>You hold a pocket pair on the button. A player raises to $25 and the blinds are $7. How much extra must a set win to justify a call?</summary>
+  <p>About 6.5 x 25 - 7 = $155. Exact: $25 x 0.8824 / 0.1176 = $187.7, minus the $32 already in the pot, is $155.7.</p>
+</details>
+<details class="drill">
+  <summary>The pot is $60 on the river and he bets $60. His range has 6 value combos and 2 bluff combos. Call with a bluff-catcher?</summary>
+  <p>Bluff share = 2 / 8 = 25 percent. The price is 33.3 percent. EV = 0.25 x $120 - 0.75 x $60 = $30 - $45 = -$15. Fold, unless you know he bluffs more than this.</p>
+</details>
+<details class="drill">
+  <summary>The pot is $100 and he bets $50. He has 12 value combos. How many bluff combos make a call break even?</summary>
+  <p>Half pot: 50 / 200 = 25 percent bluffs, which is 1 bluff for every 3 value combos. 12 / 3 = 4 bluff combos.</p>
+</details>
+<details class="drill">
+  <summary>A dominated hand wins $45 when ahead and loses $120 when behind. How often must it be ahead to break even?</summary>
+  <p>120 / (120 + 45) = 72.7 percent. That is why you do not play it for stacks.</p>
+</details>
+
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>Would I call a pot-size bet here</h2>
+  <p><strong>The shortcut.</strong> A pot-size bet gives you 2 to 1, so you need to win one time in three. On the river, that means one bluff for every two value hands. Count what beats you, halve it, and ask whether he bets at least that many hands you beat. With cards to come, the same one in three is the equity your hand needs against his betting range.</p>
+  <p class="math">9 value combos, halved = 4.5 bluffs needed. He has 4. Fold, by a hair (EV -$7.69 per $100 call).</p>
+  <p><strong>Where it bends.</strong> Bet half pot and you need 1 bluff per 3 value. Bet twice the pot and you need 2 bluffs per 3 value hands. The counts are guesses: blockers (cards in your hand that remove his combos) change them, and in most low-stakes live games players bluff the river less than the math allows, so lean toward folding when the count is close.</p>
+</aside>
