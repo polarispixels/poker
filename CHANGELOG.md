@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.25.0] - 2026-11-21
+
+### Added
+
+- Chapter 38, The Lifelong Student: Chapter 38 gives a weekly study loop, a live hand rebuilt from notes with implied-odds math, a leak-ranking method, and how many hands it takes for results to mean anything.
+
 ## [0.24.0] - 2026-11-21
 
 ### Added

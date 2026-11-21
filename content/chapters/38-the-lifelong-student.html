@@ -1,0 +1,224 @@
+<p class="lead">Poker rewards the player who keeps learning, and the game never stops changing. This chapter gives you a study loop you can run in an hour a week, a way to review live hands from notes, a method for finding your own leaks, and the arithmetic of how little your results can tell you.</p>
+
+<h2>A study system, not a study mood</h2>
+
+<p>Most players study when they feel like it. They watch a video after a bad night and forget it by Thursday. A system replaces mood with a loop: play, capture, review, drill, change one thing, and play again. The loop matters more than any single hour of it.</p>
+
+<p>Live play makes the loop harder than online play. Nobody hands you a hand history. You see about 25 to 30 hands an hour (a rough figure for a full nine-handed table; yours will differ), and most of them fold preflop. So you capture only the few hands where a real decision was close, and you do it in short notes, not in a spreadsheet at the table.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">The study loop</h3></div>
+  <ol class="flow">
+    <li><strong>Capture</strong><span>Jot two or three close hands during a break.</span></li>
+    <li><strong>Review</strong><span>Rebuild each hand from the notes, with numbers.</span></li>
+    <li><strong>Name the leak</strong><span>One sentence: what I do, and when.</span></li>
+    <li><strong>Drill</strong><span>Ten minutes on that one spot.</span></li>
+    <li><strong>Test</strong><span>Watch for the spot next session.</span></li>
+  </ol>
+  <p class="figure-note">A summary of this section. The loop is a process, not a result.</p>
+</figure>
+
+<p>The first rule of review is to judge the decision, not the outcome. You met this in {{ch:7}}: a good decision can lose, and a bad one can win. If you review only the hands you lost, you will punish good plays. Review the hands you were unsure about, win or lose.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Two ways to review a session</h3></div>
+  <div class="compare">
+    <div class="a"><h4>Results review</h4><p>Which hands lost money? Who got lucky? It feels useful and teaches almost nothing, because one hand is mostly luck.</p></div>
+    <div class="b"><h4>Process review</h4><p>Which decisions were close? What did I assume about the villain? What does the math say? It is slower and it is the only kind that compounds.</p></div>
+  </div>
+  <p class="figure-note">A summary of this section.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Justin Bonomo might say</p>
+  <p class="said">He would want the plan written down and the review honest. A study schedule you keep for a year beats a burst of enthusiasm for a week, and the hands you would rather not look at are the ones to look at first.</p>
+  <p class="note">An imagined voice: our reading of his public reputation for self-directed study, not his words.</p>
+</aside>
+
+<h2>Reviewing a live hand from notes</h2>
+
+<p>At the table you cannot record a hand, but you can keep a few facts: positions, stacks, bet sizes, the board, and what you thought the villain held. Write them in the order they happened. Later, rebuild the pot street by street. Money that does not add up means a note is missing, and that is itself a lesson.</p>
+
+<p>Here is an invented example hand in a $2/$5 game with $500 stacks. You are on the button with [[Ah 9h]]. The cutoff raises to $15 and you call. The blinds fold. The pot is $15 + $15 + $2 + $5 = $37.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">A hand rebuilt from notes</h3></div>
+  <div class="table-scroll">
+    <table class="hand-log">
+      <thead><tr><th>Street</th><th>Board</th><th>Action</th><th>Pot</th></tr></thead>
+      <tbody>
+        <tr><td>Preflop</td><td>Hero: [[Ah 9h]]</td><td>Cutoff raises to $15. Hero calls on the button.</td><td class="pot">$37</td></tr>
+        <tr><td>Flop</td><td>[[Kh 8h 3c]]</td><td>Cutoff bets $20. Hero calls with a flush draw.</td><td class="pot">$77</td></tr>
+        <tr><td>Turn</td><td>[[Kh 8h 3c 2s]]</td><td>Cutoff bets $60. Hero needs 60 / (77 + 60 + 60) = 30.5% and calls.</td><td class="pot">$197</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">An example hand, not a real hand history. Pot after the turn: 77 + 60 + 60 = 197. Price from tools/poker.js: 60 / 197 = 30.46%.</p>
+</figure>
+
+<p>Now the review. Your note says you called because you had the nut flush draw. That is a reason, not a number. The draw has nine outs, so the exact chance to hit on the river is 9 / 46 = 19.6% ({{ch:5}}). But a pair or better also beats you sometimes, so use a range. Suppose the cutoff holds top pair, a set, aces, or a big pair below the king that keeps betting: KQ, KJ, KT, AK, 88, 33, 22, AA, QQ, JJ. That range is an assumption for the example. Against those 69 combinations, your equity on the turn is 24.1% (exact, from tools/poker.js). The price is 30.5%.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Your chance against the price</h3></div>
+  <div data-fig="bars"><script type="application/json">
+  {"label": "On the turn, the hand has 24.1 percent equity against the assumed range, but the call needs 30.5 percent, so the call falls short before implied odds.",
+   "unit": "%", "max": 40,
+   "items": [
+     {"label": "Equity needed to call", "value": 30.5, "note": "the price", "tone": "accent"},
+     {"label": "Equity of the hand", "value": 24.1, "note": "vs 69 combos", "tone": "ink"},
+     {"label": "Flush only, one card", "value": 19.6, "note": "9 of 46", "tone": "muted"}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact, from tools/poker.js. The villain range is an assumption for the example.</p>
+</figure>
+
+<p>The call is short by 6.4 points, so it needs implied odds: money you win later when you hit. How much? Let W be the extra you win on the river. When you win, you take the $137 already in the pot (the cutoff's bet included) plus W; when you lose, you lose your $60. Break-even is 0.241 x (137 + W) = 0.759 x 60, so 137 + W = 45.5 / 0.241 = 188.9, and W is about $52. The cutoff has about $405 left, so a $52 river payment is plausible against a player who pays off. Against a player who folds to a flush, it is not. So the review does not say you erred. It says the call depends on one fact about the villain. That is a note worth writing: "Does this player pay off a third flush card?" Next time, you will watch for it ({{ch:19}}).</p>
+
+<details class="drill">
+  <summary>Same spot, but the villain bets $30 on the turn into the $77 pot. What equity do you need?</summary>
+  <p>30 / (77 + 30 + 30) = 30 / 137 = 21.9% (tools/poker.js). Your equity against the assumed range is still 24.1%, so the call pays on direct odds alone. Even the flush alone, at 19.6%, is only 2.3 points short, and a small river payment covers that.</p>
+</details>
+
+<h2>Finding your own leaks</h2>
+
+<p>A leak is a habit that costs you money in a repeatable spot. It is not a single bad beat or a single mistake. To find one, look for patterns across several reviewed hands: the same street, the same position, the same kind of villain. One hand is a story. The same mistake in three reviewed hands is a leak candidate.</p>
+
+<p>Rank your candidates by two things: how often the spot comes up, and how much it costs each time. A rare, expensive mistake and a common, small one can cost about the same over a year. The ones that are both common and costly come first.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Which leak to fix first</h3></div>
+  <div data-fig="scatter"><script type="application/json">
+  {"label": "Four sample leaks placed by how often the spot comes up and how much each mistake costs. Calling too wide preflop is common and costly, so it comes first.",
+   "x": {"label": "How often it comes up", "low": "Rare", "high": "Common"},
+   "y": {"label": "Cost each time", "high": "Costly"},
+   "quadrants": ["Rare and costly", "Fix first", "Ignore for now", "Small but constant"],
+   "points": [
+     {"label": "Calling raises too wide", "x": 84, "y": 72, "tone": "accent"},
+     {"label": "Paying off river bets", "x": 60, "y": 58, "tone": "gold"},
+     {"label": "Big bluff, wrong spot", "x": 14, "y": 84, "tone": "muted"},
+     {"label": "Tiny bet sizing slip", "x": 76, "y": 16, "tone": "muted"}
+   ]}
+  </script></div>
+  <p class="figure-note">An illustration with invented leaks. Positions are examples, not measurements. Your own list goes here.</p>
+</figure>
+
+<p>Keep a leak log. One line per leak, one change to try, and a test you can check in the next session. Make the change small enough that you can tell whether you did it.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">A leak log, with the test</h3></div>
+  <div class="table-scroll">
+    <table class="wrap">
+      <thead><tr><th>Leak</th><th>The change</th><th>The test next session</th></tr></thead>
+      <tbody>
+        <tr><td>I call raises with weak offsuit hands out of position.</td><td>Fold them from the blinds unless the price is good.</td><td>Count the weak hands I folded.</td></tr>
+        <tr><td>I pay off river bets with one pair.</td><td>Before calling, name three worse hands that bet.</td><td>Did I name three, or only wish?</td></tr>
+        <tr><td>I never note my read of the villain.</td><td>Write a one-word read on every close hand.</td><td>Count the hands with a read.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">An example of the format. The leaks are invented.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Daniel Negreanu might say</p>
+  <p class="said">He would say the leak you find at the table by feel is real, and so is the one a solver shows you. His own game improved when he added solver study to a style built on reading people. Do not drop either source, and let each one check the other.</p>
+  <p class="note">An imagined voice: our reading of his public account of rebuilding his game around solver study, not his words.</p>
+</aside>
+
+<p>Be careful with leaks you cannot see. We tend to find the leaks that feel bad, such as the hero call that failed, and miss the ones that feel fine, such as folding too much in the blinds. A friend, a coach, or a study group sees what you will not. The solver chapter ({{ch:37}}) shows how to check a spot against theory.</p>
+
+<h2>What your results can and cannot tell you</h2>
+
+<p>Your results are a poor teacher. Poker has so much luck that a profitable player can lose for a long time, and a losing player can win for a long time. Before you believe a result, put a number on its noise.</p>
+
+<p>The noise is the <strong>standard error</strong> of your win rate. Let SD be the standard deviation of a hundred-hand block, the typical swing of one block around your average. After n hands you have n / 100 blocks. The standard error is:</p>
+
+<p class="math">Standard error = SD / sqrt(n / 100)</p>
+
+<p>Assume SD = 100 BB per 100 hands. This is an invented round number for a loose live game, not a measured figure. It matches the 50 BB per hour that {{ch:10}} assumed: at 25 hands an hour, 50 x sqrt(100 / 25) = 100. At $2/$5, 1 BB is $5. After 10,000 hands, n / 100 = 100, sqrt(100) = 10, and the standard error is 100 / 10 = 10 BB per 100. A rough 95% range around your measured win rate is plus or minus 1.96 x 10 = 19.6 BB per 100.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">10,000 hands in three numbers</h3></div>
+  <ul class="stats">
+    <li><b>10</b><span>BB per 100: standard error</span></li>
+    <li><b>19.6</b><span>BB per 100: the 95% margin</span></li>
+    <li><b>400</b><span>hours at 25 hands an hour</span></li>
+  </ul>
+  <p class="figure-note">Arithmetic: 100 / sqrt(100) = 10. 1.96 x 10 = 19.6. 10,000 / 25 = 400. SD of 100 BB per 100 is an assumption.</p>
+</figure>
+
+<p>Read that again. After 400 hours, a winning player's measured rate is only known to within about 20 BB per 100. A true winner of 5 BB per 100 (1.25 BB, or $6.25, an hour at 25 hands an hour) could easily show a loss. How easily? The measured rate is roughly bell-shaped around the true one, with the standard error as its spread. The chance of a measured loss is the chance of landing more than 5 / 10 = 0.5 standard errors below the mean, which is 30.9%.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">100 true winners, 10,000 hands each</h3></div>
+  <div data-fig="dots"><script type="application/json">
+  {"label": "Of 100 players whose true win rate is plus 5 BB per 100, about 69 show a profit after 10,000 hands and about 31 show a loss.",
+   "parts": [
+     {"label": "Shows a profit", "value": 69, "tone": "accent2"},
+     {"label": "Shows a loss", "value": 31, "tone": "accent"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: z = 5 / 10 = 0.5, and the normal chance below minus 0.5 is 30.9%. Assumes SD of 100 BB per 100 and a normal spread.</p>
+</figure>
+
+<p>The margin shrinks slowly, with the square root of the hands. To halve it, you need four times the hands.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">How the margin shrinks with hands</h3></div>
+  <div data-fig="line"><script type="application/json">
+  {"label": "The 95 percent margin on a win rate falls from 62 BB per 100 at 1,000 hands to 4.4 at 200,000 hands, and crosses the 5 BB line near 154,000 hands.",
+   "xLabel": "Hands played, in thousands", "xUnit": "k", "yUnit": " BB", "yMin": 0, "yMax": 65,
+   "series": [
+     {"name": "95% margin, BB per 100", "tone": "ink", "points": [[1, 62.0], [5, 27.7], [10, 19.6], [30, 11.3], [50, 8.8], [100, 6.2], [153.7, 5.0], [200, 4.4]]}
+   ],
+   "refs": [{"y": 5, "label": "A 5 BB win rate"}],
+   "marks": [{"x": 10, "y": 19.6, "label": "10k hands: 19.6"}]}
+  </script></div>
+  <p class="figure-note">Arithmetic: margin = 1.96 x 100 / sqrt(n / 100). SD of 100 BB per 100 is an assumption.</p>
+</figure>
+
+<p>So what do you do with a number like that? Use it to stay calm and to keep your attention on the process ({{ch:35}}). Do not use your results to decide that your play is good or bad. Use the quality of your decisions, which you can review today, and treat the results as a slow check that arrives years later. The bankroll side of this is in {{ch:10}} and {{ch:36}}.</p>
+
+<h2>Coaches, groups, and a game that moves</h2>
+
+<p>A coach or a study partner does one thing you cannot do alone: they see your blind spots. Bring them specific hands with your notes, your read, and your math. A good session is an hour on three hands, not a tour of the night. A strong player will tell you what they would do, but you still need to understand why, or you have only swapped one habit for another.</p>
+
+<p>When you coach someone else, you learn the same way. Explaining why a fold is right forces you to rebuild the numbers. If you cannot explain it plainly, you do not own it yet.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Phil Galfond might say</p>
+  <p class="said">He would sort lessons by order. A new idea sticks when it sits on a simpler one you already hold, so review your basics before you chase an advanced line, and teach what you learn to a friend soon after.</p>
+  <p class="note">An imagined voice: our reading of his teaching approach at Run It Once, not his words.</p>
+</aside>
+
+<p>The game also moves. Your $2/$5 game this year is not the one next year. Players read the same videos, a new strategy spreads, and a regular who once overfolded learns to stop. A leak you fixed may become an exploit someone uses on you. Keep your study on two tracks: a baseline you can trust ({{ch:22}}), and a habit of watching how this table plays now ({{ch:24}}, {{ch:25}}).</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">A rhythm of review</h3></div>
+  <ol class="timeline">
+    <li><b>After a session</b><span>Write down the close hands while you remember them.</span></li>
+    <li><b>Weekly</b><span>Rebuild three hands with numbers. Update the leak log.</span></li>
+    <li><b>Monthly</b><span>Check the leak log. Did the test pass? Pick one new leak.</span></li>
+    <li><b>Each season</b><span>Read one book from {{ch:E}} and ask what the table has changed.</span></li>
+  </ol>
+  <p class="figure-note">A suggested schedule. Adjust it to how much you play.</p>
+</figure>
+
+<details class="drill">
+  <summary>You review five hands and find the same loose river call in three of them. Is that a leak?</summary>
+  <p>It is a candidate. Three of five is a pattern, but five hands is a small sample, and each call may have had its own reason. Write it in the leak log, set a test for next session, and watch whether it repeats before you change much.</p>
+</details>
+
+<details class="drill">
+  <summary>Why can a player with a 5 BB per 100 win rate still be down after 10,000 hands?</summary>
+  <p>The standard error is 100 / sqrt(100) = 10 BB per 100. A true 5 is only 0.5 standard errors above zero, so a measured loss happens about 31% of the time.</p>
+</details>
+
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>How many hands before your results mean anything</h2>
+  <p><strong>The shortcut.</strong> Round 1.96 up to 2. The hands you need to pin down your win rate to within a margin M (in BB per 100) are 100 x (2 x SD / M) squared.</p>
+  <p class="math">SD 100, margin 5: (2 x 100 / 5)^2 = 40^2 = 1,600 blocks = 160,000 hands (exact: 153,664)</p>
+  <p>At 25 hands an hour, 160,000 hands is 6,400 hours. Halve the margin and you need four times the hands.</p>
+  <p><strong>Where it bends.</strong> The answer depends on your SD, which you do not know. At SD 80 the exact count is 98,345 hands; at SD 120 it is 221,276. A fifth off the SD moves the answer by a third or more. It also assumes the spread is bell-shaped and your game does not change, and a game that moves breaks that. Treat it as a reason for patience, not a measure of skill.</p>
+</aside>
