@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.13.0] - 2026-11-21
+
+### Added
+
+- Chapter 13, Thinking in Ranges: Chapter 13 teaches ranges through one UTG example: building and counting a range, card removal, equity against strong, medium, and air piles, and narrowing by a flop bet.
+
 ## [0.12.0] - 2026-11-21
 
 ### Added

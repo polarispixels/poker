@@ -22,13 +22,243 @@
     <main>
       <article class="chapter">
         <header class="chapter-head">
-          <p class="chapter-kicker label">Chapter 13 <span class="badge">To come</span></p>
+          <p class="chapter-kicker label">Chapter 13 <span class="badge">Preliminary draft</span></p>
           <h1 class="chapter-title">Thinking in Ranges</h1>
           <p class="standfirst">From what hand does he have to what hands could he have.</p>
         </header>
 
         <div class="prose chapter-body">
-<p class="lead">This page has not been written yet. The book is being written and published one chapter at a time.</p>
+<p class="lead">A strong player stops asking what hand the opponent has and starts asking what hands he could have. This chapter shows how to build that list, count it, and shrink it as the hand goes on.</p>
+
+<h2>From a hand to a range</h2>
+
+<p>Early in your poker life you try to guess. The man in seat three raises, and you decide he has <span class="cards" role="img" aria-label="Ace of clubs, King of clubs"><span class="pc">A<i>♣</i></span><span class="pc">K<i>♣</i></span></span>. Then the flop comes and you act as if you are sure. You will be wrong most of the time, because a single guess is almost never right. There are 1,326 two-card hands in the deck, and any one of them is a long shot.</p>
+
+<p>A <strong>range</strong> is the whole set of hands a player could hold in a spot, given how he has played so far. You do not need to pick one. You need to know what the set looks like and how your own hand fares against it. The question changes from "what does he have?" to "what could he have, and how do I do against all of it?"</p>
+
+<p>This is the book's thesis in small. GTO play is built on ranges, and exploitation is the art of reading which hands a real person leaves in or takes out. You read people and you respect the numbers, and a range is where the two meet.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 13.1</span><h3 class="figure-title">Two ways to think about one opponent</h3></div>
+  <div class="compare">
+    <div class="a"><h4>One hand</h4><p>He has <span class="cards" role="img" aria-label="Ace of clubs, King of clubs"><span class="pc">A<i>♣</i></span><span class="pc">K<i>♣</i></span></span>. You act as if that is certain. When he turns over <span class="cards" role="img" aria-label="Jack of hearts, Jack of diamonds"><span class="pc r">J<i>♥</i></span><span class="pc r">J<i>♦</i></span></span> you were not unlucky, you were wrong.</p></div>
+    <div class="b"><h4>A range</h4><p>He could have any of 104 combinations: pairs, big aces, and <span class="cards" role="img" aria-label="King of spades, Queen of spades"><span class="pc">K<i>♠</i></span><span class="pc">Q<i>♠</i></span></span>. You ask how your hand does against the whole group and what each bet takes out of it.</p></div>
+  </div>
+  <p class="figure-note">The 104 comes from the example range built in the next section. Count from tools/poker.js.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What David Sklansky might say</p>
+  <p class="said">He would tie ranges to his Fundamental Theorem: you gain when an opponent plays differently than he would if he could see your cards, and you lose when you do the same. You never see his cards, so the next best thing is to know the group they come from, play well against that whole group, and be honest about how wide it is.</p>
+  <p class="note">An imagined voice: our reading of the Fundamental Theorem in The Theory of Poker, not his words.</p>
+</aside>
+
+<h2>Building a range</h2>
+
+<p>You build a range from three pieces of information: where he sits, what he did, and what you know about him. Start with his seat and his action. A raise from under the gun (UTG), the first seat to act, comes from a tighter set of hands than a raise from the button, because eight players still have to act behind him. <a class="xref" href="03-position.html">Chapter 3, Position</a> covers why, and <a class="xref" href="12-preflop-strategy-for-live-games.html">Chapter 12, Preflop Strategy for Live Games</a> gives opening ranges seat by seat. The charts in <a class="xref" href="c-preflop-range-charts.html">Appendix C, Preflop Range Charts</a> list them in full.</p>
+
+<p>Here is our running example, a live $2/$5 game, nine-handed, $500 stacks. A solid, fairly tight player opens from UTG to $15. We will give him this range: every pair from sevens up, the suited ace-ten or better, ace-king through ace-jack offsuit, and king-queen suited. In range notation that is 77+, ATs+, KQs, AJo+. The grid shows it.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 13.2</span><h3 class="figure-title">The UTG opening range for our example</h3></div>
+  <div data-fig="range"><script type="application/json">
+  {"label": "The starting hand grid with the example UTG range shaded: pairs from seven-seven up, suited hands from ace-ten and king-queen, and offsuit ace-jack or better.",
+   "groups": [
+     {"name": "Pairs", "tone": "ink", "hands": "77+"},
+     {"name": "Suited", "tone": "accent2", "hands": "ATs+,KQs"},
+     {"name": "Offsuit", "tone": "gold", "hands": "AJo+"}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact counts from tools/poker.js: 104 of 1,326 combinations, 7.84 percent of all hands. The range is an assumption for the example, not a published chart.</p>
+</figure>
+
+<p>Notice what the range is not. It is not "good hands." It is a specific list, and you can count it. That list has a width, and width matters because it sets how often you are ahead. Compare four example openers, from a very tight one to a very wide one.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 13.3</span><h3 class="figure-title">How wide is the range?</h3></div>
+  <div data-fig="bars"><script type="application/json">
+  {"label": "Share of all starting hands in four ranges: 3.8 percent for the tightest, 7.8 percent for our UTG example, 17.0 percent for a wide opener, and 24.3 percent for a very wide one.",
+   "unit": "%", "max": 30,
+   "items": [
+     {"label": "Very tight", "value": 3.8, "note": "50 combos: TT+, AQs+, AKo", "tone": "muted"},
+     {"label": "Our UTG range", "value": 7.8, "note": "104 combos", "tone": "ink"},
+     {"label": "Wide", "value": 17.0, "note": "226 combos", "tone": "accent2"},
+     {"label": "Very wide", "value": 24.3, "note": "322 combos", "tone": "gold"}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact counts from tools/poker.js. Wide: 22+, A2s+, KTs+, QTs+, JTs, T9s, ATo+, KJo+. Very wide: 22+, A2s+, K9s+, Q9s+, J9s+, T9s, 98s, 87s, 76s, A8o+, KTo+, QTo+, JTo.</p>
+</figure>
+
+<p>The third piece is you. Your own read can move a hand in or out. In most low-stakes live games, a player who limps and then re-raises is telling you more than the chart can: in our judgment that line leans hard toward big pairs. A long pause before a raise is a clue too, but a weaker one, and it means different things from different people. Some players never 3-bet without a premium hand. Others open much wider than any chart. Start with the position range, then edit it for the person in front of you.</p>
+
+<p>One more habit: a range has weights. If a player raises ace-queen offsuit from UTG only some of the time, those twelve combinations count for less than twelve. For now, treat every hand in a range as an equal member. <a class="xref" href="14-combinatorics.html">Chapter 14, Combinatorics</a> and <a class="xref" href="19-hand-reading.html">Chapter 19, Hand Reading</a> add the weighting later.</p>
+
+<h2>What your cards take away</h2>
+
+<p>Your own hand is information. You hold two cards, so those cards are not in his hand. This is called card removal, and it changes the count. <a class="xref" href="14-combinatorics.html">Chapter 14, Combinatorics</a> treats it fully. Here we only need the idea.</p>
+
+<p>Say you are on the button with <span class="cards" role="img" aria-label="Ace of hearts, Queen of hearts"><span class="pc r">A<i>♥</i></span><span class="pc r">Q<i>♥</i></span></span>, and everyone folds to you after the UTG raise. Your hand removes cards, and the table shows how much. A pair of aces has six combinations in the deck. With one ace in your hand, only three are left. Ace-king offsuit drops from twelve to nine, and ace-queen offsuit from twelve to six, because you hold both an ace and a queen.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table 13.1</span><h3 class="figure-title">His 104 combinations, after your cards and the flop</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Hand type</th><th>Opening range</th><th>After your <span class="cards" role="img" aria-label="Ace of hearts, Queen of hearts"><span class="pc r">A<i>♥</i></span><span class="pc r">Q<i>♥</i></span></span></th><th>After flop <span class="cards" role="img" aria-label="King of spades, 7 of diamonds, 2 of clubs"><span class="pc">K<i>♠</i></span><span class="pc r">7<i>♦</i></span><span class="pc">2<i>♣</i></span></span></th></tr></thead>
+      <tbody>
+        <tr><td>77</td><td>6</td><td>6</td><td>3</td></tr>
+        <tr><td>88 to JJ</td><td>24</td><td>24</td><td>24</td></tr>
+        <tr><td>QQ</td><td>6</td><td>3</td><td>3</td></tr>
+        <tr><td>KK</td><td>6</td><td>6</td><td>3</td></tr>
+        <tr><td>AA</td><td>6</td><td>3</td><td>3</td></tr>
+        <tr><td>AKs, AKo</td><td>16</td><td>12</td><td>9</td></tr>
+        <tr><td>AQs, AQo</td><td>16</td><td>9</td><td>9</td></tr>
+        <tr><td>AJs, AJo, ATs, KQs</td><td>24</td><td>18</td><td>17</td></tr>
+        <tr class="total"><td>Total</td><td>104</td><td>81</td><td>71</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Exact counts from tools/poker.js, checked by hand against the card removal. The flop is an example, not a real hand history.</p>
+</figure>
+
+<p>Twenty-three combinations vanished the moment you looked at your cards, and the flop took ten more. None of them was a guess. This is the first form of narrowing. It costs nothing and uses only the cards you can see: your two, and later the board.</p>
+
+<h2>Your hand against his range</h2>
+
+<p>Now ask the useful question: how does my hand do against all of that? You do not run the number at the table. You study it here, so the picture is in your head when you sit down.</p>
+
+<p>Preflop, against our 104-combination UTG range, here is how six hands do. Pocket aces are far ahead. Pocket jacks look strong but are only a modest favorite, because the range holds every bigger pair, which crushes them, and ace-king, which is close to a coin flip against them. And <span class="cards" role="img" aria-label="Ace of hearts, Queen of hearts"><span class="pc r">A<i>♥</i></span><span class="pc r">Q<i>♥</i></span></span>, the hand we hold in our example, is a slight underdog. Many players overrate it because the ace looks big.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 13.4</span><h3 class="figure-title">Six hands against the UTG range</h3></div>
+  <div data-fig="bars"><script type="application/json">
+  {"label": "All-in equity against the example UTG range before the flop: aces 84 percent, jacks 57, ace-king suited 55, ace-queen suited 48, fives 37, queen-jack suited 35.",
+   "unit": "%", "max": 100,
+   "items": [
+     {"label": "<span class="cards" role="img" aria-label="Ace of spades, Ace of diamonds"><span class="pc">A<i>♠</i></span><span class="pc r">A<i>♦</i></span></span>", "value": 84.3, "tone": "accent2"},
+     {"label": "<span class="cards" role="img" aria-label="Jack of spades, Jack of diamonds"><span class="pc">J<i>♠</i></span><span class="pc r">J<i>♦</i></span></span>", "value": 56.7, "tone": "ink"},
+     {"label": "<span class="cards" role="img" aria-label="Ace of spades, King of spades"><span class="pc">A<i>♠</i></span><span class="pc">K<i>♠</i></span></span>", "value": 55.5, "tone": "ink"},
+     {"label": "<span class="cards" role="img" aria-label="Ace of hearts, Queen of hearts"><span class="pc r">A<i>♥</i></span><span class="pc r">Q<i>♥</i></span></span>", "value": 47.8, "tone": "gold"},
+     {"label": "<span class="cards" role="img" aria-label="5 of spades, 5 of diamonds"><span class="pc">5<i>♠</i></span><span class="pc r">5<i>♦</i></span></span>", "value": 37.4, "tone": "accent"},
+     {"label": "<span class="cards" role="img" aria-label="Queen of spades, Jack of spades"><span class="pc">Q<i>♠</i></span><span class="pc">J<i>♠</i></span></span>", "value": 35.4, "tone": "accent"}
+   ]}
+  </script></div>
+  <p class="figure-note">From tools/poker.js. Before the flop the figures are sampled, so each is good to about 0.2 points. Hero cards are removed from the range each time.</p>
+</figure>
+
+<p>The flop makes the picture sharper, because a hand now falls into a pile. Take the flop <span class="cards" role="img" aria-label="King of spades, 7 of diamonds, 2 of clubs"><span class="pc">K<i>♠</i></span><span class="pc r">7<i>♦</i></span><span class="pc">2<i>♣</i></span></span> and sort his 71 remaining combinations into three piles by what they hold:</p>
+
+<ul>
+  <li><strong>Strong:</strong> two pair or better, an overpair, or top pair. Here that is 20 combinations: sets (kings and sevens), the overpair (aces), and top pair (ace-king and king-queen).</li>
+  <li><strong>Medium:</strong> any other pair. Here that is 27 combinations: the underpairs eight-eight through queen-queen, which sit above the seven but below the king.</li>
+  <li><strong>Air:</strong> no pair. Here that is 24 combinations: the ace-ten, ace-jack, and ace-queen hands that missed.</li>
+</ul>
+
+<p>Our <span class="cards" role="img" aria-label="Ace of hearts, Queen of hearts"><span class="pc r">A<i>♥</i></span><span class="pc r">Q<i>♥</i></span></span> has no pair, but its ace is an overcard to the whole board, and it blocks some of his air hands. The equity against each pile tells the whole story. Against the strong pile we have under 3 percent. Against medium we have 24 percent. Against air we are a 71 percent favorite. Against everything together we land near 34 percent. The hand is neither good nor bad. It depends entirely on which pile he is in.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 13.5</span><h3 class="figure-title"><span class="cards" role="img" aria-label="Ace of hearts, Queen of hearts"><span class="pc r">A<i>♥</i></span><span class="pc r">Q<i>♥</i></span></span> on <span class="cards" role="img" aria-label="King of spades, 7 of diamonds, 2 of clubs"><span class="pc">K<i>♠</i></span><span class="pc r">7<i>♦</i></span><span class="pc">2<i>♣</i></span></span>, pile by pile</h3></div>
+  <div data-fig="bars"><script type="application/json">
+  {"label": "Hero equity on the king-seven-deuce flop against each pile of the villain's range: 2.9 percent against strong hands, 24.0 against medium, 70.9 against air, and 33.9 against the whole range.",
+   "unit": "%", "max": 100,
+   "items": [
+     {"label": "Vs strong (20 combos)", "value": 2.9, "tone": "accent"},
+     {"label": "Vs medium (27 combos)", "value": 24.0, "tone": "gold"},
+     {"label": "Vs air (24 combos)", "value": 70.9, "tone": "accent2"},
+     {"label": "Vs all 71 combos", "value": 33.9, "tone": "ink"}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact, from tools/poker.js, counting every turn and river. Equity is not the same as winning the pot: it ignores later betting. Piles go by made hand. On this rainbow flop no hand in his range has more than a backdoor draw, so nothing is hiding in air.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Daniel Negreanu might say</p>
+  <p class="said">He would point out that the piles are only as good as your read of the player. His approach is built on hand reading from betting patterns and how a person behaves, so he would want you to move hands between piles when a person acts in a way the chart does not predict, instead of trusting the chart alone.</p>
+  <p class="note">An imagined voice: our reading of his public teaching on hand reading, not his words.</p>
+</aside>
+
+<h2>Narrowing as the hand goes</h2>
+
+<p>A range is not fixed. Each action cuts hands out, and the cut is where the money is made. Here is the same hand, street by street. We will add one read: this player, in our example, bets the flop with every strong hand, checks his medium pairs to control the pot, and bluffs only with the suited aces that missed.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 13.6</span><h3 class="figure-title">The range, street by street</h3></div>
+  <div class="table-scroll">
+    <table class="hand-log">
+      <thead><tr><th>Street</th><th>Board</th><th>Action</th><th>Pot</th></tr></thead>
+      <tbody>
+        <tr><td>Preflop</td><td>Hero: <span class="cards" role="img" aria-label="Ace of hearts, Queen of hearts"><span class="pc r">A<i>♥</i></span><span class="pc r">Q<i>♥</i></span></span></td><td>UTG raises to $15. Folds to hero on the button, who calls. The blinds fold. His range: 104 combos, 81 after we remove our cards.</td><td class="pot">$37</td></tr>
+        <tr><td>Flop</td><td><span class="cards" role="img" aria-label="King of spades, 7 of diamonds, 2 of clubs"><span class="pc">K<i>♠</i></span><span class="pc r">7<i>♦</i></span><span class="pc">2<i>♣</i></span></span></td><td>The king and seven on the board remove ten more, leaving 71 combos. UTG bets $25. His read-based betting range: 20 strong combos plus 9 suited-ace bluffs. 29 combos.</td><td class="pot">$62</td></tr>
+        <tr><td>Decision</td><td><span class="cards" role="img" aria-label="King of spades, 7 of diamonds, 2 of clubs"><span class="pc">K<i>♠</i></span><span class="pc r">7<i>♦</i></span><span class="pc">2<i>♣</i></span></span></td><td>Hero must call $25 to win a pot of $87: 25 / (62 + 25) = 25 / 87 = 28.7%. Against his 29 betting combos hero has 23.8%. Short of the price, so hero folds and UTG wins the $62.</td><td class="pot">$62</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history. Equity is exact, from tools/poker.js, against the 29 combos. Arithmetic: the pot is $15 + $15 + $2 + $5 = $37 before the flop, and $37 + $25 = $62 after his bet.</p>
+</figure>
+
+<p>Count the arithmetic. His bet cut the range from 71 combos to 29. Of those 29, 20 are strong and 9 are bluffs. That is 69 percent value and 31 percent bluffs.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 13.7</span><h3 class="figure-title">Of 100 flop bets from this player</h3></div>
+  <div data-fig="dots"><script type="application/json">
+  {"label": "Out of 100 flop bets from the example player, about 69 are made with a strong hand and 31 are suited-ace bluffs.",
+   "parts": [
+     {"label": "Strong hand", "value": 69, "tone": "ink"},
+     {"label": "Suited-ace bluff", "value": 31, "tone": "accent"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: 20 / 29 = 69.0%, and 9 / 29 = 31.0%. The betting pattern is an assumption for the example.</p>
+</figure>
+
+<p>This is where the thinking pays off. Against this player the bet is value-heavy, and 23.8 percent falls about 5 points short of the 28.7 percent price. It is worse than it looks, because a player like this will usually keep betting his strong hands on the turn, so a call now often means facing another bet with ace-high. Fold. Now change one read: say he bluffs with every ace that missed, all 24 combos, so he bets 44. Against that range <span class="cards" role="img" aria-label="Ace of hearts, Queen of hearts"><span class="pc r">A<i>♥</i></span><span class="pc r">Q<i>♥</i></span></span> has 40.0 percent, and the call is easy. Had we put him on "a king," we would fold against both players. Had we put him on "nothing," we would call against both. The range is what tells the two apart, and the difference is how many bluffs it holds.</p>
+
+<p>The sequence repeats on every street. At each action, ask which hands in the range would do this, and cut the rest. Keep the hands that would, with the weight they deserve. <a class="xref" href="19-hand-reading.html">Chapter 19, Hand Reading</a> teaches the full method, with bet size and timing as clues, and <a class="xref" href="15-board-texture.html">Chapter 15, Board Texture</a> shows how the board itself changes who is ahead.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Phil Galfond might say</p>
+  <p class="said">He would teach this as a habit, not a trick. Name the range to yourself at each street, name the three piles, and check that your next move still makes sense against all of them. Doing it every hand matters more than doing it perfectly.</p>
+  <p class="note">An imagined voice: our reading of the teaching approach he is known for at Run It Once, not his words.</p>
+</aside>
+
+<aside class="key">
+  <p class="label">Key idea</p>
+  <p>You are never ahead or behind a hand. You are ahead of some of his range and behind the rest, and each action tells you which part is left.</p>
+</aside>
+
+<details class="drill">
+  <summary>You hold <span class="cards" role="img" aria-label="King of spades, King of diamonds"><span class="pc">K<i>♠</i></span><span class="pc r">K<i>♦</i></span></span> and the same UTG player opens with 77+, ATs+, KQs, AJo+. How many combos of AA and AK does that range hold, and what share of his range is that?</summary>
+  <p>Aces: 6 combos of AA, since none of them uses a king. Ace-king: 2 suited (the spade and the diamond are gone) plus 6 offsuit (3 with the king of hearts and 3 with the king of clubs, the two kings you do not hold) is 8. Together that is 14 of his 89 remaining combos, or 14 / 89 = 15.7%. Notice that only 1 combo of KK is left.</p>
+</details>
+
+<details class="drill">
+  <summary>The pot is $37 and a player bets $25. What equity do you need to call, and how does that compare with the flop in our example?</summary>
+  <p>The pot after his bet is 37 + 25 = $62. You call $25, so the final pot is 62 + 25 = $87. 25 / 87 = 28.7%. In our example the hand had 23.8% against the betting range, so it falls about 5 points short: a fold. A common slip is to add his bet twice. The $62 already holds it.</p>
+</details>
+
+<details class="drill">
+  <summary>On a flop you sort 90 combos into 18 strong, 27 medium, and 45 air. What are the shares?</summary>
+  <p>18 / 90 = 20%, 27 / 90 = 30%, and 45 / 90 = 50%. Half the range has nothing, so a bet that folds out air takes the pot half the time.</p>
+</details>
+
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>What share of a range is strong, medium, and air</h2>
+  <p><strong>The shortcut.</strong> Sort the range into three piles, count the combinations in each, and divide by the total. Do it once for a standard range and board and you will know roughly where you stand. Count pairs as 6 combos, suited hands as 4, and offsuit hands as 12, then take out the combos that use a board card (a pair with one card on the board drops to 3).</p>
+  <p class="math">Our range on <span class="cards" role="img" aria-label="King of spades, 7 of diamonds, 2 of clubs"><span class="pc">K<i>♠</i></span><span class="pc r">7<i>♦</i></span><span class="pc">2<i>♣</i></span></span>, removing only the board cards, not yours: 27 strong, 30 medium, 36 air of 93. 27 / 93 = 29%, 30 / 93 = 32%, 36 / 93 = 39%.</p>
+  <figure class="figure">
+    <div class="figure-head"><span class="figure-number">Fig. 13.8</span><h3 class="figure-title">The same range on four flops</h3></div>
+    <div data-fig="split"><script type="application/json">
+    {"label": "Share of the example UTG range that is strong, medium, and air on four flops. On king-seven-deuce it is 29, 32, and 39 percent. On ace-nine-four it is 53, 42, and 5. On jack-eight-six it is 38, 19, and 43. On nine-eight-seven it is 41, 0, and 59.",
+     "rows": [
+       {"label": "K 7 2 rainbow", "parts": [{"label": "Strong", "value": 29.0, "tone": "ink"}, {"label": "Medium", "value": 32.3, "tone": "gold"}, {"label": "Air", "value": 38.7, "tone": "muted"}]},
+       {"label": "A 9 4 rainbow", "parts": [{"label": "Strong", "value": 52.9, "tone": "ink"}, {"label": "Medium", "value": 42.4, "tone": "gold"}, {"label": "Air", "value": 4.7, "tone": "muted"}]},
+       {"label": "J 8 6 two hearts", "parts": [{"label": "Strong", "value": 38.3, "tone": "ink"}, {"label": "Medium", "value": 19.1, "tone": "gold"}, {"label": "Air", "value": 42.6, "tone": "muted"}]},
+       {"label": "9 8 7 two spades", "parts": [{"label": "Strong", "value": 41.1, "tone": "ink"}, {"label": "Medium", "value": 0, "tone": "gold"}, {"label": "Air", "value": 58.9, "tone": "muted"}]}
+     ]}
+    </script></div>
+    <p class="figure-note">Exact counts from a throwaway script on tools/poker.js. Strong: two pair or better, an overpair, or top pair. Medium: any other pair. Air: no pair, so draws sit in air. The pile rules are our own choice.</p>
+  </figure>
+  <p><strong>Where it bends.</strong> The split depends on the board far more than on the range. A tight range crushes an ace-high board and misses a low connected one. Do not carry the 29-32-39 split to another flop. Pile definitions also bend: a flush draw counts as air here, but it is a hand that can call or raise, so a real read moves it up.</p>
+</aside>
         </div>
       </article>
 
@@ -49,5 +279,6 @@
   </div>
 
   <script src="../js/version.js"></script>
+  <script src="../js/figures.js"></script>
 </body>
 </html>
