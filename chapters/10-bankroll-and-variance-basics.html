@@ -22,13 +22,236 @@
     <main>
       <article class="chapter">
         <header class="chapter-head">
-          <p class="chapter-kicker label">Chapter 10 <span class="badge">To come</span></p>
+          <p class="chapter-kicker label">Chapter 10 <span class="badge">Preliminary draft</span></p>
           <h1 class="chapter-title">Bankroll and Variance Basics</h1>
           <p class="standfirst">Why good players lose sessions, and how not to go broke.</p>
         </header>
 
         <div class="prose chapter-body">
-<p class="lead">This page has not been written yet. The book is being written and published one chapter at a time.</p>
+<p class="lead">You can play well and still lose a session, a month, or a few thousand dollars. This chapter shows how big those swings are, how long they last, and how many buy-ins keep a swing from ending your game.</p>
+
+<h2>Why good players lose sessions</h2>
+<p><strong>Variance</strong> is the spread of your results around their average. Poker is built on it. You make a good decision, the cards do not cooperate, and you lose money. The reverse happens too. <a class="xref" href="07-expected-value.html">Chapter 7, Expected Value</a> covered the idea that a decision is good or bad when you make it. This chapter covers what that means for your wallet.</p>
+<p>Start with the cleanest case. You get all your chips in with <span class="cards" role="img" aria-label="Ace of spades, Ace of hearts"><span class="pc">A<i>♠</i></span><span class="pc r">A<i>♥</i></span></span> against <span class="cards" role="img" aria-label="King of clubs, King of diamonds"><span class="pc">K<i>♣</i></span><span class="pc r">K<i>♦</i></span></span>. You are a huge favorite, and you still lose about one time in five.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 10.1</span><h3 class="figure-title">Aces against kings, all-in preflop</h3></div>
+  <div data-fig="split"><script type="application/json">
+  {"label": "All-in preflop equity for ace of spades ace of hearts against king of clubs king of diamonds: aces win 81.3 percent and kings win 18.7 percent, with ties split.",
+   "rows": [
+     {"label": "AA against KK", "note": "the best case in poker", "parts": [{"label": "Aces", "value": 81.3, "tone": "ink"}, {"label": "Kings", "value": 18.7, "tone": "accent"}]}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact, from tools/poker.js: 81.26% to 18.74%, counting every possible board and splitting ties.</p>
+</figure>
+
+<p>A good player wins more than a bad player over a long run, but a session is a short run. Here is a picture of what a winning player faces. Say you win 4 big blinds an hour. Over a 6-hour session you lose money about 42 times in 100. The section on swing size shows where that number comes from.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 10.2</span><h3 class="figure-title">A winning player, 100 six-hour sessions</h3></div>
+  <div data-fig="dots"><script type="application/json">
+  {"label": "Out of 100 six-hour sessions for a player who wins 4 big blinds an hour, about 58 finish up and 42 finish down.",
+   "parts": [
+     {"label": "Session ends up", "value": 58, "tone": "accent2"},
+     {"label": "Session ends down", "value": 42, "tone": "accent"}
+   ]}
+  </script></div>
+  <p class="figure-note">Assumptions: win rate 4 BB/hour, standard deviation 50 BB/hour (both invented for this chapter). Normal model: 42.2% of sessions lose, rounded to 42. See the section on swing size.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What David Sklansky might say</p>
+  <p class="said">He would call a lost session a poor measure of a decision. His Fundamental Theorem judges you by what you did given what you could see, so a bad result tells you almost nothing until you have many of them. Track your play, not one night.</p>
+  <p class="note">An imagined voice: our reading of the ideas in The Theory of Poker, not his words.</p>
+</aside>
+
+<h2>How big the swings are</h2>
+<p>To talk about swings with numbers, you need two inputs. The <strong>win rate</strong> is your average profit per hour. The <strong>standard deviation</strong> (SD) measures how far a typical hour strays from that average. Neither is known for you. Both change with game, table, and style. We pick values and label them as assumptions.</p>
+
+<p class="math">Assumptions: $2/$5 live, big blind (BB) = $5, 30 hands an hour. Win rate = 4 BB/hour = $20/hour. SD = 50 BB/hour = $250/hour.</p>
+<p>These are illustrative, and both are our judgment, not measured figures. We picked 4 BB/hour as a solid winner, and 50 BB/hour as a rough guess at live swings. That SD is probably on the low side for deep, loose, multiway live games, and a bigger SD makes every swing in this chapter bigger. Your own records are the only good source for your numbers. The method works for any numbers you swap in.</p>
+<p>Results add up in a particular way. Over <em>h</em> hours your expected profit grows with <em>h</em>, but the SD grows only with the square root of <em>h</em>. We then treat the result as a bell curve (a normal model, an approximation).</p>
+<p class="math">Mean = win rate x h. SD = 50 x sqrt(h). Chance of a losing stretch = Phi(-mean / SD).</p>
+<p>Phi is the bell-curve lookup: Phi(-z) is the share of results more than z SDs below the average. Three values cover most of this chapter: Phi(-0.5) is about 31%, Phi(-1) about 16%, and Phi(-2) about 2.3%.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table 10.1</span><h3 class="figure-title">What to expect over different stretches</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Stretch</th><th>Hours</th><th>Expected</th><th>SD</th><th>Typical range (1 SD)</th></tr></thead>
+      <tbody>
+        <tr><td>One hour</td><td>1</td><td>+4 BB</td><td>50 BB</td><td>-46 to +54 BB</td></tr>
+        <tr><td>One session</td><td>6</td><td>+24 BB</td><td>122 BB</td><td>-98 to +146 BB</td></tr>
+        <tr><td>One month</td><td>40</td><td>+160 BB</td><td>316 BB</td><td>-156 to +476 BB</td></tr>
+        <tr><td>Four months</td><td>160</td><td>+640 BB</td><td>632 BB</td><td>+8 to +1,272 BB</td></tr>
+        <tr><td>One year</td><td>480</td><td>+1,920 BB</td><td>1,095 BB</td><td>+825 to +3,015 BB</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Arithmetic with the assumptions above (4 BB/hour, SD 50 BB/hour, normal model). About 68 in 100 results land inside the 1 SD range. In dollars at $5 a big blind, one session is +$120 expected with an SD near $612.</p>
+</figure>
+
+<p>Read the session row. You expect +24 BB, yet one SD in either direction covers a range from -98 to +146 BB. That is about -$490 to +$730. A typical session result is mostly noise, and it takes your skill a long while to show through the noise.</p>
+<p>Paths make this concrete. Below are three simulated runs of 200 hours for the same player, drawn from the same assumptions. The dashed line is the expected path. One run ends below it at 468 BB, one above at 1,085 BB, and the third is down about 290 BB at hour 80 before it recovers. All three are the same player.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 10.3</span><h3 class="figure-title">Three runs of 200 hours, same player</h3></div>
+  <div data-fig="line"><script type="application/json">
+  {"label": "Three simulated bankroll paths over 200 hours for a player winning 4 big blinds an hour with an SD of 50. One ends near 470, one near 1,090, and one dips to minus 290 around hour 80 before ending near 920. A dashed line shows the expected 800 at hour 200.",
+   "xLabel": "Hours played", "yLabel": "Profit in big blinds", "yUnit": " BB",
+   "series": [
+     {"name": "Run A", "tone": "ink", "points": [[0, 0], [20, 306], [40, 409], [60, 558], [80, 316], [100, 548], [120, 354], [140, 484], [160, 491], [180, 469], [200, 468]]},
+     {"name": "Run B", "tone": "accent2", "points": [[0, 0], [20, 165], [40, 49], [60, 341], [80, 684], [100, 681], [120, 1276], [140, 1224], [160, 1239], [180, 821], [200, 1085]]},
+     {"name": "Run C", "tone": "accent", "points": [[0, 0], [20, 115], [40, -186], [60, 65], [80, -290], [100, -127], [120, 27], [140, 153], [160, 552], [180, 665], [200, 923]]},
+     {"name": "Expected", "tone": "gold", "dashed": true, "points": [[0, 0], [200, 800]]}
+   ]}
+  </script></div>
+  <p class="figure-note">Simulation: each hour is a normal draw with mean 4 and SD 50, from a seeded generator, shown every 20 hours. Illustrative runs under assumed numbers, not real results.</p>
+</figure>
+
+<h2>How long until skill shows</h2>
+<p>The same square-root rule that tames a month also tells you how much data you need. The next figure shows the chance that the player above is behind after a given number of hours.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 10.4</span><h3 class="figure-title">Chance a 4 BB/hour player is losing</h3></div>
+  <div data-fig="columns"><script type="application/json">
+  {"label": "Chance that a player winning 4 big blinds an hour is behind after 1, 6, 40, 160, 480, and 1000 hours: 47, 42, 31, 16, 4, and under 1 percent.",
+   "unit": "%", "categories": ["1 hr", "6 hrs", "40 hrs", "160 hrs", "480 hrs", "1,000 hrs"],
+   "xLabel": "Hours played", "yLabel": "Chance of being behind",
+   "series": [{"name": "Chance of a loss", "values": [46.8, 42.2, 30.6, 15.6, 4.0, 0.6], "tone": "accent"}]}
+  </script></div>
+  <p class="figure-note">Arithmetic: Phi(-4 x h / (50 x sqrt(h))), normal model. Same assumptions as before.</p>
+</figure>
+
+<p>A winning player can be behind for a month, nearly one month in three. After a year it is rare. Now flip the question. You do not know your true win rate. You only see your results. Your measured average over <em>h</em> hours is uncertain by about 50 / sqrt(<em>h</em>) BB/hour, one SD.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 10.5</span><h3 class="figure-title">How slowly a win rate shows itself</h3></div>
+  <ul class="stats">
+  <li><b>3.95 BB/hr</b><span>uncertainty in your measured win rate after 160 hours</span></li>
+  <li><b>156</b><span>hours until a 4 BB/hour edge is one SD above zero</span></li>
+  <li><b>625</b><span>hours until it is two SDs above zero</span></li>
+</ul>
+  <p class="figure-note">Arithmetic: 50 / sqrt(160) = 3.95. Hours for the edge to equal k SDs: (k x 50 / 4)^2, which is 156 for k = 1 and 625 for k = 2.</p>
+</figure>
+
+<p>After 160 hours, the uncertainty in your measured win rate is about as large as the win rate itself. A month or two of results cannot tell you whether you are good. Use hand review and the ideas in <a class="xref" href="07-expected-value.html">Chapter 7, Expected Value</a> to judge your play, and let the bankroll absorb the noise.</p>
+
+<details class="drill">
+  <summary>Over a 10-hour weekend, what are your expected result and SD at 4 BB/hour and SD 50 BB/hour?</summary>
+  <p>Mean = 4 x 10 = 40 BB. SD = 50 x sqrt(10) = 158 BB. One SD covers -118 to +198 BB.</p>
+</details>
+
+<h2>Risk of ruin and the buy-in count</h2>
+<p><strong>Risk of ruin</strong> is the chance you lose your whole bankroll before the edge saves you. If you never add money, never take money out, stay at one stake, and play forever, a simple model gives a formula. It assumes a steady win rate (mu) and SD (sigma) per hour, and a bankroll B in the same units.</p>
+<p class="math">Risk of ruin = e^(-2 x mu x B / sigma^2)</p>
+<p>With mu = 4 and sigma = 50, a bankroll of 2,000 BB (20 buy-ins of 100 BB each, or $10,000 at $2/$5) gives e^(-2 x 4 x 2000 / 2500) = e^(-6.4) = 0.17%. A 10 buy-in bankroll gives e^(-3.2) = 4.1%.</p>
+<p>The SD matters as much as the win rate, because it is squared. If your true SD is 80 BB/hour instead of 50, the same 20 buy-ins give e^(-2 x 4 x 2,000 / 6,400) = e^(-2.5) = 8.2%, not 0.17%.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table 10.2</span><h3 class="figure-title">Risk of ruin by win rate and bankroll</h3></div>
+  <div data-fig="heat"><script type="application/json">
+  {"label": "Risk of ruin in percent for win rates of 1, 2, 4, and 6 big blinds an hour, with bankrolls of 10, 20, and 30 buy-ins. A 1 BB/hour player with 10 buy-ins has a 44.9 percent risk. A 6 BB/hour player with 30 buy-ins has nearly none.",
+   "corner": "Win rate", "unit": "%", "tone": "accent",
+   "cols": ["10 buy-ins", "20 buy-ins", "30 buy-ins"],
+   "rows": ["1 BB/hr", "2 BB/hr", "4 BB/hr", "6 BB/hr"],
+   "values": [[44.9, 20.2, 9.1], [20.2, 4.1, 0.8], [4.1, 0.2, 0.0], [0.8, 0.0, 0.0]]}
+  </script></div>
+  <p class="figure-note">Arithmetic: e^(-2 x mu x B / 2,500) with B = buy-ins x 100 BB and SD 50 BB/hour. Rounded to one decimal, so 0.0 means under 0.05%.</p>
+</figure>
+
+<p>The table carries a lesson that is easy to miss. The weaker your edge, the more buy-ins you need. A 1 BB/hour player with 30 buy-ins faces more risk than a 4 BB/hour player with 10. And you cannot know your own win rate well (see the last section). So a bankroll rule built for a 4 BB/hour player is a gamble if you actually win 1.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Doyle Brunson might say</p>
+  <p class="said">He would point to the length of a career, not the length of a session. A player who stays in the game for decades outlasts the player who wins fast and busts. Keep enough behind you that a bad run is a nuisance and not the end. Aggression at the table needs a deep cushion away from it.</p>
+  <p class="note">An imagined voice: our reading of the ideas in Super/System (1979) and his long career, not his words.</p>
+</aside>
+
+<p>Even a comfortable bankroll goes through long downswings. In a simulation of 60,000 careers of 1,000 hours each with the same assumptions (SD 50), the median worst drawdown (the biggest fall from a peak, checked hour by hour) was about 910 BB, just over 9 buy-ins. About 38 percent of careers had a drawdown of 1,000 BB (10 buy-ins) or more, even though every one of them had a true 4 BB/hour edge.</p>
+
+<details class="drill">
+  <summary>At 2 BB/hour and SD 50, what is the risk of ruin with 15 buy-ins (1,500 BB)?</summary>
+  <p>e^(-2 x 2 x 1,500 / 2,500) = e^(-2.4) = 9.1%.</p>
+</details>
+<details class="drill">
+  <summary>A 1 BB/hour player wants a risk of ruin of 5% or less. How big a bankroll is that?</summary>
+  <p>Solve e^(-2 x 1 x B / 2,500) = 0.05. B = -ln(0.05) x 2,500 / 2 = 2.996 x 1,250 = 3,745 BB, about 37.5 buy-ins. Round up to 38 to stay at or under 5%.</p>
+</details>
+
+<h2>Buy-in guidelines are conventions</h2>
+<p>Poker players pass around rules of thumb such as a set number of buy-ins per stake. They are conventions and judgments, not laws. The formula above is the only math behind them, and the formula rests on inputs you cannot know. Treat any number as a starting point. The figures below come from our model, not from a survey or a study.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 10.6</span><h3 class="figure-title">Cash game bankroll in buy-ins, under our model</h3></div>
+  <div data-fig="bars"><script type="application/json">
+  {"label": "Risk of ruin for a 4 big blind an hour player at five bankroll sizes: 38.3 percent at 3 buy-ins, 20.2 percent at 5, 4.1 percent at 10, 0.8 percent at 15, and 0.2 percent at 20.",
+   "unit": "%", "max": 40,
+   "items": [
+     {"label": "3 buy-ins", "value": 38.3, "tone": "accent"},
+     {"label": "5 buy-ins", "value": 20.2, "tone": "accent"},
+     {"label": "10 buy-ins", "value": 4.1},
+     {"label": "15 buy-ins", "value": 0.8, "tone": "accent2"},
+     {"label": "20 buy-ins", "value": 0.2, "tone": "accent2"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: e^(-2 x 4 x B / 2,500), B = buy-ins x 100 BB. Assumes a true 4 BB/hour win rate, which is generous.</p>
+</figure>
+
+<p>Our judgment: because you do not know your win rate, aim above what the 4 BB/hour row suggests. For a live cash game, we would want at least 20 to 30 buy-ins for the stake you play, and more if your edge is small or untested. Your own rule should come from your answers to three questions.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 10.7</span><h3 class="figure-title">Sizing your own bankroll</h3></div>
+  <ol class="flow">
+  <li><strong>Pick a win rate you doubt</strong><span>Use a number below your hopes, such as 1 or 2 BB/hour.</span></li>
+  <li><strong>Choose a risk you accept</strong><span>For example 5% or less.</span></li>
+  <li><strong>Solve for the bankroll</strong><span>B = -ln(risk) x SD^2 / (2 x win rate).</span></li>
+  <li><strong>Separate the money</strong><span>Keep it apart from rent and bills.</span></li>
+</ol>
+  <p class="figure-note">Arithmetic: the risk-of-ruin formula rearranged. The result is a judgment aid, not a guarantee.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Bryn Kenney might say</p>
+  <p class="said">He would remind you that variance is a cost to be managed with structure. At the biggest buy-ins, players sell pieces of themselves and buy pieces of others to smooth the ride. At your level the equivalent is simple: pick a stake where one bad night does not change how you play.</p>
+  <p class="note">An imagined voice: our reading of his public focus on staking and variance at high buy-ins, not his words.</p>
+</aside>
+
+<h2>Tournaments, and rules for not going broke</h2>
+<p>Tournaments swing harder than cash games. In a tournament most of the prize pool goes to a small share of entrants, and your entire buy-in is gone when you bust. So long losing runs are normal even for a skilled player. As a rough convention, tournament players carry far more buy-ins than cash players, often 100 or more. We have not computed that figure here, so treat it as a rule of thumb. <a class="xref" href="31-live-tournament-fundamentals.html">Chapter 31, Live Tournament Fundamentals</a> covers tournament structure and <a class="xref" href="36-bankroll-business-and-longevity.html">Chapter 36, Bankroll, Business, and Longevity</a> returns to staking and moving up and down.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 10.8</span><h3 class="figure-title">Two kinds of variance</h3></div>
+  <div class="compare">
+    <div class="b"><h4>Live cash game</h4><p>You can leave at any time. A session can only cost what you bring to the table. Swings are large over a month but smaller than in tournaments.</p></div>
+    <div class="a"><h4>Live tournament</h4><p>One entry, one shot. Most entries return nothing, and a few return a lot. Long dry spells are normal.</p></div>
+  </div>
+  <p class="figure-note">A qualitative summary. No numbers here: the tournament side depends on the payout structure and field.</p>
+</figure>
+
+<p>A bankroll is also a set of habits. These rules protect you from the damage that variance does to people, which <a class="xref" href="35-the-mental-game.html">Chapter 35, The Mental Game</a> covers in more depth.</p>
+<ul>
+  <li><strong>Play inside your bankroll.</strong> At our 20 to 30 buy-in judgment, a $500 buy-in at $2/$5 calls for $10,000 to $15,000 set aside. If you have less, drop down.</li>
+  <li><strong>Do not chase.</strong> A losing session does not make the next one more likely to win. Cards have no memory.</li>
+  <li><strong>Set a stop.</strong> Decide ahead of time when you leave. Tired, angry players make costly decisions.</li>
+  <li><strong>Keep records.</strong> Note hours, results, stakes. Without records, your sense of your win rate is a story.</li>
+  <li><strong>Move down without shame.</strong> Dropping a stake after a bad run protects the roll while you find out whether the run was noise.</li>
+</ul>
+
+<aside class="key">
+  <p class="label">Key idea</p>
+  <p>Over a short stretch, luck swamps skill. Size your bankroll for the swings, not for the average.</p>
+</aside>
+
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>Win rate in big blinds per hour, and a losing month</h2>
+  <p><strong>The shortcut.</strong> Count your results in big blinds, not dollars, and divide by hours. Then size the swing: SD per hour times the square root of hours. Divide the mean by that SD to get z, and read the losing odds off three anchors: z of 0.5 is about 31%, z of 1 about 16%, z of 2 about 2%.</p>
+  <p class="math">Win rate: +$1,400 over 70 hours at $2/$5 = 1,400 / 5 = 280 BB. 280 / 70 = 4 BB/hour, or $20 an hour.</p>
+  <p class="math">Month of 40 hours: mean = 4 x 40 = 160 BB. SD = 50 x sqrt(40) = 316 BB. z = 160 / 316 = 0.51. Losing odds = Phi(-0.51) = 31%</p>
+  <p>So a losing month is not a sign of a leak. Our player loses about 3 months in 10. A 1 BB/hour player has z = 40 / 316 = 0.13 and loses about 45 months in 100.</p>
+  <p><strong>Where it bends.</strong> The 50 BB/hour SD and the bell curve are assumptions. Your SD may be higher if you play wide and deep, and real results have fatter tails than a bell curve. Your true win rate is unknown, and after 160 hours it is uncertain by about 4 BB/hour, as large as the edge we assumed.</p>
+</aside>
         </div>
       </article>
 
@@ -49,5 +272,6 @@
   </div>
 
   <script src="../js/version.js"></script>
+  <script src="../js/figures.js"></script>
 </body>
 </html>

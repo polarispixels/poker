@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.8.0] - 2026-11-21
+
+### Added
+
+- Chapter 10, Bankroll and Variance Basics: Chapter 10 sizes live swings with a labeled 4 BB/hour, 50 BB/hour SD model, derives risk of ruin and buy-in judgments, and ends with Table Math on BB/hour and a losing month.
+
 ## [0.7.0] - 2026-11-21
 
 ### Added
