@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.9.0] - 2026-11-21
+
+### Added
+
+- Chapter 8, Aggression: Chapter 8 explains fold equity as the second way to win a pot, with a worked flush-draw semi-bluff and bluff break-even math.
+
 ## [0.8.0] - 2026-11-21
 
 ### Added

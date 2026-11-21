@@ -1,0 +1,227 @@
+<p class="lead">Betting and raising give you a second way to win a pot that calling never has. This chapter shows where that extra value comes from, how to price it, and when it stops paying.</p>
+
+<h2>Two ways to win a pot</h2>
+<p>Every pot ends in one of two ways. Either someone shows the best hand at the end, or everyone else folds. That is all. You can win a pot with the worst hand at the table if the others give up.</p>
+<p>The first way is <strong>showdown</strong>: the players left turn their cards over and the best five-card hand takes the pot. The second is <strong>fold equity</strong>: the chance that a bet or raise makes your opponents fold. Fold equity is not a trick or a bluff-only idea. It is simply the share of the time a bet takes the pot down right there, and it is worth real money.</p>
+<p>Here is the catch. Only one of those two ways needs a bet. If you call, you can win only at showdown, so you need the best hand. If you bet or raise, you can win either way. A caller has one path to the pot. An aggressor has two.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Two ways to win a pot</h3></div>
+  <div class="compare">
+    <div class="a"><h4>Showdown</h4><p>You hold the best hand when the cards are turned over. Open to callers and bettors alike.</p></div>
+    <div class="b"><h4>Fold equity</h4><p>Your opponents fold before the end. Open only to the player who bet or raised.</p></div>
+  </div>
+  <p class="figure-note">A summary of this section.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Doyle Brunson might say</p>
+  <p class="said">He would say the player who puts in the bet owns the hand. The caller waits to see what happens, and the bettor decides what happens. For him, calling is the play that needs a reason, and betting or raising is the default when you choose to play on.</p>
+  <p class="note">An imagined voice: our reading of the aggressive style taught in Super/System (1979), not his words.</p>
+</aside>
+
+<h2>Why calling is the weak play</h2>
+<p>Calling is not wrong. Plenty of calls are fine, and later chapters show when. But a call is the only action that puts chips in without any chance of winning the pot on the spot. It asks the cards to do all the work.</p>
+<p>Look at one hand. It is a live $2/$5 game, nine-handed, with $500 stacks. You are on the button with [[Ah 5h]]. You raise to $30 and only the big blind calls. The pot is $30 + $30 + $2 from the small blind = $62. The flop is [[Qh 7h 2c]]. You have the ace-high flush draw and nothing else yet.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">The button, heads-up on the flop</h3></div>
+  <div data-fig="table"><script type="application/json">
+  {"label": "Nine-handed table. Hero on the button holds ace and five of hearts on a flop of queen of hearts, seven of hearts, two of clubs. The big blind has checked. The pot is 62 dollars.",
+   "button": 0, "pot": "$62", "board": "Qh 7h 2c",
+   "seats": [
+     {"pos": "BTN", "stack": "$470", "cards": "Ah 5h", "state": "hero"},
+     {"pos": "SB", "state": "fold"},
+     {"pos": "BB", "stack": "$470", "note": "checks", "state": "villain"},
+     {"pos": "UTG", "state": "fold"},
+     {"pos": "UTG+1", "state": "fold"},
+     {"pos": "MP", "state": "fold"},
+     {"pos": "LJ", "state": "fold"},
+     {"pos": "HJ", "state": "fold"},
+     {"pos": "CO", "state": "fold"}
+   ]}
+  </script></div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history.</p>
+</figure>
+
+<p>Your choices are to check behind or to bet. To compare them we need the villain's hand. For an example, suppose the big blind would call a bet with any pair of queens, sevens, or nines, or with ace-queen, king-queen, or jack-ten suited. That is 22 combinations once your cards and the board are removed, and it is an invented range for teaching, not a read on real players. Against that whole group you have 45.42% equity (exact, from tools/poker.js). The sums below use 0.4542; at the table, think 45%. To keep them plain, they treat it as showdown equity with no more betting, and they use the same range whether he checks it down or calls. {{ch:5}} covers equity and outs.</p>
+<p>If you check behind, you win your share of the $62 and nothing else:</p>
+<p class="math">EV of checking = 0.4542 x $62 = $28.16</p>
+<p>Now bet $40. If the big blind folds, you win $62. If he calls, the pot is $62 + $40 + $40 = $142, and you have risked $40 more:</p>
+<p class="math">EV when called = 0.4542 x $102 - 0.5458 x $40 = $46.33 - $21.83 = $24.50</p>
+<p>Notice that the bet is worth less than checking when it is always called: $24.50 against $28.16. A bet without fold equity gives up a little. That is the price of admission. The question is how often villain must fold to repay it.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">One hand, two endings</h3></div>
+  <div class="table-scroll">
+    <table class="hand-log">
+      <thead><tr><th>Street</th><th>Board</th><th>Action</th><th>Pot</th></tr></thead>
+      <tbody>
+        <tr><td>Preflop</td><td>Hero: [[Ah 5h]]</td><td>Hero raises to $30 on the button. Big blind calls. The small blind's $2 is in the pot.</td><td class="pot">$62</td></tr>
+        <tr><td>Flop</td><td>[[Qh 7h 2c]]</td><td>Big blind checks. Hero bets $40.</td><td class="pot">$102</td></tr>
+        <tr><td>Ending A</td><td>[[Qh 7h 2c]]</td><td>Big blind folds. Hero wins $62 and never needs to improve.</td><td class="pot">$102</td></tr>
+        <tr><td>Ending B</td><td>[[Qh 7h 2c]]</td><td>Big blind calls $40. Hero now has to make the best hand by the river, or win it with a later bet.</td><td class="pot">$142</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history. Pot: 30 + 30 + 2 = 62; 62 + 40 = 102; 102 + 40 = 142.</p>
+</figure>
+
+<p>This is the heart of it. When you check, the hand is decided by the cards alone. When you bet, you add a second chance to win, and you pay for it only when the second chance fails.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Before you call, ask</h3></div>
+  <ol class="flow">
+    <li><strong>Can I win now?</strong><span>Would a bet or raise make them fold often enough?</span></li>
+    <li><strong>Can I win later?</strong><span>If called, is my hand strong or drawing?</span></li>
+    <li><strong>Is a call better?</strong><span>Only when raising does neither.</span></li>
+  </ol>
+  <p class="figure-note">A summary of this section. A checklist, not a rule: some spots call correctly.</p>
+</figure>
+
+<h2>Fold equity</h2>
+<p>You have seen that betting costs a little when it is called and pays a lot when it is not. How often must it not be called? Here is the cleanest case, a pure bluff. Suppose you have a hand with no chance at all, bet $40 into the $62 pot, and the villain folds 40% of the time.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">A $40 bluff into a $62 pot</h3></div>
+  <ul class="tree">
+    <li><span class="node root">Bluff $40 into $62</span>
+      <ul>
+        <li><span class="edge">Villain folds 40% of the time</span><span class="node win">Win $62</span></li>
+        <li><span class="edge">Villain calls 60% of the time</span><span class="node lose">Lose $40</span></li>
+      </ul>
+    </li>
+  </ul>
+  <p class="math">EV = 0.40 x $62 + 0.60 x (-$40) = $24.80 - $24.00 = +$0.80</p>
+  <p class="figure-note">Arithmetic. The fold frequency is an assumption for the example. Calling is assumed to lose the whole bet.</p>
+</figure>
+
+<p>At 40% folds the bluff is barely profitable. At 39% it loses. The break-even point is $40 / ($62 + $40) = 39.2%, found by dividing what you risk ($40) by the total of what you risk and what you can win ($40 + the $62 pot). {{ch:7}} gives the full method for turning a decision into one number.</p>
+<p>That is a hard number to hit with nothing. Now put the draw back in. Your hand is worth 45% when called, so the bet needs far fewer folds. The line below tracks the EV of the $40 bet as the fold frequency rises, and the dashed line is the $28.16 you get for checking.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Bet or check, by how often he folds</h3></div>
+  <div data-fig="line"><script type="application/json">
+  {"label": "Expected value of betting 40 dollars into 62 with a flush draw, as the villain's fold frequency rises from zero to 60 percent. The bet overtakes checking, worth 28 dollars, at about 10 percent folds.",
+   "xLabel": "How often he folds", "xUnit": "%", "yUnit": "$", "yMin": 0, "yMax": 60,
+   "series": [
+     {"name": "Bet $40", "tone": "ink", "points": [[0, 24.5], [20, 32.0], [40, 39.5], [60, 47.0]]}
+   ],
+   "refs": [{"y": 28.2, "label": "Check: $28.16"}]}
+  </script></div>
+  <p class="figure-note">Arithmetic: EV = f x 62 + (1 - f) x 24.50, with 45.42% equity when called. Equals the check at f = (28.16 - 24.50) / (62 - 24.50) = 9.8%.</p>
+</figure>
+
+<p>The draw makes the bet pay at about 10% folds. The pure bluff needs 39%. Same bet, same pot. The difference is the second way to win.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What David Sklansky might say</p>
+  <p class="said">He would point out that a bet has to be judged by all of its outcomes together: the folds, the calls where you win, and the calls where you lose. A hand with no chance of winning at showdown can still be a good bet if the folds pay for the losses. And against a player who folds often, a call leaves those folds on the table.</p>
+  <p class="note">An imagined voice: our reading of the expected-value approach in The Theory of Poker, not his words.</p>
+</aside>
+
+<h2>The semi-bluff</h2>
+<p>A <strong>semi-bluff</strong> is a bet or raise with a hand that is not best yet but can improve to the best hand. Your ace-high flush draw is a perfect example. It wins in two ways, and each helps the other.</p>
+<p>A plain flush draw completes about 35 times in 100 by the river (nine outs, 34.97% exact). Against the range above the number moves both ways. The ace and the five add some wins against the weaker hands, and the sets take some flushes away when the board pairs. Net, your hand wins about 45 times in 100 when the villain calls and no more money goes in.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Ah 5h against his calling range, 100 times</h3></div>
+  <div data-fig="dots"><script type="application/json">
+  {"label": "Out of 100 times that ace and five of hearts sees both cards against the villain's range on this flop, about 45 win and 55 lose.",
+   "parts": [
+     {"label": "Hero wins at showdown", "value": 45, "tone": "accent2"},
+     {"label": "Hero loses at showdown", "value": 55, "tone": "paper"}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact: 45.42% against the range, from tools/poker.js, rounded to 45. Assumes no more betting.</p>
+</figure>
+
+<p>Now compare the pure bluff and the semi-bluff, side by side, at four fold frequencies.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Pure bluff against semi-bluff, $40 into $62</h3></div>
+  <div data-fig="columns"><script type="application/json">
+  {"label": "Expected value of a 40 dollar bet into 62 dollars at fold frequencies of 0, 20, 40, and 60 percent. The pure bluff loses until about 39 percent folds; the semi-bluff is positive at every frequency shown.",
+   "unit": "$", "categories": ["0% folds", "20% folds", "40% folds", "60% folds"],
+   "series": [
+     {"name": "Pure bluff", "values": [-40, -19.6, 0.8, 21.2], "tone": "accent"},
+     {"name": "Semi-bluff", "values": [24.5, 32.0, 39.5, 47.0], "tone": "accent2"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: pure bluff = f x 62 - (1 - f) x 40. Semi-bluff = f x 62 + (1 - f) x 24.50.</p>
+</figure>
+
+<p>Read the left pair. If the villain never folds, a pure bluff loses the whole $40. The semi-bluff still holds $24.50 in expected value, because the hand is live. That is a little less than the $28.16 for checking, and the first few folds close the gap. That is the reason to prefer bets and raises with hands that can improve. {{ch:18}} covers bluffing and semi-bluffing in full, and {{ch:16}} covers the flop bet you make as the preflop raiser.</p>
+
+<aside class="key">
+  <p class="label">Key idea</p>
+  <p>A bet with a draw wins when they fold and wins when you hit. A call wins only when you hit.</p>
+</aside>
+
+<h2>Picking your spots</h2>
+<p>Aggression is not "bet everything." A bet needs a reason: the hand is best and wants calls, or the hand is weak and wants folds, or the hand is a draw that gets both. A bet with a hand that does neither is a leak.</p>
+<p>The size of the bet sets how often it must work. A small bet is cheap, so it needs few folds. A big bet risks more, so it needs many. The break-even fold frequency of a pure bluff is bet / (pot + bet), written here as a share of the pot:</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">How often a bluff must work</h3></div>
+  <div data-fig="bars"><script type="application/json">
+  {"label": "Break-even fold frequency for a pure bluff by bet size: 25 percent for a third of the pot, 33 for half, 40 for two thirds, 50 for the pot, 60 for one and a half times the pot, and 67 for twice the pot.",
+   "unit": "%", "max": 100,
+   "items": [
+     {"label": "1/3 pot", "value": 25, "note": "risk 1 to win 3"},
+     {"label": "1/2 pot", "value": 33.3, "note": "risk 1 to win 2"},
+     {"label": "2/3 pot", "value": 40, "note": "risk 2 to win 3"},
+     {"label": "Pot", "value": 50, "note": "risk 1 to win 1", "tone": "gold"},
+     {"label": "1.5x pot", "value": 60, "note": "risk 3 to win 2"},
+     {"label": "2x pot", "value": 66.7, "note": "risk 2 to win 1", "tone": "accent"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: b / (1 + b), where b is the bet as a fraction of the pot. Risk means your bet; win means the pot already there. Checked against tools/poker.js odds. {{ch:20}} covers bet sizing.</p>
+</figure>
+
+<p>The second half of picking a spot is the player. A bluff needs someone who can fold. Some opponents rarely do, and a bluff into them throws money away. Others fold to almost any pressure, and every bet is a gift. {{ch:9}} shows how to sort them, and {{ch:25}} covers the types that fill most live low-stakes games. The sketch below is a judgment about how most such players tend to act, not a measurement.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Who folds to your bet</h3></div>
+  <div data-fig="scatter"><script type="application/json">
+  {"label": "Four kinds of opponent placed by how many hands they play and how often they fold to a bet. Tight players fold often, loose passive players call down and rarely fold.",
+   "x": {"label": "Hands played", "low": "Tight", "high": "Loose"},
+   "y": {"label": "Folds to a bet", "low": "Rarely", "high": "Often"},
+   "quadrants": ["Folds a lot, plays few", "Folds a lot, plays many", "Calls, plays few", "Calls, plays many"],
+   "points": [
+     {"label": "The nit", "x": 14, "y": 84, "tone": "accent2"},
+     {"label": "The solid regular", "x": 28, "y": 60, "tone": "ink"},
+     {"label": "The maniac", "x": 82, "y": 40, "tone": "muted"},
+     {"label": "The calling station", "x": 80, "y": 12, "tone": "accent"}
+   ]}
+  </script></div>
+  <p class="figure-note">A sketch of common live types. Positions are illustrative, not measured.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Daniel Negreanu might say</p>
+  <p class="said">He would agree that betting is how you win, then add that you must watch who you are betting at. His reading of a hand starts with how the opponent behaves, so he would not fire at a player who has shown he will not fold. A bet is a question, and he wants to know the answer is likely a fold before he asks it.</p>
+  <p class="note">An imagined voice: our reading of the hand-reading approach Negreanu is known for, not his words.</p>
+</aside>
+
+<details class="drill">
+  <summary>The pot is $100 and you bet $50 with a pure bluff. How often must he fold to break even?</summary>
+  <p>50 / (100 + 50) = 50 / 150 = 33.3%.</p>
+</details>
+<details class="drill">
+  <summary>You bet the pot with a hand that has no chance. He folds 45% of the time. Profit or loss?</summary>
+  <p>A pot-sized bluff needs 50%. At 45% it loses. Check with a pot of $100: 0.45 x $100 + 0.55 x (-$100) = $45 - $55 = -$10.</p>
+</details>
+<details class="drill">
+  <summary>You hold a flush draw and bet $40 into $62, and he always calls. Does the bet cost you against checking?</summary>
+  <p>Yes, by a little. With 45.42% equity: checking is worth $28.16 and a bet that is always called is worth $24.50. Each fold adds to the bet, and about 10% folds repay the gap.</p>
+</details>
+
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>How often a bluff must work</h2>
+  <p><strong>The shortcut.</strong> Compare what you risk with what you can win. Break-even fold frequency = bet / (pot + bet). For a pot-sized bet it is half. For a half-pot bet it is one in three.</p>
+  <p class="math">$40 into $62: 40 / (62 + 40) = 40 / 102 = 39%</p>
+  <p>In your head: $40 is close to two thirds of $62, and a two-thirds-pot bluff needs 40%. So call it about 40%.</p>
+  <p><strong>Where it bends.</strong> It treats the bluff as having no chance when called. A draw needs far fewer folds (about 10% in the example above). It also ignores later streets: a call now can mean another bet to fire or to face. With two or more opponents, the bluff wins only when every one of them folds, which is much rarer. And against a player who rarely folds, the real fold rate may sit far below the number you need. Treat it as the floor a pure bluff must clear, not the whole answer.</p>
+</aside>
