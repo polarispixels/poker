@@ -1,0 +1,346 @@
+<p class="lead">This appendix holds the exact numbers behind the book: the chance of hitting a draw for every count of outs from 1 to 20, the pot odds and odds against that go with it, what a flop does to a hand, how common starting hands match up, how often you are dealt a pair and flop a set, and how many hands of each rank exist. Use it to look a number up. The ideas behind the numbers are in {{ch:5}} (outs), {{ch:14}} (combinations), and {{ch:15}} (board texture), and the short versions to memorize are in {{ch:A}}.</p>
+
+<p>Every number here was computed by program, not remembered. The draw rows use the formula in the first table's note, run through <code>tools/poker.js</code>. The flop counts, set odds, and hand-ranking counts come from a throwaway Node script that deals out every possible combination and scores it with the evaluator in <code>tools/poker.js</code>. The matchups are exact all-in equities from <code>node tools/poker.js equity</code>, counting every possible board.</p>
+
+<h2>Draws by outs</h2>
+<p>An <strong>out</strong> is an unseen card that completes your draw. Read the row for your count of outs. "Flop to river" assumes you see both the turn and the river. "Turn to river" is one card to come. "Flop to turn" is the chance the very next card hits. The last two columns are the rules of 4 and 2 from {{ch:6}}, so you can see how far they drift.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">Chance of hitting, 1 to 20 outs</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Outs</th><th>Flop to river %</th><th>Turn to river %</th><th>Flop to turn %</th><th>Rule of 4</th><th>Rule of 2</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>4.3</td><td>2.2</td><td>2.1</td><td>4</td><td>2</td></tr>
+        <tr><td>2</td><td>8.4</td><td>4.3</td><td>4.3</td><td>8</td><td>4</td></tr>
+        <tr><td>3</td><td>12.5</td><td>6.5</td><td>6.4</td><td>12</td><td>6</td></tr>
+        <tr><td>4</td><td>16.5</td><td>8.7</td><td>8.5</td><td>16</td><td>8</td></tr>
+        <tr><td>5</td><td>20.4</td><td>10.9</td><td>10.6</td><td>20</td><td>10</td></tr>
+        <tr><td>6</td><td>24.1</td><td>13.0</td><td>12.8</td><td>24</td><td>12</td></tr>
+        <tr><td>7</td><td>27.8</td><td>15.2</td><td>14.9</td><td>28</td><td>14</td></tr>
+        <tr><td>8</td><td>31.5</td><td>17.4</td><td>17.0</td><td>32</td><td>16</td></tr>
+        <tr><td>9</td><td>35.0</td><td>19.6</td><td>19.1</td><td>36</td><td>18</td></tr>
+        <tr><td>10</td><td>38.4</td><td>21.7</td><td>21.3</td><td>40</td><td>20</td></tr>
+        <tr><td>11</td><td>41.7</td><td>23.9</td><td>23.4</td><td>44</td><td>22</td></tr>
+        <tr><td>12</td><td>45.0</td><td>26.1</td><td>25.5</td><td>48</td><td>24</td></tr>
+        <tr><td>13</td><td>48.1</td><td>28.3</td><td>27.7</td><td>52</td><td>26</td></tr>
+        <tr><td>14</td><td>51.2</td><td>30.4</td><td>29.8</td><td>56</td><td>28</td></tr>
+        <tr><td>15</td><td>54.1</td><td>32.6</td><td>31.9</td><td>60</td><td>30</td></tr>
+        <tr><td>16</td><td>57.0</td><td>34.8</td><td>34.0</td><td>64</td><td>32</td></tr>
+        <tr><td>17</td><td>59.8</td><td>37.0</td><td>36.2</td><td>68</td><td>34</td></tr>
+        <tr><td>18</td><td>62.4</td><td>39.1</td><td>38.3</td><td>72</td><td>36</td></tr>
+        <tr><td>19</td><td>65.0</td><td>41.3</td><td>40.4</td><td>76</td><td>38</td></tr>
+        <tr><td>20</td><td>67.5</td><td>43.5</td><td>42.6</td><td>80</td><td>40</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Exact, from tools/poker.js (draw command). Flop to river: 1 minus (47 minus outs)(46 minus outs) over 47 times 46. Turn to river: outs over 46. Flop to turn: outs over 47. Rounded to one decimal place.</p>
+</figure>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">The rule of 4 against the exact odds</h3></div>
+  <div data-fig="line"><script type="application/json">
+  {"label": "Exact flop to river chance and the rule of 4 estimate for 1 to 20 outs. The two lines match at low counts, then the rule climbs above the exact odds, reaching 80 percent against 67.5 percent at 20 outs.",
+   "xLabel": "Outs", "yUnit": "%", "yMin": 0, "yMax": 80,
+   "series": [
+     {"name": "Rule of 4", "tone": "gold", "dashed": true, "points": [[1,4],[2,8],[3,12],[4,16],[5,20],[6,24],[7,28],[8,32],[9,36],[10,40],[11,44],[12,48],[13,52],[14,56],[15,60],[16,64],[17,68],[18,72],[19,76],[20,80]]},
+     {"name": "Exact", "tone": "ink", "points": [[1,4.3],[2,8.4],[3,12.5],[4,16.5],[5,20.4],[6,24.1],[7,27.8],[8,31.5],[9,35],[10,38.4],[11,41.7],[12,45],[13,48.1],[14,51.2],[15,54.1],[16,57],[17,59.8],[18,62.4],[19,65],[20,67.5]]}
+   ],
+   "marks": [{"x": 9, "y": 35.0, "label": "9 outs: 35.0"}]}
+  </script></div>
+  <p class="figure-note">Exact odds from tools/poker.js. The rule of 4 is outs times 4. Past about 8 outs it overstates. Subtracting one point for each out above 8 (the corrected rule in {{ch:6}}) stays within about 1.2 points of the exact figure all the way to 20 outs. Arithmetic: the largest gap is at 14 outs, 50 against 51.16.</p>
+</figure>
+
+<p>The next table names the draws you meet most often, with an example of each and its count of outs. Each count was checked by listing every unseen card that makes the hand. A count covers the named draw only: if the example hand also holds an overcard, pairing it can add outs.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">Named draws and their outs</h3></div>
+  <div class="table-scroll">
+    <table class="wrap">
+      <thead><tr><th>Draw</th><th>Example</th><th>Outs</th><th>Flop to river %</th><th>Turn to river %</th></tr></thead>
+      <tbody>
+        <tr><td>Pocket pair to a set</td><td>[[7c 7d]] on [[Ks 9d 2c]]</td><td>2</td><td>8.4</td><td>4.3</td></tr>
+        <tr><td>One overcard</td><td>[[Ah 4c]] on [[Ts 8d 2s]]</td><td>3</td><td>12.5</td><td>6.5</td></tr>
+        <tr><td>Gutshot straight draw</td><td>[[Jh Tc]] on [[9d 7s 2c]]</td><td>4</td><td>16.5</td><td>8.7</td></tr>
+        <tr><td>Two overcards</td><td>[[As Kd]] on [[Qh 7c 2d]]</td><td>6</td><td>24.1</td><td>13.0</td></tr>
+        <tr><td>Set to full house or quads</td><td>[[7c 7d]] on [[7h Ks 2d]]</td><td>7 (10 on a blank turn)</td><td>33.4</td><td>21.7</td></tr>
+        <tr><td>Open-ended straight draw</td><td>[[Jh Tc]] on [[9d 8s 2c]]</td><td>8</td><td>31.5</td><td>17.4</td></tr>
+        <tr><td>Flush draw</td><td>[[Ah 8h]] on [[Kh 9h 4c]]</td><td>9</td><td>35.0</td><td>19.6</td></tr>
+        <tr><td>Flush draw + gutshot</td><td>[[Jh Th]] on [[9h 7c 2h]]</td><td>12</td><td>45.0</td><td>26.1</td></tr>
+        <tr><td>Flush draw + open-ender</td><td>[[Jh Th]] on [[9h 8c 2h]]</td><td>15</td><td>54.1</td><td>32.6</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Outs counted with a throwaway Node script and the evaluator in tools/poker.js, odds from the draw formula. Examples are invented, not real hands. These counts treat every out as clean. A card that completes your flush but also pairs the board can still lose to a full house. The set row is different: every blank turn pairs with itself on the river, so a set has 7 outs on the flop and 10 on an unpaired turn. Its flop to river figure, 33.4 percent (361 of 1,081 turn and river pairs), is counted directly, not from the 7-out row.</p>
+</figure>
+
+<p>To turn a bet into the outs you need, multiply the equity you need by 46 unseen cards and round up. This table does that for a one-card draw on the turn. An example, not a real hand: at $2/$5 the pot is $100 on the turn and a player bets $50. The pot is now $150, and you call $50 to make it $200. You need 50 / 200 = 25 percent, which is 12 outs. A flush draw has 9, so on pot odds alone it is a fold unless you expect to win more on the river.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">Outs needed to call a turn bet</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Bet</th><th>Pot odds</th><th>Equity needed %</th><th>Outs needed, one card</th></tr></thead>
+      <tbody>
+        <tr><td>1/4 pot</td><td>5 to 1</td><td>16.7</td><td>8</td></tr>
+        <tr><td>1/3 pot</td><td>4 to 1</td><td>20.0</td><td>10</td></tr>
+        <tr><td>1/2 pot</td><td>3 to 1</td><td>25.0</td><td>12</td></tr>
+        <tr><td>2/3 pot</td><td>2.5 to 1</td><td>28.6</td><td>14</td></tr>
+        <tr><td>3/4 pot</td><td>2.3 to 1</td><td>30.0</td><td>14</td></tr>
+        <tr><td>Pot</td><td>2 to 1</td><td>33.3</td><td>16</td></tr>
+        <tr><td>1.5x pot</td><td>1.7 to 1</td><td>37.5</td><td>18</td></tr>
+        <tr><td>2x pot</td><td>1.5 to 1</td><td>40.0</td><td>19</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Arithmetic: equity needed is bet / (pot + 2 x bet), checked with the odds command in tools/poker.js. Pot odds are (pot + bet) to bet. Outs needed is the equity times 46, rounded up. It ignores money you win on later streets and cards that help a villain.</p>
+</figure>
+
+<p>Some players think in odds against rather than percentages. This chart puts common draws in that form, so you can hold them up against the pot odds column above.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">Odds against hitting</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Outs</th><th>One card to come</th><th>Two cards to come</th></tr></thead>
+      <tbody>
+        <tr><td>2</td><td>22 to 1</td><td>10.9 to 1</td></tr>
+        <tr><td>4</td><td>10.5 to 1</td><td>5.1 to 1</td></tr>
+        <tr><td>6</td><td>6.7 to 1</td><td>3.1 to 1</td></tr>
+        <tr><td>8</td><td>4.8 to 1</td><td>2.2 to 1</td></tr>
+        <tr><td>9</td><td>4.1 to 1</td><td>1.9 to 1</td></tr>
+        <tr><td>12</td><td>2.8 to 1</td><td>1.2 to 1</td></tr>
+        <tr><td>15</td><td>2.1 to 1</td><td>0.85 to 1 (a favorite)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Arithmetic: one card is (46 minus outs) to outs. Two cards is misses to hits over the 2,162 turn and river pairs, where misses are (47 minus outs)(46 minus outs). For 9 outs: 1,406 misses to 756 hits, 1.86 to 1. The two-card column assumes you see both cards, which a call on the flop does not promise.</p>
+</figure>
+
+<h2>Flop frequencies</h2>
+<p>A flop is three cards from 52, so there are 22,100 of them. Before you look at your own hand, this is what the board will look like.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">What a random flop looks like</h3></div>
+  <div data-fig="bars"><script type="application/json">
+  {"label": "Share of all 22,100 flops by suit pattern and by pairing. Two suits is the most common suit pattern at 55 percent, and 83 percent of flops are unpaired.",
+   "unit": "%", "max": 100,
+   "items": [
+     {"label": "Two suits", "value": 55.06, "note": "12,168 flops"},
+     {"label": "Rainbow (three suits)", "value": 39.76, "note": "8,788 flops"},
+     {"label": "Monotone (one suit)", "value": 5.18, "note": "1,144 flops", "tone": "accent"},
+     {"label": "Unpaired", "value": 82.82, "note": "18,304 flops", "tone": "accent2"},
+     {"label": "Paired", "value": 16.94, "note": "3,744 flops"},
+     {"label": "Three of a kind", "value": 0.24, "note": "52 flops", "tone": "gold"}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact, from a throwaway Node script that counts all 22,100 flops. The first three bars add to 100 percent, and so do the last three. In all, 18.5 percent of flops (4,096 of 22,100, which is 64 rank sets times 64 suit choices) are unpaired with three ranks that fit inside one five-card straight.</p>
+</figure>
+
+<p>Now deal yourself a hand. The three tables below count every one of the 19,600 flops that can come with a given hand in your hand (50 unseen cards, choose 3).</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">What a pocket pair flops: [[7c 7d]]</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Flop result</th><th>Flops</th><th>Chance %</th></tr></thead>
+      <tbody>
+        <tr><td>Set (one 7 on the flop, no pair beside it)</td><td>2,112</td><td>10.78</td></tr>
+        <tr><td>Full house (a 7 plus a pair on the flop)</td><td>144</td><td>0.73</td></tr>
+        <tr><td>Four of a kind (two 7s on the flop)</td><td>48</td><td>0.24</td></tr>
+        <tr><td>Full house (three of a kind on the flop)</td><td>48</td><td>0.24</td></tr>
+        <tr><td>Two pair (a pair on the flop, no 7)</td><td>3,168</td><td>16.16</td></tr>
+        <tr><td>Just your pair</td><td>14,080</td><td>71.84</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Exact, from a throwaway Node script that scores all 19,600 flops. A seven on the flop in any form is 2,304 flops, or 11.76 percent: 17,296 flops hold no seven, and 1 minus 17,296 over 19,600 is that number. The first four rows together, set or better, are 2,352 flops (12.00 percent). The second full house row needs no seven: the board itself is three of a kind, and your pair completes it.</p>
+</figure>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">What ace king offsuit flops: [[As Kd]]</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Flop result</th><th>Flops</th><th>Chance %</th></tr></thead>
+      <tbody>
+        <tr><td>No pair, nothing on the board</td><td>10,496</td><td>53.55</td></tr>
+        <tr><td>Pair on the board only</td><td>2,640</td><td>13.47</td></tr>
+        <tr><td>Pair of aces or kings</td><td>5,280</td><td>26.94</td></tr>
+        <tr><td>Two pair</td><td>792</td><td>4.04</td></tr>
+        <tr><td>Three of a kind</td><td>308</td><td>1.57</td></tr>
+        <tr><td>Straight, full house, or quads</td><td>84</td><td>0.43</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Exact, from a throwaway Node script that scores all 19,600 flops. "Pair of aces or kings" means one of your own cards paired by the flop. Any made hand at all (the last four rows) is 6,464 flops, 32.98 percent. The three of a kind row includes 44 flops where the board itself is trips, which every player shares. About one flop in three gives ace king something, and two in three do not.</p>
+</figure>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">What a suited hand flops: [[As Ks]]</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Flop result</th><th>Flops</th><th>Chance %</th></tr></thead>
+      <tbody>
+        <tr><td>No flush draw</td><td>17,290</td><td>88.21</td></tr>
+        <tr><td>Flush draw (two of your suit)</td><td>2,145</td><td>10.94</td></tr>
+        <tr><td>Flush made (three of your suit)</td><td>165</td><td>0.84</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Exact, from a throwaway Node script that scores all 19,600 flops. Any suited two-card hand gives these same counts: 11 of the 50 unseen cards share your suit, so you flop a flush draw about once in nine tries (10.94 percent) and a made flush about once in 119 (0.84 percent).</p>
+</figure>
+
+<h2>Preflop matchups</h2>
+<p>These are all-in equities with no board yet, as a share of the pot you win (a tie counts as half). Suits matter a little, so each hand is shown with its suits. The first split chart gives eight matchups you will see again and again. The table below holds more.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Eight matchups worth knowing</h3></div>
+  <div data-fig="split"><script type="application/json">
+  {"label": "All-in preflop equity for eight matchups, from pair over pair at about 81 to 19, through the race at 57 to 43, to suited connectors as a 60 to 40 underdog against ace king.",
+   "rows": [
+     {"label": "AA against KK", "parts": [{"label": "First hand", "value": 81.3, "tone": "ink"}, {"label": "Second hand", "value": 18.7, "tone": "accent"}]},
+     {"label": "AA against AKo", "parts": [{"label": "First hand", "value": 92.6, "tone": "ink"}, {"label": "Second hand", "value": 7.4, "tone": "accent"}]},
+     {"label": "TT against 99", "parts": [{"label": "First hand", "value": 81.3, "tone": "ink"}, {"label": "Second hand", "value": 18.7, "tone": "accent"}]},
+     {"label": "KK against AQo", "parts": [{"label": "First hand", "value": 71.6, "tone": "ink"}, {"label": "Second hand", "value": 28.4, "tone": "accent"}]},
+     {"label": "AKo against AQo", "parts": [{"label": "First hand", "value": 74, "tone": "ink"}, {"label": "Second hand", "value": 26, "tone": "accent"}]},
+     {"label": "QQ against AKo", "parts": [{"label": "First hand", "value": 57.2, "tone": "ink"}, {"label": "Second hand", "value": 42.8, "tone": "accent"}]},
+     {"label": "AKs against QQ", "parts": [{"label": "First hand", "value": 46.2, "tone": "ink"}, {"label": "Second hand", "value": 53.8, "tone": "accent"}]},
+     {"label": "98s against AKo", "parts": [{"label": "First hand", "value": 40.4, "tone": "ink"}, {"label": "Second hand", "value": 59.6, "tone": "accent"}]}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact, from tools/poker.js (equity command), counting every possible board. Rounded to one decimal place. Suits are chosen so that no flush draw favors either hand, except where the matchup is suited by design.</p>
+</figure>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">More preflop matchups</h3></div>
+  <div class="table-scroll">
+    <table class="wrap">
+      <thead><tr><th>Matchup</th><th>Type</th><th>First hand %</th><th>Second hand %</th></tr></thead>
+      <tbody>
+        <tr><td>[[As Ah]] v [[Kd Kc]]</td><td>Overpair against pair</td><td>81.3</td><td>18.7</td></tr>
+        <tr><td>[[As Ah]] v [[Ad Kc]]</td><td>Pair against a dominated ace</td><td>92.6</td><td>7.4</td></tr>
+        <tr><td>[[As Ah]] v [[7d 2c]]</td><td>Pair against the worst hand</td><td>87.4</td><td>12.6</td></tr>
+        <tr><td>[[Ts Th]] v [[9d 9c]]</td><td>Pair over pair</td><td>81.3</td><td>18.7</td></tr>
+        <tr><td>[[Qs Qh]] v [[Jd Td]]</td><td>Pair against suited connectors</td><td>81.1</td><td>18.9</td></tr>
+        <tr><td>[[Ks Kh]] v [[Ad Qc]]</td><td>Pair against two overcards</td><td>71.6</td><td>28.4</td></tr>
+        <tr><td>[[Ks Kh]] v [[Ad Qd]]</td><td>Same, overcards suited</td><td>67.9</td><td>32.1</td></tr>
+        <tr><td>[[Qs Qh]] v [[Ad Kc]]</td><td>The classic race</td><td>57.2</td><td>42.8</td></tr>
+        <tr><td>[[Qs Qh]] v [[Ad Kd]]</td><td>The race, overcards suited</td><td>53.8</td><td>46.2</td></tr>
+        <tr><td>[[Js Jh]] v [[Ad Kc]]</td><td>Pair against two overcards</td><td>57.3</td><td>42.7</td></tr>
+        <tr><td>[[7s 7h]] v [[Ad Kc]]</td><td>Small pair against two overcards</td><td>55.4</td><td>44.6</td></tr>
+        <tr><td>[[9s 9h]] v [[Td Jc]]</td><td>Pair against two overcards</td><td>54.3</td><td>45.7</td></tr>
+        <tr><td>[[8s 8h]] v [[Ad Jd]]</td><td>Pair against ace and a lower card</td><td>52.5</td><td>47.5</td></tr>
+        <tr><td>[[Qs Js]] v [[2d 2c]]</td><td>Suited broadways against a small pair</td><td>52.7</td><td>47.3</td></tr>
+        <tr><td>[[As Kh]] v [[Ad Qc]]</td><td>Dominated: shared ace, better kicker</td><td>74.0</td><td>26.0</td></tr>
+        <tr><td>[[As Ks]] v [[Ad Qd]]</td><td>Dominated, both suited</td><td>71.3</td><td>28.7</td></tr>
+        <tr><td>[[As Js]] v [[Kd Td]]</td><td>Two higher cards against two lower</td><td>61.0</td><td>39.0</td></tr>
+        <tr><td>[[As Kh]] v [[Jd Tc]]</td><td>Two high cards against connectors</td><td>62.6</td><td>37.4</td></tr>
+        <tr><td>[[As Kh]] v [[7d 2c]]</td><td>High cards against the worst hand</td><td>67.0</td><td>33.0</td></tr>
+        <tr><td>[[As Kh]] v [[7d 6c]]</td><td>High cards against low connectors</td><td>61.5</td><td>38.5</td></tr>
+        <tr><td>[[9s 8s]] v [[Ad Kc]]</td><td>Suited connectors against high cards</td><td>40.4</td><td>59.6</td></tr>
+        <tr><td>[[6s 5s]] v [[Ad Kc]]</td><td>Suited connectors against high cards</td><td>42.2</td><td>57.8</td></tr>
+        <tr><td>[[Js Ts]] v [[Ad Ac]]</td><td>Suited connectors against aces</td><td>21.7</td><td>78.3</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Exact, from tools/poker.js (equity command). Two things to read from it. Suits move the number: kings against ace queen are 71.6 percent when the ace queen is offsuit and 67.9 percent when it is suited, and queens against ace king drop from 57.2 to 53.8 percent when the ace king is suited. Domination is lopsided: ace king against ace queen is 74.0 to 26.0, while ace king suited against queens is 46.2 to 53.8.</p>
+</figure>
+
+<p>For which of these hands to play and from where, see {{ch:4}} and {{ch:C}}.</p>
+
+<h2>Pairs and sets</h2>
+<p>There are 1,326 two-card starting hands (52 times 51 over 2). Every other count in this section divides by that.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">How often you are dealt each kind of hand</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Hand</th><th>Combos</th><th>Chance %</th><th>About 1 in</th></tr></thead>
+      <tbody>
+        <tr><td>Any pocket pair (13 ranks x 6)</td><td>78</td><td>5.88</td><td>17</td></tr>
+        <tr><td>Any suited hand (78 shapes x 4)</td><td>312</td><td>23.53</td><td>4.25</td></tr>
+        <tr><td>Any offsuit hand (78 shapes x 12)</td><td>936</td><td>70.59</td><td>1.42</td></tr>
+        <tr><td>Two cards ten or higher</td><td>190</td><td>14.33</td><td>7.0</td></tr>
+        <tr><td>At least one ace</td><td>198</td><td>14.93</td><td>6.7</td></tr>
+        <tr><td>Ace king, either suitedness</td><td>16</td><td>1.21</td><td>82.9</td></tr>
+        <tr><td>A named offsuit hand, such as ace king offsuit</td><td>12</td><td>0.90</td><td>110.5</td></tr>
+        <tr><td>A named suited hand, such as ace king suited</td><td>4</td><td>0.30</td><td>331.5</td></tr>
+        <tr><td>A named pocket pair, such as aces</td><td>6</td><td>0.45</td><td>221</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Arithmetic, with the counts checked by tools/poker.js (combos command). Two cards ten or higher: 20 cards (T, J, Q, K, A in four suits), 20 choose 2 is 190. At least one ace: 4 x 48 + 6 = 198. See {{ch:14}} for how to count combinations.</p>
+</figure>
+
+<p>A pocket pair becomes a set when one of the two remaining cards of its rank comes. The odds depend on how many cards you get to see, counted from the moment you are dealt the pair.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">A pocket pair finds its third card</h3></div>
+  <div data-fig="bars"><script type="application/json">
+  {"label": "Chance that at least one of the two remaining cards of your pair's rank arrives: 11.8 percent on the flop, 15.5 percent by the turn, and 19.2 percent by the river.",
+   "unit": "%", "max": 30,
+   "items": [
+     {"label": "By the flop", "value": 11.76, "note": "7.5 to 1 against"},
+     {"label": "By the turn", "value": 15.51, "note": "5.4 to 1 against"},
+     {"label": "By the river", "value": 19.18, "note": "4.2 to 1 against", "tone": "accent2"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic, with the flop figure matching the flop table above: 1 minus C(48,k) over C(50,k) for k = 3, 4, 5 board cards. That is 1 minus 17,296 over 19,600, 1 minus 194,580 over 230,300, and 1 minus 1,712,304 over 2,118,760. Odds against are (1 minus p) over p.</p>
+</figure>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">A pocket pair on the flop, played 100 times</h3></div>
+  <div data-fig="dots"><script type="application/json">
+  {"label": "Out of 100 flops after you hold a pocket pair, about 12 show at least one more card of your rank and 88 do not.",
+   "parts": [
+     {"label": "A third card of your rank", "value": 12, "tone": "accent2"},
+     {"label": "No third card", "value": 88, "tone": "paper"}
+   ]}
+  </script></div>
+  <p class="figure-note">11.76 percent, rounded to 12. If the flop misses, you now have 2 outs with two cards to come, and the draw table above gives 8.4 percent by the river (4.3 percent for one card). The two figures differ because this one is counted before you see the flop.</p>
+</figure>
+
+<h2>Hand-ranking counts</h2>
+<p>A five-card hand is one of 2,598,960 combinations. In hold'em you pick the best five of seven cards, so the rarer ranks show up more often than the five-card counts suggest. Both sets of counts are here. In the seven-card column each hand is counted once, under the best rank it makes.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">Hands by rank, five cards and best five of seven</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Rank</th><th>Five-card hands</th><th>%</th><th>Seven-card hands</th><th>%</th><th>Seven cards, about 1 in</th></tr></thead>
+      <tbody>
+        <tr><td>Straight flush</td><td>40</td><td>0.0015</td><td>41,584</td><td>0.03</td><td>1 in 3,217</td></tr>
+        <tr><td>Four of a kind</td><td>624</td><td>0.02</td><td>224,848</td><td>0.17</td><td>1 in 595</td></tr>
+        <tr><td>Full house</td><td>3,744</td><td>0.14</td><td>3,473,184</td><td>2.60</td><td>1 in 39</td></tr>
+        <tr><td>Flush</td><td>5,108</td><td>0.20</td><td>4,047,644</td><td>3.03</td><td>1 in 33</td></tr>
+        <tr><td>Straight</td><td>10,200</td><td>0.39</td><td>6,180,020</td><td>4.62</td><td>1 in 22</td></tr>
+        <tr><td>Three of a kind</td><td>54,912</td><td>2.11</td><td>6,461,620</td><td>4.83</td><td>1 in 21</td></tr>
+        <tr><td>Two pair</td><td>123,552</td><td>4.75</td><td>31,433,400</td><td>23.50</td><td>1 in 4</td></tr>
+        <tr><td>One pair</td><td>1,098,240</td><td>42.26</td><td>58,627,800</td><td>43.82</td><td>1 in 2</td></tr>
+        <tr><td>High card</td><td>1,302,540</td><td>50.12</td><td>23,294,460</td><td>17.41</td><td>1 in 6</td></tr>
+        <tr class="total"><td>Total</td><td>2,598,960</td><td>100</td><td>133,784,560</td><td>100</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Exact, from a throwaway Node script that scores every five-card and seven-card combination with the evaluator in tools/poker.js. The straight flush row includes the royal flush: 4 five-card hands and 4,324 seven-card hands. The royal flush count is arithmetic (4 suits, 5 royal cards, 2 others from the other 47: 4 x 1,081), confirmed by the same script.</p>
+</figure>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Best hand of seven cards</h3></div>
+  <div data-fig="bars"><script type="application/json">
+  {"label": "Share of all seven-card combinations by best hand. One pair is the most common at 44 percent, then two pair, high card, and trips, while a straight flush is 0.03 percent.",
+   "unit": "%", "max": 50,
+   "items": [
+     {"label": "High card", "value": 17.41},
+     {"label": "One pair", "value": 43.82},
+     {"label": "Two pair", "value": 23.5},
+     {"label": "Three of a kind", "value": 4.83},
+     {"label": "Straight", "value": 4.62},
+     {"label": "Flush", "value": 3.03},
+     {"label": "Full house", "value": 2.6},
+     {"label": "Four of a kind", "value": 0.17},
+     {"label": "Straight flush", "value": 0.03}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact, from the same seven-card count as the table. This is the chance for seven cards chosen at random, which is the case at showdown for a hand that sees the river, not for a hand you chose to play.</p>
+</figure>

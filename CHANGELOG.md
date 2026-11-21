@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.41.0] - 2026-11-21
+
+### Added
+
+- Appendix B, Probability Tables and Odds Charts: Appendix B: exact tables for draws by outs, pot odds and odds against, flop frequencies, preflop matchups, pair and set odds, and hand-ranking counts.
+
 ## [0.40.0] - 2026-11-21
 
 ### Added

@@ -1,6 +1,6 @@
 // The one place the version lives. Pages stamp it into any [data-version] element.
 // tools/check.js fails the build if CHANGELOG.md has no entry for it.
-var POKER_VERSION = '0.40.0';
+var POKER_VERSION = '0.41.0';
 
 document.addEventListener('DOMContentLoaded', function () {
   var nodes = document.querySelectorAll('[data-version]');
