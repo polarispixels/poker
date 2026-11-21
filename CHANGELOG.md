@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.7.0] - 2026-11-21
+
+### Added
+
+- Chapter 2, Rules, Hands, and the Flow of a Live Hand: Chapter 2 covers hand rankings with exact counts, the button, blinds and straddle, four betting rounds with a tracked pot, showdown, live procedure, and counting the pot street by street.
+
 ## [0.6.0] - 2026-11-21
 
 ### Added

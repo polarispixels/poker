@@ -22,13 +22,251 @@
     <main>
       <article class="chapter">
         <header class="chapter-head">
-          <p class="chapter-kicker label">Chapter 2 <span class="badge">To come</span></p>
+          <p class="chapter-kicker label">Chapter 2 <span class="badge">Preliminary draft</span></p>
           <h1 class="chapter-title">Rules, Hands, and the Flow of a Live Hand</h1>
           <p class="standfirst">Hand rankings, the button, blinds, straddles, betting rounds, and live procedure.</p>
         </header>
 
         <div class="prose chapter-body">
-<p class="lead">This page has not been written yet. The book is being written and published one chapter at a time.</p>
+<p class="lead">This chapter gives you the rules of a live No-Limit Hold'em hand from the first blind to the last card turned over: what beats what, who posts what, who acts when, and how to bet at a real table without costing yourself money by accident.</p>
+
+<h2>Ranking the hands</h2>
+
+<p>Every player gets two private cards, called hole cards. Five shared cards, called the board, come face up in the middle. Your hand is the best five cards you can make from those seven. You may use both hole cards, one, or none. Suits never break ties; they only matter for flushes.</p>
+
+<p>The ranking runs from the rarest hand to the most common. A deck holds 2,598,960 different five-card hands (52 x 51 x 50 x 49 x 48 / 120), and the table below counts how many fall into each category. The counts come from arithmetic, shown in the note. Count by hand: pick the ranks, then the suits, then remove any hand already counted in a higher category.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table 2.1</span><h3 class="figure-title">The ten hands, rarest first</h3></div>
+  <div class="table-scroll">
+    <table class="wrap">
+      <thead><tr><th>Hand</th><th>Example</th><th>Count</th><th>Chance</th><th>About</th></tr></thead>
+      <tbody>
+        <tr><td>Royal flush</td><td><span class="cards" role="img" aria-label="Ace of spades, King of spades, Queen of spades, Jack of spades, Ten of spades"><span class="pc">A<i>♠</i></span><span class="pc">K<i>♠</i></span><span class="pc">Q<i>♠</i></span><span class="pc">J<i>♠</i></span><span class="pc">T<i>♠</i></span></span></td><td>4</td><td>0.0002%</td><td>1 in 649,740</td></tr>
+        <tr><td>Straight flush</td><td><span class="cards" role="img" aria-label="9 of hearts, 8 of hearts, 7 of hearts, 6 of hearts, 5 of hearts"><span class="pc r">9<i>♥</i></span><span class="pc r">8<i>♥</i></span><span class="pc r">7<i>♥</i></span><span class="pc r">6<i>♥</i></span><span class="pc r">5<i>♥</i></span></span></td><td>36</td><td>0.0014%</td><td>1 in 72,193</td></tr>
+        <tr><td>Four of a kind</td><td><span class="cards" role="img" aria-label="Queen of spades, Queen of hearts, Queen of diamonds, Queen of clubs, 4 of spades"><span class="pc">Q<i>♠</i></span><span class="pc r">Q<i>♥</i></span><span class="pc r">Q<i>♦</i></span><span class="pc">Q<i>♣</i></span><span class="pc">4<i>♠</i></span></span></td><td>624</td><td>0.024%</td><td>1 in 4,165</td></tr>
+        <tr><td>Full house</td><td><span class="cards" role="img" aria-label="Jack of spades, Jack of hearts, Jack of diamonds, 8 of clubs, 8 of spades"><span class="pc">J<i>♠</i></span><span class="pc r">J<i>♥</i></span><span class="pc r">J<i>♦</i></span><span class="pc">8<i>♣</i></span><span class="pc">8<i>♠</i></span></span></td><td>3,744</td><td>0.14%</td><td>1 in 694</td></tr>
+        <tr><td>Flush</td><td><span class="cards" role="img" aria-label="Ace of diamonds, 9 of diamonds, 7 of diamonds, 4 of diamonds, 2 of diamonds"><span class="pc r">A<i>♦</i></span><span class="pc r">9<i>♦</i></span><span class="pc r">7<i>♦</i></span><span class="pc r">4<i>♦</i></span><span class="pc r">2<i>♦</i></span></span></td><td>5,108</td><td>0.20%</td><td>1 in 509</td></tr>
+        <tr><td>Straight</td><td><span class="cards" role="img" aria-label="9 of clubs, 8 of diamonds, 7 of hearts, 6 of spades, 5 of clubs"><span class="pc">9<i>♣</i></span><span class="pc r">8<i>♦</i></span><span class="pc r">7<i>♥</i></span><span class="pc">6<i>♠</i></span><span class="pc">5<i>♣</i></span></span></td><td>10,200</td><td>0.39%</td><td>1 in 255</td></tr>
+        <tr><td>Three of a kind</td><td><span class="cards" role="img" aria-label="7 of spades, 7 of hearts, 7 of diamonds, King of clubs, 2 of spades"><span class="pc">7<i>♠</i></span><span class="pc r">7<i>♥</i></span><span class="pc r">7<i>♦</i></span><span class="pc">K<i>♣</i></span><span class="pc">2<i>♠</i></span></span></td><td>54,912</td><td>2.11%</td><td>1 in 47</td></tr>
+        <tr><td>Two pair</td><td><span class="cards" role="img" aria-label="King of spades, King of hearts, 5 of diamonds, 5 of clubs, Ace of hearts"><span class="pc">K<i>♠</i></span><span class="pc r">K<i>♥</i></span><span class="pc r">5<i>♦</i></span><span class="pc">5<i>♣</i></span><span class="pc r">A<i>♥</i></span></span></td><td>123,552</td><td>4.75%</td><td>1 in 21</td></tr>
+        <tr><td>One pair</td><td><span class="cards" role="img" aria-label="Ten of spades, Ten of hearts, Ace of clubs, 8 of diamonds, 3 of spades"><span class="pc">T<i>♠</i></span><span class="pc r">T<i>♥</i></span><span class="pc">A<i>♣</i></span><span class="pc r">8<i>♦</i></span><span class="pc">3<i>♠</i></span></span></td><td>1,098,240</td><td>42.26%</td><td>1 in 2.4</td></tr>
+        <tr><td>High card</td><td><span class="cards" role="img" aria-label="Ace of spades, Jack of hearts, 9 of diamonds, 5 of clubs, 2 of spades"><span class="pc">A<i>♠</i></span><span class="pc r">J<i>♥</i></span><span class="pc r">9<i>♦</i></span><span class="pc">5<i>♣</i></span><span class="pc">2<i>♠</i></span></span></td><td>1,302,540</td><td>50.12%</td><td>1 in 2.0</td></tr>
+        <tr class="total"><td>All hands</td><td></td><td>2,598,960</td><td>100%</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Arithmetic. Straight flushes (36) exclude the 4 royals. Flush: 4 x C(13,5) - 40 = 5,108. Straight: 10 x 4^5 - 40 = 10,200. Full house: 13 x 4 x 12 x 6 = 3,744. The ten counts sum to 2,598,960.</p>
+</figure>
+
+<p>Two details trip up new players. The ace plays high or low in a straight, so A-2-3-4-5 (the wheel) is the lowest straight, and 10-J-Q-K-A the highest. And when two players hold the same category, rank decides: a full house is compared by its three of a kind first, then its pair. Kickers, the spare cards that break ties between equal pairs or trips, matter more than beginners expect.</p>
+
+<p>The table counts five-card hands, which is what you finish with. Most of the time you finish with a weak one.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 2.1</span><h3 class="figure-title">One hundred five-card hands</h3></div>
+  <div data-fig="dots"><script type="application/json">
+  {"label": "Out of 100 random five-card hands, about 50 are high card, 42 are one pair, 5 are two pair, and 3 are three of a kind or better.",
+   "parts": [
+     {"label": "High card", "value": 50, "tone": "paper"},
+     {"label": "One pair", "value": 42, "tone": "muted"},
+     {"label": "Two pair", "value": 5, "tone": "accent2"},
+     {"label": "Trips or better", "value": 3, "tone": "gold"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic from the table above: 50.12%, 42.26%, 4.75%, and 2.87% (the seven best categories added), rounded to whole dots.</p>
+</figure>
+
+<details class="drill">
+  <summary>Two players show full houses: kings full of sevens, and sevens full of aces. Who wins?</summary>
+  <p>Kings full. Compare the three of a kind first: three kings beat three sevens, and the pair never comes into it.</p>
+</details>
+
+<h2>The button, the blinds, and the straddle</h2>
+
+<p>Someone has to act last, and a round plastic disc, the dealer button, decides who. It marks the seat that acts last after the flop, and it moves one seat clockwise after every hand. The dealer in a casino is a hired employee; the button stands in for the dealer's seat.</p>
+
+<p>The two seats left of the button post forced bets, called blinds, before the cards come out. The small blind (SB) is the first seat left of the button. The big blind (BB) is the next. In the $2/$5 game this book uses, the big blind is $5 and the small blind is often $2, though some rooms use another amount. Blinds exist so there is something to win. They are also why folding is not free: every orbit, a seat pays them whether it plays or not.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 2.2</span><h3 class="figure-title">Nine seats, blinds posted</h3></div>
+  <div data-fig="table"><script type="application/json">
+  {"label": "Nine-handed $2/$5 table before anyone acts. The hero is on the button. The small blind has posted $2 and the big blind $5, so the pot is $7.",
+   "button": 0, "pot": "$7",
+   "seats": [
+     {"pos": "BTN", "stack": "$500", "state": "hero"},
+     {"pos": "SB", "stack": "$500", "bet": "$2"},
+     {"pos": "BB", "stack": "$500", "bet": "$5"},
+     {"pos": "UTG", "stack": "$500"},
+     {"pos": "UTG+1", "stack": "$500"},
+     {"pos": "MP", "stack": "$500"},
+     {"pos": "LJ", "stack": "$500"},
+     {"pos": "HJ", "stack": "$500"},
+     {"pos": "CO", "stack": "$500"}
+   ]}
+  </script></div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history. Seat names are explained in <a class="xref" href="03-position.html">Chapter 3, Position</a>.</p>
+</figure>
+
+<p>Preflop, action starts with the seat left of the big blind, called under the gun (UTG), and moves clockwise. After the flop the order changes: the first live seat left of the button acts first, and the button acts last. Acting last is a large edge, and <a class="xref" href="03-position.html">Chapter 3, Position</a> is about nothing else.</p>
+
+<p>A straddle is an optional extra blind, posted before the cards are dealt, by a player who wants more money in play. In most live rooms it comes from the UTG seat, is usually double the big blind ($10 here), and gives that player the last action preflop. The straddler is, in effect, the new big blind: the first bet to call is $10, and the smallest raise is to $20. In some rooms the button can straddle instead, and rules on who may straddle vary, so ask before you play.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 2.3</span><h3 class="figure-title">The same table with a $10 UTG straddle</h3></div>
+  <div data-fig="table"><script type="application/json">
+  {"label": "Nine-handed $2/$5 table with a $10 straddle from UTG. Dead money is $2 plus $5 plus $10, so the pot is $17. The hero in UTG plus one acts first and faces a $10 bet.",
+   "button": 5, "pot": "$17",
+   "seats": [
+     {"pos": "UTG+1", "stack": "$500", "state": "hero", "note": "acts first"},
+     {"pos": "MP", "stack": "$500"},
+     {"pos": "LJ", "stack": "$500"},
+     {"pos": "HJ", "stack": "$500"},
+     {"pos": "CO", "stack": "$500"},
+     {"pos": "BTN", "stack": "$500"},
+     {"pos": "SB", "stack": "$500", "bet": "$2"},
+     {"pos": "BB", "stack": "$500", "bet": "$5"},
+     {"pos": "UTG", "stack": "$500", "bet": "$10", "note": "straddle"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: 2 + 5 + 10 = 17. An example hand in a $2/$5 game. Not a real hand history. Strategy against straddles is in <a class="xref" href="12-preflop-strategy-for-live-games.html">Chapter 12, Preflop Strategy for Live Games</a>.</p>
+</figure>
+
+<details class="drill">
+  <summary>In the straddled hand above, what is the smallest raise the first player to act may make?</summary>
+  <p>To $20. The bet to match is $10, and a raise must add at least the size of the last bet or raise, which is $10.</p>
+</details>
+
+<h2>Four betting rounds</h2>
+
+<p>A Hold'em hand has four betting rounds, called streets. Each one ends when every player still in the hand has either put the same amount in or folded. If everyone folds to one bet, that player wins the pot with no showdown and does not have to show a card.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 2.4</span><h3 class="figure-title">The four streets, in order</h3></div>
+  <ol class="timeline">
+    <li><b>Preflop</b><span>Two hole cards each. Blinds are posted. UTG acts first.</span></li>
+    <li><b>Flop</b><span>Three board cards face up. First live seat left of the button acts first.</span></li>
+    <li><b>Turn</b><span>A fourth board card. Bets are usually larger now.</span></li>
+    <li><b>River</b><span>The fifth and last board card. Last chance to bet.</span></li>
+    <li><b>Showdown</b><span>Cards are shown and the best five-card hand takes the pot.</span></li>
+  </ol>
+  <p class="figure-note">Live dealers burn (discard face down) one card before each street. The burn does not change your odds, since you cannot see it either way.</p>
+</figure>
+
+<p>In no-limit, you may bet any amount from the minimum up to every chip you have, called going all in. The minimum opening bet is one big blind. A raise must be at least as large as the previous bet or raise in that round. At $2/$5, if the first bettor opens to $20 (a $15 raise over the $5 blind), the next raise must be to at least $35. Larger raises are legal. Raising is covered as a skill in <a class="xref" href="08-aggression.html">Chapter 8, Aggression</a>.</p>
+
+<p>The pot is the sum of all money in the middle, and you should be able to say its size without asking. Here is one hand, tracked street by street. It is an invented example.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 2.5</span><h3 class="figure-title">A pot growing across four streets</h3></div>
+  <div class="table-scroll">
+    <table class="hand-log">
+      <thead><tr><th>Street</th><th>Board</th><th>Action</th><th>Pot</th></tr></thead>
+      <tbody>
+        <tr><td>Preflop</td><td>Hero: <span class="cards" role="img" aria-label="Ace of clubs, Jack of clubs"><span class="pc">A<i>♣</i></span><span class="pc">J<i>♣</i></span></span></td><td>MP raises to $20. Hero calls in the cutoff. The small blind folds, and its $2 stays in the pot. The big blind calls.</td><td class="pot">$62</td></tr>
+        <tr><td>Flop</td><td><span class="cards" role="img" aria-label="Jack of diamonds, 8 of hearts, 3 of clubs"><span class="pc r">J<i>♦</i></span><span class="pc r">8<i>♥</i></span><span class="pc">3<i>♣</i></span></span></td><td>The big blind checks. MP bets $40. Hero calls. The big blind folds.</td><td class="pot">$142</td></tr>
+        <tr><td>Turn</td><td><span class="cards" role="img" aria-label="Jack of diamonds, 8 of hearts, 3 of clubs, 2 of spades"><span class="pc r">J<i>♦</i></span><span class="pc r">8<i>♥</i></span><span class="pc">3<i>♣</i></span><span class="pc">2<i>♠</i></span></span></td><td>MP bets $70. Hero calls.</td><td class="pot">$282</td></tr>
+        <tr><td>River</td><td><span class="cards" role="img" aria-label="Jack of diamonds, 8 of hearts, 3 of clubs, 2 of spades, King of hearts"><span class="pc r">J<i>♦</i></span><span class="pc r">8<i>♥</i></span><span class="pc">3<i>♣</i></span><span class="pc">2<i>♠</i></span><span class="pc r">K<i>♥</i></span></span></td><td>MP checks. Hero checks. The river checked through, so MP, first to act, shows first.</td><td class="pot">$282</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Arithmetic: the small blind's $2, plus $20 each from MP, the hero, and the big blind (whose $20 includes its $5 blind): 2 + 20 + 20 + 20 = 62. Flop: 62 + 40 + 40 = 142. Turn: 142 + 70 + 70 = 282. An example hand in a $2/$5 game. Not a real hand history.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Phil Galfond might say</p>
+  <p class="said">He would tell a new player to learn the mechanics until they are boring, and only then care about strategy. A player who is thinking about whether it is their turn has no attention left for the hand. Sequence matters in teaching: procedure first, then ideas.</p>
+  <p class="note">An imagined voice: our reading of the teaching approach behind Run It Once, not his words.</p>
+</aside>
+
+<h2>Showdown</h2>
+
+<p>When betting ends on the river with two or more players left, they show their hands. In most rooms the last player to bet or raise shows first. If the river checks through, the first player to act shows first. The rule most worth knowing is "cards speak": your hand is whatever your cards make, not whatever you say. Turn both hole cards face up, let the dealer read them, and do not announce a hand. A player who mucks (discards face down) a winner by mistake in most rooms cannot get it back.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table 2.2</span><h3 class="figure-title">A showdown, step by step</h3></div>
+  <div class="table-scroll">
+    <table class="wrap">
+      <thead><tr><th>Player</th><th>Hole cards</th><th>Best five</th><th>Hand</th></tr></thead>
+      <tbody>
+        <tr><td>Board</td><td colspan="3"><span class="cards" role="img" aria-label="King of spades, 7 of diamonds, 7 of clubs, 2 of spades, Ace of diamonds"><span class="pc">K<i>♠</i></span><span class="pc r">7<i>♦</i></span><span class="pc">7<i>♣</i></span><span class="pc">2<i>♠</i></span><span class="pc r">A<i>♦</i></span></span></td></tr>
+        <tr><td>Hero</td><td><span class="cards" role="img" aria-label="Ace of hearts, 7 of hearts"><span class="pc r">A<i>♥</i></span><span class="pc r">7<i>♥</i></span></span></td><td><span class="cards" role="img" aria-label="7 of hearts, 7 of diamonds, 7 of clubs, Ace of hearts, Ace of diamonds"><span class="pc r">7<i>♥</i></span><span class="pc r">7<i>♦</i></span><span class="pc">7<i>♣</i></span><span class="pc r">A<i>♥</i></span><span class="pc r">A<i>♦</i></span></span></td><td class="bad">Sevens full of aces</td></tr>
+        <tr><td>Villain</td><td><span class="cards" role="img" aria-label="King of hearts, King of diamonds"><span class="pc r">K<i>♥</i></span><span class="pc r">K<i>♦</i></span></span></td><td><span class="cards" role="img" aria-label="King of hearts, King of diamonds, King of spades, 7 of diamonds, 7 of clubs"><span class="pc r">K<i>♥</i></span><span class="pc r">K<i>♦</i></span><span class="pc">K<i>♠</i></span><span class="pc r">7<i>♦</i></span><span class="pc">7<i>♣</i></span></span></td><td class="good">Kings full of sevens</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Both players made a full house. Three kings beat three sevens, so the villain wins. An example hand, not a real hand history.</p>
+</figure>
+
+<p>Ties split the pot. When two players have the same five cards, such as when the board is the best hand, they divide it evenly, and any odd chip goes by the house rule.</p>
+
+<h2>Live procedure: say it, then do it</h2>
+
+<p>Online, a click is unambiguous. Live, a bet is made by words and chips, and the two can disagree. Rooms differ, so check the posted rules, but a few principles are close to universal.</p>
+
+<ul>
+  <li><strong>Words are binding.</strong> In most rooms, a clear verbal statement ("call", "raise to sixty", "fold") commits you, even before the chips move. "Raise" with no amount often means the smallest legal raise.</li>
+  <li><strong>A string bet is not allowed.</strong> If you reach out, put chips in, go back to your stack, and put in more, the dealer may force you to stop at the first amount. To raise in one motion, say "raise" first, or put all the chips in at once.</li>
+  <li><strong>One chip forward is a call.</strong> In most rooms, a single chip pushed over the line without a word is only a call, even when the chip is worth more than the bet and even if you meant to raise. With no bet in front of you, the same chip is a bet of its full value. Several chips without a word are judged by house rule, and that is where most arguments start.</li>
+  <li><strong>Act in turn.</strong> A bet, call, or fold made before your turn can be held binding, and even reaching for chips early tells the table what you plan to do. Wait, and say nothing about your hand while others decide.</li>
+</ul>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 2.6</span><h3 class="figure-title">Sloppy and clean, on the same bet</h3></div>
+  <div class="compare">
+    <div class="a"><h4>Sloppy</h4><p>Facing a $20 bet, you slide out a $5 chip, pause, then add a $25 chip while saying nothing. The first motion did not even cover the call, so the likely ruling is a string bet: you call $20 and lose the raise you wanted.</p></div>
+    <div class="b"><h4>Clean</h4><p>You say "raise to sixty" and push exactly $60 across in one motion. The words and the chips match, so there is nothing to rule on.</p></div>
+  </div>
+  <p class="figure-note">An example of common practice. Exact rulings vary by room, so ask the floor. Etiquette and house rules are collected in <a class="xref" href="f-live-etiquette-and-house-rules.html">Appendix F, Live Etiquette and House Rules</a>.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Doyle Brunson might say</p>
+  <p class="said">He would say to learn the rules cold and never lean on them. A confident raise delivered cleanly is a weapon. A fumbled one hands the table information and a ruling. Know the procedure so it never gets in the way of the pressure.</p>
+  <p class="note">An imagined voice: our reading of the open-playbook spirit of Super/System (1979), not his words.</p>
+</aside>
+
+<details class="drill">
+  <summary>The bet to you is $25. You push a single $100 chip forward and say nothing. What is the likely ruling?</summary>
+  <p>In most rooms, a call of $25, and the dealer gives you $75 change. Some rooms rule it differently, which is the point: say "raise to a hundred" if you mean a raise.</p>
+</details>
+
+<h2>Protecting your hand and your chips</h2>
+
+<p>Your cards are not safe until you protect them. A dealer may kill a hand that touches the muck, and a tossed card can land on a discard by accident. Do not lean on your cards, and do not hide them so deep that no one can tell whose they are. Keep them in front of you, in plain view of the dealer, with a chip, a card protector, or a small token on top.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 2.7</span><h3 class="figure-title">Your routine for every hand</h3></div>
+  <ol class="flow">
+    <li><strong>Look once</strong><span>Check both cards, then lock them away in your mind.</span></li>
+    <li><strong>Cover</strong><span>Put a chip or protector on top of the cards.</span></li>
+    <li><strong>Wait your turn</strong><span>No chips, no words, until action reaches you.</span></li>
+    <li><strong>Say, then move</strong><span>Declare the action, then move chips to match.</span></li>
+    <li><strong>Fold clearly</strong><span>Push the cards forward to the dealer, face down.</span></li>
+  </ol>
+  <p class="figure-note">A summary of this section, based on common live-room practice rather than any one room's rules.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Daniel Negreanu might say</p>
+  <p class="said">He would point out that the table is already telling you things before a card is shown. How a person handles chips, how fast they reach for them, and whether they guard their cards are all information. Learn clean procedure yourself, and notice who does not have it.</p>
+  <p class="note">An imagined voice: our reading of his publicly known emphasis on hand reading and observation, not his words.</p>
+</aside>
+
+<p>Two more habits save money. Keep your chips in neat, visible stacks so the dealer and your opponents can see your total, and never put chips into the pot in a way that blurs the amount. And speak up: if you think someone has misread a bet, call the dealer before action moves on, since a mistake is easiest to fix right away.</p>
+
+<aside class="key">
+  <p class="label">Key idea</p>
+  <p>The rules are cheap to learn and expensive to forget. Say your action, make the chips match, and protect your cards, so your mistakes happen on strategy and not on procedure.</p>
+</aside>
+
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>Count the pot as it grows</h2>
+  <p><strong>The shortcut.</strong> Keep a running total. After each street, add the bet once for the bettor and once for each caller. Heads-up, that means adding the bet twice. Round to the nearest $5 if exact dollars slow you down.</p>
+  <p class="math">Pot $62. Bet $40, called: 62 + 40 + 40 = $142. Bet $70, called: 142 + 70 + 70 = $282</p>
+  <p><strong>Where it bends.</strong> Preflop, count each player's total, not the raise: a big blind who calls a $20 raise has $20 in, not $25, and a folded blind's money stays in. In a three-way pot, a $40 bet with two callers adds $120, not $80. Live rooms take rake and sometimes a jackpot drop from each pot, so the dealer's pot can be a little smaller than yours. Side pots in all-in hands and bets you do not see called also break the count. When it matters, ask the dealer for the pot, which most rooms allow. The same running total feeds the pot-odds math in <a class="xref" href="05-odds-and-outs.html">Chapter 5, Odds and Outs</a>.</p>
+</aside>
         </div>
       </article>
 
@@ -49,5 +287,6 @@
   </div>
 
   <script src="../js/version.js"></script>
+  <script src="../js/figures.js"></script>
 </body>
 </html>
