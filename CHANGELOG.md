@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.40.0] - 2026-11-21
+
+### Added
+
+- Chapter 34, A Hold'em Player's Guide to Omaha: Why Hold'em instincts about big pairs and draws fail in Omaha, with exact wrap and equity comparisons and a short tour of stud, razz, draw and mixed games.
+
 ## [0.39.0] - 2026-11-21
 
 ### Added

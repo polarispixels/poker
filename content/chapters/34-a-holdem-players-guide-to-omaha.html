@@ -1,0 +1,261 @@
+<p class="lead">Omaha looks like Hold'em with two extra cards, and that is the trap. This chapter shows why your Hold'em instincts about big pairs and draws fail there, and what the failure teaches you about equity in the game you play every night.</p>
+
+<h2>The same board, a different game</h2>
+
+<p>Pot-Limit Omaha (PLO) uses the same table, the same button, the same five shared cards, and the same hand rankings as Hold'em. Two rules change everything. First, you are dealt <strong>four</strong> hole cards. Second, your hand must use <strong>exactly two</strong> of them and exactly three board cards. You cannot play the board, and you cannot play one hole card or three.</p>
+
+<p>The third change is the betting. In pot-limit, the biggest bet you can make is the size of the pot. In a $2/$5 game, that means no all-in shoves for $500 into a $12 pot. Pots grow in steps: bet the pot, get called, and the pot has tripled. At 100 big blinds, stacks usually go in over several streets, not in one shove.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">What four hole cards do to the count</h3></div>
+  <ul class="stats">
+    <li><b>1,326</b><span>starting hands in Hold'em</span></li>
+    <li><b>270,725</b><span>starting hands in Omaha</span></li>
+    <li><b>60</b><span>five-card hands you hold on a full board</span></li>
+  </ul>
+  <p class="figure-note">Arithmetic: Hold'em is 52 x 51 / 2 = 1,326. Omaha is 52 x 51 x 50 x 49 / 24 = 270,725, about 204 times more. Five-card hands: 6 pairs of hole cards (4 x 3 / 2) times 10 ways to pick 3 of 5 board cards = 60.</p>
+</figure>
+
+<p>Sixty possible hands is the heart of it. In Hold'em you hold one hand, and the board either helps it or does not. In Omaha you hold sixty, and the best of them wins. A hand that looks dead on the flop can be alive on the turn, and a hand that looks strong can be one card away from second best.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Hold'em next to Omaha</h3></div>
+  <div class="compare">
+    <div class="a"><h4>Hold'em</h4><p>Two hole cards. Use both, one, or none. Usually no-limit: one bet can be your whole stack. A pair is a real hand.</p></div>
+    <div class="b"><h4>Omaha</h4><p>Four hole cards. Use exactly two. Usually pot-limit: a bet is at most the pot. One pair is rarely enough to win a big pot.</p></div>
+  </div>
+  <p class="figure-note">A summary of the rules. Live Omaha is also dealt in other forms, such as Omaha hi-lo. This chapter covers the high-only game.</p>
+</figure>
+
+<h2>Why big pairs shrink</h2>
+
+<p>A pair of aces is the best starting hand in Hold'em. In Omaha, a pair of aces is only one piece of a four-card hand, and the other two cards decide whether it is good. Aces with no suited or connected partners are called "naked" aces, and they play poorly. You hold one strong pair and nothing that works with the board.</p>
+
+<p>Three things shrink the pair.</p>
+
+<ol>
+  <li><strong>More hands run into yours.</strong> Every opponent holds four cards too, so someone has a set, two pair, or a straight draw far more often than in Hold'em.</li>
+  <li><strong>The board hits other hands harder.</strong> Eight hole cards in two players' hands cover a lot of ranks. A flop that misses your pair of aces often connects with something else.</li>
+  <li><strong>One pair is a thin hand.</strong> Pairs win small pots. Sets, straights, flushes, and full houses win the big ones.</li>
+</ol>
+
+<p>Here is an invented hand to see it. The game is $2/$5 PLO. Hero holds a pair of aces with two weak side cards. The button holds four cards that all work together.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Aces that flop an overpair and lose</h3></div>
+  <div class="table-scroll">
+    <table class="hand-log">
+      <thead><tr><th>Street</th><th>Board</th><th>Action</th><th>Pot</th></tr></thead>
+      <tbody>
+        <tr><td>Preflop</td><td>Hero: [[As Ah 9d 4c]]<br>Button: [[Kc Qc 8d 7h]]</td><td>Hero raises to $15 from UTG. The button calls. Blinds fold.</td><td class="pot">$37</td></tr>
+        <tr><td>Flop</td><td>[[Kd 8h 3s]]</td><td>Hero bets the pot, $37. The button calls.</td><td class="pot">$111</td></tr>
+        <tr><td>Read</td><td>Same flop</td><td>The button has two pair, kings and eights, from two hole cards. Hero has one pair and only backdoor draws. Equity now: hero 28.0%, button 72.0%.</td><td class="pot">$111</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history. Pot: 2 + 5 + 15 + 15 = $37, then 37 + 37 + 37 = $111. Equity exact: all 820 turn and river pairs counted with a short Omaha script built on the hand evaluator in tools/poker.js.</p>
+</figure>
+
+<p>The button flopped a hand, and also a few ways to improve it. Hero flopped a pair that is already behind. This is the usual shape of a big-pair loss in Omaha: it is not a bad beat, it is a hand that was worth less than it looked.</p>
+
+<p>The fix is to judge all four cards together. A hand is strong when its cards support each other: pairs with suited cards, connected cards, and a matching suit on the high ones. The sketch below shows two things to ask about any four-card hand.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Four-card hands on two questions</h3></div>
+  <div data-fig="scatter"><script type="application/json">
+  {"label": "Sketch of Omaha starting hands. Cards that work together rank high on the horizontal axis and nut potential ranks high on the vertical axis. A double-suited high rundown sits at the top right, naked aces sit low on the left.",
+   "x": {"label": "Cards work together", "low": "Disconnected", "high": "Coordinated"},
+   "y": {"label": "Nut potential", "high": "Nut hands"},
+   "quadrants": ["Top, alone", "Top, together", "Weak, alone", "Weak, together"],
+   "points": [
+     {"label": "Aces, double-suited, with two big cards", "x": 80, "y": 90, "tone": "accent2"},
+     {"label": "Big double-suited rundown", "x": 88, "y": 70, "tone": "ink"},
+     {"label": "Naked aces", "x": 16, "y": 58, "tone": "accent"},
+     {"label": "Low rainbow rundown", "x": 70, "y": 14, "tone": "muted"},
+     {"label": "Four unconnected rags", "x": 12, "y": 10, "tone": "muted"}
+   ]}
+  </script></div>
+  <p class="figure-note">A sketch of the idea. Positions are illustrative, not measured.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What David Sklansky might say</p>
+  <p class="said">He would measure it by expected value, not by how a hand feels. A pair of aces feels like the best thing in the deck, but the decision is whether the money you put in is more than you get back. If your pair is often second best when the money goes in, it is a losing pair, however good it looked before the flop.</p>
+  <p class="note">An imagined voice: our reading of the expected-value thinking in The Theory of Poker, not his words.</p>
+</aside>
+
+<h2>Why the nut draw matters</h2>
+
+<p>In Hold'em, a flush draw with a weak card is still a fair hand: if it hits, it probably wins. In Omaha, the second-best flush is a way to lose a lot of money. With four cards each, someone else is often drawing to a bigger one. So the first question about any draw is not how many outs you have. It is whether those outs make the <strong>nuts</strong>, the best possible hand on that board.</p>
+
+<p>Draws are also bigger. Because you hold four cards, you can have two draws at once, and wraps (a straight draw that takes outs from both ends and the middle) can reach 13 outs and more. Here is an example hand. Hero holds [[9h 8d 7c 6s]] on a flop of [[Jd Tc 2h]]. Any 7, 8, 9, or Queen makes a straight. There are three of each of the 7, 8, and 9 left (hero holds one of each), and four Queens: 3 + 3 + 3 + 4 = 13 outs.</p>
+
+<p>The count of unseen cards is 45 on the flop in Omaha: 52 minus your four cards minus three board cards. In Hold'em it is 47. That small difference moves the exact odds a little, and the rule of 4 runs high as outs grow, just as in Hold'em.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">The rule of 4 against the exact odds, 45 unseen</h3></div>
+  <div data-fig="columns"><script type="application/json">
+  {"label": "Rule of 4 estimates compared with exact flop-to-river odds in Omaha for 8, 9, 13, 17, and 20 outs with 45 unseen cards. The rule overstates more as outs grow.",
+   "unit": "%", "categories": ["8 outs", "9 outs", "13 outs", "17 outs", "20 outs"],
+   "series": [
+     {"name": "Rule of 4", "values": [32, 36, 52, 68, 80], "tone": "gold"},
+     {"name": "Exact", "values": [32.7, 36.4, 49.9, 61.8, 69.7], "tone": "ink"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: 1 minus (45 minus outs)(44 minus outs) over 45 x 44. For 13 outs: 1 minus (32 x 31) / (45 x 44) = 49.9%. Assumes every out is clean and both cards come.</p>
+</figure>
+
+<p>Thirteen outs is just under half. That sounds like a monster, but the phrase "every out is clean" is carrying a lot of weight. Hero holds the bottom of this wrap. Check each out on the turn: only the three 7s make the nuts (J-T-9-8-7). An 8 or a 9 gives hero a Jack-high straight that loses to a Queen-high one (Q-9 on an 8, Q-8 or K-Q on a 9). A Queen gives hero a Queen-high straight that loses to A-K or K-9. So 3 of the 13 outs make the nuts, and 10 make a hand that can lose a big pot. A card that pairs the board or puts a third card of one suit out can also hand someone a full house or a flush. Count the outs that make the nuts, and call the rest "dirty."</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">The wrap, played 100 times</h3></div>
+  <div data-fig="dots"><script type="application/json">
+  {"label": "Out of 100 thirteen-out wraps on the flop, about 50 complete a straight by the river and 50 miss.",
+   "parts": [
+     {"label": "A straight card arrives by the river", "value": 50, "tone": "accent2"},
+     {"label": "It misses", "value": 50, "tone": "paper"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: thirteen outs with two cards to come is 49.9%, rounded to 50. Not every completed straight wins: in the example, only the three 7s make the nuts.</p>
+</figure>
+
+<p>A short checklist helps at the table. Run it on the flop, before you call.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Is this draw worth paying for?</h3></div>
+  <ol class="flow">
+    <li><strong>Count every out</strong><span>Of 45 unseen cards, which complete a hand?</span></li>
+    <li><strong>Cross out the dirty ones</strong><span>Cards that pair the board, or make a hand someone else can beat.</span></li>
+    <li><strong>Ask what you hold if it hits</strong><span>The nuts is a call. A hand that loses to the nuts is a fold.</span></li>
+    <li><strong>Price it</strong><span>Compare your chance to bet / (pot + 2 x bet).</span></li>
+  </ol>
+  <p class="figure-note">A summary of this section.</p>
+</figure>
+
+<details class="drill">
+  <summary>You hold a flush draw with the ace of the suit and the flop has two of that suit. 9 outs, 45 unseen. What is the chance by the river?</summary>
+  <p>1 minus (36 / 45)(35 / 44) = 1 minus 0.636 = 36.4%. With one card to come it is 9 / 44 = 20.5%.</p>
+</details>
+
+<details class="drill">
+  <summary>You hold the same draw but with the king of the suit, and the ace is not on the board. How is this a different draw than the one above?</summary>
+  <p>The count of outs is the same, 9. The value is not. Any opponent with the ace of that suit has the nut flush, and with four cards each in a pot-limit game, someone often does. A king-high flush draw is a draw to second best some of the time, so those 9 outs are worth less than they look.</p>
+</details>
+
+<h2>What Omaha teaches about equity</h2>
+
+<p><strong>Equity</strong> is your share of the pot if all the cards were dealt out: the chance you win, plus half of any ties. In Hold'em, the gaps between hands are often wide. Before the flop, [[As Ah]] is 82.3% against [[Kc Qc]]. On [[Jd Tc 2h]], top set [[Js Jh]] is 72.4% against [[Qd 9d]], a straight draw plus a flush draw.</p>
+
+<p>In Omaha, hands run closer together. Everyone holds four cards, and four cards give every hand a few ways to improve. A set on the flop is a strong hand, but it is not safe against a wrap with a flush draw. The table puts the same kinds of hands side by side.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">The same matchups, two games</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Matchup</th><th>Hold'em</th><th>Omaha</th></tr></thead>
+      <tbody>
+        <tr><td>Aces against kings-queens, before the flop</td><td>[[As Ah]] 82.3% vs [[Kc Qc]]</td><td>[[As Ah 9d 4c]] about 58% vs [[Kc Qc 8d 7h]]</td></tr>
+        <tr><td>Top set against a straight and flush draw, on [[Jd Tc 2h]]</td><td>[[Js Jh]] 72.4% vs [[Qd 9d]]</td><td>[[Js Jh 5c 3d]] 51.5% vs [[Qd 9d 8s 7c]]</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Hold'em: exact, from tools/poker.js. Omaha flop: exact, all 820 turn and river pairs counted with a short Omaha script built on the tools/poker.js evaluator. Omaha preflop: an estimate from 200,000 random boards, so treat it as about 58%. Example hands, chosen to show the pattern, not averages.</p>
+</figure>
+
+<p>Expect close races where Hold'em would have a clear favorite. That is a pattern across many matchups, not a rule for every one.</p>
+
+<p>Two lessons come back to Hold'em.</p>
+
+<ul>
+  <li><strong>Equity is not the same as winning.</strong> A hand with a lot of equity that cannot win a big pot is worth less than the number says. In Hold'em, ask the same question of a weak flush draw or of top pair with a bad kicker.</li>
+  <li><strong>Price decides.</strong> A draw is a call or a fold only after you compare your chance to the price. That math is the same in both games.</li>
+</ul>
+
+<p>See {{ch:5}} for the Hold'em version of outs, and {{ch:7}} for the expected value math behind every call. The tree below shows the price test on a 13-out draw, treating every out as clean (which flatters the wrap above, where only 3 outs are the nuts). Hero faces a pot-sized bet on the flop: the pot is $60, the villain bets $60, and hero must call $60 to win a pot of $120.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Calling a pot-sized bet with 13 outs, one card to come</h3></div>
+  <ul class="tree">
+    <li><span class="node root">Call $60 to win $120</span>
+      <ul>
+        <li><span class="edge">The card comes 28.9% of the time (13 of 45)</span><span class="node win">Win $120</span></li>
+        <li><span class="edge">It misses 71.1% of the time</span><span class="node lose">Lose $60</span></li>
+      </ul>
+    </li>
+  </ul>
+  <p class="math">EV = 0.289 x $120 + 0.711 x (-$60) = $34.67 - $42.67 = -$8</p>
+  <p class="math">With two cards to come: 0.499 x $120 + 0.501 x (-$60) = $59.88 - $30.06 = +$29.82</p>
+  <p class="figure-note">Arithmetic. Equity needed is 60 / (120 + 60) = 33.3%. The two-card line assumes you see the turn and river for the price of one call, and every out is clean. In a real hand there will be more bets.</p>
+</figure>
+
+<p>Thirteen outs fails the price test with one card to come and passes it with two. That is the same rule as in Hold'em, and it is why drawing hands in Omaha care about how much money is still behind them.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Phil Ivey might say</p>
+  <p class="said">He would say a Hold'em player who spends time in Omaha comes back with better judgment. You learn to value a hand by how it plays against many hands, not by its name. That skill carries to every game he plays, which is why he argues for being a complete player and not a one-game specialist.</p>
+  <p class="note">An imagined voice: our reading of the mixed-game, complete-player approach Phil Ivey is known for, not his words.</p>
+</aside>
+
+<h2>A quick tour of other games</h2>
+
+<p>Omaha is the closest relative of Hold'em. The other games on a card-room menu are further away. Here is each at overview level, so you know what you are looking at if a table forms.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">Five games next to Hold'em</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Game</th><th>The deal</th><th>What wins</th><th>What it asks of you</th></tr></thead>
+      <tbody>
+        <tr><td>Seven-card stud</td><td>Seven cards each, some face up. No shared cards.</td><td>Best five-card high hand.</td><td>Watch the up cards. Track which cards are gone.</td></tr>
+        <tr><td>Razz</td><td>Stud, played for the lowest hand.</td><td>The lowest five cards. Straights and flushes do not count against you. The best hand is A-2-3-4-5.</td><td>Think in reverse. Low cards are good.</td></tr>
+        <tr><td>Five-card draw</td><td>Five cards, then you swap some for new ones.</td><td>Best five-card high hand.</td><td>Read what a player keeps from how many cards they take.</td></tr>
+        <tr><td>Omaha hi-lo</td><td>Omaha, with the pot split between high and low hands.</td><td>Best high hand and best qualifying low hand.</td><td>Play for the whole pot. A half pot is a thin win.</td></tr>
+        <tr><td>Mixed games</td><td>A rotation of several games, often a new one every orbit.</td><td>Depends on the game this round.</td><td>Be fluent in all of them.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">An overview, not a rulebook. Betting structures vary by room. Many of these games are played fixed-limit, where each bet is a set size.</p>
+</figure>
+
+<p>The shared theme is that every game rewards the same habit: know what the best hand is, and know your chance of making it. Stud players track dead cards. Razz players count how many low cards are left. Draw players read the number of cards a player took. These are the outs and equity skills you built for Hold'em, in different clothes.</p>
+
+<p>Mixed games string several of them together. H.O.R.S.E. is the best known. Its name is a list of the five games in the rotation.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">The H.O.R.S.E. rotation</h3></div>
+  <ol class="timeline">
+    <li><b>H</b><span>Hold'em.</span></li>
+    <li><b>O</b><span>Omaha hi-lo.</span></li>
+    <li><b>R</b><span>Razz.</span></li>
+    <li><b>S</b><span>Seven-card stud.</span></li>
+    <li><b>E</b><span>Stud hi-lo, usually called eight or better.</span></li>
+  </ol>
+  <p class="figure-note">The order of play in H.O.R.S.E. The game changes on a schedule, often every orbit or every set number of hands.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Chip Reese might say</p>
+  <p class="said">He would point out that the best mixed-game players are not the ones who know the most tricks. They are the ones who pick good games, stay patient, and keep their temperament level when the game changes under them. A new game is a reason to slow down and learn, not to guess.</p>
+  <p class="note">An imagined voice: our reading of the cash-game discipline and all-around reputation described for Chip Reese, not his words.</p>
+</aside>
+
+<p>If you want to try one of these, start in a low-stakes game and treat the first sessions as study. Your Hold'em skills carry over in the parts that matter: patience, position, price, and reading people. Everything else is rules and practice.</p>
+
+<details class="drill">
+  <summary>In Omaha, how many different five-card hands can one player make from four hole cards and a five-card board?</summary>
+  <p>Choose 2 of 4 hole cards: 6 ways. Choose 3 of 5 board cards: 10 ways. 6 x 10 = 60.</p>
+</details>
+
+<details class="drill">
+  <summary>Pot-limit, pot $40, villain bets $40. What equity do you need to call?</summary>
+  <p>40 / (40 + 40 + 40) = 40 / 120 = 33.3%. The price is the same as in a pot-sized bet in any game.</p>
+</details>
+
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>Why 13 outs is routine in Omaha and a monster in Hold'em</h2>
+  <p><strong>The shortcut.</strong> The arithmetic does not change. Multiply outs by 4 on the flop, then trim a few points.</p>
+  <p class="math">13 outs: 13 x 4 = 52%. Omaha exact: 49.9%. Hold'em exact: 48.1% (tools/poker.js).</p>
+  <p><strong>What does change is how often you get there.</strong> In Hold'em only a combination draw gets near this size: a flush draw with a gutshot is 12 outs, and a flush draw with an open-ended straight draw is 15. Those flops are uncommon. In Omaha, four connected hole cards make a 13-out wrap on a board that fits, so you meet it often. It is routine because the game hands out four cards, and it is not a monster because your opponents also hold four cards each, so they hit made hands and bigger draws more often.</p>
+  <p><strong>Where it bends.</strong> The rule counts every out as clean. Cross out outs that pair the board or make a straight that loses to a higher one. Omaha's 45 unseen cards also move the exact figure by a point or two compared with Hold'em's 47. Compare your chance to the price, as in {{ch:A}}.</p>
+</aside>
