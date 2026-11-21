@@ -1,0 +1,249 @@
+<p class="lead">A live table gives you about ten seconds and no calculator. This chapter gives you the few calculations that decide most hands, in the form you can run with chips in your hand: odds to percentages, the price of a bet, the rule of 2 and 4 with its fixes, and the preflop matchups worth knowing cold.</p>
+
+<h2>Odds and percentages are the same thing</h2>
+<p>Players speak in <strong>odds</strong> ("you are 4 to 1 against") and in <strong>percentages</strong> ("you have 20 percent"). You need to flip between them without thinking, because the pot speaks in one and your cards speak in the other.</p>
+<p>The flip is one step. Odds of X to 1 against means you win 1 time in X + 1. So 4 to 1 is 1 in 5, which is 20 percent. Going back, a chance of p percent is (100 minus p) divided by p, to 1. A 25 percent chance is 75 / 25 = 3 to 1.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">Odds against, as a chance</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Odds against</th><th>One in</th><th>Chance</th></tr></thead>
+      <tbody>
+        <tr><td>1 to 1</td><td>2</td><td>50%</td></tr>
+        <tr><td>2 to 1</td><td>3</td><td>33%</td></tr>
+        <tr><td>3 to 1</td><td>4</td><td>25%</td></tr>
+        <tr><td>4 to 1</td><td>5</td><td>20%</td></tr>
+        <tr><td>5 to 1</td><td>6</td><td>17%</td></tr>
+        <tr><td>6 to 1</td><td>7</td><td>14%</td></tr>
+        <tr><td>9 to 1</td><td>10</td><td>10%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Arithmetic: 1 / (X + 1). Rounded to whole percents.</p>
+</figure>
+
+<p>Learn the first four rows by heart. Everything else is a neighbor of one of them. Percentages also work better as pictures. A 20 percent chance is not a vague "unlikely": it happens once in every five tries, and it fails four times.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">4 to 1 against, played 100 times</h3></div>
+  <div data-fig="dots"><script type="application/json">
+  {"label": "Out of 100 tries at a 4 to 1 shot, 20 hit and 80 miss.",
+   "parts": [
+     {"label": "The shot hits", "value": 20, "tone": "accent2"},
+     {"label": "It misses", "value": 80, "tone": "paper"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: 1 / (4 + 1) = 20%.</p>
+</figure>
+
+<details class="drill">
+  <summary>You are 7 to 1 against. What is your chance?</summary>
+  <p>1 in 8, which is 12.5 percent.</p>
+</details>
+<details class="drill">
+  <summary>You have a 33 percent chance. What odds is that?</summary>
+  <p>(100 - 33) / 33 is about 2, so 2 to 1 against.</p>
+</details>
+
+<h2>The price of a bet</h2>
+<p>When someone bets, the pot offers you a price. You pay the <strong>call</strong> to win what is already out there. If your chance of winning beats the price, calling makes money over time. If not, it loses money. (How much it makes or loses is the subject of {{ch:7}}.)</p>
+<p>The price has one formula. Write the bet as B and the pot before the bet as P.</p>
+<p class="math">Equity needed to call = B / (P + 2 x B)</p>
+<p><strong>Equity</strong> is your share of the pot, as a chance of winning it. Why the 2? Your call is a second B, and you count it in the final pot along with the bet. You risk B to win P + B, so you need B out of the total P + 2B.</p>
+<p>Nobody divides at the table. You memorize the common sizes instead. Half pot needs 25 percent, one in four. Pot needs 33 percent, one in three. A third of the pot needs 20 percent, one in five. Most other sizes sit near or between them.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">What each bet size asks of you</h3></div>
+  <div data-fig="bars"><script type="application/json">
+  {"label": "Equity needed to call for seven bet sizes, from 17 percent for a quarter-pot bet up to 40 percent for a bet twice the pot.",
+   "unit": "%", "max": 50,
+   "items": [
+     {"label": "1/4 pot", "value": 16.7},
+     {"label": "1/3 pot", "value": 20.0, "tone": "accent2"},
+     {"label": "1/2 pot", "value": 25.0, "tone": "accent2"},
+     {"label": "2/3 pot", "value": 28.6},
+     {"label": "3/4 pot", "value": 30.0},
+     {"label": "Pot", "value": 33.3, "tone": "accent2"},
+     {"label": "2x pot", "value": 40.0, "tone": "accent"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: B / (P + 2B) with B as a share of P, so f / (1 + 2f). The highlighted bars are the three to memorize.</p>
+</figure>
+
+<p>Notice how slowly the price climbs. Doubling the bet from half pot to pot moves the price from 25 to 33 percent, not from 25 to 50. A big bet asks for less extra equity than it feels like it does.</p>
+
+<p>Here is the check at a real table. It is a $2/$5 game, nine-handed. UTG limps for $5, the cutoff raises to $25, you call on the button with [[Ad 5d]], and everyone else folds. The pot is $62. On a flop with two diamonds, the cutoff bets $31, half the pot.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Half a pot to call, a flush draw in hand</h3></div>
+  <div data-fig="table"><script type="application/json">
+  {"label": "Nine-handed table, flop of king of diamonds, nine of diamonds, two of clubs. The cutoff bets 31 into a pot of 62. Hero on the button holds the ace and five of diamonds and must decide whether to call.",
+   "button": 0, "pot": "$62", "board": "Kd 9d 2c",
+   "seats": [
+     {"pos": "BTN", "stack": "$475", "cards": "Ad 5d", "state": "hero"},
+     {"pos": "SB", "state": "fold"},
+     {"pos": "BB", "state": "fold"},
+     {"pos": "UTG", "state": "fold"},
+     {"pos": "UTG+1", "state": "fold"},
+     {"pos": "MP", "state": "fold"},
+     {"pos": "LJ", "state": "fold"},
+     {"pos": "HJ", "state": "fold"},
+     {"pos": "CO", "stack": "$444", "bet": "$31", "state": "villain"}
+   ]}
+  </script></div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history. Both players started with $500. Pot: $5 limp + $25 + $25 + $2 + $5 blinds = $62. Price: 31 / (62 + 62) = 25%.</p>
+</figure>
+
+<p>The price is half pot, so 25 percent. You hold nine outs. The next section turns nine outs into a chance and shows when that chance clears the price.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Dan Harrington might say</p>
+  <p class="said">He would tell you to stop chasing the decimal. At a live table the exact 28.6 percent is worth nothing if it costs you your focus on the bettor. Round the price up, round your chance down, and call only when the gap is clear. When the gap is thin, the decision belongs to something other than arithmetic, such as the player and the stack sizes.</p>
+  <p class="note">An imagined voice: our reading of the approach in Harrington on Hold'em, not his words.</p>
+</aside>
+
+<details class="drill">
+  <summary>The pot is $45 and your opponent bets $15. What equity do you need?</summary>
+  <p>15 / (45 + 30) = 15 / 75 = 20 percent. A third-pot bet, so one in five.</p>
+</details>
+<details class="drill">
+  <summary>The pot is $150 and your opponent bets $100. What equity do you need?</summary>
+  <p>100 / (150 + 200) = 100 / 350 = 28.6 percent. Two-thirds pot, so call it 29.</p>
+</details>
+<details class="drill">
+  <summary>The pot is $60 and your opponent overbets $90. What equity do you need?</summary>
+  <p>90 / (60 + 180) = 90 / 240 = 37.5 percent. The bet is 1.5 times the pot.</p>
+</details>
+
+<h2>The rule of 2 and 4</h2>
+<p>You need your own chance too. The shortcut: count your outs (see {{ch:5}}), then multiply by 4 on the flop, when two cards are still to come, or by 2 on the turn, when one is. Your nine diamonds on the flop give 9 x 4 = 36 percent. The exact figure is 34.97, so the rule runs one point high. Either way it beats the 25 percent price, as long as you see both cards for this one bet (more on that below).</p>
+<p>The rule is not a law. It runs high when you have many outs, because it counts the boards where both the turn and the river hit as two wins instead of one, and that overlap grows with every out. The fix is a single step: on the flop, take 4 times your outs, then subtract one point for each out above 8.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">The rule of 4, raw and corrected</h3></div>
+  <div data-fig="columns"><script type="application/json">
+  {"label": "Flop-to-river chance for 4, 8, 9, 12, and 15 outs: the raw rule of 4, the corrected rule that subtracts the outs above 8, and the exact figure. The corrected rule is within about one point of exact each time.",
+   "unit": "%", "categories": ["4 outs", "8 outs", "9 outs", "12 outs", "15 outs"],
+   "series": [
+     {"name": "Raw rule of 4", "values": [16, 32, 36, 48, 60], "tone": "gold"},
+     {"name": "Corrected", "values": [16, 32, 35, 44, 53], "tone": "accent2"},
+     {"name": "Exact", "values": [16.5, 31.5, 35.0, 45.0, 54.1], "tone": "ink"}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact values from tools/poker.js draw. Corrected: 4 x outs, minus (outs - 8) when outs are above 8.</p>
+</figure>
+
+<p>On the turn the rule of 2 errs the other way, but by less. Nine outs gives 18 percent against an exact 19.6. Twelve outs gives 24 against 26.1. Fifteen gives 30 against 32.6. The exact turn figure is outs / 46, about 2.2 points per out, so the rule of 2 drops about one point for every five outs. When the price is close, nudge the turn figure up a point or two.</p>
+
+<p>One more trap. The 36 percent assumes you see both cards for the price of one bet. That holds when you are all-in or when the bettor will check the turn. If the bettor fires again on the turn, you pay again with only one card left. Seen one card at a time, nine outs on the flop hit the turn only 9 / 47 = 19 percent of the time. Check each street against its own price, as this worked hand does.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">The same draw, priced street by street</h3></div>
+  <div class="table-scroll">
+    <table class="hand-log">
+      <thead><tr><th>Street</th><th>Board</th><th>Action</th><th>Pot</th></tr></thead>
+      <tbody>
+        <tr><td>Preflop</td><td>Hero: [[Qh 9h]]</td><td>A player in UTG+1 raises to $15. Hero calls on the button. Blinds are $2 and $5, and both fold.</td><td class="pot">$37</td></tr>
+        <tr><td>Flop</td><td>[[Ks 7h 2h]]</td><td>Villain bets $25. Hero needs 25 / (37 + 50) = 29%. Nine outs, 9 x 4 = 36% if Hero sees both cards, but only 19% for the turn alone. Hero calls, hoping for a free or cheap turn.</td><td class="pot">$87</td></tr>
+        <tr><td>Turn</td><td>[[Ks 7h 2h 4d]]</td><td>Villain bets $45. Hero needs 45 / (87 + 90) = 25%. Nine outs, 9 x 2 = 18% (exact 19.6%). Fold on the numbers alone.</td><td class="pot">$87</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history. Pot shown before the turn bet is called. Once Villain bet again, the flop call had paid 29% for a 19% card. Whether money you win later (implied odds) can justify calls like these is the subject of {{ch:28}}.</p>
+</figure>
+
+<details class="drill">
+  <summary>You flopped a flush draw (9 outs). Rule of 4, then corrected?</summary>
+  <p>9 x 4 = 36, then subtract 1 for the one out above 8: 35 percent. Exact is 34.97.</p>
+</details>
+<details class="drill">
+  <summary>You have 12 outs on the flop (a flush draw plus a gutshot). Corrected rule of 4?</summary>
+  <p>12 x 4 = 48, minus 4 for the four outs above 8: 44 percent. Exact is 45.</p>
+</details>
+<details class="drill">
+  <summary>Turn, 9 outs, and your opponent bets half pot. Call on price alone?</summary>
+  <p>You need 25 percent and hold about 19.6. No: you are about 5 points short. Fold unless later bets could pay you extra.</p>
+</details>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What David Sklansky might say</p>
+  <p class="said">He would accept the shortcut and insist on the discipline behind it. The only question is whether the call has positive expected value, and a rounded number that points the right way is as good as an exact one. A rounded number that points the wrong way is a leak, so know where the rule bends.</p>
+  <p class="note">An imagined voice: our reading of the approach in The Theory of Poker, not his words.</p>
+</aside>
+
+<h2>Preflop matchups worth knowing</h2>
+<p>All-in preflop, a few matchups cover most of what happens. You do not need to know hundreds. You need the shapes, and the shapes come in four families: a pair against overcards, a pair against a smaller pair, a dominated hand, and overcards against undercards. Each family has a number you can carry.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Six matchups, all-in before the flop</h3></div>
+  <div data-fig="split"><script type="application/json">
+  {"label": "All-in preflop equity for six matchups: pair against overcards, a pair against a smaller pair, aces against kings, a dominated ace, and two overcards against two undercards.",
+   "rows": [
+     {"label": "QQ against AKs", "note": "the flip", "parts": [{"label": "First hand", "value": 54.0, "tone": "ink"}, {"label": "Second hand", "value": 46.0, "tone": "accent"}]},
+     {"label": "QQ against AKo", "note": "the flip", "parts": [{"label": "First hand", "value": 56.8, "tone": "ink"}, {"label": "Second hand", "value": 43.2, "tone": "accent"}]},
+     {"label": "KK against 88", "note": "pair over pair", "parts": [{"label": "First hand", "value": 80.9, "tone": "ink"}, {"label": "Second hand", "value": 19.1, "tone": "accent"}]},
+     {"label": "AA against KK", "note": "the biggest pairs", "parts": [{"label": "First hand", "value": 81.9, "tone": "ink"}, {"label": "Second hand", "value": 18.1, "tone": "accent"}]},
+     {"label": "AKo against AQo", "note": "domination", "parts": [{"label": "First hand", "value": 74.4, "tone": "ink"}, {"label": "Second hand", "value": 25.6, "tone": "accent"}]},
+     {"label": "AKo against 87o", "note": "overs vs unders", "parts": [{"label": "First hand", "value": 62.4, "tone": "ink"}, {"label": "Second hand", "value": 37.6, "tone": "accent"}]}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact equities from tools/poker.js, counting every possible board and averaging over every suit combination. Ties are split. Specific suits move a number by up to about a point.</p>
+</figure>
+
+<p>Fold the table into four numbers. A pair against two overcards is about 55/45, a true flip. A pair against a smaller pair is about 80/20. A dominated hand, where one card is shared and the other is beaten, is about 75/25 (ace king against ace jack and king queen against king jack land at 74 too; about five points of that come from split pots). Two overcards against two undercards is about 60/40. When you put a stack in, you are usually inside one of these families.</p>
+
+<p>Small pairs behave like the big ones in the flip family. Even a pair of deuces holds 53 percent (52.6) against ace king offsuit. Suited connectors carry the same shape: jack-ten suited is a slight favorite, 54 percent, against a pair of deuces.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Daniel Negreanu might say</p>
+  <p class="said">He would say the number is only the starting point. A matchup chart assumes you know both hands, and you never do. Put the opponent on a range first, then reach for the matchups inside it. Queens are a flip against ace king, but a tight live player who shoves over a raise often holds aces or kings as well, and that changes everything.</p>
+  <p class="note">An imagined voice: our reading of his public emphasis on hand reading and range thinking, not his words.</p>
+</aside>
+
+<p>Here is that idea in numbers. Suppose a tight player's shove holds only aces, kings, and ace king: 28 combos. Your queens hold 40 percent equity against that range, not 57. Against a looser shove of tens or better plus ace queen or better, queens are back to 55 percent. The pair did not change. The range did. (Range equities from tools/poker.js vsrange, sampled to within about 0.2 points.)</p>
+
+<details class="drill">
+  <summary>You hold queens and an opponent shoves with ace-king. Roughly what are you?</summary>
+  <p>A pair against two overcards is about 55/45 in your favor. Exact: 56.8 percent against ace king offsuit and 54.0 against suited.</p>
+</details>
+<details class="drill">
+  <summary>You hold ace-king and an opponent shoves with a pair of nines. Who is ahead?</summary>
+  <p>The pair, by a small margin: nines hold 55.3 percent against ace king offsuit. It is the same flip family.</p>
+</details>
+
+<h2>Ten seconds, start to finish</h2>
+<p>Put the pieces in order and the whole job takes one breath. The flow below is the routine. Practice it away from the table until the steps blur together.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">The ten-second check</h3></div>
+  <ol class="flow">
+    <li><strong>Price</strong><span>Half pot is 25. Pot is 33. A third is 20.</span></li>
+    <li><strong>Outs</strong><span>Count them, then drop any that might not win (tainted outs).</span></li>
+    <li><strong>Chance</strong><span>4 per out on the flop, minus 1 per out above 8. 2 per out on the turn.</span></li>
+    <li><strong>Compare</strong><span>Chance above price: call. Close: think about the player.</span></li>
+  </ol>
+  <p class="figure-note">A summary of the chapter. Steps 2 and 3 are covered in {{ch:5}}.</p>
+</figure>
+
+<aside class="key">
+  <p class="label">Key idea</p>
+  <p>You are not looking for the exact number. You are looking for which side of the price your chance falls on. Round so that errors push you toward the safer choice.</p>
+</aside>
+
+<details class="drill">
+  <summary>The flop pot is $80 and your opponent bets $40. You hold an open-ended straight draw (8 outs). Call?</summary>
+  <p>The price is 40 / (80 + 80) = 25 percent. Eight outs on the flop is 8 x 4 = 32 percent (exact 31.5). The chance beats the price, so calling is fine on the numbers if you will see both cards.</p>
+</details>
+<details class="drill">
+  <summary>The turn pot is $100 and your opponent bets $75. You have 9 outs. Price, chance, decision?</summary>
+  <p>Price: 75 / (100 + 150) = 30 percent. Chance: 9 x 2 = 18, call it 20. You are 10 points short. Fold.</p>
+</details>
+
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>The bet-size table</h2>
+  <p><strong>The shortcut.</strong> Memorize three rows. A third-pot bet needs 20 percent, half pot needs 25, and a pot-size bet needs 33. In odds, the pot lays you 4 to 1, 3 to 1, and 2 to 1.</p>
+  <p class="math">$40 bet into $80: 40 / (80 + 80) = 25% (exact: 25.0%)</p>
+  <p><strong>Where it bends.</strong> Sizes between the rows give in-between prices: two-thirds pot is 29 percent and three-quarters is 30. Bets bigger than the pot climb slowly: 2 times pot needs 40 percent, and even a bet five times the pot needs only 5 / 11, about 45 percent. And the price covers only this one bet: if more bets could come, the real cost of your draw is higher.</p>
+</aside>

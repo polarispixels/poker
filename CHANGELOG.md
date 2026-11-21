@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.30.0] - 2026-11-21
+
+### Added
+
+- Chapter 6, Mental Math at the Table I: The Core Shortcuts: Chapter 6 teaches the core table shortcuts: odds to percentages, bet-size prices, the corrected rule of 2 and 4, and suit-averaged preflop matchups.
+
 ## [0.29.0] - 2026-11-21
 
 ### Added
