@@ -22,13 +22,284 @@
     <main>
       <article class="chapter">
         <header class="chapter-head">
-          <p class="chapter-kicker label">Chapter 21 <span class="badge">To come</span></p>
+          <p class="chapter-kicker label">Chapter 21 <span class="badge">Preliminary draft</span></p>
           <h1 class="chapter-title">Part II Review</h1>
           <p class="standfirst">Full live hands walked through range by range.</p>
         </header>
 
         <div class="prose chapter-body">
-<p class="lead">This page has not been written yet. The book is being written and published one chapter at a time.</p>
+<p class="lead">Part II gave you tools one at a time: ranges, combos, texture, c-bets, later streets, bluffs, reads, and sizes. This chapter puts them back together in six full live hands, each walked range by range, with the combos counted and the price checked.</p>
+
+<p>Every hand is an invented example in a live $2/$5 game, nine-handed, with $500 stacks. None is a real hand history. The ranges are assumptions, written down so you can argue with them. Change a range and the numbers move, which is the point: the review shows you which assumption the decision rests on.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What David Sklansky might say</p>
+  <p class="said">He would tell you to grade each decision on what you knew when you made it. A hand that wins by luck is still a mistake if the price was wrong, and a hand that loses to a bad beat can still be a good play. Walk each hand by asking what the opponent could hold and what each choice earns against that list.</p>
+  <p class="note">An imagined voice: our reading of the Fundamental Theorem and the decisions-over-results theme in The Theory of Poker, not his words.</p>
+</aside>
+
+<h2>Hand 1: Isolating a limper</h2>
+
+<p>The button holds <span class="cards" role="img" aria-label="Ace of clubs, Queen of diamonds"><span class="pc">A<i>♣</i></span><span class="pc r">Q<i>♦</i></span></span>. One player in middle position limps $5. In most live games a limp range is weak (a judgment), so <a class="xref" href="12-preflop-strategy-for-live-games.html">Chapter 12, Preflop Strategy for Live Games</a> says to raise it. The size is 3 big blinds ($15) plus one more for the limper, so $20. We use the 212-combo limp range from that chapter: 22-99, A2s-A9s, KTs+, QTs+, JTs, T9s down to 54s, KJo+, QJo, and A8o-AJo. Our ace-queen has 62 percent equity against it before the flop (sampled with tools/poker.js, good to about 0.2 points).</p>
+
+<p>Now the limper decides. A player who limped with 76s or A8o folds to a raise; a player with a pair or a good suited hand calls. We assume he calls with 140 of the 212 combos and folds the other 72 (<a class="xref" href="13-thinking-in-ranges.html">Chapter 13, Thinking in Ranges</a> calls this narrowing). Against the calling part, our equity drops a little, to 59 percent. A raise earns most when it takes the pot now and when the hands that call are still behind.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 21.1</span><h3 class="figure-title">Button isolates a limper, then bets the flop</h3></div>
+  <div class="table-scroll">
+    <table class="hand-log">
+      <thead><tr><th>Street</th><th>Board</th><th>Action</th><th>Pot</th></tr></thead>
+      <tbody>
+        <tr><td>Preflop</td><td>Hero: <span class="cards" role="img" aria-label="Ace of clubs, Queen of diamonds"><span class="pc">A<i>♣</i></span><span class="pc r">Q<i>♦</i></span></span></td><td>MP limps $5. Hero raises to $20 on the button. Both blinds fold. MP calls $15.</td><td class="pot">$47</td></tr>
+        <tr><td>Flop</td><td><span class="cards" role="img" aria-label="Queen of hearts, 8 of spades, 4 of diamonds"><span class="pc r">Q<i>♥</i></span><span class="pc">8<i>♠</i></span><span class="pc r">4<i>♦</i></span></span></td><td>MP checks. Hero bets $25. MP folds.</td><td class="pot">$47</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div data-fig="range"><script type="application/json">
+  {"label": "The starting hand grid showing the assumed limp range: the 140 combos that call a raise to 20 dollars, and the 72 combos that fold.",
+   "groups": [
+     {"name": "Calls the raise", "tone": "accent", "hands": "22-99,A2s-A9s,KTs+,QTs+,JTs,T9s,98s,87s,KQo,AJo"},
+     {"name": "Folds to the raise", "tone": "muted", "hands": "76s,65s,54s,KJo,QJo,A8o-ATo"}
+   ]}
+  </script></div>
+  <p class="figure-note">An example hand, not a real hand history. Pot: $2 + $5 + $20 + $20 = $47. Combos counted by the grid and checked with tools/poker.js: 140 + 72 = 212. The range is an assumption.</p>
+</figure>
+
+<p>On the <span class="cards" role="img" aria-label="Queen of hearts, 8 of spades, 4 of diamonds"><span class="pc r">Q<i>♥</i></span><span class="pc">8<i>♠</i></span><span class="pc r">4<i>♦</i></span></span> flop we hold top pair with the top kicker. Our own cards and the board take combos out of his range (<a class="xref" href="14-combinatorics.html">Chapter 14, Combinatorics</a>): 140 become 124 with the board alone and 107 once our ace and queen are gone. Of those 107, 6 are sets (88 and 44), 58 are one pair, and 43 hold nothing. Against the 64 hands that have a pair or better, we are still 80 percent to win. A $25 bet into $47 asks him for 25 / (47 + 50) = 26 percent equity, and the 43 airballs, about 40 percent of his range, cannot pay it. So the bet is for value: the 58 weaker pairs can call, and the air, which could not call anyway, folds.</p>
+
+<h2>Hand 2: A small c-bet on a dry flop</h2>
+
+<p>You raise to $15 in the cutoff with <span class="cards" role="img" aria-label="Ace of hearts, Queen of clubs"><span class="pc r">A<i>♥</i></span><span class="pc">Q<i>♣</i></span></span> and the big blind calls. The pot is $15 + $15 + $2 = $32. The flop is <span class="cards" role="img" aria-label="King of spades, 7 of diamonds, 2 of clubs"><span class="pc">K<i>♠</i></span><span class="pc r">7<i>♦</i></span><span class="pc">2<i>♣</i></span></span>. <a class="xref" href="15-board-texture.html">Chapter 15, Board Texture</a> asks who the flop favors. We use the open range from <a class="xref" href="12-preflop-strategy-for-live-games.html">Chapter 12, Preflop Strategy for Live Games</a> for the cutoff (202 combos) and the big blind call range from that chapter (334 combos). That call range was drawn against a button open, so against a cutoff it is a little wide; we use it as it is.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 21.2</span><h3 class="figure-title">Cutoff bets one-third on a K-7-2 flop</h3></div>
+  <div class="table-scroll">
+    <table class="hand-log">
+      <thead><tr><th>Street</th><th>Board</th><th>Action</th><th>Pot</th></tr></thead>
+      <tbody>
+        <tr><td>Preflop</td><td>Hero: <span class="cards" role="img" aria-label="Ace of hearts, Queen of clubs"><span class="pc r">A<i>♥</i></span><span class="pc">Q<i>♣</i></span></span></td><td>Hero raises to $15 in the cutoff. The big blind calls.</td><td class="pot">$32</td></tr>
+        <tr><td>Flop</td><td><span class="cards" role="img" aria-label="King of spades, 7 of diamonds, 2 of clubs"><span class="pc">K<i>♠</i></span><span class="pc r">7<i>♦</i></span><span class="pc">2<i>♣</i></span></span></td><td>The big blind checks. Hero bets $10. The big blind folds.</td><td class="pot">$32</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div data-fig="split"><script type="application/json">
+  {"label": "Where two ranges land on a king, seven, deuce flop, in combos. The cutoff's opening range has 9 combos of two pair or better, 96 with one pair, and 76 with no pair. The big blind's calling range has 8, 114, and 180.",
+   "unit": "",
+   "rows": [
+     {"label": "Cutoff opening range", "note": "181 combos", "parts": [{"label": "Two pair or better", "value": 9, "tone": "ink"}, {"label": "One pair", "value": 96, "tone": "gold"}, {"label": "No pair", "value": 76, "tone": "muted"}]},
+     {"label": "Big blind calling range", "note": "302 combos", "parts": [{"label": "Two pair or better", "value": 8, "tone": "ink"}, {"label": "One pair", "value": 114, "tone": "gold"}, {"label": "No pair", "value": 180, "tone": "muted"}]}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact counts from tools/poker.js ranges with the board removed. An example hand, not a real hand history. Both ranges are assumptions from <a class="xref" href="12-preflop-strategy-for-live-games.html">Chapter 12, Preflop Strategy for Live Games</a>.</p>
+</figure>
+
+<p>The big blind has no pair 60 percent of the time (180 of 302), the cutoff 42 percent (76 of 181). The cutoff also holds 27 combos of pocket pairs from tens up, against 6 for the big blind (only TT), because the big blind 3-bets JJ and better preflop in that chapter's range. That is a range advantage: the flop is better for the raiser's range than the caller's. Two things follow (<a class="xref" href="16-continuation-betting.html">Chapter 16, Continuation Betting</a>). Bet small with a lot of the range, and bet it with hands that hold nothing, like ours.</p>
+
+<p>A $10 bet into $32 is a bluff that must work 10 / (32 + 10) = 24 percent of the time. Remove our cards and the board and the big blind has 263 combos. If he continues with every pair or better (116 combos) and folds the other 147, he folds 56 percent. When he calls, our equity is only 18 percent. Even so, counting a called hand as if it checks down, the bet earns about 0.56 x $32 + 0.44 x (0.183 x $52 - $10) = $17.9 - $0.2 = +$17.7 compared with giving up the pot. That assumes he folds all air and calls with every pair, which no real player does exactly. It shows the size of the cushion above the 24 percent we needed.</p>
+
+<h2>Hand 3: Thin value on the river</h2>
+
+<p>You raise to $15 on the button with <span class="cards" role="img" aria-label="Ace of diamonds, Jack of clubs"><span class="pc r">A<i>♦</i></span><span class="pc">J<i>♣</i></span></span> and the big blind calls. The flop is <span class="cards" role="img" aria-label="Jack of diamonds, 6 of spades, 3 of clubs"><span class="pc r">J<i>♦</i></span><span class="pc">6<i>♠</i></span><span class="pc">3<i>♣</i></span></span>. You bet $20 and he calls. The turn is the <span class="cards" role="img" aria-label="4 of hearts"><span class="pc r">4<i>♥</i></span></span>. You bet $40 and he calls again. The river is the <span class="cards" role="img" aria-label="9 of diamonds"><span class="pc r">9<i>♦</i></span></span>. The pot has grown from $32 to $72 to $152 (<a class="xref" href="17-playing-the-turn-and-river.html">Chapter 17, Playing the Turn and River</a>).</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 21.3</span><h3 class="figure-title">Three streets of top pair, then a river bet</h3></div>
+  <div class="table-scroll">
+    <table class="hand-log">
+      <thead><tr><th>Street</th><th>Board</th><th>Action</th><th>Pot</th></tr></thead>
+      <tbody>
+        <tr><td>Preflop</td><td>Hero: <span class="cards" role="img" aria-label="Ace of diamonds, Jack of clubs"><span class="pc r">A<i>♦</i></span><span class="pc">J<i>♣</i></span></span></td><td>Hero raises to $15 on the button. The big blind calls.</td><td class="pot">$32</td></tr>
+        <tr><td>Flop</td><td><span class="cards" role="img" aria-label="Jack of diamonds, 6 of spades, 3 of clubs"><span class="pc r">J<i>♦</i></span><span class="pc">6<i>♠</i></span><span class="pc">3<i>♣</i></span></span></td><td>Check. Hero bets $20. The big blind calls.</td><td class="pot">$72</td></tr>
+        <tr><td>Turn</td><td><span class="cards" role="img" aria-label="Jack of diamonds, 6 of spades, 3 of clubs, 4 of hearts"><span class="pc r">J<i>♦</i></span><span class="pc">6<i>♠</i></span><span class="pc">3<i>♣</i></span><span class="pc r">4<i>♥</i></span></span></td><td>Check. Hero bets $40. The big blind calls.</td><td class="pot">$152</td></tr>
+        <tr><td>River</td><td><span class="cards" role="img" aria-label="Jack of diamonds, 6 of spades, 3 of clubs, 4 of hearts, 9 of diamonds"><span class="pc r">J<i>♦</i></span><span class="pc">6<i>♠</i></span><span class="pc">3<i>♣</i></span><span class="pc r">4<i>♥</i></span><span class="pc r">9<i>♦</i></span></span></td><td>Check. Hero bets $75. The big blind calls.</td><td class="pot">$302</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div data-fig="split"><script type="application/json">
+  {"label": "Against the 94 combos the big blind still holds when he calls the river, ace jack is ahead of 68, ties 6, and is behind 20.",
+   "unit": "",
+   "rows": [
+     {"label": "His river calls", "note": "94 combos", "parts": [{"label": "Hero is ahead", "value": 68, "tone": "accent2"}, {"label": "Chop", "value": 6, "tone": "muted"}, {"label": "Hero is behind", "value": 20, "tone": "accent"}]}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact counts from tools/poker.js, with the big blind call range from <a class="xref" href="12-preflop-strategy-for-live-games.html">Chapter 12, Preflop Strategy for Live Games</a> and the board and our cards removed. Assumed: he calls the flop and turn with any pair or straight draw, and the river with any pair or better. An example hand, not a real hand history. Pot: $152 + $75 + $75 = $302.</p>
+</figure>
+
+<p>A thin value bet is a bet where you are only a little ahead of the hands that call. The test is simple: when he calls, are you ahead of more than half of what he calls with? His range shrinks street by street: 246 combos after the cards come out, 94 that called the flop and turn with a pair or a straight draw and still hold a pair or better. We are ahead of 68 of those 94, 72 percent, and chop with 6 more. The 20 hands that beat us are sets (66, 44, 33, 99), a straight (75s), and two pair (96s, J9s). Our bet of $75 into $152 asks 25 percent equity of a caller, and every weaker pair that calls pays us.</p>
+
+<p>The hand also shows why the stack matters. The stack-to-pot ratio, or SPR (effective stack divided by the pot), fell fast:</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 21.4</span><h3 class="figure-title">The SPR on each street</h3></div>
+  <ul class="stats">
+    <li><b>15.2</b><span>flop: $485 / $32</span></li>
+    <li><b>6.5</b><span>turn: $465 / $72</span></li>
+    <li><b>2.8</b><span>river: $425 / $152</span></li>
+  </ul>
+  <p class="figure-note">Arithmetic. Stacks: $500 - $15 = $485, then minus $20 = $465, then minus $40 = $425.</p>
+</figure>
+
+<h2>Hand 4: A semi-bluff with a flush draw</h2>
+
+<p>The cutoff opens to $15 and you call on the button with <span class="cards" role="img" aria-label="Jack of diamonds, Ten of diamonds"><span class="pc r">J<i>♦</i></span><span class="pc r">T<i>♦</i></span></span>. The blinds fold; the pot is $37. The flop is <span class="cards" role="img" aria-label="King of diamonds, 8 of diamonds, 3 of spades"><span class="pc r">K<i>♦</i></span><span class="pc r">8<i>♦</i></span><span class="pc">3<i>♠</i></span></span>. He bets $20 and you call, so the pot is $77. The turn is the <span class="cards" role="img" aria-label="6 of clubs"><span class="pc">6<i>♣</i></span></span>, and he checks. You hold a nine-out flush draw and nothing else.</p>
+
+<p>What does a player who bets the flop and checks the turn hold? We assume he gave up the strong hands: no kings, no sets, no pocket pairs from 88 up. That leaves 96 combos once our cards and the board are removed. The grid shows the 108 combos of that checking range before the cards come out.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 21.5</span><h3 class="figure-title">Semi-bluffing into a checked turn</h3></div>
+  <div class="table-scroll">
+    <table class="hand-log">
+      <thead><tr><th>Street</th><th>Board</th><th>Action</th><th>Pot</th></tr></thead>
+      <tbody>
+        <tr><td>Preflop</td><td>Hero: <span class="cards" role="img" aria-label="Jack of diamonds, Ten of diamonds"><span class="pc r">J<i>♦</i></span><span class="pc r">T<i>♦</i></span></span></td><td>The cutoff raises to $15. Hero calls on the button. The blinds fold.</td><td class="pot">$37</td></tr>
+        <tr><td>Flop</td><td><span class="cards" role="img" aria-label="King of diamonds, 8 of diamonds, 3 of spades"><span class="pc r">K<i>♦</i></span><span class="pc r">8<i>♦</i></span><span class="pc">3<i>♠</i></span></span></td><td>The cutoff bets $20. Hero calls.</td><td class="pot">$77</td></tr>
+        <tr><td>Turn</td><td><span class="cards" role="img" aria-label="King of diamonds, 8 of diamonds, 3 of spades, 6 of clubs"><span class="pc r">K<i>♦</i></span><span class="pc r">8<i>♦</i></span><span class="pc">3<i>♠</i></span><span class="pc">6<i>♣</i></span></span></td><td>The cutoff checks. Hero bets $50.</td><td class="pot">$127</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div data-fig="range"><script type="application/json">
+  {"label": "The starting hand grid showing the cutoff's assumed turn checking range of 108 combos, and the stronger hands of his opening range that would bet.",
+   "groups": [
+     {"name": "Checks the turn", "tone": "accent", "hands": "77,55,44,22,ATs,AJs,AQs,A9s,A8s,A7s,A6s,A5s,A4s,A3s,A2s,QJs,JTs,T9s,98s,AQo,AJo"},
+     {"name": "Would bet or hold a king", "tone": "muted", "hands": "88,99,TT,JJ,QQ,KK,AA,66,33,AKs,KQs,KJs,KTs,AKo,KQo"}
+   ]}
+  </script></div>
+  <p class="figure-note">Counts from tools/poker.js. The checking range is an assumption built from the cutoff opening range in <a class="xref" href="12-preflop-strategy-for-live-games.html">Chapter 12, Preflop Strategy for Live Games</a>: no king, no set, and no pocket pair from 88 up. It keeps 98s and A8s, which hold a pair of eights.</p>
+</figure>
+
+<p>Now sort the 96 combos by what they do against a $50 bet into $77. We assume he calls with any pair (22, 44, 55, 77, and the A8s, A6s, A3s, and 98s hands that paired the board) or any diamond (a flush draw), and folds the rest. That is 51 calls and 45 folds, so he folds 47 percent. When he calls, our equity is 29.6 percent, and the price is $50 / ($77 + $100) = 28.2 percent. The draw alone just pays. The folds are the bonus.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 21.6</span><h3 class="figure-title">The value of the $50 semi-bluff</h3></div>
+  <ul class="tree">
+    <li><span class="node root">Bet $50 into $77 with a flush draw</span>
+      <ul>
+        <li><span class="edge">He folds 45 of 96 combos (47%)</span><span class="node win">Win $77</span></li>
+        <li><span class="edge">He calls 51 of 96 combos (53%), and we win 29.6% of the time</span><span class="node win">Net +$2.3 on average</span></li>
+      </ul>
+    </li>
+  </ul>
+  <p class="math">EV = 0.469 x $77 + 0.531 x ($2.3) = $36.1 + $1.2 = about +$37</p>
+  <p class="figure-note">Called: 0.2955 x ($77 + $100) - $50 = +$2.3, from tools/poker.js equity against his 51 calling combos. This assumes no raise and no river bet. Checking back is worth roughly 0.331 x $77 = $25.5 (our equity against all 96 combos), so the bet earns about $12 more under these assumptions.</p>
+</figure>
+
+<p>This matches the rule in <a class="xref" href="18-bluffing-and-semi-bluffing.html">Chapter 18, Bluffing and Semi-Bluffing</a>: a draw that nearly pays for itself needs very few folds to make the bet clearly right. A pure bluff at this size would need to work 50 / (77 + 50) = 39 percent of the time.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Doyle Brunson might say</p>
+  <p class="said">He would like this bet and ask why you would give a free card to the player who just showed weakness. Taking the lead with a hand that can still win if called is how you put the other player to the test.</p>
+  <p class="note">An imagined voice: our reading of the aggression-first approach in Super/System (1979), not his words.</p>
+</aside>
+
+<h2>Hand 5: Counting combos on the river</h2>
+
+<p>The button raises to $15 and you defend in the big blind with <span class="cards" role="img" aria-label="King of diamonds, Queen of clubs"><span class="pc r">K<i>♦</i></span><span class="pc">Q<i>♣</i></span></span>. The flop is <span class="cards" role="img" aria-label="King of hearts, 7 of spades, 3 of diamonds"><span class="pc r">K<i>♥</i></span><span class="pc">7<i>♠</i></span><span class="pc r">3<i>♦</i></span></span>. You check, he bets $10, and you call. The turn is the <span class="cards" role="img" aria-label="2 of spades"><span class="pc">2<i>♠</i></span></span>. You check, he bets $25, and you call. The river is the <span class="cards" role="img" aria-label="Ten of diamonds"><span class="pc r">T<i>♦</i></span></span>. You check, and he bets $90 into $102. You need 90 / (102 + 180) = 32 percent equity to call.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 21.7</span><h3 class="figure-title">Top pair facing a river bet</h3></div>
+  <div class="table-scroll">
+    <table class="hand-log">
+      <thead><tr><th>Street</th><th>Board</th><th>Action</th><th>Pot</th></tr></thead>
+      <tbody>
+        <tr><td>Preflop</td><td>Hero: <span class="cards" role="img" aria-label="King of diamonds, Queen of clubs"><span class="pc r">K<i>♦</i></span><span class="pc">Q<i>♣</i></span></span></td><td>The button raises to $15. Hero calls in the big blind. The small blind folds.</td><td class="pot">$32</td></tr>
+        <tr><td>Flop</td><td><span class="cards" role="img" aria-label="King of hearts, 7 of spades, 3 of diamonds"><span class="pc r">K<i>♥</i></span><span class="pc">7<i>♠</i></span><span class="pc r">3<i>♦</i></span></span></td><td>Check. The button bets $10. Hero calls.</td><td class="pot">$52</td></tr>
+        <tr><td>Turn</td><td><span class="cards" role="img" aria-label="King of hearts, 7 of spades, 3 of diamonds, 2 of spades"><span class="pc r">K<i>♥</i></span><span class="pc">7<i>♠</i></span><span class="pc r">3<i>♦</i></span><span class="pc">2<i>♠</i></span></span></td><td>Check. The button bets $25. Hero calls.</td><td class="pot">$102</td></tr>
+        <tr><td>River</td><td><span class="cards" role="img" aria-label="King of hearts, 7 of spades, 3 of diamonds, 2 of spades, Ten of diamonds"><span class="pc r">K<i>♥</i></span><span class="pc">7<i>♠</i></span><span class="pc r">3<i>♦</i></span><span class="pc">2<i>♠</i></span><span class="pc r">T<i>♦</i></span></span></td><td>Check. The button bets $90. Hero has $450 behind.</td><td class="pot">$192</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div data-fig="split"><script type="application/json">
+  {"label": "Three versions of the button's betting range on the river, in combos. With every assumed bluff and thin value hand, hero wins 34 combos, chops 6, and loses 32. Without the busted straight draws, hero wins 18. Without those and without the king-jack, hero wins 10.",
+   "unit": "",
+   "rows": [
+     {"label": "All the hands we listed", "note": "hero has 51%", "parts": [{"label": "Hero wins", "value": 34, "tone": "accent2"}, {"label": "Chop", "value": 6, "tone": "muted"}, {"label": "Hero loses", "value": 32, "tone": "accent"}]},
+     {"label": "No busted straight draws", "note": "hero has 38%", "parts": [{"label": "Hero wins", "value": 18, "tone": "accent2"}, {"label": "Chop", "value": 6, "tone": "muted"}, {"label": "Hero loses", "value": 32, "tone": "accent"}]},
+     {"label": "Also no king-jack", "note": "hero has 27%", "parts": [{"label": "Hero wins", "value": 10, "tone": "accent2"}, {"label": "Chop", "value": 6, "tone": "muted"}, {"label": "Hero loses", "value": 32, "tone": "accent"}]}
+   ]}
+  </script></div>
+  <p class="figure-note">Counts from tools/poker.js ranges with our cards and the board removed. Value (we lose): AK 8, KT 6, K7 6, 77 3, 33 3, 22 3, TT 3 = 32. Thin value (we win): KJ 8. Bluffs (we win): A5s 4, A4s 4, 65s 4, 54s 4, 98s 4, QJs 3, AQs 3 = 26. The busted straight draws are A5s, A4s, 65s, and 54s (16 combos). King-queen chops: 6. Equity: (34 + 3) / 72 = 51%, (18 + 3) / 56 = 38%, (10 + 3) / 48 = 27%. Hero needs 32%. An example hand, not a real hand history.</p>
+</figure>
+
+<p>This is the count from <a class="xref" href="19-hand-reading.html">Chapter 19, Hand Reading</a>. Against 32 value combos, a river bet of this size needs 32 x 90 / 192 = 15 bluffs to make a call break even. The list above gives 26 bluffs and 8 thin-value hands, so the call is fine. But look at the lower rows. Take away the busted straight draws and only 10 bluffs are left, short of 15; the call still wins only because the king-jack pays off too. Take away the king-jack as well and hero has 27 percent against a 32 percent price, so the call becomes a fold. Every number in this count comes from a list of hands he might bet, so the call depends on what you know about him.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Daniel Negreanu might say</p>
+  <p class="said">He would start with the player. Has he shown a bet with a draw before? Does he tighten up when the pot gets large? He would use the combo count as a way to test his read, then let what he has seen decide the close ones.</p>
+  <p class="note">An imagined voice: our reading of the hand-reading approach he is publicly known for, not his words.</p>
+</aside>
+
+<h2>Hand 6: Sizing a bet in a 3-bet pot</h2>
+
+<p>The hijack opens to $15, the action is on you in the cutoff, and you 3-bet to $50 with <span class="cards" role="img" aria-label="Ace of spades, King of spades"><span class="pc">A<i>♠</i></span><span class="pc">K<i>♠</i></span></span>, a value hand like those in the 3-bet range in <a class="xref" href="12-preflop-strategy-for-live-games.html">Chapter 12, Preflop Strategy for Live Games</a>. Everyone else folds and the hijack calls. The pot is $2 + $5 + $50 + $50 = $107. We assume he did not 4-bet, so his calling range is JJ, TT, 99, 88, AQs, AJs, KQs, and AQo: 48 combos before cards come out.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 21.8</span><h3 class="figure-title">A 3-bet pot and a two-thirds bet</h3></div>
+  <div class="table-scroll">
+    <table class="hand-log">
+      <thead><tr><th>Street</th><th>Board</th><th>Action</th><th>Pot</th></tr></thead>
+      <tbody>
+        <tr><td>Preflop</td><td>Hero: <span class="cards" role="img" aria-label="Ace of spades, King of spades"><span class="pc">A<i>♠</i></span><span class="pc">K<i>♠</i></span></span></td><td>The hijack opens to $15. Hero 3-bets to $50 in the cutoff. The hijack calls.</td><td class="pot">$107</td></tr>
+        <tr><td>Flop</td><td><span class="cards" role="img" aria-label="Queen of spades, 8 of spades, 3 of hearts"><span class="pc">Q<i>♠</i></span><span class="pc">8<i>♠</i></span><span class="pc r">3<i>♥</i></span></span></td><td>The hijack checks. Hero bets $70. The hijack calls.</td><td class="pot">$247</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div data-fig="range"><script type="application/json">
+  {"label": "The starting hand grid showing the hijack's assumed range for calling a 3-bet: four pocket pairs, and ace-queen, ace-jack, and king-queen hands.",
+   "groups": [
+     {"name": "Pairs", "tone": "gold", "hands": "JJ,TT,99,88"},
+     {"name": "Broadway hands", "tone": "accent", "hands": "AQs,AJs,KQs,AQo"}
+   ]}
+  </script></div>
+  <p class="figure-note">Counts from tools/poker.js: 24 combos of pairs and 24 of broadway hands, 48 in all. The range is an assumption. An example hand, not a real hand history. Stacks: $500 - $50 = $450 before the flop and $380 after the flop bet.</p>
+</figure>
+
+<p>With our two spades and the <span class="cards" role="img" aria-label="Queen of spades, 8 of spades, 3 of hearts"><span class="pc">Q<i>♠</i></span><span class="pc">8<i>♠</i></span><span class="pc r">3<i>♥</i></span></span> flop, we have the nut flush draw and two overcards, nine flush outs plus the ace and king. With our cards and the board removed, his range has 36 combos: 3 sets or two pair, 30 one pair, and 3 with nothing. We have 52 percent equity against all of it (exact, from tools/poker.js). The stack-to-pot ratio is $450 / $107 = 4.2. That is low enough that a pair of queens or a flush draw is close to committed.</p>
+
+<p>Two sizes are on the table. A $35 bet asks the hijack for 20 percent equity. A $70 bet asks 28 percent. Most of his range is a pair, and a pair has far more than 28 percent against our draw, so almost every hand calls either size. Against a range that calls anyway, the larger bet builds the larger pot while we are a slight favorite at 52 percent (<a class="xref" href="20-bet-sizing.html">Chapter 20, Bet Sizing</a>). After the $70 call the pot is $247 and the stacks are $380, an SPR of 1.5. If a turn card helps us, the rest of the stack goes in.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Doyle Brunson might say</p>
+  <p class="said">He would not give this hand a free card or a small price. A hand with this much equity should be building the pot, and a smaller bet only lets the opponent see the turn cheaply and gives your draw a worse chance to get paid.</p>
+  <p class="note">An imagined voice: our reading of the pressure-first play in Super/System (1979), not his words.</p>
+</aside>
+
+<h2>The routine behind all six</h2>
+
+<p>The six hands used the same five questions, in the same order. Run them on any hand you want to review.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 21.9</span><h3 class="figure-title">Reviewing a hand, range by range</h3></div>
+  <ol class="flow">
+    <li><strong>Write the range</strong><span>Start from position and the action, as in <a class="xref" href="12-preflop-strategy-for-live-games.html">Chapter 12, Preflop Strategy for Live Games</a>.</span></li>
+    <li><strong>Remove cards</strong><span>The board and your own cards, as in <a class="xref" href="14-combinatorics.html">Chapter 14, Combinatorics</a>.</span></li>
+    <li><strong>Sort into piles</strong><span>Strong, medium, and air.</span></li>
+    <li><strong>Find the price</strong><span>Bet / (pot + 2 x bet).</span></li>
+    <li><strong>Test the read</strong><span>Which assumption could flip the answer?</span></li>
+  </ol>
+  <p class="figure-note">A summary of this chapter.</p>
+</figure>
+
+<details class="drill">
+  <summary>Drill: the board is <span class="cards" role="img" aria-label="King of spades, 7 of diamonds, 2 of clubs"><span class="pc">K<i>♠</i></span><span class="pc r">7<i>♦</i></span><span class="pc">2<i>♣</i></span></span>. How many combos of AK and of AA are left in a range?</summary>
+  <p>The king of spades is on the board, so three kings remain. AK is 4 aces x 3 kings = 12 combos. AA is not touched by the board, so it is 6.</p>
+</details>
+
+<details class="drill">
+  <summary>Drill: the pot is $152 and the villain bets $75. About what equity do you need to call?</summary>
+  <p>$75 is about half the pot, which asks about 1 in 4, or 25 percent. The exact figure is 75 / (152 + 150) = 24.8 percent.</p>
+</details>
+
+<details class="drill">
+  <summary>Drill: you need 15 bluffs in a range with 32 value combos. He has 12. Call or fold?</summary>
+  <p>12 is short of 15, so the call loses a little against this range. The count is close, so a read that he bluffs more than the list says would change the answer. Treat it as a near coin flip, not a rule.</p>
+</details>
+
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>Tracking the pot as it grows</h2>
+  <p><strong>The shortcut.</strong> A bet that gets called adds two bets to the pot. So a half-pot bet doubles the pot, a pot-sized bet triples it, and a one-third bet makes it about two-thirds bigger. Use the new pot to size the next bet.</p>
+  <p class="math">Hand 5: $32, a $10 bet (about a third) called is about $32 x 5/3 = $53 (exact: $52). Then a $25 bet (about half) called doubles it: about $104 (exact: $102).</p>
+  <p><strong>Where it bends.</strong> Real bets are never exact fractions, so the estimate drifts by a few dollars a street. Live rake and jackpot drops also take chips from the pot, so the real pot can be lower than your count. Re-count with the chips on the felt before you decide on a large river bet.</p>
+</aside>
         </div>
       </article>
 
@@ -49,5 +320,6 @@
   </div>
 
   <script src="../js/version.js"></script>
+  <script src="../js/figures.js"></script>
 </body>
 </html>

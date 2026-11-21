@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.44.0] - 2026-11-21
+
+### Added
+
+- Chapter 21, Part II Review: Six example hands at $2/$5 walked range by range to review Chapters 12 to 20, with corrected combo counts and a street-by-street narrowed river range.
+
 ## [0.43.0] - 2026-11-21
 
 ### Added
