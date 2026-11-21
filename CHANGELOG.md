@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.17.0] - 2026-11-21
+
+### Added
+
+- Chapter 26, Tells, Table Talk, and Table Presence: Chapter 26 explains tells as tendencies, ranks physical, timing and verbal tells by judgment, weighs a tell with odds times likelihood, and covers managing your own image.
+
 ## [0.16.0] - 2026-11-21
 
 ### Added
