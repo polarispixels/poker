@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.33.0] - 2026-11-21
+
+### Added
+
+- Appendix F, Live Etiquette and House Rules: Appendix F: live etiquette, binding action, minimum and short all-in raises, table stakes, and the house rules that vary by room.
+
 ## [0.32.0] - 2026-11-21
 
 ### Added
