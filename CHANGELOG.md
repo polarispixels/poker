@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-11-21
+
+### Added
+
+- Chapter 16, Continuation Betting: Chapter 16 teaches when to c-bet, how much, when to check, and why fold equity shrinks with each extra player.
+
 ## [0.5.0] - 2026-11-21
 
 ### Added

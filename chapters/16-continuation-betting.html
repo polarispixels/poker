@@ -22,13 +22,240 @@
     <main>
       <article class="chapter">
         <header class="chapter-head">
-          <p class="chapter-kicker label">Chapter 16 <span class="badge">To come</span></p>
+          <p class="chapter-kicker label">Chapter 16 <span class="badge">Preliminary draft</span></p>
           <h1 class="chapter-title">Continuation Betting</h1>
           <p class="standfirst">When to bet the flop after raising, how much, and when to check.</p>
         </header>
 
         <div class="prose chapter-body">
-<p class="lead">This page has not been written yet. The book is being written and published one chapter at a time.</p>
+<p class="lead">You raised before the flop and someone called. A continuation bet, or c-bet, is the bet you make on the flop as the player who showed strength. This chapter gives you three decisions in order: whether to bet, how much, and when to check instead.</p>
+
+<h2>Why the c-bet exists</h2>
+<p>When you raise preflop, your opponents put you on a strong range. The flop rarely gives them much. A c-bet cashes in on that gap: you bet whether or not the flop helped you, and your opponent has to decide whether their hand is good enough to continue.</p>
+<p>Start with how seldom a hand connects. An unpaired hand like <span class="cards" role="img" aria-label="Ace of hearts, Queen of diamonds"><span class="pc r">A<i>♥</i></span><span class="pc r">Q<i>♦</i></span></span> flops at least a pair 32.4 percent of the time. Exact: 1 minus (44 choose 3) over (50 choose 3), since 6 cards help and 44 do not. So you miss about two flops in three, and your opponent misses a lot too. The bettor, who can win without a hand, often wins the pot.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 16.1</span><h3 class="figure-title">An unpaired hand on the flop, played 100 times</h3></div>
+  <div data-fig="dots"><script type="application/json">
+  {"label": "Out of 100 flops, an unpaired hand such as ace queen pairs at least one hole card about 32 times and misses about 68 times.",
+   "parts": [
+     {"label": "You pair a hole card or better", "value": 32, "tone": "accent2"},
+     {"label": "You miss", "value": 68, "tone": "paper"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: 1 minus C(44,3) / C(50,3) = 1 minus 13,244 / 19,600 = 32.4%, rounded to 32.</p>
+</figure>
+
+<p>Here is the spot we will use all chapter. It is a $2/$5 game, nine-handed, $500 stacks. You raise to $15 from the cutoff with <span class="cards" role="img" aria-label="Ace of hearts, Queen of diamonds"><span class="pc r">A<i>♥</i></span><span class="pc r">Q<i>♦</i></span></span>. The small blind folds. The big blind calls. The pot is $15 + $15 + $2 = $32.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 16.2</span><h3 class="figure-title">The flop, heads up with the initiative</h3></div>
+  <div data-fig="table"><script type="application/json">
+  {"label": "Nine-handed table. Hero in the cutoff holds ace queen after raising to 15. The big blind called. The flop is king of spades, seven of diamonds, two of clubs, and the pot is 32 dollars.",
+   "button": 1, "pot": "$32", "board": "Ks 7d 2c",
+   "seats": [
+     {"pos": "CO", "stack": "$485", "cards": "Ah Qd", "state": "hero"},
+     {"pos": "BTN", "state": "fold"},
+     {"pos": "SB", "state": "fold"},
+     {"pos": "BB", "stack": "$485", "state": "villain"},
+     {"pos": "UTG", "state": "fold"},
+     {"pos": "UTG+1", "state": "fold"},
+     {"pos": "MP", "state": "fold"},
+     {"pos": "LJ", "state": "fold"},
+     {"pos": "HJ", "state": "fold"}
+   ]}
+  </script></div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history. Pot: $15 + $15 + $2 (small blind) = $32.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Doyle Brunson might say</p>
+  <p class="said">He would ask why you are thinking about checking at all. You raised, so you took the lead. Betting the flop keeps the pressure on, and the player who stops betting hands the pot and the initiative back.</p>
+  <p class="note">An imagined voice: our reading of the aggressive approach in Super/System (1979), not his words.</p>
+</aside>
+
+<h2>Which flops to bet</h2>
+<p>Brunson's instinct is a good start and a bad finish. A c-bet is not a rule for every flop. It works when the board favors the range you raised with, and it fails when the board favors the range that called. <a class="xref" href="15-board-texture.html">Chapter 15, Board Texture</a> covers range advantage and nut advantage in detail. Here is the short version: ask who has more strong hands on this flop.</p>
+<p>A cutoff raiser holds many kings, aces, and big pairs. The big blind, who called a raise, holds many middle cards and suited connectors. To make that concrete, give the big blind this example calling range: 370 combinations, 27.9 percent of all starting hands. It is a simplified sketch for the example, not a solver output, and it keeps a few hands (such as aces and kings) that many players would reraise.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 16.3</span><h3 class="figure-title">An example big blind calling range</h3></div>
+  <div data-fig="range"><script type="application/json">
+  {"label": "The starting hand grid with an example big blind calling range shaded: all pairs, suited aces, many suited and connected hands, and broadway offsuit hands.",
+   "groups": [
+     {"name": "Pairs", "tone": "ink", "hands": "22+"},
+     {"name": "Suited", "tone": "accent2", "hands": "A2s+,K5s+,Q8s+,J8s+,T8s+,97s+,86s+,75s+,65s+,54s"},
+     {"name": "Offsuit", "tone": "gold", "hands": "A8o+,KTo+,QTo+,JTo"}
+   ]}
+  </script></div>
+  <p class="figure-note">An example range, 370 combos (27.9% of 1,326), counted by tools/poker.js. It is a teaching sketch, not a solver output.</p>
+</figure>
+
+<p>Now run your <span class="cards" role="img" aria-label="Ace of hearts, Queen of diamonds"><span class="pc r">A<i>♥</i></span><span class="pc r">Q<i>♦</i></span></span> against that range on two different flops. On <span class="cards" role="img" aria-label="King of spades, 7 of diamonds, 2 of clubs"><span class="pc">K<i>♠</i></span><span class="pc r">7<i>♦</i></span><span class="pc">2<i>♣</i></span></span>, a dry board, you have 48.9 percent equity even though you have not paired. On <span class="cards" role="img" aria-label="9 of spades, 8 of hearts, 7 of diamonds"><span class="pc">9<i>♠</i></span><span class="pc r">8<i>♥</i></span><span class="pc r">7<i>♦</i></span></span>, a connected board that suits the big blind's range, the same hand has 38.1 percent. Pocket nines go the other way: <span class="cards" role="img" aria-label="9 of clubs, 9 of diamonds"><span class="pc">9<i>♣</i></span><span class="pc r">9<i>♦</i></span></span> holds up on the dry board and turns into a monster on the wet one.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 16.4</span><h3 class="figure-title">One hand, two flops</h3></div>
+  <div data-fig="columns"><script type="application/json">
+  {"label": "Equity against the example big blind calling range for ace queen, pocket nines, and six five of clubs on a dry king-seven-two flop and a connected nine-eight-seven flop.",
+   "unit": "%", "categories": ["Ah Qd", "9c 9d", "6c 5c"],
+   "series": [
+     {"name": "K-7-2 rainbow", "values": [48.9, 58.7, 22.1], "tone": "ink"},
+     {"name": "9-8-7 rainbow", "values": [38.1, 83.4, 80.8], "tone": "accent2"}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact, from tools/poker.js against the 370-combo example range, with the hero's own cards and the board removed. These are equities against the whole range, before the big blind folds anything. Six five on nine-eight-seven is a made straight.</p>
+</figure>
+
+<p>Bet more often on the dry board and less often on the wet one. In most low-stakes live games, players fold weak hands to a small flop bet and call with any pair, so the dry board pays your bluffs and the wet board does not.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 16.5</span><h3 class="figure-title">Which flops invite a c-bet</h3></div>
+  <div data-fig="scatter"><script type="application/json">
+  {"label": "Five flop types placed by how well they fit the raiser's range and how easily a caller folds. Ace-high and king-high dry boards sit top right, middle-card connected boards sit bottom left.",
+   "x": {"label": "Fits the raiser's range", "low": "Fits the caller", "high": "Fits the raiser"},
+   "y": {"label": "Caller folds easily", "low": "Sticky", "high": "Folds"},
+   "quadrants": ["Bet small, often", "Bet most of the range", "Check often", "Bet your strong hands"],
+   "points": [
+     {"label": "A-7-2 rainbow", "x": 88, "y": 80, "tone": "ink"},
+     {"label": "K-7-2 rainbow", "x": 74, "y": 68, "tone": "ink"},
+     {"label": "Q-J-T two-tone", "x": 55, "y": 28, "tone": "gold"},
+     {"label": "9-8-7 connected", "x": 18, "y": 22, "tone": "accent"},
+     {"label": "6-5-5", "x": 28, "y": 62, "tone": "muted"}
+   ]}
+  </script></div>
+  <p class="figure-note">A sketch. Positions are judgments for a typical live game, not measured.</p>
+</figure>
+
+<h2>How much to bet</h2>
+<p>A c-bet is a bluff that sometimes has a hand behind it, so start with the price of the bluff. A bet of B into a pot of P breaks even on fold equity alone when the caller folds B / (P + B) of the time. Bigger bets need more folds. Pot is $32 here.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table 16.1</span><h3 class="figure-title">What each c-bet size asks of the big blind</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Size</th><th>Bet</th><th>Folds needed</th><th>Caller needs</th><th>Risk to win $32</th></tr></thead>
+      <tbody>
+        <tr><td>1/3 pot</td><td>$11</td><td>25.6%</td><td>20.4% equity</td><td>$11</td></tr>
+        <tr><td>1/2 pot</td><td>$16</td><td>33.3%</td><td>25% equity</td><td>$16</td></tr>
+        <tr><td>2/3 pot</td><td>$21</td><td>39.6%</td><td>28.4% equity</td><td>$21</td></tr>
+        <tr><td>Pot</td><td>$32</td><td>50%</td><td>33.3% equity</td><td>$32</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Arithmetic. Folds needed is bet / (pot + bet): 11 / 43 = 25.6%, 16 / 48 = 33.3%, 21 / 53 = 39.6%, 32 / 64 = 50%. The $11 and $21 bets are the one-third and two-thirds pot sizes rounded to whole dollars. Caller needs is bet / (pot + 2 x bet): 11 / 54 = 20.4%, 16 / 64 = 25%, 21 / 74 = 28.4%, 32 / 96 = 33.3%, matching tools/poker.js odds. The last column is just the bet: a c-bet always risks its own size to win the pot.</p>
+</figure>
+
+<p>The cheapest bet works on a dry board because few of the big blind's hands are strong enough to call, and small bets get the same folds as large ones from the weakest hands. On the wet board, the caller has plenty of draws that call any size, so a small bet buys little and a big bet is expensive. That is a reason to check more, not to bet bigger.</p>
+<p>Live players are often loose about the price. A caller who will not fold a pair or a draw does not care whether you bet $11 or $21, so against that player, bet bigger when you have a hand (the call comes anyway) and bluff less at any size. <a class="xref" href="20-bet-sizing.html">Chapter 20, Bet Sizing</a> treats sizing in full. For now, here is the hand played out at one-third pot.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 16.6</span><h3 class="figure-title">A small c-bet, then a decision</h3></div>
+  <div class="table-scroll">
+    <table class="hand-log">
+      <thead><tr><th>Street</th><th>Board</th><th>Action</th><th>Pot</th></tr></thead>
+      <tbody>
+        <tr><td>Preflop</td><td>Hero: <span class="cards" role="img" aria-label="Ace of hearts, Queen of diamonds"><span class="pc r">A<i>♥</i></span><span class="pc r">Q<i>♦</i></span></span></td><td>Hero raises to $15 in the cutoff. The big blind calls.</td><td class="pot">$32</td></tr>
+        <tr><td>Flop</td><td><span class="cards" role="img" aria-label="King of spades, 7 of diamonds, 2 of clubs"><span class="pc">K<i>♠</i></span><span class="pc r">7<i>♦</i></span><span class="pc">2<i>♣</i></span></span></td><td>The big blind checks. Hero bets $11. The big blind calls.</td><td class="pot">$54</td></tr>
+        <tr><td>Turn</td><td><span class="cards" role="img" aria-label="King of spades, 7 of diamonds, 2 of clubs, 4 of hearts"><span class="pc">K<i>♠</i></span><span class="pc r">7<i>♦</i></span><span class="pc">2<i>♣</i></span><span class="pc r">4<i>♥</i></span></span></td><td>The big blind checks. Hero has ace high and one card to come, and decides whether to keep going (see <a class="xref" href="17-playing-the-turn-and-river.html">Chapter 17, Playing the Turn and River</a>).</td><td class="pot">$54</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history. Pot: $32 + $11 + $11 = $54.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Daniel Negreanu might say</p>
+  <p class="said">He would like the small bet. It costs little, it keeps the pot manageable when you are wrong, and it lets you collect information about what the other player does next. He would warn you to watch how this particular player responds, since a bet is also a question.</p>
+  <p class="note">An imagined voice: our reading of his small ball approach and his emphasis on reading hands, not his words.</p>
+</aside>
+
+<h2>When to check</h2>
+<p>Checking is not weakness. It is the right play when a bet would lose money or when your hand does better without one. Three common cases make up most of the checks.</p>
+<p>The first is a board that favors the caller, like <span class="cards" role="img" aria-label="9 of spades, 8 of hearts, 7 of diamonds"><span class="pc">9<i>♠</i></span><span class="pc r">8<i>♥</i></span><span class="pc r">7<i>♦</i></span></span> above. The second is a hand with showdown value: a small pair or weak ace high that wins at showdown but folds to a raise, especially on boards where you are not betting your whole range. Betting turns that hand into a bluff that only better hands call. The third is a hand with enough equity to take a free card but not enough to want the money in the middle.</p>
+
+<p>The real skill is knowing why a hand checks. A hand that checks for a reason can take a good line on the turn. A hand that checks out of fear cannot.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Phil Galfond might say</p>
+  <p class="said">He would ask you to run through the same short list every time and name the reason for the bet or the check before you act. A reason you can say in one sentence is a plan. A feeling is not. He would also remind you that a baseline needs adjusting to the player in front of you.</p>
+  <p class="note">An imagined voice: our reading of his teaching approach at Run It Once, not his words.</p>
+</aside>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 16.7</span><h3 class="figure-title">The c-bet checklist</h3></div>
+  <ol class="flow">
+    <li><strong>Count the players</strong><span>Heads up, or more? Each extra caller makes bluffs harder.</span></li>
+    <li><strong>Read the board</strong><span>Who has more strong hands here, you or the caller?</span></li>
+    <li><strong>Sort your hand</strong><span>Value, bluff with equity, showdown value, or give up.</span></li>
+    <li><strong>Pick the size</strong><span>Small on dry boards. Larger only with a reason.</span></li>
+  </ol>
+  <p class="figure-note">A summary of this chapter's method. <a class="xref" href="18-bluffing-and-semi-bluffing.html">Chapter 18, Bluffing and Semi-Bluffing</a> covers which bluffs to choose.</p>
+</figure>
+
+<h2>Into several players</h2>
+<p>Everything above gets harder with more callers. To win a pot with a bluff, everyone must fold. If each of them folds independently with probability f, all of them fold f raised to the number of opponents. Independence is a simplification, since players act on the same board and the same bet, but it shows the trend.</p>
+<p>Say each opponent folds 60 percent of the time. One opponent folds 60 percent. Two opponents both fold 36 percent. Three all fold 21.6 percent. The bluff gets expensive fast.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table 16.2</span><h3 class="figure-title">How often everyone folds</h3></div>
+  <div data-fig="heat"><script type="application/json">
+  {"label": "Chance that every opponent folds to a bluff, for one, two, and three opponents who each fold 50, 60, or 70 percent of the time.",
+   "corner": "Opponents", "unit": "%", "tone": "accent",
+   "cols": ["Each folds 50%", "Each folds 60%", "Each folds 70%"],
+   "rows": ["1", "2", "3"],
+   "values": [[50, 60, 70], [25, 36, 49], [12.5, 21.6, 34.3]]}
+  </script></div>
+  <p class="figure-note">Arithmetic: the per-player fold rate raised to the number of opponents. The fold rates are assumptions for the example, and 12.5 is 0.5 x 0.5 x 0.5.</p>
+</figure>
+
+<p>Now put numbers on a three-way pot. You raise to $15 in the cutoff, the button and the big blind both call, and the pot is $15 + $15 + $15 + $2 = $47. A bet of $16 (about one-third) needs 16 / (47 + 16) = 25.4 percent folds. With two callers, each must fold the square root of 0.254, about 50 percent, and both must do it on the same flop. If each folds 45 percent, they both fold 20.25 percent, and the bluff loses money by itself.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 16.8</span><h3 class="figure-title">A bluff into two callers</h3></div>
+  <ul class="tree">
+    <li><span class="node root">Bet $16 into $47 with air</span>
+      <ul>
+        <li><span class="edge">Both fold, 20.25% of the time (45% each)</span><span class="node win">Win $47</span></li>
+        <li><span class="edge">At least one calls, 79.75% of the time</span><span class="node lose">Lose $16</span></li>
+      </ul>
+    </li>
+  </ul>
+  <p class="math">EV = 0.2025 x $47 + 0.7975 x (-$16) = $9.52 - $12.76 = -$3.24</p>
+  <p class="figure-note">Arithmetic. The 45% fold rate is an assumption for the example, and the EV ignores any equity the hand keeps when called.</p>
+</figure>
+
+<p>The fix is not a bigger bet. Pot is $47, and a pot-size bet needs 50 percent folds from the group. In most low-stakes live games, a multiway c-bet is mostly a value bet. You bet when you hold a hand that wants callers (and sometimes a strong draw that is happy to be called), and you check the rest. <a class="xref" href="27-multiway-pots.html">Chapter 27, Multiway Pots</a> goes deeper into multiway play.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What David Sklansky might say</p>
+  <p class="said">He would point out that the multiway bluff is a plain arithmetic problem. Fold equity is a product, so it shrinks quickly, and a bet that is profitable against one player can lose money against three. Count the folds you need before you count your courage.</p>
+  <p class="note">An imagined voice: our reading of the expected value thinking in The Theory of Poker, not his words.</p>
+</aside>
+
+<details class="drill">
+  <summary>The pot is $32 and you bet $16 on the flop. How often must the big blind fold for the bet to break even?</summary>
+  <p>16 / (32 + 16) = 16 / 48 = 33.3%.</p>
+</details>
+<details class="drill">
+  <summary>The pot is $47 with two opponents. Each folds 50 percent of the time. How often do they both fold?</summary>
+  <p>0.5 x 0.5 = 25%. A bet of $16 needs 25.4%, so it just fails to break even.</p>
+</details>
+<details class="drill">
+  <summary>Heads up, the big blind folds 40 percent to an $11 bet into $32. What is the bluff's EV, ignoring equity when called?</summary>
+  <p>0.40 x $32 + 0.60 x (-$11) = $12.80 - $6.60 = +$6.20.</p>
+</details>
+<details class="drill">
+  <summary>You raise preflop and two players call. You hold a small pair on a king-high flop. Bet or check?</summary>
+  <p>Check is usually right. The hand wins at showdown sometimes, folds to a raise, and a bet gets called by better hands and folded out by worse ones.</p>
+</details>
+
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>Fold equity shrinks with each extra player</h2>
+  <p><strong>The shortcut.</strong> Multiply the opponents' fold chances together. Two players who each fold 60 percent both fold 36 percent. For a quick check, a one-third pot bet needs about one fold in four, so a bluff into two players needs each to fold about one in two.</p>
+  <p class="math">Three players at 60% each: 0.6 x 0.6 x 0.6 = 21.6%</p>
+  <p><strong>Where it bends.</strong> Folds are not independent. Once one player calls, the next gets a better price and often calls lighter. Players also differ, so multiply each player's own rate: a 70 percent folder and a 30 percent folder both fold 0.7 x 0.3 = 21 percent, not the 25 percent two 50 percent folders give. One player who never folds makes the whole product zero. Treat the product as a rough guide, not a promise.</p>
+</aside>
         </div>
       </article>
 
@@ -49,5 +276,6 @@
   </div>
 
   <script src="../js/version.js"></script>
+  <script src="../js/figures.js"></script>
 </body>
 </html>
