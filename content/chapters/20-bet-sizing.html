@@ -1,0 +1,215 @@
+<p class="lead">Every bet is a price you quote to the next player. This chapter shows what each size asks of a caller, how to choose a size for value or for folds, and why live players answer the size on the felt more than the range behind it.</p>
+
+<h2>A size is a price</h2>
+
+<p>A bet does two jobs at once. It tells the next player what a call costs, and it tells them what you might hold. Start with the cost, because it is pure arithmetic. If you bet into a pot, the caller puts in one bet to play for a final pot of the pot plus both bets. The share of the time they must win to break even is <em>bet / (pot + 2 x bet)</em>. This is the same pot-odds math from {{ch:5}} and {{ch:6}}, seen from the other side of the table.</p>
+
+<p>Your bluffs face a matching price. A bluff breaks even when the opponent folds <em>bet / (pot + bet)</em> of the time. The bigger the bet, the more equity the caller needs, and the more often your bluff has to work.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">What a bet asks, and what a bluff needs</h3></div>
+  <div data-fig="line"><script type="application/json">
+  {"label": "Equity the caller needs and fold rate a bluff needs, as the bet grows from a quarter of the pot to twice the pot. Both rise with size, and the bluff line rises faster.",
+   "xLabel": "Bet as a share of the pot", "xUnit": "x", "yUnit": "%", "yMin": 0, "yMax": 70,
+   "series": [
+     {"name": "Equity the caller needs", "tone": "ink", "points": [[0.25, 16.7], [0.5, 25], [0.75, 30], [1, 33.3], [1.5, 37.5], [2, 40]]},
+     {"name": "Folds a bluff needs", "tone": "accent", "points": [[0.25, 20], [0.5, 33.3], [0.75, 42.9], [1, 50], [1.5, 60], [2, 66.7]]}
+   ],
+   "marks": [{"x": 0.5, "y": 25, "label": "Half pot: 25%"}]}
+  </script></div>
+  <p class="figure-note">Exact, from tools/poker.js (odds command). The pot is counted before the bet.</p>
+</figure>
+
+<p>Look at the gap between the lines. Going from a half-pot bet to a pot-sized bet asks the caller for 8 more points of equity (25% to 33%). It asks your bluff for 17 more points of folds (33% to 50%). A bigger bet makes the caller's job a little harder and your bluff's job a lot harder. Most of this chapter is about when that trade is worth making.</p>
+
+<aside class="key">
+  <p class="label">Key idea</p>
+  <p>Pick the size by asking who you want to call, and who you want to fold. The math sets the price. Your range and your opponent decide whether that price is right.</p>
+</aside>
+
+<h2>What a size does to a draw</h2>
+
+<p>Sizing is a tool for charging draws. A draw wants a cheap price, because it only has a chance to win some of the time. If you bet too small, a drawing hand gets a correct call. If you bet big enough, the same hand has to fold, and you have taken its equity away.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Queens against a straight draw, flop and turn</h3></div>
+  <div class="table-scroll">
+    <table class="hand-log">
+      <thead><tr><th>Street</th><th>Board</th><th>Action</th><th>Pot</th></tr></thead>
+      <tbody>
+        <tr><td>Preflop</td><td>Hero: [[Qs Qc]]</td><td>Hero raises to $15 in the cutoff. The big blind calls with [[9h 8h]]. The small blind folds.</td><td class="pot">$32</td></tr>
+        <tr><td>Flop</td><td>[[Jh Ts 4c]]</td><td>Hero bets $16, half the pot. The villain's price is 16 / (32 + 32) = 25%. He has 26.8% to win by the river, but only 13.3% to hit on the turn. He calls, counting on implied odds.</td><td class="pot">$64</td></tr>
+        <tr><td>Turn</td><td>[[Jh Ts 4c 2d]]</td><td>Hero bets $32, half the pot. The villain needs 32 / (64 + 64) = 25% and has 13.6%. He folds. Hero wins the $64 pot.</td><td class="pot">$64</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">An example hand in a $2/$5 game, $500 stacks. Not a real hand history. The 26.8% and 13.6% are exact, from tools/poker.js. Arithmetic: the turn hit is 6 outs (four sevens and the two queens Hero does not hold) out of 45 unseen cards, 6 / 45 = 13.3%.</p>
+</figure>
+
+<p>Notice the two flop numbers. The 26.8% is the draw's equity only if it sees both the turn and the river for this one price. Hero will bet again on the turn, so the fair flop number is the 13.3% chance to hit on the next card. Now change only the flop bet.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">The price of a call against the draw's equity</h3></div>
+  <div data-fig="columns"><script type="application/json">
+  {"label": "On the jack, ten, four flop with a pot of 32 dollars, a quarter-pot bet costs the draw 16.7 percent, a half-pot bet 25 percent, and a pot bet 33.3 percent. The draw hits on the turn 13.3 percent of the time and by the river 26.8 percent.",
+   "unit": "%", "categories": ["$8 bet", "$16 bet", "$32 bet"],
+   "series": [
+     {"name": "Price", "values": [16.7, 25, 33.3], "tone": "accent"},
+     {"name": "Hits turn", "values": [13.3, 13.3, 13.3], "tone": "accent2"},
+     {"name": "By river", "values": [26.8, 26.8, 26.8], "tone": "muted"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: bet / (32 + 2 x bet), and 6 / 45 for the turn. The river figure for [[9h 8h]] against [[Qs Qc]] is exact, from tools/poker.js.</p>
+</figure>
+
+<p>On the next card alone, every one of these bets is too expensive. What makes a call possible is implied odds: the extra money the draw expects to win on later streets when it hits. The bet size sets how much it needs. With a 6 in 45 chance, the draw breaks even when 6 x (32 + bet + extra) = 39 x bet. Against the $8 bet it needs about $12 more when it hits. Against $16, about $56. Against $32, about $144, which is a lot to collect from an overpair that may slow down when a seven arrives. A small bet lets the draw in cheaply. A big one makes it count on a payoff it may not get. On the turn of the hand log, the $32 bet would need about $107 more on the river, so the villain folds.</p>
+
+<p>This is why wet boards ask for bigger bets, a topic {{ch:15}} and {{ch:16}} cover from the texture side. The cost of a big bet is that you risk more when you are the one who is behind.</p>
+
+<h2>Polarized and merged ranges</h2>
+
+<p>A <strong>polarized</strong> range holds the very strong hands and the bluffs, and little in between. A <strong>merged</strong> range holds the strong and the medium hands, so most of it can beat something that calls. The size you choose tends to follow the shape of your range. Big bets suit a polarized range: the strong hands want the most money, the bluffs want the most folds, and there are no medium hands to get called by better. Small bets suit a merged range, since you want worse hands to call.</p>
+
+<p>For a polarized range, the size also sets the bluff share. For a bet to leave the caller indifferent, your bluffs must make up <em>bet / (pot + 2 x bet)</em> of your betting range. That is the same number as the caller's equity requirement. A half-pot bet needs one bluff for every three value hands.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">A half-pot river bet, 100 times</h3></div>
+  <div data-fig="dots"><script type="application/json">
+  {"label": "Out of 100 half-pot river bets in a balanced polarized range, 75 are value bets and 25 are bluffs.",
+   "parts": [
+     {"label": "Value bets", "value": 75, "tone": "accent2"},
+     {"label": "Bluffs", "value": 25, "tone": "accent"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: 0.5 / (1 + 2 x 0.5) = 25%. A pot-sized bet lifts the bluff share to 33, and a bet of twice the pot lifts it to 40.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Daniel Negreanu might say</p>
+  <p class="said">He would defend the smaller bet. Small bets keep the pot affordable, let you collect from worse hands, and give you a cheap look at how the other player reacts. He would say a big bet is a commitment, and most of the time you do not need to make it to win.</p>
+  <p class="note">An imagined voice: our reading of his small ball approach, not his words.</p>
+</aside>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Doyle Brunson might say</p>
+  <p class="said">He would lean the other way. A big bet makes the other player pay to see the next card, and it makes a medium hand think twice. He would add that a player who only bets small is easy to read and easy to stand up to.</p>
+  <p class="note">An imagined voice: our reading of the aggression in Super/System (1979), not his words.</p>
+</aside>
+
+<p>They are both right about something. Small bets win more from calling stations. Large bets win more from players who fold. Which one you are facing is a read, and the next two sections show how to use it.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Two ways to shape a betting range</h3></div>
+  <div class="compare">
+    <div class="a"><h4>Polarized</h4><p>Strong hands and bluffs. Bet large. The size sets how many bluffs you can afford.</p></div>
+    <div class="b"><h4>Merged</h4><p>Strong and medium hands. Bet small to medium. You want a worse hand to call, so the price must be easy.</p></div>
+  </div>
+  <p class="figure-note">A summary of this section. Balance and bluff ratios are covered further in {{ch:18}} and {{ch:23}}.</p>
+</figure>
+
+<h2>Sizing for value and sizing for folds</h2>
+
+<p>A value bet should be the largest bet that a worse hand still calls. A bluff or semi-bluff should be the size that makes enough better hands fold. These are different questions, and they can pick different sizes.</p>
+
+<p>Here is a value example. On the river you hold a strong hand, and the pot is $90. You want to know how much extra the bet earns beyond the pot you already own. In the first column, the opponent folds more as the bet grows. In the second, he is a calling station who pays any size with a pair. The call rates are assumptions for this example.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">A $90 river pot: who pays more?</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Bet</th><th>Size-sensitive caller</th><th>Average win</th><th>Calling station</th><th>Average win</th></tr></thead>
+      <tbody>
+        <tr><td>$30 (1/3 pot)</td><td>Calls 85%</td><td>$25.50</td><td>Calls 85%</td><td>$25.50</td></tr>
+        <tr><td>$60 (2/3 pot)</td><td>Calls 55%</td><td class="good">$33.00</td><td>Calls 85%</td><td>$51.00</td></tr>
+        <tr><td>$90 (pot)</td><td>Calls 30%</td><td>$27.00</td><td>Calls 85%</td><td class="good">$76.50</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Arithmetic: bet x call rate. The call rates are assumptions for the example, not measured. Assumes your hand is best whenever it is called, so the bet adds bet x call rate to the pot you already win.</p>
+</figure>
+
+<p>Against the first player the middle size wins most. Against the station the biggest size does, and it is not close. The lesson is not that a certain size is correct. It is that the right size moves with the person who calls.</p>
+
+<p>Bluffs follow the same fold math. Say you bluff $60 into $90, and the opponent folds half the time.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">A $60 bluff into a $90 pot</h3></div>
+  <ul class="tree">
+    <li><span class="node root">Bluff $60 into $90</span>
+      <ul>
+        <li><span class="edge">Villain folds 50% of the time</span><span class="node win">Win $90</span></li>
+        <li><span class="edge">Villain calls 50% of the time</span><span class="node lose">Lose $60</span></li>
+      </ul>
+    </li>
+  </ul>
+  <p class="math">EV = 0.50 x $90 + 0.50 x (-$60) = $45 - $30 = +$15. Break-even is 60 / (90 + 60) = 40% folds.</p>
+  <p class="figure-note">Arithmetic. The 50% fold rate is an assumption for the example.</p>
+</figure>
+
+<p>A smaller bluff of $30 only needs 30 / 120 = 25% folds. If the opponent folds just as often to a small bet as to a big one, the small bluff risks less for the same pot. If he calls small bets and folds to big ones, the big bluff is the one that works. {{ch:18}} covers how bluffs and value bets fit together.</p>
+
+<h2>How live players react to size</h2>
+
+<p>Solvers use sizes that fit the ranges. Live players, in most low-stakes games, answer the amount they see. A $20 bet feels small, a $60 bet feels big, and many players call or fold on that feeling before they think about a range. This is a judgment from how these games tend to play, not a measured fact, and your own table may differ. It is why the book's thesis applies here: respect the numbers, and then exploit what people do.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">Common live reactions, and a response</h3></div>
+  <div class="table-scroll">
+    <table class="wrap">
+      <thead><tr><th>What you see</th><th>What often happens</th><th>Your adjustment</th></tr></thead>
+      <tbody>
+        <tr><td>A small bet into the player</td><td>Players with any pair or any draw tend to call, since the price looks harmless.</td><td>Value bet thinner. Pair-plus hands can bet small and get paid.</td></tr>
+        <tr><td>A big bet</td><td>Medium hands tend to fold, and strong hands call or raise.</td><td>Bluff more against folders. Hold back medium hands that cannot stand a call.</td></tr>
+        <tr><td>A player who bets small with weak hands and big with strong ones</td><td>The size gives away the hand. Many casual players do this without noticing.</td><td>Fold to the big bet more. Raise the small bet more.</td></tr>
+        <tr><td>An overbet from a tight player</td><td>Often the strong end of a range.</td><td>Give credit. Call only with a hand that beats most of it.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Tendencies in most low-stakes live games, offered as judgment. Watch your own table before you trust any row. See {{ch:25}} and {{ch:26}} for player types and tells.</p>
+</figure>
+
+<p>Treat any size read as a pattern across several hands, not a fact from one. A player who bets small once may simply be tired. A player who has bet small with every weak hand in the last hour has told you something.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What David Sklansky might say</p>
+  <p class="said">He would remind you that a bet size is information, and that the other side is learning from it too. If your big bets always mean strong hands, a good opponent profits from folding. If you use the same size for different hands, you deny him that gain.</p>
+  <p class="note">An imagined voice: our reading of the Fundamental Theorem of Poker in The Theory of Poker, not his words.</p>
+</aside>
+
+<p>His point is the cost of being readable. Against a live player who is not tracking your sizes, you can pick each size for the hand you hold, as the value table did. Against an observant one, use the same size for your value hands and your bluffs in a given spot, so the amount tells him nothing.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Choosing a size, step by step</h3></div>
+  <ol class="flow">
+    <li><strong>Name the goal</strong><span>Value, fold equity, or charging a draw.</span></li>
+    <li><strong>Find the target</strong><span>Value: the worst hand that pays. Bluff: the best hand that folds.</span></li>
+    <li><strong>Check the price</strong><span>Bet / (pot + 2 x bet) against that hand.</span></li>
+    <li><strong>Read the person</strong><span>Does this player react to size?</span></li>
+  </ol>
+  <p class="figure-note">A summary of this chapter. Start at the goal, and let the opponent move the size up or down.</p>
+</figure>
+
+<h3>Drills</h3>
+
+<details class="drill">
+  <summary>The pot is $60 and you bet $45. What equity does the caller need, and how often must a bluff work?</summary>
+  <p>Caller: 45 / (60 + 90) = 45 / 150 = 30%. Bluff: 45 / (60 + 45) = 45 / 105 = 42.9%.</p>
+</details>
+
+<details class="drill">
+  <summary>You bet the pot on the river with 12 value combos. How many bluff combos keep a caller indifferent?</summary>
+  <p>The bluff share of a pot-sized bet is 1/3 of the betting range, so one bluff per two value hands: 12 / 2 = 6 bluff combos.</p>
+</details>
+
+<details class="drill">
+  <summary>On the turn a player bets $24 into $48. You hold a flush draw with 9 outs and one card to come. Is a call right on price alone?</summary>
+  <p>The price is 24 / (48 + 48) = 25%. Nine outs with one card to come is 19.6% (exact, from tools/poker.js). On price alone, fold. Only implied odds could change that.</p>
+</details>
+
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>What each size asks the caller to have</h2>
+  <p><strong>The shortcut.</strong> A bet of one n-th of the pot asks the caller to win 1 time in (n + 2). Half pot is 1 in 4. A third of the pot is 1 in 5. A pot-sized bet is 1 in 3.</p>
+  <p class="math">Half pot: n = 2, so 1 in 4 = 25%. Pot: n = 1, so 1 in 3 = 33%. Third pot: n = 3, so 1 in 5 = 20%.</p>
+  <p><strong>Where it bends.</strong> Sizes that are not a clean fraction of the pot need the full formula. Three-quarters of the pot is 0.75 / (1 + 1.5) = 30%, and a bet of twice the pot is 40%. The shortcut also ignores implied odds and any money still to go in. It prices only the bet in front of you. See {{ch:A}} for the full table.</p>
+</aside>

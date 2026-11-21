@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.21.0] - 2026-11-21
+
+### Added
+
+- Chapter 20, Bet Sizing: Chapter 20 shows each bet size as a price, how it charges draws, how range shape and the opponent pick between value and fold-equity sizes, and how live players react to the amount.
+
 ## [0.20.0] - 2026-11-21
 
 ### Added
