@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.24.0] - 2026-11-21
+
+### Added
+
+- Appendix E, Recommended Reading and Study Path: Appendix E: a six-part study path with matched books for each part, the council's books, and a read, play, review loop.
+
 ## [0.23.0] - 2026-11-21
 
 ### Added
