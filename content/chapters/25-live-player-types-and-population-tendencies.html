@@ -1,0 +1,220 @@
+<p class="lead">Every live room has the same cast: a few regulars, a crowd of recreational players, and at least one nit. This chapter profiles each type, shows what each one's range looks like in numbers, and gives you a default adjustment to start from before you have any reads.</p>
+
+<h2>Types are a first guess</h2>
+
+<p>A player type is a bet on how someone will act before you have seen them act. It is a prior: a starting estimate you replace as evidence arrives. Two things sort most players. How many hands do they play (loose or tight)? How often do they bet and raise instead of calling (aggressive or passive)? The types below are those two questions combined.</p>
+
+<p>Use the type only until the table gives you something better. {{ch:9}} covers how to watch and keep notes. {{ch:24}} covers how to attack a deviation once you have found one. This chapter sits between them: what you expect to see before you have seen it.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Five types of live player</h3></div>
+  <div data-fig="scatter"><script type="application/json">
+  {"label": "Five live player types on two axes: how many hands they play, and how often they bet and raise. The nit is tight and passive, the regular is tight and aggressive, the calling station is loose and passive, the maniac is loose and aggressive, and the casual recreational player sits loose and in the middle.",
+   "x": {"label": "Hands played", "low": "Tight", "high": "Loose"},
+   "y": {"label": "Aggression", "high": "Bets and raises"},
+   "quadrants": ["Tight-aggressive", "Loose-aggressive", "Tight-passive", "Loose-passive"],
+   "points": [
+     {"label": "The regular", "x": 30, "y": 72, "tone": "ink"},
+     {"label": "The nit", "x": 10, "y": 28, "tone": "muted"},
+     {"label": "The calling station", "x": 84, "y": 16, "tone": "gold"},
+     {"label": "The maniac", "x": 82, "y": 88, "tone": "accent"},
+     {"label": "The casual player", "x": 62, "y": 40, "tone": "accent2"}
+   ]}
+  </script></div>
+  <p class="figure-note">A sketch. Positions are illustrative, not measured. In most low-stakes live games the loose-passive corner holds more players than the loose-aggressive one.</p>
+</figure>
+
+<aside class="key">
+  <p class="label">Key idea</p>
+  <p>A type is a starting guess about how a player will act. Your notes from this session replace it.</p>
+</aside>
+
+<h2>The recreational player</h2>
+
+<p>The recreational player plays for fun. They arrive after work, they like seeing flops, and they hate folding a hand that might win. In most low-stakes live rooms, in our judgment, they are most of the money at the table. In our experience of low-stakes live games, their most common leak is calling too much, so we start there.</p>
+
+<p>How wide is "too much"? Take a loose range: any pair, any suited ace, the better suited broadways and connectors, and the better offsuit hands. That is 282 combos out of 1,326, or 21% of all starting hands. Out of 100 hands, about 21 are played and 79 are folded. Compare that with the 3.8% a nit might raise from early position (see below). Some recreational players are looser still: a 36% range is 478 combos.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">A loose player, 100 hands</h3></div>
+  <div data-fig="dots"><script type="application/json">
+  {"label": "Out of 100 hands, a player with a loose 282-combo range plays about 21 and folds 79.",
+   "parts": [
+     {"label": "Hands he plays", "value": 21, "tone": "gold"},
+     {"label": "Hands he folds", "value": 79, "tone": "paper"}
+   ]}
+  </script></div>
+  <p class="figure-note">Combos from tools/poker.js: 282 / 1,326 = 21.27%. The range is an example, not a measured one.</p>
+</figure>
+
+<p>A range that wide is full of second-best hands. That is where your money comes from. Put top pair with a good kicker against it and see what happens.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Top pair against two kinds of range</h3></div>
+  <div data-fig="split"><script type="application/json">
+  {"label": "Equity of ace queen on a queen, seven, two flop: 84 percent against the loose range (212 combos left once your cards and the flop are removed), and 66 percent against the nit's range (35 combos left). Ace jack before the flop: 54 percent against the loose range and 28 percent against the nit.",
+   "rows": [
+     {"label": "AQ on Q72, against the loose range", "note": "exact", "parts": [{"label": "Hero", "value": 83.6, "tone": "ink"}, {"label": "Villain", "value": 16.4, "tone": "accent"}]},
+     {"label": "AQ on Q72, against the nit", "note": "exact", "parts": [{"label": "Hero", "value": 66.0, "tone": "ink"}, {"label": "Villain", "value": 34.0, "tone": "accent"}]},
+     {"label": "AJo preflop, against the loose range", "note": "sampled", "parts": [{"label": "Hero", "value": 53.9, "tone": "ink"}, {"label": "Villain", "value": 46.1, "tone": "accent"}]},
+     {"label": "AJo preflop, against the nit", "note": "sampled", "parts": [{"label": "Hero", "value": 28.0, "tone": "ink"}, {"label": "Villain", "value": 72.0, "tone": "accent"}]}
+   ]}
+  </script></div>
+  <p class="figure-note">From tools/poker.js. Hero holds [[Ah Qd]] on [[Qs 7c 2d]], or [[Ah Jd]] before the flop. The loose range is the 282-combo range listed in the range grid below (212 combos remain once the flop blocks cards). Sampled equities are good to about 0.2 points. The nit range is TT+, AQs+, AKo.</p>
+</figure>
+
+<p>The same hand is a strong favorite against one range and a clear underdog against the other. That gap is the whole reason to profile. Against a loose caller you bet thinner for value: with a hand that is ahead of his calling range about 60% of the time, a $50 river bet into a $100 pot gains 0.60 x $50 - 0.40 x $50 = $10 each time, if he always calls. You also stop bluffing him. He folds too rarely, and the tree below shows what that costs.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">The same $60 bluff, two opponents</h3></div>
+  <ul class="tree">
+    <li><span class="node root">Bluff $60 into $100 on the river</span>
+      <ul>
+        <li><span class="edge">Calling station folds 15%: 0.15 x $100 - 0.85 x $60</span><span class="node lose">EV = -$36</span></li>
+        <li><span class="edge">Nit folds 65%: 0.65 x $100 - 0.35 x $60</span><span class="node win">EV = +$44</span></li>
+      </ul>
+    </li>
+  </ul>
+  <p class="math">Break-even fold rate = 60 / (100 + 60) = 37.5%. The station is far below it. The nit is far above.</p>
+  <p class="figure-note">Break-even from tools/poker.js (odds 100 60). The fold rates are assumptions for the example.</p>
+</figure>
+
+<details class="drill">
+  <summary>You bet $40 into a $100 pot as a bluff. What fold rate do you need to break even?</summary>
+  <p>40 / (100 + 40) = 40 / 140 = 28.6%. A player who folds about one time in four is close. A player who folds one time in ten is not.</p>
+</details>
+
+<h2>The nit</h2>
+
+<p>A nit plays very few hands and rarely bluffs. When a nit bets big or raises, believe the hand. A typical raise from early position might be TT+, AQs+, and AKo: 50 combos, 3.8% of all hands. Compare that with the loose range above, and with a regular's range.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Three players, one grid</h3></div>
+  <div data-fig="range"><script type="application/json">
+  {"label": "The starting hand grid showing three nested ranges: the nit's 50 combos, 72 more that a regular adds, and 160 more that a loose recreational player adds, for 282 combos in total.",
+   "groups": [
+     {"name": "Nit", "tone": "ink", "hands": "TT+,AQs+,AKo"},
+     {"name": "Regular adds", "tone": "accent2", "hands": "66-99,ATs,AJs,KQs,AJo,AQo,KQo"},
+     {"name": "Loose player adds", "tone": "gold", "hands": "22-55,A2s-A9s,K9s-KJs,QTs,QJs,JTs,T9s,98s,A8o-ATo,KTo,KJo,QJo"}
+   ]}
+  </script></div>
+  <p class="figure-note">Combos from tools/poker.js: 50 + 72 + 160 = 282, or 21.3% of all hands. The ranges are examples of a tight, a middle, and a loose player, not measured data.</p>
+</figure>
+
+<p>The nit's weakness is that you can see his hand coming. You can steal his blind: he folds often, so a raise from the button into his big blind often wins the pot outright. If you raise to $15 with $7 in the blinds, you risk 15 to win 7 and need the blinds to fold 15 / (7 + 15) = 68% of the time for the raise to profit with no help from your cards. That 68% is for both blinds together: if the small blind folds 85% and the nit in the big blind folds 80% (both assumptions for the example), they both fold 0.85 x 0.80 = 68% of the time, right at break-even before you count the pots you win after a call. Your hand's equity when called is the margin, so steal with hands that play well, not with any two cards. You also fold medium hands to his aggression, because there is little bluffing to catch. See {{ch:18}} for how bluffs and value balance, and {{ch:13}} for building ranges like these.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Daniel Negreanu might say</p>
+  <p class="said">He would remind you that a label is not a read. A nit who has sat for two hours and then raises is telling you something, but only if you saw the two hours. He would have you ask what this player did with the last three hands he showed, and adjust from there.</p>
+  <p class="note">An imagined voice: our reading of his public teaching on hand reading and small ball, not his words.</p>
+</aside>
+
+<h2>The regular</h2>
+
+<p>The regular is the player who beats the game, or tries to. In most live rooms there are a few. They open selectively, they 3-bet with a plan, they size bets with a purpose, and they notice you. The adjustment here is the opposite of the one above: you have less to exploit, so you lean on the baseline and watch for the one leak each regular has.</p>
+
+<p>Most regulars share a habit that works against you. They are aggressive, and they are good at telling when you are weak. A regular who 3-bets you often is not always strong, but he is rarely bluffing without a reason. Do not pay him off with a hand that only looks good. Look for what he does too much of, and nothing else.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What David Sklansky might say</p>
+  <p class="said">He would point out that the regular and the calling station are the same lesson. Each time either one plays a hand differently from how he would if he could see your cards, you gain. The station does it often and the regular rarely. The regular gives you less, so choose your seat and stack against the one who gives you more.</p>
+  <p class="note">An imagined voice: our reading of the Fundamental Theorem in The Theory of Poker, not his words.</p>
+</aside>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">A typical live table, nine-handed</h3></div>
+  <div data-fig="table"><script type="application/json">
+  {"label": "Nine-handed table from the button. One regular sits to the hero's left in the big blind, a calling station is under the gun, a nit sits in the hijack, a maniac is in the cutoff, and the rest are casual players.",
+   "button": 0, "pot": "$7",
+   "seats": [
+     {"pos": "BTN", "stack": "$500", "state": "hero", "note": "You"},
+     {"pos": "SB", "stack": "$480", "bet": "$2", "note": "Casual"},
+     {"pos": "BB", "stack": "$900", "bet": "$5", "note": "Regular"},
+     {"pos": "UTG", "stack": "$250", "note": "Station"},
+     {"pos": "UTG+1", "stack": "$300", "note": "Casual"},
+     {"pos": "MP", "stack": "$500", "note": "Casual"},
+     {"pos": "LJ", "stack": "$420", "note": "Casual"},
+     {"pos": "HJ", "stack": "$600", "note": "Nit"},
+     {"pos": "CO", "stack": "$700", "note": "Maniac"}
+   ]}
+  </script></div>
+  <p class="figure-note">An invented table, not a real hand history. Most seats in a live game are casual players, with one or two of each extreme.</p>
+</figure>
+
+<h2>Default adjustments by stake</h2>
+
+<p>Stakes shift the mix. In most low-stakes live games the room is mostly recreational and loose-passive: raises are rarer than you expect, and many pots are limped. In the middle stakes, regulars are common and the recreational players are fewer. In higher-stakes live games, nearly everyone is a regular and the edge is small. These are judgments, not measurements. Check each against your own room.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">Default adjustments, before you have reads</h3></div>
+  <div class="table-scroll">
+    <table class="wrap">
+      <thead><tr><th>Where</th><th>Who you meet</th><th>Default adjustment</th></tr></thead>
+      <tbody>
+        <tr><td>Low stakes ($1/$2 to $2/$5)</td><td>Many recreational players, loose and passive</td><td>Value bet thinner, bluff less, size up when you raise limpers</td></tr>
+        <tr><td>Middle stakes ($5/$10 to $10/$25)</td><td>A mix: regulars, a few recreational players, a nit or two</td><td>Play the baseline against regulars, attack the weakest seat</td></tr>
+        <tr><td>High stakes ($25/$50 and up)</td><td>Mostly strong regulars</td><td>Stay close to the baseline, look for small leaks, pick your seat</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Judgments about typical rooms, not measured data. The stake bands are examples; rooms differ.</p>
+</figure>
+
+<p>Sizing is a lever here. Against players who call too much, bigger value bets earn more. Against players who fold too much, smaller bluffs work. {{ch:20}} covers the sizing mechanics, and {{ch:27}} covers what changes when three or more players see the flop, which is the normal case in a loose room.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Phil Galfond might say</p>
+  <p class="said">He would say to learn the baseline first and treat every population note as a deviation from it. If you cannot say what the standard play is, you cannot say what you are changing, or why.</p>
+  <p class="note">An imagined voice: our reading of the approach to teaching he is known for at Run It Once, not his words.</p>
+</aside>
+
+<h2>Building a profile</h2>
+
+<p>The types above are guesses. The profile is what you build. Keep two counts for each player you care about: hands you saw him play, and how many times he voluntarily put chips in. Add a third: how many of those were raises. You do not need more to separate a tight player from a loose one.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">One player, 24 hands of notes</h3></div>
+  <div class="table-scroll">
+    <table class="wrap">
+      <thead><tr><th>What he did</th><th>Hands</th><th>Share of 24</th></tr></thead>
+      <tbody>
+        <tr><td>Folded without putting chips in</td><td>15</td><td>62.5%</td></tr>
+        <tr><td>Limped</td><td>4</td><td>16.7%</td></tr>
+        <tr><td>Called a raise</td><td>2</td><td>8.3%</td></tr>
+        <tr><td>Raised</td><td>3</td><td>12.5%</td></tr>
+        <tr class="total"><td>Played (limped, called, or raised)</td><td>9</td><td>37.5%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">An invented tally. Arithmetic: 9 / 24 = 37.5%; 4 + 2 + 3 = 9; 3 of his 9 played hands were raises, or 33%.</p>
+</figure>
+
+<p>This player has played 37.5% of his hands and raised only a third of those. That reads as loose and passive. But 24 hands is a small sample, and the next figure shows how small.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">How much a tally can be off</h3></div>
+  <div data-fig="line"><script type="application/json">
+  {"label": "The margin of error on a measured play rate of 35 percent shrinks as you see more hands: about 30 points after 10 hands, 21 after 20, 12 after 60, and 9 after 100.",
+   "xLabel": "Hands observed", "yUnit": " pts", "yMin": 0, "yMax": 35,
+   "series": [
+     {"name": "Margin of error", "tone": "ink", "points": [[10, 29.6], [20, 20.9], [30, 17.1], [60, 12.1], [100, 9.3], [200, 6.6]]}
+   ],
+   "marks": [{"x": 20, "y": 20.9, "label": "20 hands: plus or minus 21"}]}
+  </script></div>
+  <p class="figure-note">Arithmetic: 1.96 x the square root of (0.35 x 0.65 / n), about 95% of the time, for a player whose true rate is 35%. It assumes the hands are a fair sample, which a short session may not be.</p>
+</figure>
+
+<p>With 24 hands, a measured 37.5% could be a true rate anywhere from about 18% to 57%. All it supports is "probably looser than a nit." Treat a profile as a lean, and lean on what you saw him show down more than on any single rate. See {{ch:26}} for how to weigh a tell the same way.</p>
+
+<details class="drill">
+  <summary>A player has played 6 of the last 20 hands you watched. What rate is that, and what does it tell you?</summary>
+  <p>6 / 20 = 30%. With 20 hands at a 30% rate the margin is about plus or minus 20 points (1.96 x the square root of (0.30 x 0.70 / 20) = 20.1), so the true rate could be 10% to 50%. It does not tell you much yet. Keep counting.</p>
+</details>
+
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>A quick frequency profile from one session</h2>
+  <p><strong>The shortcut.</strong> Count hands seen and hands played. Divide. Then think of the margin as about 1 divided by the square root of hands seen.</p>
+  <p class="math">9 played of 24 seen: 9 / 24 = 37.5%. Margin: 1 / sqrt(24) = 0.204, about 20 points, so about 17% to 58%.</p>
+  <p><strong>Where it bends.</strong> The margin shrinks slowly: to halve it you need four times the hands. It also runs a little high for rates near 35% (the exact margin at 24 hands is about 19 points). It assumes a fair sample, so a player who sat out a tight stretch, or was moved to a better seat, breaks it.</p>
+</aside>

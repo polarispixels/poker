@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.12.0] - 2026-11-21
+
+### Added
+
+- Chapter 25, Live Player Types and Population Tendencies: Chapter 25 profiles regulars, recreational players, and nits with range counts and equities, gives default adjustments by stake, and shows how to build a frequency profile with its margin of error.
+
 ## [0.11.0] - 2026-11-21
 
 ### Added
