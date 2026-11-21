@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.27.0] - 2026-11-21
+
+### Added
+
+- Chapter 27, Multiway Pots: Chapter 27 shows how equity, hand values, ranges, bluffing, and draws change in pots with three or more players, with exact equities, a fold-frequency chart, worked bluff and draw hands, and a Table Math box on how many players must fold.
+
 ## [0.26.0] - 2026-11-21
 
 ### Added

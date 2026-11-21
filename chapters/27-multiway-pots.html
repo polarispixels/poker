@@ -22,13 +22,226 @@
     <main>
       <article class="chapter">
         <header class="chapter-head">
-          <p class="chapter-kicker label">Chapter 27 <span class="badge">To come</span></p>
+          <p class="chapter-kicker label">Chapter 27 <span class="badge">Preliminary draft</span></p>
           <h1 class="chapter-title">Multiway Pots</h1>
           <p class="standfirst">The everyday reality of live poker: three or more players to the flop.</p>
         </header>
 
         <div class="prose chapter-body">
-<p class="lead">This page has not been written yet. The book is being written and published one chapter at a time.</p>
+<p class="lead">In most low-stakes live games, three or four players see the flop more often than two do. This chapter shows how that changes what your hand is worth, when a bluff can work, and which hands you want to hold when the pot is crowded.</p>
+
+<h2>Equity gets cut into more pieces</h2>
+
+<p>Heads-up, your hand fights one opponent for the whole pot. Multiway, it fights several at once, and it has to beat every one of them to win. That is why hands fall in value as players join, even strong ones. Take the best hand in the game. <span class="cards" role="img" aria-label="Ace of spades, Ace of hearts"><span class="pc">A<i>♠</i></span><span class="pc r">A<i>♥</i></span></span> holds up well, but each new opponent takes a bite.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 27.1</span><h3 class="figure-title">Pocket aces as the field grows</h3></div>
+  <div data-fig="columns"><script type="application/json">
+  {"label": "Ace of spades and ace of hearts win 82 percent of the pot against one opponent, 65 against two, 52 against three, and 44 against four, while an equal share would be 50, 33, 25, and 20.",
+   "unit": "%", "categories": ["1 opponent", "2 opponents", "3 opponents", "4 opponents"],
+   "series": [
+     {"name": "Aces: all-in equity", "values": [82.3, 65.1, 51.6, 43.7], "tone": "ink"},
+     {"name": "Equal share", "values": [50, 33.3, 25, 20], "tone": "muted"}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact, from tools/poker.js, counting every board. Opponents added in turn: <span class="cards" role="img" aria-label="King of clubs, Queen of clubs"><span class="pc">K<i>♣</i></span><span class="pc">Q<i>♣</i></span></span>, then <span class="cards" role="img" aria-label="Jack of diamonds, Ten of diamonds"><span class="pc r">J<i>♦</i></span><span class="pc r">T<i>♦</i></span></span>, <span class="cards" role="img" aria-label="7 of spades, 7 of hearts"><span class="pc">7<i>♠</i></span><span class="pc r">7<i>♥</i></span></span>, and <span class="cards" role="img" aria-label="Ace of clubs, 5 of clubs"><span class="pc">A<i>♣</i></span><span class="pc">5<i>♣</i></span></span>. Ties are split.</p>
+</figure>
+
+<p>Two things stand out. Aces still win far more than an equal share, so you want your money in with them. But four opponents leave you with 43.7 percent: the best hand in poker loses more often than it wins. Equity here means your share of the pot if the hand were played to the end many times. You rarely get to see all five cards for free, which is the point of the next section.</p>
+
+<aside class="key">
+  <p class="label">Key idea</p>
+  <p>The more players in the pot, the more hands you must beat. A hand that was a clear favorite heads-up is often an underdog against the whole field.</p>
+</aside>
+
+<h2>Hand values shift</h2>
+
+<p>Post-flop, the effect is just as strong. Say you hold <span class="cards" role="img" aria-label="King of hearts, Jack of diamonds"><span class="pc r">K<i>♥</i></span><span class="pc r">J<i>♦</i></span></span> on a flop of <span class="cards" role="img" aria-label="King of clubs, 8 of diamonds, 3 of spades"><span class="pc">K<i>♣</i></span><span class="pc r">8<i>♦</i></span><span class="pc">3<i>♠</i></span></span>, top pair with a good kicker. Heads-up against <span class="cards" role="img" aria-label="9 of hearts, 8 of hearts"><span class="pc r">9<i>♥</i></span><span class="pc r">8<i>♥</i></span></span> you are an 82 percent favorite. Add players and watch the same hand shrink.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 27.2</span><h3 class="figure-title">Top pair, flop to river</h3></div>
+  <div data-fig="split"><script type="application/json">
+  {"label": "Top pair with a jack kicker wins 82 percent against one opponent, 73 percent against two, and 57 percent against three.",
+   "rows": [
+     {"label": "One opponent", "note": "vs a pair of eights", "parts": [{"label": "Top pair", "value": 81.6, "tone": "ink"}, {"label": "Field", "value": 18.4, "tone": "accent"}]},
+     {"label": "Two opponents", "note": "adds queens", "parts": [{"label": "Top pair", "value": 72.9, "tone": "ink"}, {"label": "Field", "value": 27.1, "tone": "accent"}]},
+     {"label": "Three opponents", "note": "adds ace-five", "parts": [{"label": "Top pair", "value": 57.0, "tone": "ink"}, {"label": "Field", "value": 43.0, "tone": "accent"}]}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact, from tools/poker.js. Opponents in turn: <span class="cards" role="img" aria-label="9 of hearts, 8 of hearts"><span class="pc r">9<i>♥</i></span><span class="pc r">8<i>♥</i></span></span>, <span class="cards" role="img" aria-label="Queen of diamonds, Queen of spades"><span class="pc r">Q<i>♦</i></span><span class="pc">Q<i>♠</i></span></span>, <span class="cards" role="img" aria-label="Ace of clubs, 5 of clubs"><span class="pc">A<i>♣</i></span><span class="pc">5<i>♣</i></span></span>. An example, not a real hand.</p>
+</figure>
+
+<p>Top pair is a strong hand heads-up and a medium hand three-way. In a crowded pot, someone has usually hit something. The practical rules follow from that: value-bet thinner when one player is left, but expect to need two pair or better when three players put in big bets. <a class="xref" href="15-board-texture.html">Chapter 15, Board Texture</a> covers how the board decides who connects, and <a class="xref" href="19-hand-reading.html">Chapter 19, Hand Reading</a> covers reading what a bet means.</p>
+
+<p>Nut potential moves the other way. A hand that can make the best possible hand, the nuts, gains value as the field grows, because more opponents means more money in the pot and more people willing to pay you off. That is the reason suited aces and connected suited cards play better in a crowd. Small pairs gain too. A pocket pair flops a set or better 11.8 percent of the time: one minus (48 x 47 x 46) / (50 x 49 x 48).</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 27.3</span><h3 class="figure-title">Hands that tend to gain or lose in a crowd</h3></div>
+  <div data-fig="range"><script type="application/json">
+  {"label": "The starting hand grid. Small pairs, suited aces, and suited connectors are shaded as hands that gain value multiway. Offsuit broadway hands such as king jack offsuit are shaded as hands that lose value.",
+   "groups": [
+     {"name": "Tend to gain", "tone": "accent2", "hands": "22-88,A2s-A9s,T9s,98s,87s,76s,65s,54s"},
+     {"name": "Tend to lose", "tone": "accent", "hands": "A9o-AJo,KTo-KQo,QTo-QJo,JTo"}
+   ]}
+  </script></div>
+  <p class="figure-note">A judgment about typical live play, not a solver output. <a class="xref" href="04-starting-hands.html">Chapter 4, Starting Hands</a> lists the full hand groups.</p>
+</figure>
+
+<p>Why do the offsuit hands fall? They make second-best pairs. <span class="cards" role="img" aria-label="King of diamonds, Jack of clubs"><span class="pc r">K<i>♦</i></span><span class="pc">J<i>♣</i></span></span> on a flop with a king and a queen looks good until one of the others holds <span class="cards" role="img" aria-label="Ace of hearts, King of hearts"><span class="pc r">A<i>♥</i></span><span class="pc r">K<i>♥</i></span></span> or <span class="cards" role="img" aria-label="King of spades, Queen of hearts"><span class="pc">K<i>♠</i></span><span class="pc r">Q<i>♥</i></span></span>. The hands you play multiway should make strong, hidden hands or strong draws, not medium pairs you cannot bet.</p>
+
+<p>Ranges change too. A player who bets into two or three opponents knows someone may have connected, so in most low-stakes live games a big bet into a crowd comes from a narrower, stronger range than the same bet heads-up. That is a judgment, not a measurement, but it is the baseline to start from. Callers move the other way before the flop: once a raise has been called, more players come along with suited and connected hands because the price looks good. So before the flop, when a raise has already been called, fold more of the offsuit hands in the lose group and call more often with the hands in the gain group. <a class="xref" href="13-thinking-in-ranges.html">Chapter 13, Thinking in Ranges</a> covers building ranges.</p>
+
+<details class="drill">
+  <summary>You call $15 with <span class="cards" role="img" aria-label="6 of clubs, 6 of diamonds"><span class="pc">6<i>♣</i></span><span class="pc r">6<i>♦</i></span></span> in a four-way pot. The SB folds. The pot holds $62 including your $15. How much more must you win when you flop a set or better to break even?</summary>
+  <p>The other players put in 62 - 15 = $47. A set or better arrives 11.76% of the time and misses 88.24%. To break even, 0.1176 x (47 + X) = 0.8824 x 15, so 47 + X = 15 x 0.8824 / 0.1176 = $112.6, and X is about $66 more on later streets. Heads-up against one raiser, with $22 of other money in the pot (the raiser's $15 and the blinds), you would need 112.6 - 22 = about $91. More players means less you must win later. This is a rough test: it ignores pairs that win without a set, and sets that lose to bigger ones.</p>
+</details>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Daniel Negreanu might say</p>
+  <p class="said">He would welcome the crowd with the right hands. Small suited cards and suited aces let you see a cheap flop and outplay people after it, and a big multiway pot pays more when you hit.</p>
+  <p class="note">An imagined voice: our reading of his small ball approach, not his words.</p>
+</aside>
+
+<h2>Bluffing needs everyone to fold</h2>
+
+<p>A bluff wins when the other players fold. Heads-up you need one fold. Three-way you need two. If each opponent folds 60 percent of the time, and the choices are independent, all of them fold 0.60 x 0.60 = 36 percent of the time. With three opponents it is 21.6 percent. Fold equity, the chance that your bet wins the pot on its own, shrinks fast.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 27.4</span><h3 class="figure-title">How often each player must fold</h3></div>
+  <div data-fig="line"><script type="application/json">
+  {"label": "Each opponent must fold at least 50 percent heads-up for a pot-size bluff, 71 percent with two, 79 with three, and 84 with four. A half-pot bluff needs 33, 58, 69, and 76 percent. A player who folds 60 percent of the time is shown for comparison.",
+   "xLabel": "Opponents in the hand", "yUnit": "%", "yMin": 0, "yMax": 100,
+   "series": [
+     {"name": "Pot-size bluff", "tone": "accent", "points": [[1, 50], [2, 70.7], [3, 79.4], [4, 84.1]]},
+     {"name": "Half-pot bluff", "tone": "ink", "points": [[1, 33.3], [2, 57.7], [3, 69.3], [4, 76.0]]},
+     {"name": "A player who folds 60%", "tone": "gold", "dashed": true, "points": [[1, 60], [2, 60], [3, 60], [4, 60]]}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: a bet of b into a pot of p breaks even when everyone folds b / (p + b) of the time. Each player must fold that number to the power of 1 / n.</p>
+</figure>
+
+<p>The 60 percent line is an assumption, not a measurement. Where a player folds more than the curve asks, the bluff shows a profit. A half-pot bluff works against two players who fold 60 percent each. A pot-size bluff does not. Against three, even the half-pot bluff needs more than this crowd will give.</p>
+
+<p>Here is a worked bluff. It is a $2/$5 game. The pot is $60 on the flop, and you bet $40 with nothing. That bet must work 40 / (60 + 40) = 40 percent of the time. Compare one opponent with two.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 27.5</span><h3 class="figure-title">The same $40 bluff, two opponents</h3></div>
+  <ul class="tree">
+    <li><span class="node root">Bluff $40 into $60, two opponents</span>
+      <ul>
+        <li><span class="edge">Both fold: 0.60 x 0.60 = 36%</span><span class="node win">Win $60</span></li>
+        <li><span class="edge">At least one calls: 64%</span><span class="node lose">Lose $40</span></li>
+      </ul>
+    </li>
+  </ul>
+  <p class="math">Two opponents: 0.36 x $60 + 0.64 x (-$40) = $21.60 - $25.60 = -$4.00</p>
+  <p class="math">One opponent: 0.60 x $60 + 0.40 x (-$40) = $36.00 - $16.00 = +$20.00</p>
+  <p class="figure-note">Arithmetic. An example, ignoring any equity the bluff has when called. The 60 percent fold rate is an assumption.</p>
+</figure>
+
+<p>The same hand and the same bet swing from plus $20 to minus $4 when one more player joins. So bluff less in crowded pots, and bluff when the field is thin. A semi-bluff, a bet with a draw that can still win if called, can still be right, because the draw adds equity. <a class="xref" href="18-bluffing-and-semi-bluffing.html">Chapter 18, Bluffing and Semi-Bluffing</a> covers semi-bluffs and <a class="xref" href="07-expected-value.html">Chapter 7, Expected Value</a> covers the expected-value arithmetic.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Doyle Brunson might say</p>
+  <p class="said">He would say to raise and shrink the field. If you can make three opponents into one, your aggression works again, and you avoid a pot where nobody can be pushed off.</p>
+  <p class="note">An imagined voice: our reading of the aggressive approach in Super/System (1979), not his words.</p>
+</aside>
+
+<h2>Playing a draw in a crowd</h2>
+
+<p>Draws are the place where multiway pots reward you. The pot is bigger, so the price of a call is smaller compared with the money you can win. Here is a hand. It is a $2/$5 game with $500 stacks. UTG raises to $15, the hijack calls, you call on the button with <span class="cards" role="img" aria-label="9 of spades, 8 of spades"><span class="pc">9<i>♠</i></span><span class="pc">8<i>♠</i></span></span>, the small blind folds, and the big blind calls.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 27.6</span><h3 class="figure-title">Four players see a flop</h3></div>
+  <div data-fig="table"><script type="application/json">
+  {"label": "Nine-handed table, $2/$5. Hero on the button holds nine eight of spades. Four players put in $15 each before the flop. On the flop of ten spades, six spades, and two diamonds, UTG has bet 40 and the hijack has called 40.",
+   "button": 0, "pot": "$142", "board": "Ts 6s 2d",
+   "seats": [
+     {"pos": "BTN", "stack": "$485", "cards": "9s 8s", "state": "hero"},
+     {"pos": "SB", "state": "fold"},
+     {"pos": "BB", "stack": "$485", "state": "active"},
+     {"pos": "UTG", "stack": "$485", "bet": "$40", "state": "villain"},
+     {"pos": "UTG+1", "state": "fold"},
+     {"pos": "MP", "state": "fold"},
+     {"pos": "LJ", "state": "fold"},
+     {"pos": "HJ", "stack": "$485", "bet": "$40", "state": "villain"},
+     {"pos": "CO", "state": "fold"}
+   ]}
+  </script></div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history. Stacks are shown after the preflop money went in. The pot includes the two $40 flop bets.</p>
+</figure>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 27.7</span><h3 class="figure-title">A draw facing a bet and a call</h3></div>
+  <div class="table-scroll">
+    <table class="hand-log">
+      <thead><tr><th>Street</th><th>Board</th><th>Action</th><th>Pot</th></tr></thead>
+      <tbody>
+        <tr><td>Preflop</td><td>Hero: <span class="cards" role="img" aria-label="9 of spades, 8 of spades"><span class="pc">9<i>♠</i></span><span class="pc">8<i>♠</i></span></span></td><td>UTG raises to $15. HJ calls. Hero calls on the button. SB folds. BB calls. Pot: 4 x 15 + 2 = $62.</td><td class="pot">$62</td></tr>
+        <tr><td>Flop</td><td><span class="cards" role="img" aria-label="Ten of spades, 6 of spades, 2 of diamonds"><span class="pc">T<i>♠</i></span><span class="pc">6<i>♠</i></span><span class="pc r">2<i>♦</i></span></span></td><td>BB checks. UTG bets $40. HJ calls. Hero faces $40 to win $142, so the call costs 40 / 182 = 22%.</td><td class="pot">$142</td></tr>
+        <tr><td>Flop</td><td><span class="cards" role="img" aria-label="Ten of spades, 6 of spades, 2 of diamonds"><span class="pc">T<i>♠</i></span><span class="pc">6<i>♠</i></span><span class="pc r">2<i>♦</i></span></span></td><td>Hero calls. BB folds. Hero has 12 outs: nine spades and three sevens. About 45% to hit by the river.</td><td class="pot">$182</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Arithmetic and tools/poker.js. The twelve outs are the 9 spades plus the 7c, 7d, and 7h. The 7s is already counted. An example hand, not a real hand history.</p>
+</figure>
+
+<p>You need 22 percent and you hold roughly 45 percent with two cards to come. That is a clear call. The pot is large because two players put money in, so your price is low. Against the two specific hands <span class="cards" role="img" aria-label="Ace of clubs, Ten of diamonds"><span class="pc">A<i>♣</i></span><span class="pc r">T<i>♦</i></span></span> and <span class="cards" role="img" aria-label="Queen of hearts, Queen of diamonds"><span class="pc r">Q<i>♥</i></span><span class="pc r">Q<i>♦</i></span></span> the exact figure is 48.5 percent. Those two hands are guesses at what they hold, so treat the exact number as one example.</p>
+
+<p>A raise needs a different test. It wins at once only if both players fold, and two folds are harder to get than one. When both call, a raise still gains if your equity beats your share of the new money: one third with three players in. Against these two example hands, 48.5 percent clears that. But the big blind still acts behind you, UTG can re-raise with a set, and a re-raise would force you to put a large part of your stack in with a draw. In most low-stakes live games, calling is the simpler play here: it keeps the price low and keeps both players in to pay you when you hit. Raising is a judgment call that depends on how often these players fold or re-raise.</p>
+
+<p>Nut draws, draws to the best possible hand, deserve special care. Your flush draw here is nine high. When the flush comes, any player holding a bigger spade beats you, and each extra player is another chance that someone does. Even a king-high flush draw can lose a big pot to the ace-high flush. In crowds, prefer the nut draw or a draw with extra outs, like the straight outs here, and be careful about putting your whole stack in with a low flush.</p>
+
+<h2>A multiway checklist</h2>
+
+<p>Four habits cover most multiway spots. They apply before the flop, on the flop, and on later streets.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 27.8</span><h3 class="figure-title">Before you act in a crowd</h3></div>
+  <ol class="flow">
+    <li><strong>Count the field</strong><span>How many players are still in, and who acts behind you?</span></li>
+    <li><strong>Know how your hand wins</strong><span>Does it win by being best now, or by making a big hand or draw?</span></li>
+    <li><strong>Price the bluff</strong><span>Multiply the fold chances, not add them.</span></li>
+    <li><strong>Respect the bet</strong><span>In most live games, a raise or a big bet into three players means a real hand.</span></li>
+  </ol>
+  <p class="figure-note">A summary of this chapter.</p>
+</figure>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 27.9</span><h3 class="figure-title">Heads-up against crowded</h3></div>
+  <div class="compare">
+    <div class="a"><h4>Heads-up</h4><p>Wide ranges, thin value bets, frequent bluffs, one fold to win. Position and aggression decide the pot.</p></div>
+    <div class="b"><h4>Crowded</h4><p>Narrow value ranges, strong draws, few bluffs, many folds to win. Nut potential and hand strength decide the pot.</p></div>
+  </div>
+  <p class="figure-note">A summary of this chapter. <a class="xref" href="25-live-player-types-and-population-tendencies.html">Chapter 25, Live Player Types and Population Tendencies</a> covers how live players deviate from this.</p>
+</figure>
+
+<p>None of this says to avoid multiway pots. In most low-stakes live games, many players call too much, and those pots are where you collect the money. It says to know what you are doing in them: bet your strong hands for value, play draws with a price, and give up the bluffs that need three players to fold.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What David Sklansky might say</p>
+  <p class="said">He would reduce the whole chapter to expected value. Each extra opponent adds a chance that someone holds the best hand and a source of dead money, so the right play depends on whether the added money outweighs the added risk.</p>
+  <p class="note">An imagined voice: our reading of the expected-value approach in The Theory of Poker, not his words.</p>
+</aside>
+
+<details class="drill">
+  <summary>You bet $30 into a $45 pot against three opponents. What chance of folding must each player have for the bluff to break even?</summary>
+  <p>The bluff must work 30 / (45 + 30) = 40% of the time overall. Each player must fold 0.40 to the power of 1/3, which is about 73.7%. If you expect each to fold 60%, the chance all three fold is 0.6 x 0.6 x 0.6 = 21.6%, far short of 40%.</p>
+</details>
+
+<details class="drill">
+  <summary>Two opponents each fold 70 percent of the time. You bet $50 into $100 with nothing. Is the bluff profitable?</summary>
+  <p>Break-even is 50 / (100 + 50) = 33.3%. Both fold 0.70 x 0.70 = 49%. That is above 33.3%, so yes: 0.49 x $100 - 0.51 x $50 = $49.00 - $25.50 = +$23.50.</p>
+</details>
+
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>How many players need to miss</h2>
+  <p><strong>The shortcut.</strong> Find how often a heads-up bluff must work: bet / (pot + bet). Then take the square root for two players, or the cube root for three. Each player must fold at least that often.</p>
+  <p class="math">Half-pot bluff: 50 / 150 = 33%. Two players: about 58% each. Three: about 69% each.</p>
+  <p class="math">Pot-size bluff: 50%. Two players: about 71% each. Three: about 79% each.</p>
+  <p><strong>Where it bends.</strong> It assumes each player folds independently and that you have no equity when called. Folds are often linked: a caller behind you changes what the others do. A draw adds outs, and that lowers the fold rate you need.</p>
+</aside>
         </div>
       </article>
 
@@ -49,5 +262,6 @@
   </div>
 
   <script src="../js/version.js"></script>
+  <script src="../js/figures.js"></script>
 </body>
 </html>
