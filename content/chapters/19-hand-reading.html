@@ -1,0 +1,231 @@
+<p class="lead">Hand reading is not guessing one hand. It is a running count of the hands your opponent could hold, cut down at every street by what he does. This chapter walks one invented hand from the first raise to the river, counts the combinations at each step, and ends with a way to turn that count into a call or a fold.</p>
+
+<h2>A range is a list you shorten</h2>
+
+<p>Beginners ask, "What does he have?" That question has one answer, and you will usually get it wrong. The better question is the one from {{ch:13}}: which hands could he have, given everything he has done? Hand reading is the habit of asking that question again on every street, and crossing hands off the list as the action comes in.</p>
+
+<p>Three kinds of evidence do the crossing off. The first is <strong>position and history</strong>: where he sits, what he opened, and what you have seen him do before (see {{ch:9}}). The second is <strong>the cards on the board</strong>, which {{ch:15}} covers: some hands improve on a board and some miss it. The third is <strong>his actions</strong>: the size of each bet, whether he bets or checks, and, with care, how fast he acts. Every action either keeps a hand in the list or pushes it out.</p>
+
+<p>The hand below is our worked example. It is invented, and we will keep coming back to it. It is a live $2/$5 game, nine-handed, with $500 stacks. A tight regular in middle position raises to $20. You have two jacks on the button and call. The blinds fold.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Our example hand, preflop</h3></div>
+  <div data-fig="table"><script type="application/json">
+  {"label": "Nine-handed table. A tight regular in middle position raises to 20 dollars. Hero on the button holds the jack of spades and the jack of diamonds and calls. The blinds fold and the pot is 47 dollars.",
+   "button": 0, "pot": "$47",
+   "seats": [
+     {"pos": "BTN", "stack": "$480", "bet": "$20", "cards": "Js Jd", "state": "hero"},
+     {"pos": "SB", "state": "fold"},
+     {"pos": "BB", "state": "fold"},
+     {"pos": "UTG", "state": "fold"},
+     {"pos": "UTG+1", "state": "fold"},
+     {"pos": "MP", "stack": "$480", "bet": "$20", "cards": "?? ??", "state": "villain"},
+     {"pos": "LJ", "state": "fold"},
+     {"pos": "HJ", "state": "fold"},
+     {"pos": "CO", "state": "fold"}
+   ]}
+  </script></div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history. Pot: $20 + $20 + $2 + $5 = $47.</p>
+</figure>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">The reading loop</h3></div>
+  <ol class="flow">
+    <li><strong>Start wide</strong><span>His opening range from his seat.</span></li>
+    <li><strong>Remove</strong><span>Cards on the board and in your hand.</span></li>
+    <li><strong>Filter</strong><span>Keep the hands that would act this way.</span></li>
+    <li><strong>Count</strong><span>Combos left, split by strength.</span></li>
+    <li><strong>Repeat</strong><span>Next street, same loop.</span></li>
+  </ol>
+  <p class="figure-note">A summary of the method. Each later section is one turn of the loop.</p>
+</figure>
+
+<h2>Start with his opening range</h2>
+
+<p>Your first job is to pick a starting list. This villain is a tight regular raising from middle position, and in our judgment, in most low-stakes live games a player like that opens fewer hands than the charts in {{ch:C}} suggest. We will give him this range: pairs from 77 up, the suited aces from ATs up, KQs, and the offsuit hands AQo and AKo.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">The villain's opening range</h3></div>
+  <div data-fig="range"><script type="application/json">
+  {"label": "The starting hand grid with the villain's middle-position range shaded: pairs 77 and up, suited aces ten and up, king queen suited, and ace king or ace queen offsuit.",
+   "groups": [
+     {"name": "Pairs 77+", "tone": "ink", "hands": "77+"},
+     {"name": "Suited", "tone": "accent2", "hands": "ATs+,KQs"},
+     {"name": "Offsuit", "tone": "gold", "hands": "AQo+"}
+   ]}
+  </script></div>
+  <p class="figure-note">An assumed range for an imagined player. The combo counts are exact, from tools/poker.js: 92 of 1,326 hands, 6.94%.</p>
+</figure>
+
+<p>That is 92 combinations. A <strong>combo</strong> is one specific pair of cards: [[As Kh]] and [[Ad Kc]] are two combos of the same hand type. A pair has 6 combos, a suited hand 4, and an offsuit hand 12. ({{ch:14}} shows where those come from.) The count matters because the ranges you meet in real hands are not lists of hand types. They are lists of combos, and the combos are what you compare at the end.</p>
+
+<p>Note the shape of the range. Pairs are 8 of the 15 hand types but 48 of the 92 combos. The suited and offsuit ace hands are 40 combos. There is no king-jack, no queen-jack, and no suited connector, so most straights and draws are not in it. A tight range is easy to read for that reason: it holds few hands that could be a bluff.</p>
+
+<h2>The flop removes cards, and the bet size says little</h2>
+
+<p>The flop comes [[Kh 7d 2c]]. Two things happen. First, cards come off the list. Three kings are left in the deck, so KK has 3 combos instead of 6, and AK drops from 16 combos to 12. Your own two jacks remove cards as well: only 1 combo of JJ is left. Second, the villain bets $15 into the $47 pot, about a third of the pot (15 / 47 = 32%).</p>
+
+<p>What does a one-third bet tell you? Very little. In our judgment, on a dry, king-high board a regular with a range full of overpairs and ace-high hands often bets small with nearly everything. We will say he does. He bets his whole list, so the bet crosses off nothing.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">His range in combos, street by street</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Hands</th><th>Preflop</th><th>Flop, before his bet</th><th>Turn bet</th><th>River bet</th></tr></thead>
+      <tbody>
+        <tr><td>77 (a set)</td><td>6</td><td>3</td><td>3</td><td>3</td></tr>
+        <tr><td>KK (a set)</td><td>6</td><td>3</td><td>3</td><td>3</td></tr>
+        <tr><td>AK, KQs (top pair)</td><td>20</td><td>15</td><td>15</td><td>15</td></tr>
+        <tr><td>AA, QQ (overpairs)</td><td>12</td><td>12</td><td>12</td><td>12</td></tr>
+        <tr><td>AQ (ace high)</td><td>16</td><td>16</td><td>16</td><td>4 to 16</td></tr>
+        <tr><td>88, 99, TT (middle pairs)</td><td>18</td><td>18</td><td>0</td><td>0</td></tr>
+        <tr><td>JJ, ATs, AJs (other)</td><td>14</td><td>7</td><td>0</td><td>0</td></tr>
+        <tr class="total"><td>Total</td><td>92</td><td>74</td><td>49</td><td>37 to 49</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Exact counts of combos left after the dead cards: Kh 7d 2c and our two jacks. The turn and river columns are assumptions about how this villain plays, explained below.</p>
+</figure>
+
+<p>Look at the top-pair row. It adds AK (12 combos left) and KQs (3 combos) to give 15 on the flop. That row, plus the sets and overpairs, is the part of his range that beats your jacks. Against his whole flop range your two jacks have 49.26% equity, from tools/poker.js. That is close to a coin flip, so you call.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Daniel Negreanu might say</p>
+  <p class="said">He would tell you to fix on the person, not the chart. A tight regular who bets small into you on a king-high flop is telling you about his plan for the hand, and you should ask what hands fit that plan. He would want you to keep the question open at every street instead of deciding on the flop that you know his hand.</p>
+  <p class="note">An imagined voice: our reading of the hand reading and small ball ideas he is publicly known for, not his words.</p>
+</aside>
+
+<h2>The turn is where the list gets short</h2>
+
+<p>The turn is [[4s]]. It changes almost nothing: no flush draw, no straight draw for the hands in his range. A card that changes little makes his next action the only new information. The villain bets $50 into the $77 pot, about two thirds (50 / 77 = 65%). You call, and the pot is $177.</p>
+
+<p>Now the filter does real work. A bigger second bet is not a thing a player makes with his weakest holdings. Think about each group in his flop range and ask: would this hand bet two thirds of the pot on this card? Sets and top pair, yes. Overpairs, yes, for value and to deny equity. Middle pairs like 88, 99, and TT, probably not: they beat nothing that calls and lose to a lot, so a cautious regular checks. Ace-queen is the hard group. It has no pair, but it holds an ace and a chance to push you off a jack. We will say he fires with all of it.</p>
+
+<p>Those are guesses about one man, and you should hold them loosely. What you can say for sure is the count: the list goes from 74 combos to 49. Your equity against it falls to 30.98%, from tools/poker.js. The price to call $50 into $127 is 50 / 177 = 28.25%, so the call is close, not easy: you are just above the line, and you will face another bet on the river.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Combos left at each step</h3></div>
+  <div data-fig="columns"><script type="application/json">
+  {"label": "Combos in the villain's range at four points: 92 preflop, 74 after the flop cards, 49 after his turn bet, and 37 after his river bet if he bluffs only with suited ace-queen.",
+   "categories": ["Opens", "Flop", "Turn bet", "River bet"],
+   "series": [
+     {"name": "Combos", "values": [92, 74, 49, 37], "tone": "ink"}
+   ]}
+  </script></div>
+  <p class="figure-note">Counts from the table above. The river figure assumes he bluffs with only 4 combos of ace-queen suited.</p>
+</figure>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">The hand so far</h3></div>
+  <div class="table-scroll">
+    <table class="hand-log">
+      <thead><tr><th>Street</th><th>Board</th><th>Action</th><th>Pot</th></tr></thead>
+      <tbody>
+        <tr><td>Preflop</td><td>Hero: [[Js Jd]]</td><td>Villain raises to $20 from middle position. Hero calls on the button. Blinds fold.</td><td class="pot">$47</td></tr>
+        <tr><td>Flop</td><td>[[Kh 7d 2c]]</td><td>Villain bets $15. Hero calls. Range: 74 combos.</td><td class="pot">$77</td></tr>
+        <tr><td>Turn</td><td>[[Kh 7d 2c 4s]]</td><td>Villain bets $50. Hero calls. Range: 49 combos.</td><td class="pot">$177</td></tr>
+        <tr><td>River</td><td>[[Kh 7d 2c 4s 9h]]</td><td>Villain bets $120. Hero to act.</td><td class="pot">$297</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history. Pot on the river line includes the $120 bet.</p>
+</figure>
+
+<h2>Timing, history, and what they are worth</h2>
+
+<p>So far we used cards and bet sizes. Live play gives you two more inputs, and each needs care.</p>
+
+<p><strong>History</strong> is the better of the two. If you saw this villain show down a bluff earlier, or fold to a river raise, the range you give him changes. A note like "bets big only with a made hand" is worth a whole street of guessing, and it is why {{ch:9}} asks you to keep mental notes. History also works backward: a player who has not shown a bluff in three hours has told you something about how many bluffs to put in his range.</p>
+
+<p><strong>Timing</strong> is the weaker input. A quick bet and a long pause can mean many things. One player pauses with a monster to look weak; another pauses because he is counting chips. Use timing only as a change from this player's own habit, and treat it as a nudge to a count, not a replacement. {{ch:26}} covers tells in full.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">What each kind of evidence can do</h3></div>
+  <div class="table-scroll">
+    <table class="wrap">
+      <thead><tr><th>Evidence</th><th>What it narrows</th><th>How far to trust it</th></tr></thead>
+      <tbody>
+        <tr><td>His seat and opening</td><td>The starting list</td><td>High, if you have seen how he opens</td></tr>
+        <tr><td>The board</td><td>Which hands connect</td><td>High: it is arithmetic</td></tr>
+        <tr><td>Bet size</td><td>Strong or weak hands, once it varies</td><td>Medium: a size that never changes says nothing</td></tr>
+        <tr><td>Showdowns you saw</td><td>How many bluffs he holds</td><td>Medium to high, but small samples mislead</td></tr>
+        <tr><td>Timing</td><td>A small shift in the odds</td><td>Low alone: compare to his own habit</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">A judgment, not a measurement. The ranking is our reading of how much each source usually tells you.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What David Sklansky might say</p>
+  <p class="said">He would agree that reads matter and then ask what you do with one. A read is a probability, not a fact, and your play against a range should follow the weights. Every time you act on a guess about his hand that you would not act on if you saw his cards, he gains. So write the read as a count of combos and let the count decide.</p>
+  <p class="note">An imagined voice: our reading of the Fundamental Theorem in The Theory of Poker, not his words.</p>
+</aside>
+
+<h2>The river: value combos against bluff combos</h2>
+
+<p>The river is [[9h]]. It misses everything left in his range except the 99 he already checked away. He bets $120 into $177, about two thirds of the pot (120 / 177 = 68%). You hold a pair of jacks. It beats ace-queen and nothing else, so it is a <strong>bluff-catcher</strong>: a hand that wins only against bluffs.</p>
+
+<p>Sort his 49 combos into two piles. <strong>Value</strong> is every hand that beats you: sets (6 combos), top pair (15), and overpairs (12), which is 33. <strong>Bluffs</strong> are hands that lose to you: ace-queen, 16 combos at most. How many of those 16 does he bet? That is a question about the man. In our judgment, many live regulars give up with ace-queen after two missed barrels, and in most low-stakes live games river bluffs are scarcer than the theory suggests. That is a baseline, not a measurement, so look at both cases.</p>
+
+<p>First, the price. Calling $120 into $177 needs 120 / (177 + 240) = 28.78% equity, from tools/poker.js. If he bluffs with only the 4 suited combos, you win 4 times in 37 (10.81%). If he bluffs with all 16, you win 16 times in 49 (32.65%).</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Calling $120 with a bluff-catcher</h3></div>
+  <ul class="tree">
+    <li><span class="node root">Call $120 to win $297</span>
+      <ul>
+        <li><span class="edge">He bluffs 4 combos of 37: you win 10.8%</span><span class="node lose">EV = -$74.92</span></li>
+        <li><span class="edge">He bluffs 16 combos of 49: you win 32.7%</span><span class="node win">EV = +$16.16</span></li>
+      </ul>
+    </li>
+  </ul>
+  <p class="math">EV = win share x $297 - lose share x $120</p>
+  <p class="math">4 of 37: 0.1081 x 297 - 0.8919 x 120 = 32.11 - 107.03 = -$74.92</p>
+  <p class="math">16 of 49: 0.3265 x 297 - 0.6735 x 120 = 96.98 - 80.82 = +$16.16</p>
+  <p class="figure-note">Arithmetic. Folding is worth $0. The $297 is the $177 pot plus his $120 bet, and your $120 call is the amount you risk.</p>
+</figure>
+
+<p>The same decision flips on a difference of twelve bluff combos. This is why hand reading matters. The cards on the board are the same in both worlds. Your read of the man is the only thing that moves.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">His river bet, played 100 times</h3></div>
+  <div data-fig="dots"><script type="application/json">
+  {"label": "Of 100 river bets from a villain who bluffs with only 4 combos, 89 are for value and 11 are bluffs.",
+   "parts": [
+     {"label": "A hand that beats you", "value": 89, "tone": "accent"},
+     {"label": "A bluff you beat", "value": 11, "tone": "accent2"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: 33 / 37 = 89.2%, and 4 / 37 = 10.8%. You need 29 of 100.</p>
+</figure>
+
+<aside class="key">
+  <p class="label">Key idea</p>
+  <p>You do not need to know his hand. You need to know how many hands in his range beat you, how many lose to you, and whether the second count is big enough to pay for the call.</p>
+</aside>
+
+<h3>Drills</h3>
+
+<details class="drill">
+  <summary>A different player opens from the cutoff with 22+, A2s+, KTs+, QTs+, JTs, ATo+, KJo+. On the same [[Kh 7d 2c]] flop he bets a third of the pot. Why is that bet harder to read than our villain's?</summary>
+  <p>His list starts at 222 combos instead of 92 (exact, from tools/poker.js). His sets and top pairs are mixed with many more hands that missed: small pairs, weak aces, and queen or jack high. A small bet from that range cuts very little. You run the same loop, but the count stays high longer, which is why you lean on history and showdowns.</p>
+</details>
+
+<details class="drill">
+  <summary>On the flop in our hand, you hold [[Js Jd]] and he bets $15 into $47. How much equity do you need to call?</summary>
+  <p>15 / (47 + 30) = 15 / 77 = 19.5%. Your 49.26% against his whole range is well above that, so the call is easy.</p>
+</details>
+
+<details class="drill">
+  <summary>The river bet is $60 into the same $177 pot. How many bluff combos does he need so that your call breaks even, if he has 33 value combos?</summary>
+  <p>The bluff-to-value ratio needed is 60 / (177 + 60) = 25.3%. 33 x 0.253 = 8.4, so about 8 bluff combos. A bet this small is cheap to call, so he must bluff much less to make you indifferent.</p>
+</details>
+
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>Value combos against bluff combos</h2>
+  <p><strong>The shortcut.</strong> When you hold a hand that beats only bluffs, you need one bluff for every so many value hands. The ratio you need is the bet divided by the pot after his bet: bet / (pot + bet). A pot-size bet needs 1 bluff for every 2 value combos. A half-pot bet needs 1 for every 3. Count his value combos, multiply by the ratio, and see if his bluffs reach that number.</p>
+  <p class="math">$120 into $177: 120 / (177 + 120) = 0.404. With 33 value combos, 33 x 0.404 = 13.3 bluffs needed. He has 4 (fold) or 16 (call). Check: 13.3 bluffs out of 46.3 combos is 28.8%, the same price as calling $120 to win $297.</p>
+  <p><strong>Where it bends.</strong> The count is only as good as your range. A wrong opening range or a guess about which hands bet the turn can move the totals by a dozen combos. Blockers move it as well: your own cards remove combos from both piles, and {{ch:14}} shows how. And if he would also bet some hands that your hand beats (thin value, like a weaker pair), count those on your side, next to the bluffs. When the count lands within a few combos of the line, treat the call as close and let what you know of the player decide.</p>
+</aside>

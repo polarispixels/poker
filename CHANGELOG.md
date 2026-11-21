@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.18.0] - 2026-11-21
+
+### Added
+
+- Chapter 19, Hand Reading: Chapter 19 teaches hand reading by counting one villain's combos street by street and ends with the river value-versus-bluff count.
+
 ## [0.17.0] - 2026-11-21
 
 ### Added
