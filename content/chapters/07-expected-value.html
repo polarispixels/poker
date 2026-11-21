@@ -1,0 +1,237 @@
+<p class="lead">Poker pays you for good decisions, but it pays slowly and out of order. This chapter gives you the tool that sorts a good decision from a good result: expected value, the average outcome of a choice if you could make it again and again.</p>
+
+<h2>Decisions and Results</h2>
+
+<p>You get all-in preflop at a $2/$5 table, nine-handed, with $500 stacks. You hold [[As Ah]]. Your opponent holds [[Ks Kd]]. A king flops, the turn is a blank, and you lose a $1,000 pot. Did you play badly?</p>
+
+<p>No. You made the best decision available, and the cards went the other way. Poker players call this the difference between a decision and a result. The decision is what you controlled. The result is what the deck added. Most of the time they agree, which is why people confuse them. But they are two separate things, and a player who judges choices by outcomes slowly learns the wrong lessons.</p>
+
+<p>There are four combinations. Two of them feel natural. The other two are where the learning happens.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">Decisions against results</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th></th><th>Good result</th><th>Bad result</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Good decision</strong></td><td>Deserved. Pocket aces beat kings.</td><td>A bad beat. Pocket aces lose to kings. Fine play, no fix needed.</td></tr>
+        <tr><td><strong>Bad decision</strong></td><td>Dumb luck. You call a pot-sized turn shove with a gutshot and hit. A leak that got paid.</td><td>Deserved. You make the same call and miss.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">An example framing. The hands are invented, not real hand histories.</p>
+</figure>
+
+<p>The dangerous cell is bottom left. A bad decision that wins feels like a good one, so you repeat it. The painful cell is top right. A good decision that loses tempts you to change something that was working.</p>
+
+<p>How often does a good decision lose? Run the exact numbers for aces against kings.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Aces against kings, played 100 times</h3></div>
+  <div data-fig="dots"><script type="application/json">
+  {"label": "Out of 100 all-in confrontations of pocket aces against pocket kings, aces win about 82 and lose about 18.",
+   "parts": [
+     {"label": "Aces win the pot", "value": 82, "tone": "accent2"},
+     {"label": "Kings win the pot", "value": 18, "tone": "accent"}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact, from tools/poker.js: [[As Ah]] has 81.95% equity against [[Ks Kd]], counting every board and splitting ties. Rounded to 82.</p>
+</figure>
+
+<p>Roughly one time in five, the best possible preflop hand loses to the second best. If you only watch single hands, that looks like a pattern. It is not. It is the price of playing the better side of a bet.</p>
+
+<aside class="key">
+  <p class="label">Key idea</p>
+  <p>A decision is good or bad when you make it, not when the cards come.</p>
+</aside>
+
+<h2>Expected Value in Two Branches</h2>
+
+<p>Expected value, or EV, puts a dollar figure on a decision. List every way the decision can end. For each one, write down its chance and the dollars you win or lose. Multiply, then add. The total is the average result per play, if you could make the same play many times.</p>
+
+<p>Start with the aces. You and your opponent each put in $500, so the pot is $1,000. If you win, you profit $500. If you lose, you lose $500.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Aces all-in for $500</h3></div>
+  <ul class="tree">
+    <li><span class="node root">All-in, $500 each way</span>
+      <ul>
+        <li><span class="edge">Aces win 81.95% of the time</span><span class="node win">Win $500</span></li>
+        <li><span class="edge">Kings win 18.05% of the time</span><span class="node lose">Lose $500</span></li>
+      </ul>
+    </li>
+  </ul>
+  <p class="math">EV = 0.8195 x $500 + 0.1805 x (-$500) = $409.75 - $90.25 = +$319.50</p>
+  <p class="figure-note">Arithmetic, using the exact equity from tools/poker.js. Ties are counted as half a win. Stacks are $500 each.</p>
+</figure>
+
+<p>Plus $319.50 is not a result you will ever see. You will either win $500 or lose $500. EV is the average of what could happen, not a prediction of what will. That distance between the number and the outcome is exactly why results mislead you.</p>
+
+<p>Now a smaller, more common spot. The river is on the board. The pot is $100, and your opponent bets $50. You hold a hand that only beats a bluff, and you judge that it wins 30 percent of the time. That 30 percent is a read, not a computed fact, so it is the weakest number in the tree. Calling costs $50. If you win, you take the $100 pot plus the $50 bet, a $150 profit.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">A river call, with a 30% read</h3></div>
+  <ul class="tree">
+    <li><span class="node root">Call $50 into $150</span>
+      <ul>
+        <li><span class="edge">Your hand is good 30% of the time</span><span class="node win">Win $150</span></li>
+        <li><span class="edge">It is not good 70% of the time</span><span class="node lose">Lose $50</span></li>
+      </ul>
+    </li>
+  </ul>
+  <p class="math">EV = 0.30 x $150 + 0.70 x (-$50) = $45 - $35 = +$10</p>
+  <p class="figure-note">Arithmetic. The 30% is an assumption for the example, and folding has an EV of $0, so the call is better by $10.</p>
+</figure>
+
+<p>Notice what the tree does. It forces you to say your read out loud as a number. If you think the hand is good only 20 percent of the time, the same tree gives 0.20 x $150 - 0.80 x $50 = $30 - $40 = -$10, and you fold. The tree did not change. Your belief did. Most of the skill in live poker is in how well you set those percentages, and the next chapters teach you how.</p>
+
+<p>The break-even point for this call is 25 percent, which you can confirm with $50 / ($100 + $50 + $50) = 25%. That is the pot-odds number from {{ch:5}} and {{ch:6}}. Pot odds are just EV with the answer set to zero.</p>
+
+<h2>The Fundamental Theorem</h2>
+
+<p>In The Theory of Poker, David Sklansky gave the game a single organizing idea. It is worth reading slowly.</p>
+
+<figure class="voice voice-quote">
+  <p class="who label">David Sklansky, the Fundamental Theorem</p>
+  <blockquote>
+    <p>&ldquo;Every time you play a hand differently from the way you would have played it if you could see all your opponents' cards, they gain.&rdquo;</p>
+  </blockquote>
+  <figcaption class="note">From <cite>The Theory of Poker</cite> (fourth edition, 1999), as given on <a href="https://en.wikipedia.org/wiki/Fundamental_theorem_of_poker">Wikipedia</a>.</figcaption>
+</figure>
+
+<p>Read it as a rule about EV. If you could see every card, you would always know the highest-EV play. You would fold when behind and bet when ahead. Poker hides the cards, so you must guess. Every guess that differs from the all-seeing play gives up some EV, and your opponent collects it. The reverse is also true: when your opponent is fooled into a play he would not have made with full information, you gain.</p>
+
+<p>This explains two things that look like opposites. Bluffing and slow-playing can both be good, because they push opponents into plays they would not make if they could see your hand. And mistakes are not equal. A mistake that costs you $2 of EV is a small leak. A mistake that costs $40 is a flood.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Two ways to read the theorem</h3></div>
+  <div class="compare">
+    <div class="a"><h4>Your play</h4><p>Each time you act differently than you would with full information, you give up EV. Bluff and disguise on purpose, and avoid the plain mistakes.</p></div>
+    <div class="b"><h4>Their play</h4><p>Each time an opponent acts differently than he would with full information, you gain. Make hands hard to read, and watch for the player who folds the best hand.</p></div>
+  </div>
+  <p class="figure-note">A summary of this section.</p>
+</figure>
+
+<p>The theorem is not a strategy by itself. It is a yardstick. It tells you what a perfect decision would look like and invites you to estimate the gap.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Daniel Negreanu might say</p>
+  <p class="said">He would agree that EV is the scoreboard, then add that the inputs are where players lose. A tree is only as good as the percentage you feed it, and a read on a real person at a real table beats a number copied from a chart. He would urge you to study the math and keep watching the people.</p>
+  <p class="note">An imagined voice: our reading of his public emphasis on hand reading and on blending feel with solver study, not his words.</p>
+</aside>
+
+<h2>The Long Run</h2>
+
+<p>Suppose you take a bet that wins 55 percent of the time and pays even money. You win $1 or lose $1 per play. Your EV is 0.55 x $1 + 0.45 x (-$1) = +$0.10 per play. A small edge, and a real one.</p>
+
+<p>How soon does that edge show up in your results? Slower than most people expect. Here is the chance that you are behind after a given number of plays.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Behind, despite winning 55%</h3></div>
+  <div data-fig="line"><script type="application/json">
+  {"label": "Chance of being behind after a number of even-money bets that each win 55 percent of the time. It starts at 45 percent after one bet, falls to 16 percent after 101, and is near 1 percent after 501.",
+   "xLabel": "Number of bets", "yUnit": "%", "yMin": 0, "yMax": 50,
+   "series": [
+     {"name": "Chance of being behind", "tone": "accent", "points": [[1, 45.0], [11, 36.7], [21, 32.1], [51, 23.6], [101, 15.6], [201, 7.7], [501, 1.2]]}
+   ],
+   "marks": [{"x": 101, "y": 15.6, "label": "101 bets: 16%"}]}
+  </script></div>
+  <p class="figure-note">Exact binomial arithmetic: each bet wins with probability 0.55 and pays even money. Odd counts are used so a tie is impossible.</p>
+</figure>
+
+<p>After 11 plays of a winning bet, you are still behind more than one time in three. After 101 plays you are expected to be up about $10, but the typical swing around that number is also about $10, so a loss is still on the table. It takes several hundred plays before the edge dominates.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">After 101 plays of the 55% bet</h3></div>
+  <ul class="stats">
+    <li><b>+$10</b><span>expected profit</span></li>
+    <li><b>$10</b><span>typical swing either way</span></li>
+    <li><b>1 in 6</b><span>chance you are behind</span></li>
+  </ul>
+  <p class="figure-note">Arithmetic: expected profit 101 x 0.10 = $10.10. Typical swing (standard deviation) is the square root of 101 x (1 - 0.10 x 0.10), about 10. Chance behind is 15.6%, from the previous figure.</p>
+</figure>
+
+<p>In most live games you see roughly 25 to 30 hands an hour (a rough baseline, not a measured figure). You do not see 500 repeated decisions of one kind in a night, or in a month of nights. This is why a session tells you almost nothing about whether you played well. {{ch:10}} takes up bankroll and variance in full. For now, hold one habit: judge a choice by its EV, and let the results pile up in the background.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Phil Galfond might say</p>
+  <p class="said">He would turn this into a study habit. Review your hands by asking what the best play was and why, not whether you won. Keep a list of spots where you were unsure, and come back to them with a clear head. Results are noise at first. The reasoning is the part you can improve.</p>
+  <p class="note">An imagined voice: our reading of his teaching approach at Run It Once, not his words.</p>
+</aside>
+
+<h2>EV at the Table</h2>
+
+<p>EV is also how you compare two plays that are both reasonable. Take a flush draw. Four players see a flop in a $2/$5 game, and the pot grows to $120 by the turn. Your opponent bets $60 on the turn. You hold a nine-out flush draw, with 46 unseen cards and one card to come.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">A flush draw facing a half-pot bet</h3></div>
+  <div class="table-scroll">
+    <table class="hand-log">
+      <thead><tr><th>Street</th><th>Board</th><th>Action</th><th>Pot</th></tr></thead>
+      <tbody>
+        <tr><td>Preflop</td><td>Hero: [[As 7s]]</td><td>Villain raises to $20 in the cutoff. Hero calls on the button. Both blinds call.</td><td class="pot">$80</td></tr>
+        <tr><td>Flop</td><td>[[Ks 9s 4d]]</td><td>Blinds check. Villain bets $20. Hero calls. Blinds fold.</td><td class="pot">$120</td></tr>
+        <tr><td>Turn</td><td>[[Ks 9s 4d 2h]]</td><td>Villain bets $60. Hero needs 60 / 240 = 25%, and has 9 / 46 = 19.6%.</td><td class="pot">$180</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history. The turn pot shown includes the $60 bet. The pot before it was $120.</p>
+</figure>
+
+<p>Calling costs $60 and wins $180 if a spade arrives (the $120 already there plus the $60 bet). Hero hits 9 times in 46, which is 19.57% (from tools/poker.js). That is less than the 25 percent the price demands. The EV of the call, counting only this card:</p>
+
+<p class="math">EV = (9 / 46) x $180 + (37 / 46) x (-$60) = $35.22 - $48.26 = -$13.04</p>
+
+<p>The call loses about $13 on average. Put another way, every equity level has an EV, and the break-even sits at 25 percent.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">EV of the $60 call, by your chance</h3></div>
+  <div data-fig="line"><script type="application/json">
+  {"label": "Expected value of calling $60 to win $180, for a chance of winning from 0 to 50 percent. It crosses zero at 25 percent.",
+   "xLabel": "Your chance of winning", "xUnit": "%", "yUnit": "$", "yMin": -60, "yMax": 60,
+   "series": [
+     {"name": "EV of the call", "tone": "ink", "points": [[0, -60], [10, -36], [20, -12], [25, 0], [30, 12], [40, 36], [50, 60]]}
+   ],
+   "refs": [{"x": 25, "label": "Break even: 25%"}],
+   "marks": [{"x": 19.6, "y": -13, "label": "Flush draw: -$13"}]}
+  </script></div>
+  <p class="figure-note">Arithmetic: EV = 240 x chance - 60, since the call risks $60 to win $180 (so 180 x chance minus 60 x (1 - chance)).</p>
+</figure>
+
+<p>This is the pot-odds decision from {{ch:5}} restated as EV. A fold is worth $0, so you call only when the line is above zero. A bare fold is not the end of the thought, though. If the flush arrives, you may win more on the river. How much extra do you need to break even? Solve 9 / 46 x ($180 + X) = 37 / 46 x $60, which gives $180 + X = $246.67, so X is about $67. If you expect to win at least $67 more on average when you hit, calling is fine. If you do not, fold. Those extra winnings are called implied odds, and {{ch:28}} gives the quick version.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Estimating EV in four steps</h3></div>
+  <ol class="flow">
+    <li><strong>List the outcomes</strong><span>Win, lose, or fold. Two branches is enough.</span></li>
+    <li><strong>Put a chance on each</strong><span>Use math where you can, a read where you must.</span></li>
+    <li><strong>Put dollars on each</strong><span>Profit on the win, loss on the lose.</span></li>
+    <li><strong>Multiply and add</strong><span>Pick the play with the higher total.</span></li>
+  </ol>
+  <p class="figure-note">A summary of this section.</p>
+</figure>
+
+<details class="drill">
+  <summary>The pot is $100 and your opponent bets $100. You think you win 40% of the time. Is calling +EV?</summary>
+  <p>You risk $100 to win $200 (the pot plus the bet). EV = 0.40 x $200 + 0.60 x (-$100) = $80 - $60 = +$20. The price asks for 100 / 300 = 33%, and you have 40%.</p>
+</details>
+
+<details class="drill">
+  <summary>You shove $200 into a $150 pot. If he folds 50% of the time you win the pot. If he calls you lose $200 (assume your hand never wins when called). What is the EV?</summary>
+  <p>EV = 0.50 x $150 + 0.50 x (-$200) = $75 - $100 = -$25. The bluff needs 200 / 350 = 57% folds to break even. A hand that can win when called, covered in {{ch:8}}, changes the answer.</p>
+</details>
+
+<details class="drill">
+  <summary>A friend called three pot-sized river bets of $100 with a 25% chance each time. He won one, broke even, and says the plan works. What do you tell him?</summary>
+  <p>Three plays prove nothing. A 25% shot hits at least once in three tries about 58% of the time (1 - 0.75 x 0.75 x 0.75 = 57.8%). Each call risks $100 to win $200, so EV = 0.25 x $200 - 0.75 x $100 = $50 - $75 = -$25. The price asks for 33%. On average the plan loses $75 every three calls. Judge the call by its price, not by three results.</p>
+</details>
+
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>A two-outcome EV in your head</h2>
+  <p><strong>The shortcut.</strong> Skip the second multiplication. Take your chance of winning times the total swing (what you win plus what you lose), then subtract what you risk.</p>
+  <p class="math">EV = chance x (win + loss) - loss</p>
+  <p class="math">$50 bluff into $100, he folds 40%: 0.40 x ($100 + $50) - $50 = $60 - $50 = +$10</p>
+  <p>This assumes the bluff never wins when called, so the two outcomes are he folds (win $100) or he calls (lose $50).</p>
+  <p><strong>Where it bends.</strong> It only works for two outcomes. Once a hand has a third branch, like a raise, a chop, or a big river bet when you hit, add each branch by hand. The chance is also a guess: move the fold rate from 40% to 30% and the same bluff drops to 0.30 x $150 - $50 = -$5.</p>
+</aside>

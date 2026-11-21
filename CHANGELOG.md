@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-11-21
+
+### Added
+
+- Chapter 7, Expected Value: Chapter 7 teaches expected value: decisions versus results, two-branch EV trees, Sklansky's Fundamental Theorem, long-run variance, and a two-outcome EV shortcut.
+
 ## [0.4.0] - 2026-11-21
 
 ### Added
