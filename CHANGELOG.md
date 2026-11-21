@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.28.0] - 2026-11-21
+
+### Added
+
+- Chapter 35, The Mental Game: Chapter 35 prices tilt and fatigue in big blinds per hour, names five kinds of tilt, and builds routines for before, during, and after a live session.
+
 ## [0.27.0] - 2026-11-21
 
 ### Added

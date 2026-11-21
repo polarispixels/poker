@@ -1,0 +1,226 @@
+<p class="lead">Strategy only pays if you can run it in hour nine, after a bad beat, with a stack on the line. This chapter prices tilt in big blinds per hour, shows how fatigue eats a win rate, and builds routines that protect the player behind the cards.</p>
+
+<h2>Tilt has a price</h2>
+<p><strong>Tilt</strong> is any state where emotion, not analysis, is choosing your actions. It makes you play worse than you know how to play. That makes it a leak you can measure, like folding too much or calling too light. {{ch:7}} taught that a decision is judged by its expected value. Tilt is the habit of making decisions that fail that test, and making more of them when you are upset.</p>
+<p>To price it, you need assumptions. These are examples for this chapter, not measurements of any real player. Change them to match your own game and your own records.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">The assumptions behind the price</h3></div>
+  <ul class="stats">
+    <li><b>30</b><span>hands dealt per hour, live</span></li>
+    <li><b>1.2 bb</b><span>won per hour when calm (4 bb per 100 hands)</span></li>
+    <li><b>-3.3 bb</b><span>lost per hour on tilt (-11 bb per 100 hands)</span></li>
+  </ul>
+  <p class="figure-note">Assumed for the example, in a $2/$5 game where one big blind is $5. Arithmetic: 1.2 / 30 x 100 = 4, and -3.3 / 30 x 100 = -11.</p>
+</figure>
+
+<p>The gap between the two rates is 1.2 - (-3.3) = 4.5 big blinds for every hour you spend on tilt. At $5 a big blind, that is $22.50 an hour. Now spread that over a ten-hour session with a little tilt in it.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">How much of your win tilt takes back</h3></div>
+  <div data-fig="bars"><script type="application/json">
+  {"label": "Share of a ten-hour session's expected win lost to tilt: half an hour of tilt costs 19 percent, one hour 38 percent, two hours 75 percent, and three hours 113 percent, which turns a winning session into a losing one.",
+   "unit": "%", "max": 120,
+   "items": [
+     {"label": "30 minutes of tilt", "value": 18.75, "note": "2.3 bb"},
+     {"label": "1 hour of tilt", "value": 37.5, "note": "4.5 bb"},
+     {"label": "2 hours of tilt", "value": 75, "note": "9 bb"},
+     {"label": "3 hours of tilt", "value": 112.5, "note": "13.5 bb", "tone": "accent"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic with the assumptions above. A calm ten hours is 10 x 1.2 = 12 bb. Tilt hours x 4.5 bb, divided by 12.</p>
+</figure>
+
+<p>One bad hour in ten takes back more than a third of the session. Three bad hours turn an expected +12 bb into -1.5 bb. You did not forget how to play. You played the same cards with a worse head.</p>
+
+<h2>The kinds of tilt</h2>
+<p>Tilt is not one feeling. Naming the type helps, because each type has a different trigger and a different fix. These are common patterns, grouped by our own judgment, not a clinical list.</p>
+
+<p>Most players have one or two favorites. Find yours by looking at your last three bad sessions and asking what happened in the twenty minutes before the first big mistake. The pattern is usually clear in hindsight. Once you know your type, you can watch for its trigger and act before the heat arrives, which is far easier than calming down in the middle of a hand.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">Five common kinds of tilt</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Type</th><th>Trigger</th><th>How it shows at the table</th><th>First fix</th></tr></thead>
+      <tbody>
+        <tr><td>Bad-beat tilt</td><td>A big pot lost as a favorite</td><td>Calls too light to get even</td><td>Price the next call with numbers</td></tr>
+        <tr><td>Injustice tilt</td><td>A bad player keeps winning</td><td>Plays hands to punish them</td><td>Remember their mistakes pay you over time</td></tr>
+        <tr><td>Mistake tilt</td><td>You misplayed a hand</td><td>Dwells on it, plays the next hand badly</td><td>Write it down, review it later</td></tr>
+        <tr><td>Chasing tilt</td><td>Down for the session</td><td>Plays bigger and longer to get even</td><td>Set a stop before you sit</td></tr>
+        <tr><td>Boredom tilt</td><td>Long folds, nothing to do</td><td>Enters pots to feel something</td><td>Stand up, walk, or leave</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">A working taxonomy, not a diagnosis. The fixes are habits to try, not guarantees.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Phil Hellmuth might say</p>
+  <p class="said">He would say that tilt is the part of the game that humbles everyone, himself included. He is known for visible, public frustration at the table, and just as well known for patience, survival, and reading people. He would likely tell you that a blowup costs more than the hand that caused it, because everyone at the table now knows which button to press.</p>
+  <p class="note">An imagined voice: our reading of Hellmuth's public reputation for emotional blowups and for patience and reads, not his words.</p>
+</aside>
+
+<h2>What tilt does to one decision</h2>
+<p>Tilt does its damage one decision at a time. The main trick it plays is on your sense of the opponent's range. You stop asking what he would do with a strong hand and start asking whether he could possibly have it.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">A beat, then a call twelve minutes later</h3></div>
+  <div class="table-scroll">
+    <table class="hand-log">
+      <thead><tr><th>When</th><th>Cards</th><th>Action</th><th>Pot</th></tr></thead>
+      <tbody>
+        <tr><td>Earlier</td><td>Hero: [[Ac Ad]]</td><td>All-in preflop against [[7s 7h]]. The sevens hit a set. Hero rebuys $500.</td><td class="pot">$1,007</td></tr>
+        <tr><td>Twelve minutes later</td><td>Hero: [[Jh 9d]]</td><td>Hero raises to $25 in the cutoff. The button shoves for $225 total. Hero calls $200 more.</td><td class="pot">$257</td></tr>
+        <tr><td>The price</td><td></td><td>Hero needs 200 / (257 + 200) = 200 / 457 = 43.8% equity.</td><td class="pot">$457</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history. First pot: $500 + $500 + $7 in folded blinds = $1,007. Second pot before the call: $2 + $5 + $25 + $225 = $257.</p>
+</figure>
+
+<p>The first hand was a good result for the villain and a normal bad run for you. Aces win 79.8% of the time against sevens, so you lose about one time in five. The second hand is the one that costs money. Here is what [[Jh 9d]] has against two ideas of the button's shoving range, next to the price.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Jack-nine against the price of the call</h3></div>
+  <div data-fig="bars"><script type="application/json">
+  {"label": "Equity of jack nine offsuit against a tight shoving range is 25.1 percent and against a wide range is 34.7 percent, both below the 43.8 percent needed to call.",
+   "unit": "%", "max": 60,
+   "items": [
+     {"label": "Needed to call", "value": 43.8, "note": "the price", "tone": "gold"},
+     {"label": "Against wide range", "value": 34.7, "note": "214 combos", "tone": "accent2"},
+     {"label": "Against tight range", "value": 25.1, "note": "47 combos", "tone": "accent"}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact range sizes from tools/poker.js, after removing the cards in hero's hand. Equities sampled over 400,000 deals, good to about 0.2 points. Tight: TT+,AQs+,AKo. Wide: 22+,A2s+,KTs+,QTs+,JTs,ATo+,KJo+,QJo.</p>
+</figure>
+
+<p>The call loses in both cases. Against the tight range, the expected value is 0.251 x 457 - 200 = -$85, or about -17 bb. Against the wide range it is 0.347 x 457 - 200 = -$41, about -8 bb. A calm player folds in two seconds. A tilted player thinks he is bluffing and pays for the thought. The fix is the same one {{ch:5}} gave you for draws: price first, feeling second.</p>
+
+<h2>Bad beats are scheduled</h2>
+<p>A lot of bad-beat tilt comes from forgetting that the favorite loses often. You expected to win, so losing feels like an error by the universe. It is just the other branch of the same tree.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Aces against sevens, played 100 times</h3></div>
+  <div data-fig="dots"><script type="application/json">
+  {"label": "Out of 100 all-in preflop confrontations of aces against sevens, aces win about 80 and the sevens win about 20.",
+   "parts": [
+     {"label": "Aces hold", "value": 80, "tone": "ink"},
+     {"label": "Sevens win", "value": 20, "tone": "accent"}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact, from tools/poker.js: 79.82% for aces, 20.18% for sevens, rounded to 80 and 20.</p>
+</figure>
+
+<p>Now stretch it across a day. If you get aces in three times against smaller pairs, each a roughly 80% shot, the chance you lose at least one is 1 - 0.798 x 0.798 x 0.798 = 49%. Close to a coin flip, and you did nothing wrong. {{ch:10}} shows how wide the swings of a winning player run. Knowing this ahead of time takes the sting out of the beat, because you have already booked it.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What David Sklansky might say</p>
+  <p class="said">He would remove the drama. A result is one sample from a distribution, and the right response to a bad one is to check whether the decision was good, then move on. In his framing, being upset about a correct play that lost is paying a tax on something you cannot change.</p>
+  <p class="note">An imagined voice: our reading of the results-versus-decisions emphasis in The Theory of Poker, not his words.</p>
+</aside>
+
+<details class="drill">
+  <summary>You get aces in against sevens twice in one night. What is the chance you lose at least once?</summary>
+  <p>The chance of winning both is 0.798 x 0.798 = 0.637. The chance of losing at least one is 1 - 0.637 = 36.3%.</p>
+</details>
+
+<h2>Fatigue is a slow tilt</h2>
+<p>Not all tilt is anger. Long sessions wear down attention, and tired players make the same kinds of mistakes as upset ones: loose calls, missed reads, slow folds they regret. The win rate bends downward and you rarely feel it happen.</p>
+<p>Here is a picture with an assumption stated up front: you win 1.2 bb an hour for the first five hours, then lose 0.6 bb more per hour with every hour after that. The shape is invented for teaching. Real fatigue curves differ by person, and you should find your own from your records.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">The hour to go home</h3></div>
+  <div data-fig="line"><script type="application/json">
+  {"label": "Hourly rate and running total over an eleven-hour session under an assumed fatigue pattern. The running total peaks at 6.6 big blinds after hour 6 or 7 and falls to 0.6 by hour 11.",
+   "xLabel": "Hour of the session", "xUnit": "", "yUnit": " bb", "yMin": -3, "yMax": 8,
+   "series": [
+     {"name": "Running total", "tone": "ink", "points": [[1, 1.2], [2, 2.4], [3, 3.6], [4, 4.8], [5, 6], [6, 6.6], [7, 6.6], [8, 6], [9, 4.8], [10, 3], [11, 0.6]]},
+     {"name": "Rate for that hour", "tone": "accent", "points": [[1, 1.2], [2, 1.2], [3, 1.2], [4, 1.2], [5, 1.2], [6, 0.6], [7, 0], [8, -0.6], [9, -1.2], [10, -1.8], [11, -2.4]]}
+   ],
+   "marks": [{"x": 7, "y": 6.6, "label": "Peak: 6.6 bb"}]}
+  </script></div>
+  <p class="figure-note">Assumed pattern, not data. Hourly rate is 1.2 bb through hour 5, then falls 0.6 bb each hour. The running total is the sum of the hourly rates.</p>
+</figure>
+
+<p>Under this pattern the last four hours give back 6.0 bb, which is $30 at $5 a big blind. The total stops growing after hour 6 and holds flat through hour 7, when the hourly rate reaches zero. Every hour past that has a negative expectation for you.</p>
+<p>This is not a rule to leave at hour 7. A very soft game can keep your tired rate above zero, and a tough one can drop it early. The point is to decide your stopping rule in advance, with your own numbers, and to treat leaving a game as a +EV play when your rate has turned negative. {{ch:36}} covers the larger business of stop-losses and longevity.</p>
+
+<p>Focus is the other half of the same problem. Every hand you spend on your phone or replaying an old pot is a hand where you learn nothing about the table. A simple test: after a hand you folded, can you say what each player who stayed in did and what they showed down, if anything? If not, your attention has drifted, and a break will help more than another hour.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Fedor Holz might say</p>
+  <p class="said">He would argue that focus is a resource you manage, not a trait you have. He stepped back after a huge year and spoke openly about burnout, so he would likely tell you that rest and leaving on time are part of the work. The player who plays tired every night is slowly spending the thing that makes him good.</p>
+  <p class="note">An imagined voice: our reading of Holz's public talk about burnout and mental training, not his words.</p>
+</aside>
+
+<h2>Routines before, during, and after</h2>
+<p>A routine takes decisions off your plate when you are least able to make them. The aim is to make the right behavior the default, so that willpower is not carrying the load at 2 a.m.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">A session in three parts</h3></div>
+  <ol class="timeline">
+    <li><b>Before</b><span>Set your stop-loss and your time limit. Eat. Sleep. Check that you are not sitting in a bad mood.</span></li>
+    <li><b>During</b><span>Take a break every hour or two. Note one thing about each opponent. Run the tilt check below when you feel heat.</span></li>
+    <li><b>After</b><span>Write down the result, the hours, and the two hands you want to review. Leave the result at the door.</span></li>
+  </ol>
+  <p class="figure-note">A starting template. Adjust it to what you find works, and keep it short enough that you will actually do it.</p>
+</figure>
+
+<p>The middle part is the hard one. When you feel your face heat up or your hands speed up, you have a few seconds before the next decision. A short, fixed script helps.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">The tilt check</h3></div>
+  <ol class="flow">
+    <li><strong>Notice</strong><span>Fast hands, a hot face, a clenched jaw.</span></li>
+    <li><strong>Name it</strong><span>Say to yourself which type it is.</span></li>
+    <li><strong>Slow down</strong><span>Breathe out slowly. Take the full time on the next decision.</span></li>
+    <li><strong>Price it</strong><span>Count the pot and the bet before any call.</span></li>
+    <li><strong>Leave if it holds</strong><span>Still hot after one orbit? Stand up and walk, or cash out.</span></li>
+  </ol>
+  <p class="figure-note">A working habit. It is a checklist for your own use, not a treatment.</p>
+</figure>
+
+<p>Two more habits are worth the effort. Keep a hand note for the two or three spots that nagged you, and review them away from the table ({{ch:38}} builds a full study system around this). And decide in advance what a good session means: playing your best game, not winning a particular sum. A session goal you cannot control is an invitation to tilt.</p>
+
+<p>Tilt also spreads between players. A table notices who gets angry, and in most low-stakes live games, someone will use it. Staying even costs you nothing and keeps your opponents guessing, which is part of why {{ch:26}} treats table presence as a skill. A calm face also helps you, because you stop broadcasting how you feel about the last pot.</p>
+
+<details class="drill">
+  <summary>You spend 2 hours of a 10-hour session on tilt. Using the chapter's assumptions, how many big blinds and dollars does that cost?</summary>
+  <p>2 x 4.5 = 9 bb. At $5 a big blind that is 9 x $5 = $45.</p>
+</details>
+
+<h2>When the game stops being a game</h2>
+<p>This book treats poker as a skill game you study. For some people, gambling stops being that. We cannot diagnose anyone, and nothing here is medical advice. But a few plain questions are worth asking yourself now and then, especially after a hard stretch.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">Questions worth a pause</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Ask yourself</th><th>Why it matters</th></tr></thead>
+      <tbody>
+        <tr><td>Do I stay past my stop to win it back?</td><td>Chasing breaks the plan that protects you.</td></tr>
+        <tr><td>Am I buying in with money meant for bills?</td><td>The stakes are no longer yours to risk.</td></tr>
+        <tr><td>Would I be fine showing my records to a friend?</td><td>Hiding losses is a signal to stop and look.</td></tr>
+        <tr><td>Is poker still something I enjoy?</td><td>Joy fading while time and money grow is worth noticing.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Our own judgment, not a screening test. If several of these ring true, talk to someone you trust or a support service.</p>
+</figure>
+
+<aside class="key">
+  <p class="label">Help is available</p>
+  <p>In the United States, the National Problem Gambling Helpline is 1-800-GAMBLER (1-800-426-2537). It is run by the National Council on Problem Gambling: <a href="https://www.ncpgambling.org/">https://www.ncpgambling.org/</a>. Outside the US, look for a local gambling support service.</p>
+</aside>
+
+<p>Protecting your bankroll and your head are the same job. {{ch:36}} covers the money side. The most useful habit here is the dull one: write down your hours and results honestly, and look at them.</p>
+
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>Tilt as a leak in big blinds per hour</h2>
+  <p><strong>The shortcut.</strong> Multiply your tilt hours by the gap between your calm rate and your tilt rate. That is the cost in big blinds.</p>
+  <p class="math">Leak = tilt hours x (calm rate - tilt rate) = 1 x (1.2 - (-3.3)) = 4.5 bb = $22.50</p>
+  <p>Divide by your calm rate to see it in hours of winning: 4.5 / 1.2 = 3.75. One tilted hour wipes out almost four calm ones. Over a year of 500 hours with 50 of them on tilt, the leak is 50 x 4.5 = 225 bb ($1,125). A fully calm 500 hours would earn 500 x 1.2 = 600 bb ($3,000). With the leak it shrinks to 375 bb ($1,875).</p>
+  <p><strong>Where it bends.</strong> Tilt is lumpy. One spew of 20 bb costs the same as 4.4 tilt hours of this average, so a single bad call can dominate. The rates are also assumptions, and small samples hide your true calm rate (see {{ch:10}}). Use the formula to size a problem, not to prove one.</p>
+</aside>
