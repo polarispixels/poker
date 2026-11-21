@@ -1,0 +1,254 @@
+<p class="lead">You are dealt one of 1,326 two-card hands, and most of them are not worth playing. This chapter sorts the hands into groups, shows which groups to open from which seat, and explains why a quiet fold is usually the winning play.</p>
+
+<h2>Why You Fold Most Hands</h2>
+
+<p>Start with the count. A deck has 52 cards, so there are 52 x 51 / 2 = 1,326 ways to hold two of them. Many look different but play the same. [[As Kh]] and [[Ad Ks]] are the same hand in different suits, so the 1,326 collapse into 169 hand types: 13 pocket pairs (two cards of one rank), 78 suited hands (both cards share a suit), and 78 offsuit hands. That is 13 + 78 + 78 = 169.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">The deck in three numbers</h3></div>
+  <ul class="stats">
+    <li><b>1,326</b><span>two-card starting hands</span></li>
+    <li><b>169</b><span>distinct hand types</span></li>
+    <li><b>1 in 221</b><span>hands is a pair of aces</span></li>
+  </ul>
+  <p class="figure-note">Arithmetic: 52 x 51 / 2 = 1,326. Aces: 6 combos / 1,326 = 1 in 221.</p>
+</figure>
+
+<p>Now ask how many of those are strong. The best four groups in the next section hold 142 of the 1,326 combinations. That is 142 / 1,326 = 10.7%. About one hand in nine is a real hand, and the other eight are weaker. Folding is not timid play. It is what the numbers ask for.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">100 hands dealt to you</h3></div>
+  <div data-fig="dots"><script type="application/json">
+  {"label": "Out of 100 hands dealt, about 7 fall in Groups 1 to 3, about 4 in Group 4, and the other 89 are weaker.",
+   "parts": [
+     {"label": "Groups 1 to 3", "value": 7, "tone": "ink"},
+     {"label": "Group 4", "value": 4, "tone": "accent2"},
+     {"label": "Everything else", "value": 89, "tone": "paper"}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact, from tools/poker.js: Groups 1 to 3 are 92 combos (6.9%), Group 4 is 50 (3.8%), 142 together (10.7%). Rounded to whole dots.</p>
+</figure>
+
+<p>Most of your hands cost you money if you play them, and the cost is not only the chips you put in. A weak hand that hits a little makes second-best hands, and second-best hands lose big pots. The folds you make before the flop are the cheapest decisions in poker.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Phil Hellmuth might say</p>
+  <p class="said">He would call patience the first skill. The player who folds hands the rest of the table cannot let go of has already won something before the flop is dealt, and he would rather wait for a clear edge than chase a small one.</p>
+  <p class="note">An imagined voice: our reading of the patience and survival he is publicly known for, not his words.</p>
+</aside>
+
+<h2>The Eight Groups</h2>
+
+<p>In Hold'em Poker for Advanced Players, David Sklansky and Mason Malmuth sorted the strongest of the 169 hand types into eight groups, from strongest (Group 1) to weakest (Group 8). Hands outside the eight groups are folds in nearly every spot. The groups were built for full-ring limit hold'em, so treat them as a starting point, not a rulebook. A lowercase "s" means suited, "o" means offsuit, and a hand with no letter, such as AK, means both.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Sklansky-Malmuth Groups 1 to 6</h3></div>
+  <div data-fig="range"><script type="application/json">
+  {"label": "The starting hand grid with Sklansky-Malmuth Groups 1 through 6 shaded. Group 1 is the premium pairs and AKs; Group 6 is the weakest group shown.",
+   "groups": [
+     {"name": "Group 1", "tone": "ink", "hands": "JJ+,AKs"},
+     {"name": "Group 2", "tone": "ink-soft", "hands": "TT,AQs,AJs,KQs,AKo"},
+     {"name": "Group 3", "tone": "gold", "hands": "99,JTs,QJs,KJs,ATs,AQo"},
+     {"name": "Group 4", "tone": "gold-soft", "hands": "T9s,KQo,88,QTs,98s,J9s,AJo,KTs"},
+     {"name": "Group 5", "tone": "accent2", "hands": "77,87s,Q9s,T8s,KJo,QJo,JTo,76s,97s,A2s-A9s,65s"},
+     {"name": "Group 6", "tone": "accent2-soft", "hands": "66,ATo,55,86s,KTo,QTo,54s,K9s,J8s,75s"}
+   ]}
+  </script></div>
+  <p class="figure-note">Groups from Sklansky and Malmuth, as listed in the starting hands reference. Groups 7 and 8 are left off the grid. Combos by group, exact: 28, 30, 34, 50, 98, 68.</p>
+</figure>
+
+<p>Look at the shape. The top groups are pairs and big cards, mostly suited. Group 1 is only 28 combinations out of 1,326, or 2.1%. Add Group 2 and you reach 58 combinations (4.4%). Add Group 3 and you reach 92 (6.9%). Through Group 6 you have 308 combinations, 23.2%, The other 77% sit in Groups 7 and 8 or outside the groups altogether. From most seats, those are folds.</p>
+
+<p>Suitedness is worth having but it is a small bonus. A suited hand wins a flush sometimes, and that is why [[Ks Js]] outranks [[Kh Jd]] in these groups. It does not turn a bad hand into a good one. Use it as a tiebreaker between hands of similar strength.</p>
+
+<h2>Position Opens the Gate</h2>
+
+<p>The groups say how strong a hand is. They do not say when to play it. That depends on your seat, which is why {{ch:3}} comes before this chapter. To open means to be the first to raise. The seats behind you will act after you on every street, so an early seat needs more strength to open than a late seat does.</p>
+
+<p>A sensible live baseline for a $2/$5 nine-handed game is below. It is a judgment, built from the groups and the way most low-stakes live players play. It is not solver output, and the full charts live in {{ch:C}}. Each step adds hands to the one before it.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Opening ranges widen as you move toward the button</h3></div>
+  <div data-fig="range"><script type="application/json">
+  {"label": "The starting hand grid showing a baseline opening range that grows by seat: the early seats first, then middle seats, then the hijack and cutoff, then the button. Each group adds hands to the earlier ones.",
+   "groups": [
+     {"name": "UTG, UTG+1", "tone": "ink", "hands": "77+,ATs+,KQs,QJs,JTs,AQo+"},
+     {"name": "Add in MP, LJ", "tone": "accent2", "hands": "55-66,A9s,A5s,KJs,KTs,QTs,T9s,AJo,KQo"},
+     {"name": "Add in HJ, CO", "tone": "gold", "hands": "22-44,A2s-A4s,A6s-A8s,K9s,Q9s,J9s,98s,87s,76s,ATo,KJo,QJo"},
+     {"name": "Add on BTN", "tone": "muted", "hands": "K5s-K8s,Q8s,J8s,T8s,97s,86s,65s,54s,75s,KTo,QTo,JTo,A9o,A8o"}
+   ]}
+  </script></div>
+  <p class="figure-note">A judgment baseline, not solver output. Combos added by step, exact from tools/poker.js: 100, 60, 102, 108.</p>
+</figure>
+
+<p>The cumulative share of hands you open grows each step. Notice that even on the button the baseline folds about 72% of hands. That is a conservative button range: with tight or weak players in the blinds, good players open far wider.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Share of hands opened, by seat</h3></div>
+  <div data-fig="bars"><script type="application/json">
+  {"label": "Share of all 1,326 starting hands opened under the baseline: 7.5 percent from the first two seats, 12.1 percent from middle position and lojack, 19.8 percent from hijack and cutoff, and 27.9 percent from the button.",
+   "unit": "%", "max": 100,
+   "items": [
+     {"label": "UTG, UTG+1", "value": 7.5, "note": "100 combos", "tone": "ink"},
+     {"label": "MP, LJ", "value": 12.1, "note": "160 combos"},
+     {"label": "HJ, CO", "value": 19.8, "note": "262 combos"},
+     {"label": "BTN", "value": 27.9, "note": "370 combos", "tone": "accent2"}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact, from tools/poker.js: cumulative combos divided by 1,326. For example, 370 / 1,326 = 27.9%.</p>
+</figure>
+
+<p>The blinds are a different case. You post chips before you see your cards, and after the flop you play out of position against anyone who did not post a blind, so blind play follows its own rules. {{ch:12}} covers blind play, limpers, and 3-bets.</p>
+
+<h2>Strong Is Not the Same as Dominated</h2>
+
+<p>High cards look strong, and that is how players get hurt. A hand is dominated when an opponent holds the same top card with a better kicker. If you hold [[Ah Td]] and he holds [[As Jc]], you share an ace and he wins the kicker fight. You make top pair and still lose, and the pots you lose with top pair tend to be big ones.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Domination against a race</h3></div>
+  <div data-fig="split"><script type="application/json">
+  {"label": "All-in preflop equity for four matchups. Dominated hands such as AQo against AKo and KQo against AKo win about 26 percent, while a pair against two overcards, 22 against AKo, is close to even, and a suited connector, 76s against AKo, wins about 42 percent.",
+   "rows": [
+     {"label": "AKo against AQo", "note": "domination", "parts": [{"label": "AKo", "value": 74.0, "tone": "ink"}, {"label": "AQo", "value": 26.0, "tone": "accent"}]},
+     {"label": "AKo against KQo", "note": "domination", "parts": [{"label": "AKo", "value": 74.2, "tone": "ink"}, {"label": "KQo", "value": 25.8, "tone": "accent"}]},
+     {"label": "22 against AKo", "note": "a race", "parts": [{"label": "22", "value": 52.7, "tone": "accent2"}, {"label": "AKo", "value": 47.3, "tone": "ink"}]},
+     {"label": "76s against AKo", "note": "the underdog", "parts": [{"label": "76s", "value": 42.3, "tone": "accent2"}, {"label": "AKo", "value": 57.7, "tone": "ink"}]}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact equities from tools/poker.js, counting every possible board, for one suit combination of each matchup ([[Ah Kd]] against [[Ac Qs]] or [[Kc Qs]], [[2h 2c]] against [[Ah Kd]], [[7s 6s]] against [[Ac Kd]]). Other suits move these by under a point. Ties are split.</p>
+</figure>
+
+<p>Domination is a 74 to 26 problem, nearly three to one. A small pair or a suited connector, by contrast, is never far behind. [[7s 6s]] still wins 42% against [[Ac Kd]], and it can win a large pot when the flop connects. This is the reason strong players like suited connectors and low pairs more than the old groups suggest, and offsuit hands such as KQo and QJo less. Hands like AJo and KJo are easy to dominate.</p>
+
+<p>Position hides some of this, but your opponent's range does not go away. Here is how seven hands do against a tight early-position range, about 100 combinations of pairs 77 and up, ATs and better, KQs, QJs, JTs, and AQo and better.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Your hand against an early-position opening range</h3></div>
+  <div data-fig="bars"><script type="application/json">
+  {"label": "Equity of seven hands against the early-position baseline opening range: queens 64 percent, ace king suited 54 percent, ace jack offsuit 38 percent, king jack offsuit 36 percent, deuces 35 percent, ace nine offsuit 32 percent, and seven six suited 31 percent.",
+   "unit": "%", "max": 100,
+   "items": [
+     {"label": "QQ", "value": 64.2, "tone": "ink"},
+     {"label": "AKs", "value": 54.0, "tone": "ink"},
+     {"label": "AJo", "value": 37.8},
+     {"label": "KJo", "value": 35.6},
+     {"label": "22", "value": 34.9},
+     {"label": "A9o", "value": 32.3, "tone": "accent"},
+     {"label": "76s", "value": 30.9, "tone": "accent"}
+   ]}
+  </script></div>
+  <p class="figure-note">Equity against the 100-combo UTG range above, all-in preflop. Sampled by tools/poker.js with 400,000 deals, good to about 0.2 points.</p>
+</figure>
+
+<p>Even AKs is only a slight favorite, and a hand like AJo is a clear underdog. That does not mean you fold AJo everywhere. It means that when a tight player opens in front of you, AJo is a hand you flat-call at best, or fold, and when you are the one opening, it belongs only in the later seats.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What David Sklansky might say</p>
+  <p class="said">He would say the groups exist so you can decide quickly and cheaply, and that a simple rule you follow beats a clever one you forget. The edge comes from not paying to play hands that lose to better ones. He would also insist you check any shortcut against expected value.</p>
+  <p class="note">An imagined voice: our reading of the hand groups in Hold'em Poker for Advanced Players and the expected value focus of The Theory of Poker, not his words.</p>
+</aside>
+
+<h2>Where the Groups Bend</h2>
+
+<p>The groups are a baseline. Four things move them.</p>
+
+<p><strong>No-limit implied odds.</strong> Implied odds are the money you expect to win after you hit, beyond what is already in the pot. In limit poker a winning hand can only win so much. In no-limit a small pair that flops a set (three of a kind using a pocket pair) can win a whole stack. That lifts pairs like 22 to 66 and suited connectors above where the groups put them, and it lowers offsuit hands that make top pair with a weak kicker.</p>
+
+<p><strong>Stack depth.</strong> You are 100 big blinds deep in a standard $2/$5 game ($500 stack, $5 big blind). Deep stacks reward hands that need to hit. Shallow stacks shift value back to pairs and big cards.</p>
+
+<p><strong>Opponents.</strong> Against tight players, steal more. Against loose callers, tighten up and value bet. If aggressive players sit behind you, drop the marginal opens, because you will face more 3-bets (re-raises).</p>
+
+<p><strong>Table size.</strong> Fewer players means fewer hands to beat you. The baseline above is for nine-handed. At a six-handed table, widen it.</p>
+
+<p>The set-mining math shows how a small pair earns its place. A pocket pair flops a set about 1 in 8.5 times: the chance of missing is (48 x 47 x 46) / (50 x 49 x 48) = 88.2%, so a set arrives 11.8% of the time. Say a player opens to $15 and you call with [[7h 7d]] on the button. In the simple model below, you miss and give up the $15 about 88% of the time. You need the set to pay enough to cover that.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Calling $15 with a pocket pair to hit a set</h3></div>
+  <ul class="tree">
+    <li><span class="node root">Call $15 with [[7h 7d]]</span>
+      <ul>
+        <li><span class="edge">Flops a set 11.8% of the time</span><span class="node win">Net +$135 (assumed)</span></li>
+        <li><span class="edge">Misses 88.2% of the time</span><span class="node lose">Lose $15</span></li>
+      </ul>
+    </li>
+  </ul>
+  <p class="math">EV = 0.1176 x $135 + 0.8824 x (-$15) = $15.88 - $13.24 = +$2.64</p>
+  <p class="figure-note">Arithmetic. The $135 payoff on a hit is an assumption for the example. It ignores sets made on the turn or river and money you lose when your set runs into a bigger one. Break-even payoff is 15 x 0.8824 / 0.1176 = $112.60, about 7.5 times the call.</p>
+</figure>
+
+<p>The break-even is 7.5 times the call, but you will not collect every time you hit, and the villain sometimes has a bigger set. A common rule of thumb asks for stacks 15 to 20 times the call behind before set mining is worth it. With $485 behind a $15 call you have about 32 times, so the pair passes. At a short stack it would not. {{ch:5}} covers pot odds, and {{ch:28}} puts rough numbers on implied odds.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Daniel Negreanu might say</p>
+  <p class="said">He would defend playing more hands than the groups allow, as long as they are suited or connected and you hold position. His small ball style plays many pots cheaply and wins on later streets by outplaying people. He would add that this only works if you read the table and the player.</p>
+  <p class="note">An imagined voice: our reading of the small ball approach he is publicly known for, not his words.</p>
+</aside>
+
+<p>Sklansky and Negreanu disagree here. One wants a tight rule you can follow every time, the other wants wide ranges and the skill to play them. For a player still learning, the tighter rule is the safer start. Widen as your postflop play improves.</p>
+
+<h2>Opening in Practice</h2>
+
+<p>Put the pieces together at a table. Here is a nine-handed $2/$5 hand. It is an invented teaching example, not a real hand history. Everyone folds to you on the button, holding [[Jh 9h]]. The baseline puts J9s in the cutoff range, so on the button it is an open.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">A raise from the button, folded to hero</h3></div>
+  <div data-fig="table"><script type="application/json">
+  {"label": "Nine-handed table. Hero on the button raises to 15 with jack nine of hearts after six folds. The small blind and big blind are still to act.",
+   "button": 0, "pot": "$22",
+   "seats": [
+     {"pos": "BTN", "stack": "$500", "bet": "$15", "cards": "Jh 9h", "state": "hero"},
+     {"pos": "SB", "stack": "$310", "bet": "$2"},
+     {"pos": "BB", "stack": "$600", "bet": "$5"},
+     {"pos": "UTG", "state": "fold"},
+     {"pos": "UTG+1", "state": "fold"},
+     {"pos": "MP", "state": "fold"},
+     {"pos": "LJ", "state": "fold"},
+     {"pos": "HJ", "state": "fold"},
+     {"pos": "CO", "state": "fold"}
+   ]}
+  </script></div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history. The pot is $2 + $5 + $15 = $22.</p>
+</figure>
+
+<p>The raise to $15 is three times the big blind. In most low-stakes live games, opens of three times the big blind or a little more are common, and opens get larger when limpers are in the pot. That is a judgment about live play, not a rule. Before you open, run the checks in the flow below. They take a few seconds and keep you from opening on autopilot.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Before you open</h3></div>
+  <ol class="flow">
+    <li><strong>Find your seat</strong><span>Early seats need strong hands. The button needs the least.</span></li>
+    <li><strong>Check the action</strong><span>Has anyone limped or raised? If so, this is not an open.</span></li>
+    <li><strong>Check the range</strong><span>Is the hand inside your baseline for this seat?</span></li>
+    <li><strong>Check the players behind</strong><span>Tight blinds mean steal more. Aggressive blinds mean fewer marginal opens.</span></li>
+  </ol>
+  <p class="figure-note">A checklist, not a law. The right answer shifts with the table.</p>
+</figure>
+
+<p>Fold when the answer is no. Everyone has a hand they want to play for an unclear reason: it is suited, it has a face card, it was good once. Leave it. The groups and the baseline exist so that you do not have to decide again each time.</p>
+
+<aside class="key">
+  <p class="label">Key idea</p>
+  <p>Your seat decides how many hands you play. Your hand decides which ones. Fold the rest without regret.</p>
+</aside>
+
+<details class="drill">
+  <summary>You are first to act in UTG with [[Kh Td]]. The baseline does not include KTo anywhere before the button. What do you do?</summary>
+  <p>Fold. KTo is in the button step of the baseline, not in the early seats. Even from the button it is a thin open and depends on who is in the blinds.</p>
+</details>
+
+<details class="drill">
+  <summary>Everyone folds to you in the cutoff, and you hold [[5s 5d]]. Is it an open?</summary>
+  <p>Yes, an open. 55 is in the MP and LJ step of the baseline, which is also open from the cutoff. Later seats include it too.</p>
+</details>
+
+<details class="drill">
+  <summary>A tight player raises UTG. You hold [[Ac Jd]] in the cutoff. Why is this a worse spot than opening with AJo yourself?</summary>
+  <p>Against a tight early range AJo is dominated by hands such as AQ and AK and wins about 38% all-in. As an opener you choose the spot and the opponents behind you have not shown strength. As a caller behind a tight raise you are the one who is dominated.</p>
+</details>
+
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>How often you are dealt a pair</h2>
+  <p><strong>The shortcut.</strong> There are 13 pairs and 6 ways to make each one, so 13 x 6 = 78 pair combos out of 1,326. That is 78 / 1,326 = 5.9%, or about 1 in 17.</p>
+  <p class="math">1,326 / 78 = 17 hands per pair, on average</p>
+  <p><strong>Where it bends.</strong> One in 17 is an average, not a schedule. The chance of no pair in 17 hands is (1 - 78/1,326)^17 = 36%, so a long gap between pairs is normal. At 25 hands an hour, an assumed pace, you can expect a pair about 25 x 5.9% = 1.5 times an hour. Do not feel owed a pair when you have not seen one in a while. That is the gambler's fallacy, and the cards have no memory.</p>
+</aside>

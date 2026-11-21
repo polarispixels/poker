@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.15.0] - 2026-11-21
+
+### Added
+
+- Chapter 4, Starting Hands: Chapter 4 sorts the 1,326 starting hands into the Sklansky-Malmuth groups, builds a judgment baseline for opening by seat, and covers domination, set mining, and how often you are dealt a pair.
+
 ## [0.14.0] - 2026-11-21
 
 ### Added
