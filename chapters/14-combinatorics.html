@@ -22,13 +22,279 @@
     <main>
       <article class="chapter">
         <header class="chapter-head">
-          <p class="chapter-kicker label">Chapter 14 <span class="badge">To come</span></p>
+          <p class="chapter-kicker label">Chapter 14 <span class="badge">Preliminary draft</span></p>
           <h1 class="chapter-title">Combinatorics</h1>
           <p class="standfirst">Counting hand combinations, card removal, and blockers.</p>
         </header>
 
         <div class="prose chapter-body">
-<p class="lead">This page has not been written yet. The book is being written and published one chapter at a time.</p>
+<p class="lead">Ranges are only useful if you can count them. This chapter teaches you to count hand combinations, to see how the cards you can see remove hands from your opponent's range, and to use that removal as a weapon (a blocker).</p>
+
+<h2>One hand, counted</h2>
+
+<p>A <strong>combination</strong>, or combo, is one specific pair of cards. <span class="cards" role="img" aria-label="Ace of spades, King of spades"><span class="pc">A<i>♠</i></span><span class="pc">K<i>♠</i></span></span> is one combo. <span class="cards" role="img" aria-label="Ace of hearts, King of hearts"><span class="pc r">A<i>♥</i></span><span class="pc r">K<i>♥</i></span></span> is a different one. <a class="xref" href="13-thinking-in-ranges.html">Chapter 13, Thinking in Ranges</a> taught you to say "he could have AK." This chapter asks the next question: how many ways can he have it?</p>
+
+<p>Start with the whole deck. The first card can be any of 52, the second any of the 51 left, and the order does not matter, so you divide by two: 52 x 51 / 2 = 1,326 starting hands. (<a class="xref" href="01-what-poker-really-is.html">Chapter 1, What Poker Really Is</a> gave you that number. Now you can build it.)</p>
+
+<p>Now count a pair. There are four aces. Pick two of them. The first ace is one of 4, the second is one of the 3 left, and the order does not matter: 4 x 3 / 2 = 6. Every pair has 6 combos.</p>
+
+<p>An unpaired hand is easier. For AK, any of 4 aces goes with any of 4 kings: 4 x 4 = 16 combos. Four of them share a suit (AKs, "suited"). The other 12 do not (AKo, "offsuit"). Suited is 4 because each suit gives one pair. Offsuit is 4 x 3 = 12 because each ace pairs with the three kings of another suit.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 14.1</span><h3 class="figure-title">The three counts to know</h3></div>
+  <ul class="stats">
+    <li><b>6</b><span>combos of any pair</span></li>
+    <li><b>4</b><span>combos of a suited hand</span></li>
+    <li><b>12</b><span>combos of an offsuit hand</span></li>
+  </ul>
+  <p class="figure-note">Arithmetic: pairs 4 x 3 / 2 = 6. Unpaired 4 x 4 = 16, split into 4 suited and 4 x 3 = 12 offsuit. Checked with tools/poker.js combos.</p>
+</figure>
+
+<p>These counts explain why you are dealt aces only 1 time in 221: 1,326 / 6 = 221. They also explain a habit of live players. Offsuit hands feel common because they are. Of the 1,326 hands, 936 are offsuit and only 312 are suited.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 14.2</span><h3 class="figure-title">Where the 1,326 hands live</h3></div>
+  <div data-fig="split"><script type="application/json">
+  {"label": "Share of the 1,326 starting hands by type: pairs 78 combos or 5.9 percent, suited hands 312 combos or 23.5 percent, offsuit hands 936 combos or 70.6 percent.",
+   "rows": [
+     {"label": "All starting hands", "note": "1,326 combos", "parts": [{"label": "Pairs (78)", "value": 5.9, "tone": "gold"}, {"label": "Suited (312)", "value": 23.5, "tone": "accent2"}, {"label": "Offsuit (936)", "value": 70.6, "tone": "ink"}]}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: 13 pairs x 6 = 78. 78 suited types x 4 = 312. 78 offsuit types x 12 = 936. 78 + 312 + 936 = 1,326.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What David Sklansky might say</p>
+  <p class="said">He would tie counting to his core idea: you cannot measure the expected value of a play until you know what you are up against. Before you ask what to do against a hand, ask how many hands he can hold and how many of them beat you.</p>
+  <p class="note">An imagined voice: our reading of the mathematical approach in The Theory of Poker, not his words.</p>
+</aside>
+
+<h2>Card removal</h2>
+
+<p>The counts above assume you see no other cards. You always see some. The cards in your hand and on the board are gone from the deck, so they are gone from your opponent's hand. This is <strong>card removal</strong>.</p>
+
+<p>The rule is the same arithmetic with fewer cards. Count how many cards of each rank are still unseen, call that n, and use it:</p>
+<p class="math">Pair of one rank: n x (n - 1) / 2. Two different ranks: n1 x n2.</p>
+
+<p>Say you hold <span class="cards" role="img" aria-label="Ace of hearts, King of diamonds"><span class="pc r">A<i>♥</i></span><span class="pc r">K<i>♦</i></span></span> and want to know how many combos of AA, KK, QQ, and AK a villain could hold. You hold one ace and one king, so three of each are unseen.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 14.3</span><h3 class="figure-title">What your two cards take out of the range</h3></div>
+  <div data-fig="columns"><script type="application/json">
+  {"label": "Combos of AA, KK, QQ, and AK for a villain, before and after hero holds the ace of hearts and king of diamonds. AA falls from 6 to 3, KK from 6 to 3, QQ stays at 6, and AK falls from 16 to 9.",
+   "unit": "", "categories": ["AA", "KK", "QQ", "AK"],
+   "series": [
+     {"name": "Before you look", "values": [6, 6, 6, 16], "tone": "gold"},
+     {"name": "Holding Ah Kd", "values": [3, 3, 6, 9], "tone": "ink"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: AA is 3 x 2 / 2 = 3. KK is 3. QQ is untouched at 4 x 3 / 2 = 6. AK is 3 x 3 = 9. Checked with tools/poker.js combos.</p>
+</figure>
+
+<p>Notice what happened to the odds. Before you looked, AK was 16 combos against 6 for each pair, a ratio of about 2.7 to 1. Now it is 9 against 3, exactly 3 to 1. Your own cards shifted the mix toward AK and away from AA and KK. QQ did not move.</p>
+
+<p>The board does the same thing, and more strongly because it shows more cards. Take a flop of <span class="cards" role="img" aria-label="Ace of spades, 7 of diamonds, 2 of clubs"><span class="pc">A<i>♠</i></span><span class="pc r">7<i>♦</i></span><span class="pc">2<i>♣</i></span></span> in a $2/$5 game, with you holding <span class="cards" role="img" aria-label="King of hearts, Queen of diamonds"><span class="pc r">K<i>♥</i></span><span class="pc r">Q<i>♦</i></span></span>.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 14.4</span><h3 class="figure-title">Strong hands on A-7-2, holding Kh Qd</h3></div>
+  <div data-fig="bars"><script type="application/json">
+  {"label": "Combos a villain can hold on a flop of ace, seven, deuce when hero holds king and queen: ace-king 9, ace-seven 9, and 3 each for AA, 77, and 22.",
+   "unit": "", "max": 12,
+   "items": [
+     {"label": "AK (top pair)", "value": 9, "note": "3 x 3", "tone": "ink"},
+     {"label": "A7 (two pair)", "value": 9, "note": "3 x 3", "tone": "ink"},
+     {"label": "AA (set)", "value": 3, "note": "3 x 2 / 2", "tone": "accent2"},
+     {"label": "77 (set)", "value": 3, "note": "3 x 2 / 2", "tone": "accent2"},
+     {"label": "22 (set)", "value": 3, "note": "3 x 2 / 2", "tone": "accent2"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: three aces, three sevens, three deuces, and three kings are unseen. Checked against a brute-force count of the deck.</p>
+</figure>
+
+<p>Sets are rare and strong aces are common. Nine combos of AK and nine of A7 against nine set combos in all: on combos alone, a villain who raises this board holds a strong ace twice as often as a set. How often he raises each of them is a read, not a count.</p>
+
+<details class="drill">
+  <summary>You hold <span class="cards" role="img" aria-label="Ace of clubs, Jack of diamonds"><span class="pc">A<i>♣</i></span><span class="pc r">J<i>♦</i></span></span>. How many combos of AK can a villain hold?</summary>
+  <p>You block one ace, so 3 aces are unseen. The kings are untouched: 4. So 3 x 4 = 12 combos. Your ace of clubs is gone, so AKs has 3 combos (not 4) and AKo has 9 (not 12).</p>
+</details>
+
+<details class="drill">
+  <summary>The board is <span class="cards" role="img" aria-label="King of clubs, 8 of hearts, 3 of diamonds"><span class="pc">K<i>♣</i></span><span class="pc r">8<i>♥</i></span><span class="pc r">3<i>♦</i></span></span>. How many combos of KK can a villain hold? And 88?</summary>
+  <p>One king is on the board, so 3 are unseen: 3 x 2 / 2 = 3 combos. The same for 88: one eight shows, so 3 combos.</p>
+</details>
+
+<h2>Counting a range</h2>
+
+<p>A range is a list of hands, so counting a range is adding up combos. The range figure does the counting for you, but you should be able to do it by hand. Take a villain who 3-bets only with QQ and better, and AK. (<a class="xref" href="12-preflop-strategy-for-live-games.html">Chapter 12, Preflop Strategy for Live Games</a> covers the preflop side.)</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 14.5</span><h3 class="figure-title">A tight 3-betting range, counted</h3></div>
+  <div data-fig="range"><script type="application/json">
+  {"label": "The starting hand grid with QQ and better shaded as one group, AK suited as a second group, and AK offsuit as a third. The range is 34 combos.",
+   "groups": [
+     {"name": "QQ+ (18 combos)", "tone": "ink", "hands": "QQ+"},
+     {"name": "AKs (4 combos)", "tone": "accent2", "hands": "AKs"},
+     {"name": "AKo (12 combos)", "tone": "gold", "hands": "AKo"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: QQ, KK, AA is 3 x 6 = 18. 18 + 4 + 12 = 34 combos, 2.56 percent of 1,326. Checked with tools/poker.js combos.</p>
+</figure>
+
+<p>Now take away what you can see. If you hold <span class="cards" role="img" aria-label="Ace of hearts, King of diamonds"><span class="pc r">A<i>♥</i></span><span class="pc r">K<i>♦</i></span></span>, the 34 combos fall to 3 + 3 + 6 + 9 = 21. Your hand knocked out 13 of them, about 38 percent of his range. That is a lot of removal for two cards. All-in preflop, <span class="cards" role="img" aria-label="Ace of hearts, King of diamonds"><span class="pc r">A<i>♥</i></span><span class="pc r">K<i>♦</i></span></span> has 38.8 percent equity against those 21 combos, about 39 percent. (Exact: every board enumerated with tools/poker.js against each combo.)</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 14.6</span><h3 class="figure-title">The 21 combos left when you hold Ah Kd</h3></div>
+  <ul class="tree">
+    <li><span class="node root">Villain's 3-bet range: 21 combos</span>
+      <ul>
+        <li><span class="edge">AK: 3 aces x 3 kings</span><span class="node">9 combos</span></li>
+        <li><span class="edge">QQ: untouched</span><span class="node">6 combos</span></li>
+        <li><span class="edge">AA: 3 aces left</span><span class="node">3 combos</span></li>
+        <li><span class="edge">KK: 3 kings left</span><span class="node">3 combos</span></li>
+      </ul>
+    </li>
+  </ul>
+  <p class="math">9 + 6 + 3 + 3 = 21 combos</p>
+  <p class="figure-note">Arithmetic. The weights are counts, not guesses about how he plays. Whether he 3-bets AK or QQ at all is a read, covered in <a class="xref" href="19-hand-reading.html">Chapter 19, Hand Reading</a>.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Daniel Negreanu might say</p>
+  <p class="said">He would agree the count is the starting point, then push you to move the weights with what you see. A player who tanks and shrugs is not holding the same mix as one who snaps. Count first, then let behavior tilt the numbers.</p>
+  <p class="note">An imagined voice: our reading of his public teaching on hand reading, not his words.</p>
+</aside>
+
+<h2>Blockers</h2>
+
+<p>A <strong>blocker</strong> is a card in your hand that removes hands from your opponent's range. It is card removal used on purpose. Two things matter: which hands you block, and whether those hands are ones he bets (value) or ones he folds (bluffs and weak hands).</p>
+
+<p>Take the river board <span class="cards" role="img" aria-label="King of spades, 9 of spades, 6 of spades, 2 of diamonds, 3 of hearts"><span class="pc">K<i>♠</i></span><span class="pc">9<i>♠</i></span><span class="pc">6<i>♠</i></span><span class="pc r">2<i>♦</i></span><span class="pc r">3<i>♥</i></span></span>. Three spades are out, so a flush needs two spades in the villain's hand. Ten spades are unseen, and 10 x 9 / 2 = 45 flush combos.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 14.7</span><h3 class="figure-title">The spades, with the ace in your hand</h3></div>
+  <svg class="art" viewBox="0 0 360 130" role="img" aria-label="The thirteen spades from ace to deuce. The king, nine, and six are on the board. The ace is in hero's hand. Nine spades are unseen, so the villain can hold 36 flush combos instead of 45, and no nut flush.">
+    <rect class="fill-ink" x="11" y="20" width="26" height="34"/>
+    <text class="t on-dark" x="24" y="43" text-anchor="middle">A</text>
+    <rect class="fill-gold stroke-ink" x="37" y="20" width="26" height="34"/>
+    <text class="t" x="50" y="43" text-anchor="middle">K</text>
+    <rect class="fill-paper stroke-ink" x="63" y="20" width="26" height="34"/>
+    <text class="t" x="76" y="43" text-anchor="middle">Q</text>
+    <rect class="fill-paper stroke-ink" x="89" y="20" width="26" height="34"/>
+    <text class="t" x="102" y="43" text-anchor="middle">J</text>
+    <rect class="fill-paper stroke-ink" x="115" y="20" width="26" height="34"/>
+    <text class="t" x="128" y="43" text-anchor="middle">T</text>
+    <rect class="fill-gold stroke-ink" x="141" y="20" width="26" height="34"/>
+    <text class="t" x="154" y="43" text-anchor="middle">9</text>
+    <rect class="fill-paper stroke-ink" x="167" y="20" width="26" height="34"/>
+    <text class="t" x="180" y="43" text-anchor="middle">8</text>
+    <rect class="fill-paper stroke-ink" x="193" y="20" width="26" height="34"/>
+    <text class="t" x="206" y="43" text-anchor="middle">7</text>
+    <rect class="fill-gold stroke-ink" x="219" y="20" width="26" height="34"/>
+    <text class="t" x="232" y="43" text-anchor="middle">6</text>
+    <rect class="fill-paper stroke-ink" x="245" y="20" width="26" height="34"/>
+    <text class="t" x="258" y="43" text-anchor="middle">5</text>
+    <rect class="fill-paper stroke-ink" x="271" y="20" width="26" height="34"/>
+    <text class="t" x="284" y="43" text-anchor="middle">4</text>
+    <rect class="fill-paper stroke-ink" x="297" y="20" width="26" height="34"/>
+    <text class="t" x="310" y="43" text-anchor="middle">3</text>
+    <rect class="fill-paper stroke-ink" x="323" y="20" width="26" height="34"/>
+    <text class="t" x="336" y="43" text-anchor="middle">2</text>
+    <rect class="fill-ink" x="11" y="82" width="16" height="16"/>
+    <text class="t" x="33" y="95">Your As</text>
+    <rect class="fill-gold stroke-ink" x="125" y="82" width="16" height="16"/>
+    <text class="t" x="147" y="95">Board</text>
+    <rect class="fill-paper stroke-ink" x="225" y="82" width="16" height="16"/>
+    <text class="t" x="247" y="95">Unseen</text>
+    <text class="t" x="11" y="122">9 unseen spades: 36 flush combos</text>
+  </svg>
+  <p class="figure-note">Arithmetic: 9 x 8 / 2 = 36 flush combos with the ace of spades in your hand, against 10 x 9 / 2 = 45 without it.</p>
+</figure>
+
+<p>Holding <span class="cards" role="img" aria-label="Ace of spades, Jack of diamonds"><span class="pc">A<i>♠</i></span><span class="pc r">J<i>♦</i></span></span> removes 9 of the 45 flush combos, 20 percent. More important, it removes every nut flush. The nut flush needs the ace of spades, and you have it: 9 combos become 0. A bettor who shows up with a flush on this board can no longer have the best one. That is why an ace of the flush suit is the classic blocker for a bluff: you hold the card that makes his strongest hands, and he cannot have them.</p>
+
+<p>Compare a hand with no useful blocker. Say you hold <span class="cards" role="img" aria-label="King of hearts, Queen of diamonds"><span class="pc r">K<i>♥</i></span><span class="pc r">Q<i>♦</i></span></span>. You block no spades, so all 45 flush combos stay. You do block a king, which takes two of the three KK set combos (the king of spades is on the board, so two kings are unseen, and 2 x 1 / 2 = 1 combo remains).</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 14.8</span><h3 class="figure-title">Villain's flushes and sets, by what you hold</h3></div>
+  <div data-fig="columns"><script type="application/json">
+  {"label": "Flush and set combos a villain can hold on the board king, nine, six of spades, deuce of diamonds, trey of hearts. With no hole cards known: 45 flushes and 15 sets. Holding king and queen: 45 flushes, 13 sets. Holding ace of spades and jack: 36 flushes, 15 sets.",
+   "unit": "", "categories": ["Nothing known", "Kh Qd", "As Jd"],
+   "series": [
+     {"name": "Flush combos", "values": [45, 45, 36], "tone": "ink"},
+     {"name": "Set combos", "values": [15, 13, 15], "tone": "gold"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: sets are KK, 99, 66, 33, and 22, each 3 combos with one card of the rank on the board (15 in all). Kh takes 2 of the 3 KK combos, leaving 1 (13 in all). Checked with a brute-force count.</p>
+</figure>
+
+<p>Here is the hand in full, using the Kh Qd example. It is an invented example in a $2/$5 game, nine-handed.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 14.9</span><h3 class="figure-title">Counting value combos on the river</h3></div>
+  <div class="table-scroll">
+    <table class="hand-log">
+      <thead><tr><th>Street</th><th>Board</th><th>Action</th><th>Pot</th></tr></thead>
+      <tbody>
+        <tr><td>Preflop</td><td>Hero: <span class="cards" role="img" aria-label="King of hearts, Queen of diamonds"><span class="pc r">K<i>♥</i></span><span class="pc r">Q<i>♦</i></span></span></td><td>Villain raises to $15 in the cutoff. Hero calls on the button. The blinds fold.</td><td class="pot">$37</td></tr>
+        <tr><td>Flop</td><td><span class="cards" role="img" aria-label="King of spades, 9 of spades, 6 of spades"><span class="pc">K<i>♠</i></span><span class="pc">9<i>♠</i></span><span class="pc">6<i>♠</i></span></span></td><td>Villain bets $20. Hero calls.</td><td class="pot">$77</td></tr>
+        <tr><td>Turn</td><td><span class="cards" role="img" aria-label="King of spades, 9 of spades, 6 of spades, 2 of diamonds"><span class="pc">K<i>♠</i></span><span class="pc">9<i>♠</i></span><span class="pc">6<i>♠</i></span><span class="pc r">2<i>♦</i></span></span></td><td>Both check.</td><td class="pot">$77</td></tr>
+        <tr><td>River</td><td><span class="cards" role="img" aria-label="King of spades, 9 of spades, 6 of spades, 2 of diamonds, 3 of hearts"><span class="pc">K<i>♠</i></span><span class="pc">9<i>♠</i></span><span class="pc">6<i>♠</i></span><span class="pc r">2<i>♦</i></span><span class="pc r">3<i>♥</i></span></span></td><td>Villain bets $60. Hero needs 60 / (137 + 60) = 30.5%. Villain's flushes and sets: 45 + 13 = 58 combos.</td><td class="pot">$137</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history. Pot: 15 + 15 + 2 + 5 = 37, then 37 + 20 + 20 = 77, then 77 + 60 = 137.</p>
+</figure>
+
+<p>Those 58 flushes and sets are not his whole value range. Other hands beat your top pair too: the straight with 54 (15 combos that are not also flushes), two pair such as K9 and 96, and AK and AA. Count the ones that fit his preflop range and add them in. That count is only half the question. The other half is how many bluffs and weaker hands he bets, which is a read on this player. <a class="xref" href="18-bluffing-and-semi-bluffing.html">Chapter 18, Bluffing and Semi-Bluffing</a> builds the bluffing side and <a class="xref" href="19-hand-reading.html">Chapter 19, Hand Reading</a> puts the two together. Blockers change the count of what he can hold. They never tell you what he does hold.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Phil Galfond might say</p>
+  <p class="said">He would warn against loving blockers too much. A blocker that removes a few combos from the right part of the range matters. One that removes one combo from a range of sixty does not justify a bluff. Count the effect, then decide whether it is big enough to act on.</p>
+  <p class="note">An imagined voice: our reading of his teaching style at Run It Once, not his words.</p>
+</aside>
+
+<h2>Counting at the table</h2>
+
+<p>You cannot run code at a live table, so here is the routine. It takes a few seconds once it is habit. <a class="xref" href="15-board-texture.html">Chapter 15, Board Texture</a> will show how the flop changes which hands are worth counting.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 14.10</span><h3 class="figure-title">The counting routine</h3></div>
+  <ol class="flow">
+    <li><strong>Pick the hands</strong><span>The few that matter: value, and the draws or bluffs.</span></li>
+    <li><strong>Remove what you see</strong><span>Your cards and the board.</span></li>
+    <li><strong>Count each</strong><span>6 for a pair, 16 for unpaired, then reduce.</span></li>
+    <li><strong>Compare</strong><span>Value combos against bluff combos.</span></li>
+  </ol>
+  <p class="figure-note">A summary of the chapter.</p>
+</figure>
+
+<aside class="key">
+  <p class="label">Key idea</p>
+  <p>Count what he can have, not what he might have. The count is arithmetic. How often he plays each hand is a read.</p>
+</aside>
+
+<details class="drill">
+  <summary>The board is <span class="cards" role="img" aria-label="Queen of spades, Jack of hearts, 4 of clubs"><span class="pc">Q<i>♠</i></span><span class="pc r">J<i>♥</i></span><span class="pc">4<i>♣</i></span></span>. How many combos of QJ can a villain hold?</summary>
+  <p>Three queens and three jacks are unseen: 3 x 3 = 9 combos.</p>
+</details>
+
+<details class="drill">
+  <summary>You hold <span class="cards" role="img" aria-label="King of spades, King of diamonds"><span class="pc">K<i>♠</i></span><span class="pc r">K<i>♦</i></span></span>. How many combos of AA and KK can a villain hold?</summary>
+  <p>AA is untouched: 6. KK has two kings left: 2 x 1 / 2 = 1 combo. Your own pair nearly wipes out his chance of having the other two kings.</p>
+</details>
+
+<details class="drill">
+  <summary>The board is <span class="cards" role="img" aria-label="8 of hearts, 8 of clubs, 2 of diamonds"><span class="pc r">8<i>♥</i></span><span class="pc">8<i>♣</i></span><span class="pc r">2<i>♦</i></span></span>. How many combos of 88 and of 82 can a villain hold?</summary>
+  <p>Two eights are unseen: 1 combo of 88. For 82, two eights and three deuces: 2 x 3 = 6 combos.</p>
+</details>
+
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>6, 16, and 3</h2>
+  <p><strong>The shortcut.</strong> A pair is 6 combos, an unpaired hand is 16, and a pair is 3 once one of its cards shows. Drop one card of a rank and an unpaired hand loses a quarter: 16 becomes 12. Drop one from each rank: 9.</p>
+  <p class="math">Board <span class="cards" role="img" aria-label="Ace of spades, 7 of diamonds, 2 of clubs"><span class="pc">A<i>♠</i></span><span class="pc r">7<i>♦</i></span><span class="pc">2<i>♣</i></span></span>, no hole cards known: AA = 3, AK = 3 x 4 = 12. AK is 4 times as likely as AA.</p>
+  <p><strong>Where it bends.</strong> Suits. A suited hand starts at 4, not 16. One card of either rank in view takes it to 3. A card of the other rank in a different suit takes it to 2. Two cards of a rank in view, in your hand or on the board, leave a pair of that rank at 1 combo.</p>
+</aside>
         </div>
       </article>
 
@@ -49,5 +315,6 @@
   </div>
 
   <script src="../js/version.js"></script>
+  <script src="../js/figures.js"></script>
 </body>
 </html>

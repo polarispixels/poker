@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.14.0] - 2026-11-21
+
+### Added
+
+- Chapter 14, Combinatorics: Chapter 14 teaches combo counting, card removal by your hand and the board, and blockers, with an exact AK versus QQ+ and AK equity.
+
 ## [0.13.0] - 2026-11-21
 
 ### Added
