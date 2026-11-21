@@ -1,0 +1,234 @@
+<p class="lead">Six live hands, each played twice: once by the baseline from {{ch:22}} and {{ch:23}}, once by the exploit from {{ch:24}} and {{ch:25}}. The EV arithmetic shows why the second line earns more, and what it costs when your read is wrong.</p>
+
+<h2>One hand, two lines</h2>
+
+<p>Part III taught two ideas that seem to pull apart. Game theory says to play a mix nobody can exploit. Exploitation says to leave that mix the moment you see a leak. This review puts them next to each other. Every hand below is an invented example at a live $2/$5 table, nine-handed, with $500 stacks. None is a real hand history.</p>
+
+<p>Each hand follows the same four steps. First the baseline line: what you do with no read, using the ranges and frequencies from the earlier chapters. Second the read: one behavior you have seen, described in numbers. Third the exploit: one dial moved in the direction of the leak. Fourth the arithmetic: the expected value (EV, the average result in dollars over many repeats) of each line against that opponent.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">The routine for every hand in this chapter</h3></div>
+  <ol class="flow">
+    <li><strong>Baseline line</strong><span>What the standard strategy does with no read.</span></li>
+    <li><strong>The read</strong><span>One counted habit of this opponent.</span></li>
+    <li><strong>The exploit</strong><span>Move one dial toward the leak.</span></li>
+    <li><strong>The EV</strong><span>Price both lines against him.</span></li>
+  </ol>
+  <p class="figure-note">A summary of this section. The loop is the one from {{ch:24}}, run on six hands.</p>
+</figure>
+
+<p>One warning before the hands. Every opponent frequency below is an assumption chosen to make the arithmetic clear. Real reads are noisier than "he folds 60 percent." The last section prices that noise.</p>
+
+<h2>Hand 1: queens facing a jam</h2>
+
+<p>You open to $15 from the cutoff with [[Qh Qd]]. The button 3-bets to $50, you 4-bet to $120, and he moves all-in for $500. The small blind and big blind folded, leaving $7 of dead money. The pot is $120 + $500 + $7 = $627, and you have $380 left to call.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Queens against a button jam</h3></div>
+  <div data-fig="table"><script type="application/json">
+  {"label": "Nine-handed table. Hero in the cutoff holds queen queen, has put in 120, and faces an all-in of 500 from the button. The blinds and the other five seats have folded. The pot is 627.",
+   "button": 1, "pot": "$627",
+   "seats": [
+     {"pos": "CO", "stack": "$380", "bet": "$120", "cards": "Qh Qd", "state": "hero"},
+     {"pos": "BTN", "stack": "$0", "bet": "$500", "state": "villain"},
+     {"pos": "SB", "state": "fold"},
+     {"pos": "BB", "state": "fold"},
+     {"pos": "UTG", "state": "fold"},
+     {"pos": "UTG+1", "state": "fold"},
+     {"pos": "MP", "state": "fold"},
+     {"pos": "LJ", "state": "fold"},
+     {"pos": "HJ", "state": "fold"}
+   ]}
+  </script></div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history.</p>
+</figure>
+
+<p>The call needs 380 / (627 + 380) = 380 / 1,007 = 37.7 percent equity. With no read, the baseline starts from a jamming range of queens or better plus ace-king: QQ, KK, AA, AKs, and AKo. That range is our judgment of a typical live player who 3-bets and then jams over a 4-bet, not solver output. Your two queens block some of those, which leaves 29 live combinations. Against them [[Qh Qd]] has 40.2 percent. That clears the price, so the baseline line calls.</p>
+
+<p>Now the read. This button has played about one hand an orbit for three hours, and his only two 3-bets showed kings and aces. In our judgment, a nit like this jams only with KK and AA. Against those 12 combinations, queens have 18.3 percent. Against this player the cheaper exploit came one decision earlier: his 3-bet range is so strong that calling or folding to it beats 4-betting, because only better hands continue.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Hand 1: call or fold</h3></div>
+  <div class="compare">
+    <div class="a"><h4>Baseline: call</h4><p>Against QQ+, AKs, AKo: 40.2%, more than the 37.7% needed. EV of calling = 0.4017 x $1,007 - $380 = +$24.5. Against the nit it is 0.1825 x $1,007 - $380 = -$196.2.</p></div>
+    <div class="b"><h4>Exploit: fold</h4><p>Against KK+ the call is a loser by $196.2. Folding earns $0 from here. The $120 already in the pot is gone either way. The exploit gains $196.2 against this opponent.</p></div>
+  </div>
+  <p class="figure-note">Equities from tools/poker.js, sampled over 400,000 deals, good to about 0.2 points, so the dollar figures are good to about $2. Both ranges are our judgments for the example.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Phil Galfond might say</p>
+  <p class="said">He would call the fold a direct result of knowing the baseline. You can only say the call is wrong against this player because you can name the range where it is right. The map comes first, and then the trip.</p>
+  <p class="note">An imagined voice: our reading of his teaching at Run It Once, not his words.</p>
+</aside>
+
+<h2>Hands 2 and 3: the flop</h2>
+
+<p>Hand 2 is a continuation bet (a bet by the preflop raiser on the flop). You raise to $15 from the cutoff with [[Ac 5d]], the small blind folds, and the big blind calls. The pot is $15 + $15 + $2 = $32. The flop is [[Jh 8s 3c]]. You have ace-high and no pair. A bet of $10 is about one third of the pot, and it breaks even when he folds 10 / (32 + 10) = 23.8 percent of the time. To keep the arithmetic plain, treat ace-high as worth nothing when called.</p>
+
+<p>The baseline line bets. Against a typical big blind, assume he folds 45 percent of the time here. Our read on this opponent is different: he is a calling station, a player who calls far too often, and in our notes he folds about 15 percent on flops like this one.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Hand 2: a $10 bet into $32 with ace-high</h3></div>
+  <ul class="tree">
+    <li><span class="node root">Bet $10 into $32</span>
+      <ul>
+        <li><span class="edge">Typical opponent folds 45%</span><span class="node win">Win $32</span></li>
+        <li><span class="edge">Typical opponent calls 55%</span><span class="node lose">Lose $10</span></li>
+        <li><span class="edge">Station folds 15%</span><span class="node win">Win $32</span></li>
+        <li><span class="edge">Station calls 85%</span><span class="node lose">Lose $10</span></li>
+      </ul>
+    </li>
+  </ul>
+  <p class="math">Typical: 0.45 x $32 - 0.55 x $10 = $14.4 - $5.5 = +$8.9</p>
+  <p class="math">Station: 0.15 x $32 - 0.85 x $10 = $4.8 - $8.5 = -$3.7</p>
+  <p class="figure-note">Arithmetic. Both fold rates are assumptions. The check line is $0, so the exploit (check) gains $3.7 against the station.</p>
+</figure>
+
+<p>This is a small gain, which is typical. Most exploits are not big swings. They are many small leaks closed against the same player over a night.</p>
+
+<p>Hand 3 is a draw. The cutoff raises to $15 and you call on the button with [[Ah Th]]. The blinds fold, so the pot is $15 + $15 + $7 = $37. The flop is [[Kh 7h 2c]], and the cutoff bets $25 into the $37 pot, making $62. You have the nut flush draw. Against the hands he would bet with, kings such as KQ, KJ, and K9, you have 44.8 percent equity. That range is a simplification: he also bets some hands worse than a king, which raise your equity, and some sets, which lower it.</p>
+
+<p>Two lines. Calling $25 makes the pot $87. If the hand then checks down, the call is worth 0.448 x $87 - $25 = +$14.0. Raising to $80 puts in $80 more. If he calls the extra $55, the pot is $197 and the raise is worth 0.448 x $197 - $80 = +$8.3. If he folds, you win the $62 already out there.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">Hand 3: the semi-bluff against two opponents</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Opponent</th><th>Folds to the raise</th><th>EV of raising</th><th>EV of calling</th><th>Better line</th></tr></thead>
+      <tbody>
+        <tr><td>Baseline</td><td>35%</td><td class="good">+$27.1</td><td>+$14.0</td><td>Raise</td></tr>
+        <tr><td>Calling station</td><td>5%</td><td>+$11.0</td><td class="good">+$14.0</td><td>Call</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Arithmetic. Raise EV = fold rate x $62 + (1 - fold rate) x $8.3. Equity from tools/poker.js against KQ, KJ, and K9, exact. The fold rates are assumptions, and later betting is ignored.</p>
+</figure>
+
+<p>Here the exploit is to take the quieter line. A semi-bluff (a bet with a hand that can still improve) earns its money from folds. When he does not fold, the raise only inflates a pot you win 45 percent of the time. {{ch:18}} gave the break-even form of this idea. The gain over the baseline raise is $14.0 - $11.0 = $3.0.</p>
+
+<h2>Hands 4 to 6: the river</h2>
+
+<p>The river is where reads pay most, because there is no more card to come and the decision is a single comparison. Hand 4 is a value bet. The board is [[Kd 8c 5h 3s 2d]], and you hold [[Kc Td]], top pair with a ten. The pot is $100 and he checks. Of the hands he has taken to the river, assume yours beats 60 percent and loses to 40 percent. If you check, you win the $100 pot 60 percent of the time: EV $60.</p>
+
+<p>A bet of $50 changes who calls. The baseline opponent folds the hands you beat and calls with the hands that beat you. The station calls with everything.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Hand 4: a thin value bet</h3></div>
+  <div class="compare">
+    <div class="a"><h4>Baseline: check</h4><p>Assume a sharp player calls a $50 bet only with better hands. EV = 0.60 x $100 - 0.40 x $50 = +$40, which is below the $60 of checking. Check.</p></div>
+    <div class="b"><h4>Exploit: bet $50</h4><p>Against a station who calls everything: 0.60 x $150 - 0.40 x $50 = $90 - $20 = +$70. That is $10 more than the $60 from checking.</p></div>
+  </div>
+  <p class="figure-note">Arithmetic. The 60/40 split and both calling patterns are assumptions for the example.</p>
+</figure>
+
+<p>The edge is exactly the $50 he pays when you win, 0.60 x $50 = $30, less the $50 you lose when he has you beat, 0.40 x $50 = $20.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Daniel Negreanu might say</p>
+  <p class="said">He would point out that the hard part of hand 4 is not the arithmetic. It is knowing this player really calls with weak hands, and that comes from watching him show them down. Feel finds the leak, and the numbers price it.</p>
+  <p class="note">An imagined voice: our reading of his emphasis on hand reading and his later study of solvers, not his words.</p>
+</aside>
+
+<p>Hand 5 is a bluff-catcher: a hand that beats a bluff and loses to a value bet. The river puts you to a decision. The pot is $120 and he bets $90 (three quarters of the pot). You hold second pair. Calling needs 90 / (120 + 90 + 90) = 90 / 300 = 30 percent equity against his betting range. The baseline range is built so that 30 percent of his bets are bluffs, because $90 / $300 = 30 percent. At that mix calling and folding both earn $0, so the baseline calls with enough of your range to meet the minimum defense frequency of 120 / 210 = 57.1 percent ({{ch:22}}).</p>
+
+<p>The read changes who is betting. Against a nit, assume 5 percent of his river bets are bluffs. Against a maniac, assume half.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Hand 5: the same call against three bettors</h3></div>
+  <div class="compare">
+    <div class="a"><h4>Baseline: indifferent</h4><p>30% bluffs. Call EV = 0.30 x $210 - 0.70 x $90 = $63 - $63 = $0. Call with enough hands to defend 57%.</p></div>
+    <div class="b"><h4>Nit: fold</h4><p>5% bluffs. Call EV = 0.05 x $210 - 0.95 x $90 = $10.5 - $85.5 = -$75. Fold, and the exploit gains $75.</p></div>
+    <div class="c"><h4>Maniac: call</h4><p>50% bluffs. Call EV = 0.50 x $210 - 0.50 x $90 = +$60. Call every time.</p></div>
+  </div>
+  <p class="figure-note">Arithmetic. $210 is the pot plus his bet, which you win when he bluffs. The bluff shares are assumptions. Fold EV is $0.</p>
+</figure>
+
+<p>Hand 6 is the bluff, from the other side. You bet the flop and turn with a flush draw and the flush missed. The river pot is $100. A bet of $70 needs him to fold 70 / 170 = 41.2 percent of the time. A balanced river range uses only 70 / 240 = 29.2 percent bluffs, so the baseline bluffs with part of its busted draws and gives up with the rest. Each bluff in that mix is worth about $0 against a player who defends correctly. Now the read: this opponent folds to river bets about 60 percent of the time, and he has folded the last four he faced.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Hand 6: a $70 bluff into $100</h3></div>
+  <ul class="tree">
+    <li><span class="node root">Bluff $70 into $100</span>
+      <ul>
+        <li><span class="edge">He folds 60% of the time</span><span class="node win">Win $100</span></li>
+        <li><span class="edge">He calls 40% of the time</span><span class="node lose">Lose $70</span></li>
+      </ul>
+    </li>
+  </ul>
+  <p class="math">EV = 0.60 x $100 - 0.40 x $70 = $60 - $28 = +$32</p>
+  <p class="figure-note">Arithmetic. The 60 percent fold rate is an assumption. Break-even is 41.2 percent, so he is 18.8 points over it.</p>
+</figure>
+
+<p>The baseline gives up with some busted draws and earns $0 on them. The exploit bets all of them and earns $32 each. This is the over-fold arithmetic from {{ch:24}}: profit per bluff = (fold rate - alpha) x (pot + bet) = (0.60 - 0.412) x $170 = +$32.</p>
+
+<h2>The scorecard, and what a wrong read costs</h2>
+
+<p>Here are all six hands at once. For each hand the bar shows how much more the exploit earns than the baseline line, played against the opponent described.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">What the exploit earns over the baseline</h3></div>
+  <div data-fig="columns"><script type="application/json">
+  {"label": "Dollars gained by the exploit line over the baseline line against the described opponent: 196 in hand 1, 3.7 in hand 2, 3 in hand 3, 10 in hand 4, 75 in hand 5, and 32 in hand 6.",
+   "unit": "$", "categories": ["Hand 1", "Hand 2", "Hand 3", "Hand 4", "Hand 5", "Hand 6"],
+   "series": [
+     {"name": "Exploit minus baseline", "values": [196.2, 3.7, 3, 10, 75, 32], "tone": "accent2"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic from the six hands above. Hand 1 is large because most of a stack was at risk. Every opponent frequency is an assumption.</p>
+</figure>
+
+<p>Two patterns show up. The two biggest gains came from folds: hand 1 saved a $380 call and hand 5 saved a $90 call. The small gains come from the many spots where the exploit is one dial away from the baseline. Neither is a story about winning more pots. Four of the six exploits were a fold, a check, or a call.</p>
+
+<p>Now the cost. An exploit is a bet on your read, and a bet can lose. Take hand 5 and ask what the call is worth for every possible bluff share. It is 300b - 90 dollars, where b is the share of his bets that are bluffs.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Hand 5: what the call earns as his bluff share changes</h3></div>
+  <div data-fig="line"><script type="application/json">
+  {"label": "Expected profit in dollars of calling a $90 river bet into a $120 pot, as the share of his bets that are bluffs rises from 0 to 50 percent. It crosses zero at 30 percent, is minus 75 at the nit's 5 percent, and plus 60 at the maniac's 50 percent.",
+   "xLabel": "Share of his bets that are bluffs", "xUnit": "%", "yUnit": "$", "yMin": -100, "yMax": 80,
+   "series": [
+     {"name": "EV of calling", "tone": "ink", "points": [[0, -90], [10, -60], [20, -30], [30, 0], [40, 30], [50, 60]]}
+   ],
+   "refs": [{"y": 0, "label": "Fold = $0"}],
+   "marks": [{"x": 5, "y": -75, "label": "Nit: -$75"}, {"x": 30, "y": 0, "label": "Baseline: $0"}, {"x": 50, "y": 60, "label": "Maniac: +$60"}]}
+  </script></div>
+  <p class="figure-note">Arithmetic: EV = b x $210 - (1 - b) x $90 = 300b - 90. Break-even at b = 30 percent.</p>
+</figure>
+
+<p>The line is steep: every 10 points of bluff share moves the call by $30. That is why a read needs counted evidence and not a feeling. {{ch:25}} gave you the default types, and {{ch:9}} the habit of keeping notes. When the note is thin, stay close to the baseline.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What David Sklansky might say</p>
+  <p class="said">He would say that the exploit and the baseline are the same principle. Every time an opponent plays differently from how he would if he saw your cards, you gain, and every time you leave the baseline on a wrong read, you hand that gain back.</p>
+  <p class="note">An imagined voice: our reading of the Fundamental Theorem in The Theory of Poker, not his words.</p>
+</aside>
+
+<aside class="key">
+  <p class="label">Key idea</p>
+  <p>The exploit beats the baseline only while the read is right. The price of being wrong, set against the size of the gain, tells you how sure you must be.</p>
+</aside>
+
+<details class="drill">
+  <summary>Hand 5 again: the pot is $120 and he bets $60. What share of his bets must be bluffs for you to be indifferent?</summary>
+  <p>Bluff share = bet / (pot + 2 x bet) = 60 / (120 + 120) = 60 / 240 = 25%. Against a nit who bluffs 5 percent, folding is correct. Against 25 percent, calling and folding earn the same.</p>
+</details>
+
+<details class="drill">
+  <summary>Hand 6 again: the pot is $100, you bet $50, and he folds 55 percent of the time. What is one bluff worth?</summary>
+  <p>EV = 0.55 x $100 - 0.45 x $50 = $55 - $22.5 = +$32.5. Check it against alpha: 50 / 150 = 33.3%, and (0.55 - 0.333) x $150 = +$32.5.</p>
+</details>
+
+<details class="drill">
+  <summary>Hand 2 again: you bet $10 into $32 and he folds 35 percent of the time. Does the bluff pay?</summary>
+  <p>EV = 0.35 x $32 - 0.65 x $10 = $11.2 - $6.5 = +$4.7. Break-even is 10 / 42 = 23.8 percent, and he folds 11.2 points above it, so yes, by a small margin.</p>
+</details>
+
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>How sure must your read be</h2>
+  <p><strong>The shortcut.</strong> Let G be what the exploit gains if you are right, and L what it loses if you are wrong. Act on the read when your confidence is above L / (G + L).</p>
+  <p class="math">Hand 4: G = $10 (station), L = $20 (sharp player). Confidence needed = 20 / (10 + 20) = 2 in 3</p>
+  <p class="math">Hand 1: G = $196.2 (nit), L = $24.5 (baseline range). Confidence needed = 24.5 / 220.7 = 11%</p>
+  <p><strong>Where it bends.</strong> The rule treats the world as two kinds of opponent. Real players sit between, and your read of G and L is itself a guess. When the needed confidence is above two thirds, wait for more evidence. When it is near one in ten, act on a thin read.</p>
+</aside>

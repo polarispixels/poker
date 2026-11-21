@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.42.0] - 2026-11-21
+
+### Added
+
+- Chapter 29, Part III Review: Part III Review replays six live hands by baseline and by exploit, prices each line in dollars, and shows how sure a read must be before you act on it.
+
 ## [0.41.0] - 2026-11-21
 
 ### Added
