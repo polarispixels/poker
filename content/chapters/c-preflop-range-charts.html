@@ -1,0 +1,232 @@
+<p class="lead">This appendix is the one place to look up what to open, by seat, by stack depth, and with a live straddle in the game. Read it as a sensible live baseline to adjust from, not as solver output: every range here is a judgment built for a loose, call-heavy $2/$5 room.</p>
+
+<p>The default game is a live $2/$5 cash game, nine-handed, with $500 stacks (100 big blinds). Seats run UTG, UTG+1, MP, LJ, HJ, CO, BTN, SB, BB, as in {{ch:3}}. These charts cover the first raise in a hand (an open) when everyone before you has folded. For limpers, 3-bets, and blind defense, see {{ch:12}}. For what the hands are worth, see {{ch:4}}. For the counting behind the combo totals, see {{ch:14}}.</p>
+
+<h2>How to read the charts</h2>
+
+<p>A range is the full set of hands you play in a spot ({{ch:13}}). The grid draws a range as 169 cells: pairs on the diagonal, suited hands above it, offsuit hands below it. Each hand type holds a fixed number of combos, the specific suit pairs, so ranges can be counted and compared. All 1,326 starting hands add up from these three counts.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Combos per hand type</h3></div>
+  <ul class="stats">
+    <li><b>6</b><span>combos of a pair, like [[Kc Kd]]</span></li>
+    <li><b>4</b><span>combos of a suited hand, like [[As Ks]]</span></li>
+    <li><b>12</b><span>combos of an offsuit hand, like [[Ac Kd]]</span></li>
+  </ul>
+  <p class="figure-note">Arithmetic: 13 pairs x 6 + 78 suited hands x 4 + 78 offsuit hands x 12 = 78 + 312 + 936 = 1,326. A range's share of all hands is combos / 1,326.</p>
+</figure>
+
+<aside class="key">
+  <p class="label">Key idea</p>
+  <p>The ranges are nested. A later seat plays every hand an earlier seat plays, plus more. A shorter stack plays a subset of what a deeper stack plays. A straddle trims the deep-stack range. If you remember one hand and are unsure about a chart, the nesting tells you which way to lean.</p>
+</aside>
+
+<p>Shorthand used in the tables: "77+" is every pair from 77 to AA. "ATs+" is ATs, AJs, AQs, AKs. "AQo+" is AQ and AK offsuit. "A2s-A7s" is the suited aces from A2s to A7s.</p>
+
+<h2>Opening ranges by seat, 100 big blinds</h2>
+
+<p>These are the opening ranges at the default $500 stack. The first four seats share one range. The hijack, cutoff, and button each add hands. Open to $15 (3 big blinds) from every seat, or $20 when the table calls raises too often. Use one size so your size does not give away your hand.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Opening ranges at 100bb, layer by layer</h3></div>
+  <div data-fig="range"><script type="application/json">
+  {"label": "The starting hand grid with four opening layers: the early-seat range, the hands added in the hijack, the hands added in the cutoff, and the hands added on the button.",
+   "groups": [
+     {"name": "UTG to LJ", "tone": "ink", "hands": "77+,ATs+,KQs,AQo+"},
+     {"name": "Add in HJ", "tone": "accent2", "hands": "55-66,A9s,A8s,KTs,KJs,QJs,JTs,AJo"},
+     {"name": "Add in CO", "tone": "gold", "hands": "22-44,A2s-A7s,T9s,98s,KQo"},
+     {"name": "Add on BTN", "tone": "accent2-soft", "hands": "K2s-K9s,Q8s-QTs,J8s-J9s,T8s,97s,86s,87s,76s,65s,54s,ATo,A9o,KJo,KTo,QJo,QTo,JTo"}
+   ]}
+  </script></div>
+  <p class="figure-note">A live baseline and a judgment, not a solver output. Combo counts from tools/poker.js. Fold everything outside the shaded cells.</p>
+</figure>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">What each seat adds, with combo counts</h3></div>
+  <div class="table-scroll">
+    <table class="wrap">
+      <thead><tr><th>Seat</th><th>Hands added</th><th>New combos</th><th>Total combos</th><th>Share of hands</th></tr></thead>
+      <tbody>
+        <tr><td>UTG, UTG+1, MP, LJ</td><td>77+, ATs+, KQs, AQo+</td><td>92</td><td>92</td><td>6.9%</td></tr>
+        <tr><td>HJ</td><td>55-66, A9s, A8s, KTs, KJs, QJs, JTs, AJo</td><td>48</td><td>140</td><td>10.6%</td></tr>
+        <tr><td>CO</td><td>22-44, A2s-A7s, T9s, 98s, KQo</td><td>62</td><td>202</td><td>15.2%</td></tr>
+        <tr><td>BTN</td><td>K2s-K9s, Q8s-QTs, J8s-J9s, T8s, 97s, 87s, 86s, 76s, 65s, 54s, ATo, A9o, KJo, KTo, QJo, QTo, JTo</td><td>164</td><td>366</td><td>27.6%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Counts from tools/poker.js: 92, 140, 202, and 366 of 1,326. Each seat's total includes every layer above it. Chapter 12 draws the hijack and cutoff as one band at the cutoff total.</p>
+</figure>
+
+<p>Solver-based charts for 100 big blind cash games open the button wider than 27.6 percent. In most low-stakes live games (a judgment, not a measured fact), a button open often meets blinds who call and see the flop, so this narrower range gives up a little to keep the hands after the flop simpler. Widen it when the blinds fold too much. Tighten it, and trim the offsuit hands first, when a blind 3-bets often.</p>
+
+<p>The small blind is the last seat that can open. When everyone folds to you there, use the cutoff range (202 combos) and raise to $20 (4 big blinds), larger than the usual $15, because you will play the rest of the hand out of position. Do not stretch toward the button range: in most live games the big blind defends often (a judgment). Raise or fold. Facing an open from the small blind is covered in {{ch:12}}.</p>
+
+<details class="drill">
+  <summary>Drill: the cutoff opens the range above. How many combos, and what share of the 1,326 hands?</summary>
+  <p>92 + 48 + 62 = 202 combos. 202 / 1,326 = 15.2 percent, about 1 hand in 7.</p>
+</details>
+
+<h2>Opening ranges by stack depth</h2>
+
+<p>Stack depth changes which hands earn a raise. Deep stacks (100 big blinds, $500) pay off hands that need to hit something big: small pairs, suited aces, suited connectors. Shallower stacks pay off high cards and pairs that do fine all-in. A small pair mostly wins big by flopping a set, which happens 11.8 percent of the time (about 1 flop in 8.5). The usual rule of thumb is that set-mining needs roughly 15 to 20 times your preflop money still behind. At 40 big blinds ($200), a $15 open that gets called leaves $185 behind, about 12 times your $15, and less after a 3-bet. So the small pairs move to the latest seats, where the open also wins the blinds more often.</p>
+
+<p>The stack that counts is the effective stack: the smaller of your stack and the biggest stack still to act behind you. A $500 stack with only $200 stacks behind it plays the 40 bb column.</p>
+
+<p>The 40 bb column ($200 stacks) and the 20 bb column ($100 stacks) below are the raising range, built for the usual live open to $15. At 20 big blinds that open is 15 percent of your stack, so a smaller open, $10 or $12, is reasonable if your table accepts it. Either way, decide before you raise what you will do over a 3-bet: shove with the top of the range, fold the rest, and do not call. A call leaves too little behind to play the flop well. That plan is a judgment for live play, not a computed result.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">Share of hands opened, by seat and stack depth</h3></div>
+  <div data-fig="heat"><script type="application/json">
+  {"label": "Share of all starting hands opened by seat and stack depth. UTG to LJ opens 6.9, 6.5, and 6.0 percent at 100, 40, and 20 big blinds. The button opens 27.6, 24.6, and 20.4 percent.",
+   "corner": "Seat", "unit": "%", "tone": "accent2",
+   "cols": ["100bb", "40bb", "20bb"],
+   "rows": ["UTG to LJ", "HJ", "CO", "BTN"],
+   "values": [[6.9, 6.5, 6.0], [10.6, 9.8, 8.7], [15.2, 13.9, 12.8], [27.6, 24.6, 20.4]]}
+  </script></div>
+  <p class="figure-note">Arithmetic: combos / 1,326 for each range in the next table and the 100bb table above, from tools/poker.js. The early seats lose the least as stacks shrink. The button loses the most.</p>
+</figure>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">Opening ranges at 40 and 20 big blinds</h3></div>
+  <div class="table-scroll">
+    <table class="wrap">
+      <thead><tr><th>Seat</th><th>40bb ($200)</th><th>Combos</th><th>20bb ($100)</th><th>Combos</th></tr></thead>
+      <tbody>
+        <tr><td>UTG to LJ</td><td>88+, ATs+, KQs, AQo+</td><td>86</td><td>99+, ATs+, KQs, AQo+</td><td>80</td></tr>
+        <tr><td>HJ</td><td>66+, A9s+, KTs+, QJs, JTs, AJo+</td><td>130</td><td>77+, A9s+, KJs+, QJs, AJo+</td><td>116</td></tr>
+        <tr><td>CO</td><td>55+, A2s+, KTs+, QJs, JTs, T9s, 98s, AJo+, KQo</td><td>184</td><td>66+, A2s+, KTs+, QJs, JTs, AJo+, KQo</td><td>170</td></tr>
+        <tr><td>BTN</td><td>22+, A2s+, K6s+, Q9s+, J9s+, T9s, T8s, 98s, 87s, 76s, A9o+, KTo+, QTo+, JTo</td><td>326</td><td>22+, A2s+, K9s+, QTs+, JTs, T9s, 98s, A9o+, KTo+, QJo</td><td>270</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">A live baseline and a judgment, not a solver output. Each range sits inside the same seat's range at the next deeper stack. Combo counts from tools/poker.js.</p>
+</figure>
+
+<p>The button shows the pattern best. Its 20 bb range is the core. The 40 bb range adds ten hand types back, and the 100 bb range adds ten more.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Button range grows with stack depth</h3></div>
+  <div data-fig="range"><script type="application/json">
+  {"label": "The starting hand grid for the button range at three stack depths: the 20 big blind core, the hands added at 40 big blinds, and the hands added at 100 big blinds.",
+   "groups": [
+     {"name": "Core at 20bb", "tone": "ink", "hands": "22+,A2s+,K9s+,QTs+,JTs,T9s,98s,A9o+,KTo+,QJo"},
+     {"name": "Add at 40bb", "tone": "accent2", "hands": "K6s,K7s,K8s,Q9s,J9s,T8s,87s,76s,QTo,JTo"},
+     {"name": "Add at 100bb", "tone": "gold", "hands": "K2s-K5s,Q8s,J8s,97s,86s,65s,54s"}
+   ]}
+  </script></div>
+  <p class="figure-note">Combos: 270 at 20bb, 326 at 40bb (270 + 56), 366 at 100bb (326 + 40). Counts from tools/poker.js.</p>
+</figure>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">What changes as the stack gets shorter</h3></div>
+  <div class="table-scroll">
+    <table class="wrap">
+      <thead><tr><th>Hand type</th><th>100bb</th><th>40bb</th><th>20bb</th></tr></thead>
+      <tbody>
+        <tr><td>Small pairs (22 to 66)</td><td>55 and 66 from HJ, all from CO</td><td>66 from HJ, 55 from CO, 22 to 44 on BTN</td><td>66 from CO, 22 to 55 on BTN, shove or fold</td></tr>
+        <tr><td>Suited aces</td><td>A8s up from HJ, all from CO</td><td>A9s up from HJ, all from CO</td><td>A9s up from HJ, all from CO</td></tr>
+        <tr><td>Suited connectors</td><td>T9s and 98s from CO, down to 54s on BTN</td><td>T9s and 98s from CO, down to 76s on BTN</td><td>T9s and 98s, BTN only</td></tr>
+        <tr><td>Weak offsuit hands (A9o, KTo, QTo, JTo)</td><td>BTN only</td><td>BTN only, all kept</td><td>BTN only, drop QTo and JTo</td></tr>
+        <tr><td>AQ+ and KQs</td><td>Every seat</td><td>Every seat</td><td>Every seat</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">A summary of the ranges above and a judgment for live play, not a computed result.</p>
+</figure>
+
+<h2>Straddle adjustments</h2>
+
+<p>A straddle is an extra blind posted before the deal, usually by the player under the gun and usually double the big blind. In a $2/$5 game it is $10. The straddler acts last preflop, and the first action goes to the player on his left ({{ch:2}}). How to play against the straddle and from the straddle seat is in {{ch:12}}. Treat the straddle as the new big blind: a $500 stack is now 50 straddles, and a standard open is 3 straddles, $30.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">The same open with and without a $10 straddle</h3></div>
+  <div class="table-scroll">
+    <table class="wrap">
+      <thead><tr><th>Measure</th><th>No straddle</th><th>$10 UTG straddle</th></tr></thead>
+      <tbody>
+        <tr><td>Money in before action</td><td>$7</td><td>$17</td></tr>
+        <tr><td>Open size (3 big blinds)</td><td>$15</td><td>$30</td></tr>
+        <tr><td>Open as a share of a $500 stack</td><td>3.0%</td><td>6.0%</td></tr>
+        <tr><td>Folds needed for the open to profit on its own</td><td>68.2%</td><td>63.8%</td></tr>
+        <tr><td>Pot after one call, rest fold</td><td>$37</td><td>$77</td></tr>
+        <tr><td>Stack-to-pot ratio on the flop</td><td>13.1</td><td>6.1</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Arithmetic. Folds needed: bet / (pot + bet) = 15 / 22 = 68.2 percent and 30 / 47 = 63.8 percent. Pots: $2 + $5 + $15 + $15 = $37 and $2 + $5 + $10 + $30 + $30 = $77. Stack-to-pot ratio: $485 / $37 = 13.1 and $470 / $77 = 6.1. Folds needed counts only the dead money, and ignores the straddler's last option and the rake.</p>
+</figure>
+
+<p>The straddle pays you a little more for winning the pot, but your stack is shallower relative to the pot, so speculative hands lose value. Trim the hands that need a deep stack to pay: small pairs, suited gappers, and weak offsuit hands. The open also has three players left to get through instead of two, and the straddler acts last with a discount. In most live games straddlers defend wide (a judgment), so expect everyone to fold less often than the 63.8 percent the open needs to profit on folds alone.</p>
+
+<p>That is why the button range below is tighter than the 40 bb button range, even though a $500 stack is 50 straddles deep: the stack depth argues for a wider range, but the extra player behind you and a straddler who calls argue for a tighter one. This is a judgment. If the straddler folds often at your table, open the 40 bb button range instead.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Button range with a $10 straddle</h3></div>
+  <div data-fig="range"><script type="application/json">
+  {"label": "The starting hand grid for the button range with a ten dollar straddle. The kept hands are shaded ink. Eighty-eight combos of speculative hands from the no-straddle range are dropped and shaded as risk.",
+   "groups": [
+     {"name": "Still open", "tone": "ink", "hands": "22+,A2s+,K8s+,Q9s+,QTs,J9s,JTs,T9s,98s,87s,76s,ATo+,KJo,KTo,QJo,KQo"},
+     {"name": "Dropped", "tone": "accent", "hands": "K2s-K7s,Q8s,J8s,T8s,97s,86s,65s,54s,A9o,QTo,JTo"}
+   ]}
+  </script></div>
+  <p class="figure-note">Combos: 278 kept and 88 dropped, which add to the 366 on the button with no straddle. Counts from tools/poker.js. A judgment, not a solver output.</p>
+</figure>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">Opening ranges with a $10 straddle</h3></div>
+  <div class="table-scroll">
+    <table class="wrap">
+      <thead><tr><th>Seat</th><th>Range</th><th>Combos</th><th>Share</th><th>Change from 100bb</th></tr></thead>
+      <tbody>
+        <tr><td>UTG+1 to LJ</td><td>88+, ATs+, KQs, AQo+</td><td>86</td><td>6.5%</td><td>Drop 77</td></tr>
+        <tr><td>HJ</td><td>77+, ATs+, KQs, AQo+, A9s, A8s, KTs, KJs, QJs, JTs, AJo</td><td>128</td><td>9.7%</td><td>Drop 55 and 66</td></tr>
+        <tr><td>CO</td><td>55+, A2s+, KTs+, QJs, JTs, T9s, 98s, AJo+, KQo</td><td>184</td><td>13.9%</td><td>Drop 22 to 44</td></tr>
+        <tr><td>BTN</td><td>See the grid above</td><td>278</td><td>21.0%</td><td>Drop 88 combos</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Combo counts from tools/poker.js. A baseline for a $10 straddle in a $2/$5 game with $500 stacks, and a judgment, not a solver output. Straddle size and stack depth both move it.</p>
+</figure>
+
+<ol class="flow">
+  <li><strong>Reset the unit</strong><span>Count the straddle as the big blind. Stack is 50 straddles.</span></li>
+  <li><strong>Size to the straddle</strong><span>Open to 3 straddles, plus 1 straddle per limper.</span></li>
+  <li><strong>Trim the speculative hands</strong><span>Drop small pairs before the BTN, and weak suited and offsuit hands on it.</span></li>
+  <li><strong>Keep the button wide</strong><span>It drops the most combos but still opens the most hands.</span></li>
+</ol>
+
+<details class="drill">
+  <summary>Drill: a $10 straddle is in. You open the button to $30 and one player calls. What is the pot, and the stack-to-pot ratio?</summary>
+  <p>Pot: $2 + $5 + $10 + $30 + $30 = $77. Stacks behind: $500 - $30 = $470. 470 / 77 = 6.1.</p>
+</details>
+
+<details class="drill">
+  <summary>Drill: how many combos does the button drop when a straddle is in?</summary>
+  <p>366 - 278 = 88 combos, about a quarter of the button range (88 / 366 = 24 percent).</p>
+</details>
+
+<h2>When to leave the baseline</h2>
+
+<p>These charts assume a loose table with few light 3-bettors. Move them from what you see, using the reads in {{ch:9}} and {{ch:25}}.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">Widen or tighten from the baseline</h3></div>
+  <div class="table-scroll">
+    <table class="wrap">
+      <thead><tr><th>What you see</th><th>Move</th><th>Trim or add first</th></tr></thead>
+      <tbody>
+        <tr><td>Blinds fold to most opens</td><td>Widen late seats</td><td>Add suited hands and offsuit broadways on the BTN and CO</td></tr>
+        <tr><td>A blind 3-bets often</td><td>Tighten late seats</td><td>Trim weak offsuit hands, then suited gappers</td></tr>
+        <tr><td>Table calls raises with anything</td><td>Open a bit tighter, size up</td><td>Trim small pairs and suited connectors out of position</td></tr>
+        <tr><td>Short stack behind you</td><td>Use the shorter column</td><td>Trim hands that need depth</td></tr>
+        <tr><td>Straddle in play</td><td>Use the straddle table</td><td>Small pairs and weak hands first</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">A summary and a judgment for live play, not a computed result.</p>
+</figure>
+
+<aside class="key">
+  <p class="label">Key idea</p>
+  <p>Use these charts to start from, not to hide behind. When a table gives you a reason to move off them, move, and then check that the change still fits the nesting: later seats wider, shorter stacks tighter.</p>
+</aside>

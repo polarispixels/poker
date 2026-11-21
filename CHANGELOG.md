@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.39.0] - 2026-11-21
+
+### Added
+
+- Appendix C, Preflop Range Charts: Appendix C: opening ranges by seat, stack depth, and with a live straddle, with recounted combos and clarified judgments.
+
 ## [0.38.0] - 2026-11-21
 
 ### Added
