@@ -22,13 +22,244 @@
     <main>
       <article class="chapter">
         <header class="chapter-head">
-          <p class="chapter-kicker label">Chapter 1 <span class="badge">To come</span></p>
+          <p class="chapter-kicker label">Chapter 1 <span class="badge">Preliminary draft</span></p>
           <h1 class="chapter-title">What Poker Really Is</h1>
           <p class="standfirst">A game of incomplete information, and of decisions made under uncertainty.</p>
         </header>
 
         <div class="prose chapter-body">
-<p class="lead">This page has not been written yet. The book is being written and published one chapter at a time.</p>
+<p class="lead">Poker is a game of hidden cards and uncertain outcomes. This chapter shows you what that means in practice, how to turn uncertainty into "times out of 100," and why one night's result says so little about how well you played.</p>
+
+<h2>A game of hidden cards</h2>
+
+<p>In chess, both players see every piece. Whatever you know, your opponent knows. Games like that have <strong>complete information</strong>: nothing is hidden, so the best move is a matter of calculation.</p>
+
+<p>Poker is different. You see your two cards and the shared cards on the table. You do not see anyone else's two cards. That is <strong>incomplete information</strong>, and it is the whole game. Every decision you make is made without knowing what the other players hold.</p>
+
+<p>Here is a typical live moment. It is a $2/$5 game, nine-handed, with $500 stacks (100 big blinds). Five players fold to you. You are in the cutoff with <span class="cards" role="img" aria-label="King of spades, King of diamonds"><span class="pc">K<i>♠</i></span><span class="pc r">K<i>♦</i></span></span> and raise to $15. Three seats are still to act, and each of them holds two cards you cannot see.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 1.1</span><h3 class="figure-title">What you can see, and what you cannot</h3></div>
+  <div data-fig="table"><script type="application/json">
+  {"label": "Nine-handed table. Hero in the cutoff raises to 15 with king king after five folds. The button, small blind, and big blind each hold two cards that hero cannot see.",
+   "button": 1, "pot": "$22",
+   "seats": [
+     {"pos": "CO", "stack": "$500", "bet": "$15", "cards": "Ks Kd", "state": "hero"},
+     {"pos": "BTN", "stack": "$420"},
+     {"pos": "SB", "stack": "$310", "bet": "$2"},
+     {"pos": "BB", "stack": "$600", "bet": "$5"},
+     {"pos": "UTG", "state": "fold"},
+     {"pos": "UTG+1", "state": "fold"},
+     {"pos": "MP", "state": "fold"},
+     {"pos": "LJ", "state": "fold"},
+     {"pos": "HJ", "state": "fold"}
+   ]}
+  </script></div>
+  <p class="figure-note">An example hand, not a real hand history. Pot arithmetic: $2 + $5 + $15 = $22.</p>
+</figure>
+
+<p>Your two kings are strong, but you do not know how strong they are against the hands behind you. Poker is the art of acting well anyway. Because cards are hidden, <strong>information</strong> is worth something. Every bet, every pause, and every hand an opponent shows down tells you a little about what they hold. Your own bets tell them about you. Much of the game is a trade in information, and Part I of this book teaches you to read that trade, starting with <a class="xref" href="09-watching-the-table.html">Chapter 9, Watching the Table</a>.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 1.2</span><h3 class="figure-title">Two kinds of game</h3></div>
+  <div class="compare">
+    <div class="a"><h4>Complete information</h4><p>Chess. Every piece is visible. You compute the best move, and a better calculator wins every time.</p></div>
+    <div class="b"><h4>Incomplete information</h4><p>Poker. Part of the situation is hidden. You estimate, act, and accept that the best choice can still lose.</p></div>
+  </div>
+  <p class="figure-note">A summary of this section.</p>
+</figure>
+
+<h2>Choosing without knowing</h2>
+
+<p>When you cannot see the cards, you cannot know the result of a choice. You can still know how likely each result is. A <strong>decision under uncertainty</strong> is a choice made with that kind of knowledge: not "what will happen" but "what will happen how often."</p>
+
+<p>Take the most famous situation in the game, all your chips preflop. The question is never "will I win?" It is "how many times out of 100 would I win if this exact spot came up 100 times?" That number is your <strong>equity</strong>, your share of the pot, on average, if the hand is played to the end. Here are four matchups, each worked out by counting every possible board.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 1.3</span><h3 class="figure-title">Four all-in matchups, preflop</h3></div>
+  <div data-fig="split"><script type="application/json">
+  {"label": "All-in preflop equity for four matchups: aces over kings is 82 to 18, ace king suited against queens is 46 to 54, ace king of hearts against nines is 48 to 52, and ace king of hearts against seven deuce is 69 to 31.",
+   "rows": [
+     {"label": "Aces against kings", "note": "the biggest favorite", "parts": [{"label": "Aces", "value": 81.95, "tone": "ink"}, {"label": "Kings", "value": 18.05, "tone": "accent"}]},
+     {"label": "Queens against AKs", "note": "the coin flip", "parts": [{"label": "Queens", "value": 53.8, "tone": "ink"}, {"label": "AKs", "value": 46.2, "tone": "accent"}]},
+     {"label": "Nines against AKs", "note": "a pair is not always ahead", "parts": [{"label": "Nines", "value": 52.4, "tone": "ink"}, {"label": "AKs", "value": 47.6, "tone": "accent"}]},
+     {"label": "AKs against 72o", "note": "good hand, bad hand", "parts": [{"label": "AKs", "value": 69.3, "tone": "ink"}, {"label": "72o", "value": 30.7, "tone": "accent"}]}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact equities from tools/poker.js, counting every possible board. Ties are split. Suits as in the examples: <span class="cards" role="img" aria-label="Ace of spades, Ace of hearts"><span class="pc">A<i>♠</i></span><span class="pc r">A<i>♥</i></span></span> against <span class="cards" role="img" aria-label="King of spades, King of diamonds"><span class="pc">K<i>♠</i></span><span class="pc r">K<i>♦</i></span></span>, <span class="cards" role="img" aria-label="Queen of hearts, Queen of diamonds"><span class="pc r">Q<i>♥</i></span><span class="pc r">Q<i>♦</i></span></span> against <span class="cards" role="img" aria-label="Ace of spades, King of spades"><span class="pc">A<i>♠</i></span><span class="pc">K<i>♠</i></span></span>, <span class="cards" role="img" aria-label="9 of spades, 9 of diamonds"><span class="pc">9<i>♠</i></span><span class="pc r">9<i>♦</i></span></span> against <span class="cards" role="img" aria-label="Ace of hearts, King of hearts"><span class="pc r">A<i>♥</i></span><span class="pc r">K<i>♥</i></span></span>, and <span class="cards" role="img" aria-label="Ace of hearts, King of hearts"><span class="pc r">A<i>♥</i></span><span class="pc r">K<i>♥</i></span></span> against <span class="cards" role="img" aria-label="7 of spades, 2 of diamonds"><span class="pc">7<i>♠</i></span><span class="pc r">2<i>♦</i></span></span>.</p>
+</figure>
+
+<p>Look at the last row. Even seven-deuce offsuit, often called the worst starting hand in the game, wins about 31 times in 100 against ace king suited. And the best hand, aces, loses to kings about 18 times in 100. Nothing in poker is certain until the last card, and a large share of the game is learning to be comfortable with that.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What David Sklansky might say</p>
+  <p class="said">He would say the hidden cards are the reason poker pays. If everyone could see everyone else's hand, no one could gain by outplaying anyone. The gain comes from the gap between what you know and what your opponent guesses, and your job is to make that gap work for you.</p>
+  <p class="note">An imagined voice: our reading of the Fundamental Theorem of Poker in The Theory of Poker, not his words.</p>
+</aside>
+
+<p>Notice also what the decision looks like from the inside. You do not know the villain's hand, so you think in terms of the hands he could have, and you weigh each one. That habit has a name, <strong>range thinking</strong>, and it gets its own chapter later (<a class="xref" href="13-thinking-in-ranges.html">Chapter 13, Thinking in Ranges</a>). For now, hold on to the simpler version: every choice is a bet on a set of possibilities, and the price of the bet is known even when the result is not.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 1.4</span><h3 class="figure-title">An all-in with aces, weighed as a bet</h3></div>
+  <ul class="tree">
+    <li><span class="node root">All in with aces against kings, $500 behind</span>
+      <ul>
+        <li><span class="edge">Aces hold up 82 times in 100</span><span class="node win">Win $500</span></li>
+        <li><span class="edge">Kings hold up 18 times in 100</span><span class="node lose">Lose $500</span></li>
+      </ul>
+    </li>
+  </ul>
+  <p class="math">Average = 0.82 x $500 + 0.18 x (-$500) = $410 - $90 = +$320</p>
+  <p class="figure-note">Arithmetic with the rounded 82 and 18 from the figure above. Ties (under half a time in 100) are ignored. This weighing is called expected value, and <a class="xref" href="07-expected-value.html">Chapter 7, Expected Value</a> builds on it.</p>
+</figure>
+
+<h2>Times out of 100</h2>
+
+<p>The words "likely" and "unlikely" are not precise enough for poker. The tool this book uses everywhere is the number of times out of 100. A probability of 82 percent means 82 times out of 100. A probability of 18 percent means 18 times out of 100. Percent literally means per hundred, so nothing is lost in the translation.</p>
+
+<p>It helps to see it. Below is the same aces against kings spot played 100 times. Each dot is one deal.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 1.5</span><h3 class="figure-title">Aces against kings, played 100 times</h3></div>
+  <div data-fig="dots"><script type="application/json">
+  {"label": "Out of 100 all-in deals of aces against kings, about 82 are won by the aces and 18 by the kings.",
+   "parts": [
+     {"label": "Aces win", "value": 82, "tone": "accent2"},
+     {"label": "Kings win", "value": 18, "tone": "accent"}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact equity is 81.95%, from tools/poker.js, rounded to 82. The dots show the average. A real run of 100 deals will not land exactly on 82.</p>
+</figure>
+
+<p>Hold the picture of 18 dots in your head. Eighteen is a lot. If you had a jar with 100 marbles and 18 were red, you would not be surprised to pull a red one. The same goes for kings winning. When it happens, nothing strange has occurred. You drew one of the 18.</p>
+
+<p>Rare events become easier to feel the same way. How often are you dealt aces? Out of 1,326 possible starting hands, 6 are aces: 6 / 1,326 = 0.45%, or 1 in 221 (1,326 / 6 = 221). How often do you get any pocket pair? There are 78 pair combinations (13 ranks, 6 ways each), and 78 / 1,326 = 5.9%, about 1 in 17.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 1.6</span><h3 class="figure-title">Three numbers, three scales</h3></div>
+  <ul class="stats">
+    <li><b>82 in 100</b><span>aces beat kings all in</span></li>
+    <li><b>1 in 17</b><span>deals is a pocket pair</span></li>
+    <li><b>1 in 221</b><span>deals is aces</span></li>
+  </ul>
+  <p class="figure-note">Arithmetic: 78 / 1,326 = 5.9% and 6 / 1,326 = 0.45%. Aces against kings from tools/poker.js. The full set of starting hands is the subject of <a class="xref" href="04-starting-hands.html">Chapter 4, Starting Hands</a>.</p>
+</figure>
+
+<details class="drill">
+  <summary>Drill: In about 1 in 17 deals you pick up a pocket pair. How many pairs should you expect in 100 deals?</summary>
+  <p>100 / 17 is about 6. Exactly, 5.9% of 100 is 5.9. Expect about six pairs, and do not be shocked by three or nine.</p>
+</details>
+
+<details class="drill">
+  <summary>Drill: Queens against ace king suited is 54 to 46. Say it as "times out of 100."</summary>
+  <p>The queens win about 54 times out of 100, and the ace king wins about 46. Exact figures: 53.8% and 46.2%.</p>
+</details>
+
+<h2>Luck in the short run</h2>
+
+<p>Now the hard part. If aces win 82 times in 100, what happens in a small set of deals? Not 82 percent of them. Ten deals can easily bring a loss. The chart below shows how many of 10 all-in deals the aces win, with each chance calculated from the 82 percent figure.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 1.7</span><h3 class="figure-title">Ten all-ins with aces against kings</h3></div>
+  <div data-fig="bars"><script type="application/json">
+  {"label": "Chance of winning each possible number of 10 all-in deals when the aces win 82 percent of the time. Nine wins is the most likely at 30 percent, eight wins is 30 percent, and winning all ten is only 14 percent.",
+   "unit": "%", "max": 40,
+   "items": [
+     {"label": "All 10 won", "value": 13.7, "tone": "accent2"},
+     {"label": "9 won", "value": 30.2},
+     {"label": "8 won", "value": 29.8},
+     {"label": "7 won", "value": 17.4},
+     {"label": "6 won", "value": 6.7},
+     {"label": "5 won", "value": 1.8},
+     {"label": "4 or fewer won", "value": 0.4, "tone": "accent"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: the binomial formula with a win chance of 0.82 per deal. Chance of at least one loss in 10 deals: 1 - 0.82^10 = 86.3%. Deals are treated as independent.</p>
+</figure>
+
+<p>Read the first bar: you win all ten only about 14 times in 100. In about 86 of 100 such sessions, you lose at least once. And a result like six wins out of ten, 6.7 percent, is not impossible. The best hand in poker does not guarantee a good night.</p>
+
+<p>This is why poker is a game where good decisions get bad results. The same thing happens at the table with real stacks. Here is an example, invented for teaching.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 1.8</span><h3 class="figure-title">A good decision, a bad result</h3></div>
+  <div class="table-scroll">
+    <table class="hand-log">
+      <thead><tr><th>Street</th><th>Board</th><th>Action</th><th>Pot</th></tr></thead>
+      <tbody>
+        <tr><td>Preflop</td><td>Hero: <span class="cards" role="img" aria-label="Ace of spades, Ace of hearts"><span class="pc">A<i>♠</i></span><span class="pc r">A<i>♥</i></span></span></td><td>Hero raises to $20 in the cutoff. The big blind 3-bets to $75. Hero moves all in for $500. The big blind calls with <span class="cards" role="img" aria-label="King of spades, King of diamonds"><span class="pc">K<i>♠</i></span><span class="pc r">K<i>♦</i></span></span>.</td><td class="pot">$1,002</td></tr>
+        <tr><td>Flop</td><td><span class="cards" role="img" aria-label="King of clubs, 8 of diamonds, 3 of spades"><span class="pc">K<i>♣</i></span><span class="pc r">8<i>♦</i></span><span class="pc">3<i>♠</i></span></span></td><td>All in already. Hero has 8.6% to win from here.</td><td class="pot">$1,002</td></tr>
+        <tr><td>Turn</td><td><span class="cards" role="img" aria-label="King of clubs, 8 of diamonds, 3 of spades, 2 of hearts"><span class="pc">K<i>♣</i></span><span class="pc r">8<i>♦</i></span><span class="pc">3<i>♠</i></span><span class="pc r">2<i>♥</i></span></span></td><td>No help for hero.</td><td class="pot">$1,002</td></tr>
+        <tr><td>River</td><td><span class="cards" role="img" aria-label="King of clubs, 8 of diamonds, 3 of spades, 2 of hearts, 9 of clubs"><span class="pc">K<i>♣</i></span><span class="pc r">8<i>♦</i></span><span class="pc">3<i>♠</i></span><span class="pc r">2<i>♥</i></span><span class="pc">9<i>♣</i></span></span></td><td>Kings win. Hero loses $500.</td><td class="pot">$1,002</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history. Pot arithmetic: $2 dead small blind + $500 + $500. The 8.6% is the exact equity of the aces on that flop, from tools/poker.js.</p>
+</figure>
+
+<p>Was the all-in a mistake? No. Before the flop hero was an 82 percent favorite. The flop gave the other player a set of kings, and the hand finished as one of the 18 losing dots in the picture. Judging the choice by the king on the flop would teach hero the wrong thing: that aces should not go all in. A good decision is one that is good when you make it, whatever card comes next.</p>
+
+<aside class="key">
+  <p class="label">Key idea</p>
+  <p>Judge a decision by what you knew and what the odds were when you made it. Do not judge it by the card that came.</p>
+</aside>
+
+<p>The reverse is just as important. You will sometimes make a bad call, hit your card, and win a big pot. That does not make the call good. A player who treats lucky wins as proof of skill is on the way to a long, expensive education. Why swings are normal, and how to stay solvent through them, is the job of <a class="xref" href="10-bankroll-and-variance-basics.html">Chapter 10, Bankroll and Variance Basics</a>.</p>
+
+<h2>Skill in the long run</h2>
+
+<p>If one hand says almost nothing, where does skill show up? It shows up in volume. A small edge on each decision, repeated hundreds of times, does not stay hidden.</p>
+
+<p>Here is a model, not a poker statistic. Suppose you win a given contest 55 times in 100, and each contest is independent. In a single contest you are ahead 55 percent of the time. The line below shows how often you finish ahead after more and more contests, for a 55 percent edge and a bigger 60 percent edge.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 1.9</span><h3 class="figure-title">How often a small edge finishes ahead</h3></div>
+  <div data-fig="line"><script type="application/json">
+  {"label": "Chance of finishing with more wins than losses after 1 to 251 independent contests, for a player who wins 55 percent of them and one who wins 60 percent. The 55 percent player is ahead about 76 times in 100 after 51 contests and about 94 times in 100 after 251.",
+   "xLabel": "Number of contests", "xUnit": "", "yUnit": "%", "yMin": 40, "yMax": 100,
+   "series": [
+     {"name": "Win 60 in 100", "tone": "accent2", "points": [[1, 60.0], [5, 68.3], [11, 75.3], [25, 84.6], [51, 92.6], [101, 97.9], [251, 99.9]]},
+     {"name": "Win 55 in 100", "tone": "ink", "points": [[1, 55.0], [5, 59.3], [11, 63.3], [25, 69.4], [51, 76.4], [101, 84.4], [251, 94.4]]}
+   ],
+   "refs": [{"y": 50, "label": "Even"}]}
+  </script></div>
+  <p class="figure-note">Arithmetic: the binomial formula, using odd numbers of contests so there are no ties. A teaching model with a made-up edge, not a measured poker win rate.</p>
+</figure>
+
+<p>After 11 contests the 55 percent player is ahead only about 63 times in 100. After 101, about 84 times in 100. There is no moment when luck stops, but its influence shrinks as the sample grows. This is the difference between skill and luck in poker: not "skill wins" or "luck wins," but "skill needs many hands, and luck owns the short run."</p>
+
+<p>Two council members put the weight in different places. The first is Doyle Brunson, who in our reading would stress staying in the fight.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Doyle Brunson might say</p>
+  <p class="said">He would remind you that a long career is the real test. Sixty years of play is how the edge shows itself, so protect your bankroll and keep applying pressure, because the player who survives the bad stretches is the one who collects when the cards turn.</p>
+  <p class="note">An imagined voice: our reading of the aggression and bankroll survival in Super/System and his long career, not his words.</p>
+</aside>
+
+<p>The second is Daniel Negreanu, who would add that numbers alone are not the whole edge.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Daniel Negreanu might say</p>
+  <p class="said">He would say the odds tell you what the cards are likely to do, but the people at the table tell you what the cards are likely to be. Study the math, then use it to sharpen your read on each opponent. The best results come from blending feel and theory, not choosing one.</p>
+  <p class="note">An imagined voice: our reading of his hand reading and his later solver study, not his words.</p>
+</aside>
+
+<p>That blend is the point of view of this book. Learn the numbers, because they give you a sound baseline: what a decent decision looks like when you know nothing else. Then pay attention to the players in front of you, because in most low-stakes live games, many players stray far from the baseline, and in our judgment that is where most of the profit comes from. Read people and respect the numbers.</p>
+
+<p>For the next chapters, keep three habits from this one. See each decision as a bet on cards you cannot see. State your chances as times out of 100. Judge a decision by its price, not by its card. <a class="xref" href="02-rules-hands-and-the-flow-of-a-live-hand.html">Chapter 2, Rules, Hands, and the Flow of a Live Hand</a> covers how a live hand actually runs, and <a class="xref" href="05-odds-and-outs.html">Chapter 5, Odds and Outs</a> turns this thinking into a call-or-fold tool you can use with chips in your hand.</p>
+
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>Think in times out of 100</h2>
+  <p><strong>The shortcut.</strong> Turn every chance into "x times out of 100." A percentage already is one. For "1 in N," divide 100 by N. For odds of X to 1 against, you win 1 time in X + 1, so divide 100 by X + 1 (4 to 1 against: 100 / 5 = 20 times in 100).</p>
+  <p class="math">1 in 17: 100 / 17 = about 6 times in 100 (exact: 5.9)</p>
+  <p class="math">Queens against ace king suited: about 54 times out of 100 (exact: 53.8)</p>
+  <p><strong>Where it bends.</strong> Rare events need a bigger base. Aces at 1 in 221 is under one time in 100, so say "about 4.5 times in 1,000" (1,000 / 221 = 4.5). And do not add chances across repeated events: three 82 percent wins in a row is not 82 + 82 + 82. It is 0.82 x 0.82 x 0.82 = 55%, so you miss at least once about 45 times in 100.</p>
+  <details class="drill">
+    <summary>Drill: You face four all-ins in a month, each as a 70 percent favorite. How many times in 100 do you win all four?</summary>
+    <p>0.7 x 0.7 x 0.7 x 0.7 = 0.24, about 24 times in 100. Adding 70 four times makes no sense; multiply instead.</p>
+  </details>
+</aside>
         </div>
       </article>
 
@@ -49,5 +280,6 @@
   </div>
 
   <script src="../js/version.js"></script>
+  <script src="../js/figures.js"></script>
 </body>
 </html>

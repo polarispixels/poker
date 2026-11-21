@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-11-21
+
+### Added
+
+- Chapter 1, What Poker Really Is: Chapter 1 explains poker as a game of hidden information, teaches thinking in times out of 100, and separates short-run luck from long-run skill.
+
 ## [0.2.0] - 2026-11-20
 
 The book's frame: its title, its contents, and the kit that every chapter is built from.
