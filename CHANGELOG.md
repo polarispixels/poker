@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.46.0] - 2026-11-21
+
+### Added
+
+- Chapter 11, Part I Review: Twenty annotated live beginner hands covering Chapters 1 to 10, each with the decision, the arithmetic, and the lesson.
+
 ## [0.45.0] - 2026-11-21
 
 ### Added

@@ -1,0 +1,232 @@
+<p class="lead">Ten chapters of ideas become useful when they meet a real decision. Here are twenty beginner hands from a live $2/$5 game, nine-handed with $500 stacks, each with the spot, the choice, and the lesson. They are invented teaching examples, not real hand histories.</p>
+
+<p>Each hand points back to the chapter that taught the idea. Cover the lesson, make your own choice first, then read on. Where a number appears, it was computed, and the figure notes say how. Hands run in the order of the book: rules, seats, starting hands, odds, expected value, aggression, and the habits around the table.</p>
+
+<h2>Counting and procedure</h2>
+
+<p><strong>Hand 1. Pocket sevens, no set.</strong> You hold [[7h 7d]] and the flop is [[Ks 9c 2d]]. No seven. You feel cheated. You should not. Two sevens remain in 50 unseen cards, and the chance that at least one lands on the flop is 1 minus (48 x 47 x 46) / (50 x 49 x 48) = 1 minus 2,162 / 2,450 = 11.8%. About 12 times out of 100. Missing is the normal result. This is the habit from {{ch:1}}: turn every hope into a count out of 100, and the disappointment shrinks.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">A pocket pair meets the flop, 100 times</h3></div>
+  <div data-fig="dots"><script type="application/json">
+  {"label": "Out of 100 pocket pairs, about 12 flop a set or better and about 88 do not.",
+   "parts": [
+     {"label": "A set or better on the flop", "value": 12, "tone": "accent2"},
+     {"label": "No set", "value": 88, "tone": "paper"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: 1 - 2,162 / 2,450 = 11.76%, rounded to 12.</p>
+</figure>
+
+<p><strong>Hand 2. The flush you nearly folded.</strong> The board runs [[Kh 9c 7d 3h 2h]] and you hold [[Ah 7h]]. You have the ace-high flush, and a player who bets hard. A beginner sees the king and worries about a set of kings. The ranking list in {{ch:2}} settles it: a flush beats three of a kind. With no pair on the board, no one can hold a full house or four of a kind, and no straight flush fits these hearts with your ace out of the deck. Your flush is the best possible hand. Change one card, though: if the nine were a second seven, the board would be paired, and a player holding a king and a seven, or a pair of threes, would have a full house that beats you. Learn the order cold, and look for a pair on the board before you feel safe with a flush.</p>
+
+<p><strong>Hand 3. Say it, then do it.</strong> Facing a $15 raise, you slide out two stacks of chips without a word. Is that a call or a raise? Without a word, the dealer or floor decides from the amount and the house rule, and you may end up with a call or a raise you did not intend. (In most rooms, a single oversized chip pushed out silently is only a call.) The fix from {{ch:2}} is cheap: speak first, in a clear voice, then move the chips. Say "raise to $45" and place exactly $45. House rules vary, and {{ch:F}} lists the common ones. Ask the dealer before you need the answer.</p>
+
+<p><strong>Hand 4. Count the pot before the bet.</strong> Four players limp for $5 each, the small blind completes, and you check the big blind. Pot: 4 x $5 + $5 + $5 = $30. The flop is [[Qd 8s 3s]]. A player bets $15 and everyone folds to you. You need to know the pot at once, so use the street-by-street count from {{ch:2}}. The price is $15 to win $45, and 15 / (30 + 15 + 15) = 25%. You hold [[Js 4s]], a flush draw with nine outs, and hand 9 shows how that compares.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Counting the pot, street by street</h3></div>
+  <div class="table-scroll">
+    <table class="hand-log">
+      <thead><tr><th>Street</th><th>Board</th><th>Action</th><th>Pot</th></tr></thead>
+      <tbody>
+        <tr><td>Preflop</td><td>Hero: [[Js 4s]]</td><td>Four limp for $5. SB completes. Hero checks the big blind.</td><td class="pot">$30</td></tr>
+        <tr><td>Flop</td><td>[[Qd 8s 3s]]</td><td>A player bets $15. Others fold. Hero needs 15 / 60 = 25%.</td><td class="pot">$45</td></tr>
+        <tr><td>If hero calls</td><td>[[Qd 8s 3s]]</td><td>Hero adds $15 to the pot.</td><td class="pot">$60</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history. Arithmetic: 5 x 4 + 5 + 5 = 30.</p>
+</figure>
+
+<h2>Seats and starting hands</h2>
+
+<p><strong>Hand 5. The same hand from two seats.</strong> You are dealt [[Qs Jd]]. From UTG, eight players still act behind you, and any of them may hold a hand that dominates yours. You fold. Two hands later you get the same cards on the button. Everyone folds to you and only the two blinds remain. You raise to $15. {{ch:3}} taught the count: each player left to act has about a 4.7% chance of holding TT or better, or AQ or better. With eight players behind you, the chance that at least one does is about 31.8%. With two behind you, it is about 9.1%. Same cards, different seat, different play. {{ch:4}} says the same thing with its groups: position opens the gate.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Queen jack on the button, two players left</h3></div>
+  <div data-fig="table"><script type="application/json">
+  {"label": "Nine-handed table. Hero on the button with queen jack raises to 15 after six folds. Only the small blind and big blind remain to act.",
+   "button": 0, "pot": "$22",
+   "seats": [
+     {"pos": "BTN", "stack": "$500", "bet": "$15", "cards": "Qs Jd", "state": "hero"},
+     {"pos": "SB", "stack": "$480", "bet": "$2"},
+     {"pos": "BB", "stack": "$510", "bet": "$5"},
+     {"pos": "UTG", "state": "fold"},
+     {"pos": "UTG+1", "state": "fold"},
+     {"pos": "MP", "state": "fold"},
+     {"pos": "LJ", "state": "fold"},
+     {"pos": "HJ", "state": "fold"},
+     {"pos": "CO", "state": "fold"}
+   ]}
+  </script></div>
+  <p class="figure-note">An example hand in a $2/$5 game. Pot: 15 + 2 + 5 = 22. Not a real hand history.</p>
+</figure>
+
+<p><strong>Hand 6. Out of position with a pretty hand.</strong> You defend the big blind with [[Ad 6d]] against a button raise to $15, and the flop comes [[Ks 9d 4c]]. You act first and have nothing but a backdoor draw. Whatever you do, the button chooses next, with full knowledge of your move. That is the cost named in {{ch:3}}. The lesson is not never to defend. It is to know that a weak hand out of position gets harder to play on every street, so defend with hands that can make strong holdings, not just hands that look nice.</p>
+
+<p><strong>Hand 7. The ace that looks strong.</strong> You hold [[As Jd]] and an opponent in front of you raises. You call. The flop is [[Ac 8h 3s]] and he bets. You have top pair, and you feel good. {{ch:4}} warned about this: a hand can look strong and still be dominated. If he holds [[Ah Qc]], your preflop equity against that hand is just 26.5% to his 73.5%, because when you share an ace he has the better kicker. The loss is not in the flop. It is in the preflop choice to play a weak ace behind a raise.</p>
+
+<p><strong>Hand 8. Seven deuce.</strong> The first time you are dealt [[7c 2d]], you fold without a thought, and a player across the table says you are no fun. Your fold is correct, and no one pays you for entertainment. You will fold most hands from most seats, as {{ch:4}} says. A fold costs nothing. The money is in the hands you do play, and the seat you play them from. Patience is a skill with a payoff.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What David Sklansky might say</p>
+  <p class="said">He would call hands 5 through 8 one lesson: every starting hand has a price set by the seats behind you. Playing a hand the way you would if you could see their cards is impossible, but position buys back some of that sight, and a disciplined fold is the cheapest way to avoid paying for blindness.</p>
+  <p class="note">An imagined voice: our reading of the Fundamental Theorem in The Theory of Poker, not his words.</p>
+</aside>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Pair, domination, and the big pair</h3></div>
+  <div data-fig="split"><script type="application/json">
+  {"label": "All-in preflop equity for three matchups: ace jack against ace queen is 26 to 74, eights against ace king is 55 to 45, and aces against kings is 82 to 18.",
+   "rows": [
+     {"label": "AJo against AQo", "note": "hand 7", "parts": [{"label": "Ace jack", "value": 26.5, "tone": "accent"}, {"label": "Ace queen", "value": 73.5, "tone": "ink"}]},
+     {"label": "88 against AKo", "note": "hand 12", "parts": [{"label": "Eights", "value": 54.8, "tone": "ink"}, {"label": "Ace king", "value": 45.2, "tone": "accent"}]},
+     {"label": "AA against KK", "note": "hand 15", "parts": [{"label": "Aces", "value": 82.0, "tone": "ink"}, {"label": "Kings", "value": 18.0, "tone": "accent"}]}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact equities from tools/poker.js, counting every possible board. Ties are split. Each row uses the exact cards in its hand.</p>
+</figure>
+
+<h2>Draws and prices</h2>
+
+<p><strong>Hand 9. The free card.</strong> Pot $60, you hold [[Th 8h]] on the flop [[9h 4h Kc]], and a player bets $30 from early position. You have nine outs to a flush. The price is 30 / (60 + 30 + 30) = 25%, and your chance to hit on the turn alone is 9 / 47 = 19.1%, which is under the price. Looking only at the next card, you fold. Two things close the gap. First, when the flush comes you can win more on later streets, which {{ch:5}} calls implied odds. To break even on the turn card alone, you need to win about $37 more on average when you hit: 30 x 38 / 9 = $126.67 in total, minus the $90 already there. With more than $400 left in each stack, that is a small ask. Second, if he checks the turn, you see the river for free, and your chance over both cards is 35.0%. Here you call, and when he checks the turn you check behind.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">A flush draw, called and checked</h3></div>
+  <div class="table-scroll">
+    <table class="hand-log">
+      <thead><tr><th>Street</th><th>Board</th><th>Action</th><th>Pot</th></tr></thead>
+      <tbody>
+        <tr><td>Flop</td><td>[[9h 4h Kc]]</td><td>Villain bets $30 into $60. Hero has [[Th 8h]] and needs 25%. Hero calls.</td><td class="pot">$120</td></tr>
+        <tr><td>Turn</td><td>[[9h 4h Kc 2s]]</td><td>Villain checks. Hero checks behind and sees a free card.</td><td class="pot">$120</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history. Pot after the call: 60 + 30 + 30 = 120.</p>
+</figure>
+
+<p><strong>Hand 10. Tainted outs.</strong> You hold [[8c 7c]] on [[9d 6h 2h]]. Any five or ten makes your straight, which gives eight outs and a 31.5% chance by the river. But two hearts are on the board. The five of hearts and the ten of hearts could give a rival a flush while they give you a straight. {{ch:5}} calls these tainted outs. Count them as half or leave them out: with six clean outs your chance is 24.1%, not 31.5%. Be honest about the cards you count.</p>
+
+<p><strong>Hand 11. Ten seconds.</strong> The pot is $100 and the bet is $50. Half pot, so you need 25%, which {{ch:6}} gives you without a pencil. You hold a gutshot with four outs. On the flop, four times 4 is 16%, and the exact chance by the river is 16.5%. Even that figure is too generous, because it assumes you see both cards for this one price. It is still short by 8.5 points. On the turn card alone, your chance is 4 / 47 = 8.5%. You fold. The whole thing takes ten seconds, and nobody at the table needs to see you do it.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">The rule of 4 against the exact odds</h3></div>
+  <div data-fig="columns"><script type="application/json">
+  {"label": "Rule of 4 estimates compared with exact flop-to-river odds for 4, 6, 8, 9, and 12 outs. The rule is close up to 8 outs and runs high above that.",
+   "unit": "%", "categories": ["4 outs", "6 outs", "8 outs", "9 outs", "12 outs"],
+   "series": [
+     {"name": "Rule of 4", "values": [16, 24, 32, 36, 48], "tone": "gold"},
+     {"name": "Exact", "values": [16.5, 24.1, 31.5, 35.0, 45.0], "tone": "ink"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: outs times 4, against exact odds from tools/poker.js. The hands above use 4, 6, 8, and 9 outs.</p>
+</figure>
+
+<p><strong>Hand 12. A coin flip, by the numbers.</strong> You hold [[8s 8d]] and a short stack moves all-in with [[As Kd]]. Eights against ace king is 54.8% to 45.2%. That is close to a coin flip with a small edge, and {{ch:6}} wants you to know it without running anything. Whether you call depends on the money in the middle and what else is in the game, but the equity itself is no mystery. Learn the three or four common matchups in the split figure and you can answer fast.</p>
+
+<p><strong>Hand 13. The shove.</strong> The pot is $60. Villain shoves $140 on the flop [[Ks Jh 2h]], and you hold [[9h 6h]] with a flush draw. Your price is 140 / (60 + 280) = 41.2%. All-in means both cards come, so your chance is 35.0%. The draw is short by about six points. You fold. The same nine outs called happily in hand 9 because the bet was small. The outs did not change. The price did.</p>
+
+<h2>Value, results, and aggression</h2>
+
+<p><strong>Hand 14. The river call, in two branches.</strong> The river brings a blank, the pot is $120, and villain bets $60. You hold a hand that beats only bluffs. You need 60 / (120 + 120) = 25%. You think he bluffs one time in three here, which is a judgment from his play, not a fact. If you call, you win $180 a third of the time and lose $60 twice as often. {{ch:7}} gives the sum.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">The value of a $60 river call</h3></div>
+  <ul class="tree">
+    <li><span class="node root">Call $60 into $120 plus his $60</span>
+      <ul>
+        <li><span class="edge">He bluffs 1 time in 3</span><span class="node win">Win $180</span></li>
+        <li><span class="edge">He has it 2 times in 3</span><span class="node lose">Lose $60</span></li>
+      </ul>
+    </li>
+  </ul>
+  <p class="math">EV = 1/3 x $180 + 2/3 x (-$60) = $60 - $40 = +$20</p>
+  <p class="figure-note">Arithmetic. The one-in-three bluff rate is an assumption for the example.</p>
+</figure>
+
+<p><strong>Hand 15. Right decision, wrong result.</strong> You and a friend get your stacks in preflop, your [[Ah Ad]] against his [[Kc Kd]]. A king comes on the flop and you lose. Aces win 82.0% of the time here. This one was one of the 18. You made a good decision and got a bad result, and a bad result tells you nothing about the choice. The Fundamental Theorem in {{ch:7}} is about decisions, not outcomes. Judge the call you made, not the card that fell.</p>
+
+<p><strong>Hand 16. Raise the draw.</strong> The pot is $50, and an opponent bets $25 into it on the flop [[Jh 8h 3s]]. You hold [[Ah Th]], the nut flush draw. You could call. {{ch:8}} says to raise, because the raise gives you two ways to win: he folds now, or you hit later. You raise to $75. A pure bluff of that size needs him to fold 75 / (75 + 75) = 50% of the time, but your nine outs mean you need far fewer folds, because the draw pays for part of the gap. A smaller raise needs fewer folds still. The table shows the trade.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">How often each raise must work as a bluff</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Raise to</th><th>Pot before it</th><th>Pure bluff needs folds</th></tr></thead>
+      <tbody>
+        <tr><td>$50</td><td>$75</td><td>50 / 125 = 40%</td></tr>
+        <tr><td>$75</td><td>$75</td><td>75 / 150 = 50%</td></tr>
+        <tr><td>$100</td><td>$75</td><td>100 / 175 = 57%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Arithmetic: bet / (pot + bet), with the pot counted before the raise and including his $25 bet. A draw needs fewer folds than shown.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Doyle Brunson might say</p>
+  <p class="said">He would tell you hand 16 is the whole point. Calling lets the other player keep control, and raising takes it. A beginner who learns to bet his draws will win pots he never held the best hand in.</p>
+  <p class="note">An imagined voice: our reading of the case for aggression in Super/System (1979), not his words.</p>
+</aside>
+
+<p><strong>Hand 17. The call that never ends.</strong> You flat-call a raise with [[Ad Qd]], hit a queen on the flop, and call a bet. Then you call the turn and the river. You never bet and never raise. You win a small pot when he shows ace jack, and lose a large one when he shows two pair. {{ch:8}} calls this the weak play: a call can win only at showdown, while a bet can also win when they fold. When you are ahead, a bet makes worse hands pay. When you are behind, a call is how a loss grows slowly.</p>
+
+<h2>Reading the table and surviving it</h2>
+
+<p><strong>Hand 18. The quiet seat.</strong> You sit for one orbit, nine hands, and the player in seat 4 enters two pots, both with a raise from early position. Two hands in nine is 22%, as {{ch:9}} shows. That is a label, not a measurement, because nine hands is a small sample. Seat 4 looks tight and aggressive. When he bets big on the river, you give him credit. You have not read his cards. You have read his habits, and that is the only read a beginner can trust.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">One orbit of notes on three seats</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Seat</th><th>Hands entered, of 9</th><th>Frequency</th><th>Label</th></tr></thead>
+      <tbody>
+        <tr><td>4</td><td>2</td><td>22%</td><td>Tight, raised both</td></tr>
+        <tr><td>7</td><td>6</td><td>67%</td><td>Loose, mostly calls</td></tr>
+        <tr><td>9</td><td>1</td><td>11%</td><td>Very tight, unknown</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">An example table. Arithmetic: hands entered / 9. One orbit is a small sample, so treat each label as provisional.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Daniel Negreanu might say</p>
+  <p class="said">He would tell you hand 18 is where reading starts. The note about seat 4 is already worth more than a guess at his cards, and he would push you to keep adding to it every orbit.</p>
+  <p class="note">An imagined voice: our reading of Negreanu's public emphasis on hand reading, not his words.</p>
+</aside>
+
+<p><strong>Hand 19. The losing session.</strong> You play five hours and lose one buy-in, $500, which is 100 big blinds. You are sure you played badly. Suppose your true win rate is 4 big blinds an hour, as in {{ch:10}}, with a standard deviation of 50 big blinds an hour. Over five hours the mean is +20 and the spread is 50 x sqrt(5) = 112 big blinds. A session loses money about 43 times in 100 for that player, and a full buy-in or worse about 14 times in 100. Losing is part of winning. One session cannot tell you whether you are good.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">A winning player's five-hour sessions, 100 times</h3></div>
+  <div data-fig="dots"><script type="application/json">
+  {"label": "Out of 100 five-hour sessions by a 4 big blind per hour player, about 43 lose money and about 57 win.",
+   "parts": [
+     {"label": "The session loses", "value": 43, "tone": "accent"},
+     {"label": "The session wins", "value": 57, "tone": "accent2"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: z = 20 / 112 = 0.18, and the chance of a loss is about 43%. Assumes a 4 BB/hour win rate and 50 BB/hour standard deviation, as in {{ch:10}}.</p>
+</figure>
+
+<p><strong>Hand 20. The rebuy.</strong> You have $2,500 set aside for poker and lose your first $500 buy-in at $2/$5. Angry, you rebuy for the same amount to win it back. You started with five buy-ins, well below the 20 to 30 that {{ch:10}} suggests for this stake. After the loss you have $2,000 left, so this rebuy puts a quarter of what remains on the table. The safe move is to stop, or to drop to a smaller game that fits the roll. Winning it back is not a reason. Staying in the game long enough for your edge to show is.</p>
+
+<details class="drill">
+  <summary>Hand 9 again, but villain bets $60 into the $60 pot on the flop. You still have nine outs. Call or fold, and why?</summary>
+  <p>You need 60 / (60 + 60 + 60) = 33.3%. On the turn card alone your chance is 19.1%, far short. The 35.0% over two cards holds only if you see both for this one price, and a turn bet takes that away. To break even on one card, you need to win about $133 more on average when you hit: 60 x 38 / 9 = $253.33, minus the $120 you would win now (his bet plus the pot). Your ten-high flush can also lose to a bigger one. Against a player who bets again and pays little when the flush comes, fold. Call only against a player you expect to pay you off well when you hit.</p>
+</details>
+
+<details class="drill">
+  <summary>The pot is $80, villain bets $40, and you hold six clean outs on the flop. Call?</summary>
+  <p>Price: 40 / (80 + 40 + 40) = 25%. On the turn card alone your chance is 6 / 47 = 12.8%. The rule of 4 gives 24% (exact 24.1%), but that counts two cards for one price, and even that is short. To break even on one card you need to win about $153 more on average when you hit: 40 x 41 / 6 = $273.33, minus the $120 you would win now (his bet plus the pot). That is a lot to expect from one opponent. In most spots, fold.</p>
+</details>
+
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>The ten-second review: price against chance</h2>
+  <p><strong>The shortcut.</strong> Every draw decision in Part I reduces to two numbers. Your chance is outs x 2 for one card to come, or outs x 4 when you will see both the turn and the river for this one price, as when you call an all-in on the flop. The price is 25% for a half-pot bet and 33% for a pot-sized bet. Call when your chance clears the price, and when it falls short, ask whether you can win enough more after you hit.</p>
+  <p class="math">Hand 13: 9 outs x 4 = 36%. Price: 140 / (60 + 280) = 41%. 36 is less than 41, so fold.</p>
+  <p><strong>Where it bends.</strong> Above 8 outs the rule of 4 runs high: 12 outs gives 48%, but the exact figure is 45%. Tainted outs shrink your chance, and a bet on the next street can raise the true price. Future bets you can win, called implied odds, can make a thin call correct, and {{ch:A}} has the full table of prices and chances.</p>
+</aside>
