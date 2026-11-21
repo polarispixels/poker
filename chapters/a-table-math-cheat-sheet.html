@@ -22,13 +22,192 @@
     <main>
       <article class="chapter">
         <header class="chapter-head">
-          <p class="chapter-kicker label">Appendix A <span class="badge">To come</span></p>
+          <p class="chapter-kicker label">Appendix A <span class="badge">Preliminary draft</span></p>
           <h1 class="chapter-title">Table Math Cheat Sheet</h1>
           <p class="standfirst">The numbers worth memorizing, shortcuts first.</p>
         </header>
 
         <div class="prose chapter-body">
-<p class="lead">This page has not been written yet. The book is being written and published one chapter at a time.</p>
+<p class="lead">The numbers worth memorizing, shortcuts first. Each table gives the quick figure you use at the table and the exact figure beside it, so you know how far the shortcut can drift. For the reasoning behind them, see <a class="xref" href="05-odds-and-outs.html">Chapter 5, Odds and Outs</a> and <a class="xref" href="06-mental-math-at-the-table-1.html">Chapter 6, Mental Math at the Table I: The Core Shortcuts</a>; for full tables, see <a class="xref" href="b-probability-tables-and-odds-charts.html">Appendix B, Probability Tables and Odds Charts</a>.</p>
+
+<h2>Outs and draws</h2>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table A.1</span><h3 class="figure-title">Common draws, with the shortcut and the exact figure</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Draw</th><th>Outs</th><th>Flop to river</th><th>Turn to river</th></tr></thead>
+      <tbody>
+        <tr><td>Flush draw + open-ender</td><td>15</td><td>about 54% (54.1)</td><td>about 33% (32.6)</td></tr>
+        <tr><td>Flush draw</td><td>9</td><td>about 35% (35.0)</td><td>about 20% (19.6)</td></tr>
+        <tr><td>Open-ended straight draw</td><td>8</td><td>about 31% (31.5)</td><td>about 17% (17.4)</td></tr>
+        <tr><td>Two overcards</td><td>6</td><td>about 24% (24.1)</td><td>about 13% (13.0)</td></tr>
+        <tr><td>Gutshot</td><td>4</td><td>about 16% (16.5)</td><td>about 9% (8.7)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Exact, from tools/poker.js draw. Two cards to come from the flop (47 and 46 unseen), one from the turn (46 unseen). The odds assume every out wins. Overcard outs are the least clean: pairing your card can still lose to two pair, a set, or a better kicker, so count them for less.</p>
+</figure>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. A.1</span><h3 class="figure-title">The rule of 4 against the exact odds</h3></div>
+  <div data-fig="columns"><script type="application/json">
+  {"label": "Rule of 4 estimates compared with exact flop-to-river odds for 4, 6, 8, 9, 12, and 15 outs. The rule is close up to 9 outs and runs high after that.",
+   "unit": "%", "categories": ["4 outs", "6 outs", "8 outs", "9 outs", "12 outs", "15 outs"],
+   "series": [
+     {"name": "Rule of 4", "values": [16, 24, 32, 36, 48, 60], "tone": "gold"},
+     {"name": "Exact", "values": [16.5, 24.1, 31.5, 35.0, 45.0, 54.1], "tone": "ink"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: outs times 4, against the exact figures from tools/poker.js draw.</p>
+</figure>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. A.2</span><h3 class="figure-title">Turning outs into a percentage</h3></div>
+  <ol class="flow">
+    <li><strong>Flop: outs x 4</strong><span>Two cards to come.</span></li>
+    <li><strong>Over 8 outs: subtract the extra</strong><span>Take off the outs above 8.</span></li>
+    <li><strong>Turn: outs x 2</strong><span>One card to come.</span></li>
+  </ol>
+  <p class="math">15 outs on the flop: 15 x 4 = 60, minus 7 = 53% (exact: 54.1%)</p>
+  <p class="figure-note">Arithmetic. The same fix on 12 outs gives 48 - 4 = 44% (exact: 45.0%). On 9 outs it gives 36 - 1 = 35% (exact: 35.0%). On the turn, outs x 2 runs a little low: 9 outs gives 18% (exact: 19.6%).</p>
+</figure>
+
+<details class="drill">
+  <summary>You hold <span class="cards" role="img" aria-label="Jack of hearts, Ten of hearts"><span class="pc r">J<i>♥</i></span><span class="pc r">T<i>♥</i></span></span> on a flop of <span class="cards" role="img" aria-label="9 of hearts, 8 of clubs, 2 of hearts"><span class="pc r">9<i>♥</i></span><span class="pc">8<i>♣</i></span><span class="pc r">2<i>♥</i></span></span>. How many outs do you have, and how often do you get there by the river?</summary>
+  <p>Nine hearts for the flush, plus the three non-heart queens and three non-heart sevens for the straight: 9 + 6 = 15 outs. Shortcut: 15 x 4 = 60, minus 7 = 53%. Exact: 54.1%, from tools/poker.js draw.</p>
+</details>
+
+<h2>Prices: what a bet asks</h2>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table A.2</span><h3 class="figure-title">What each bet size asks of the caller and the bettor</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Bet size</th><th>Pot odds</th><th>Equity to call</th><th>Bluff must work</th><th>Minimum defense</th></tr></thead>
+      <tbody>
+        <tr><td>1/3 pot</td><td>4 to 1</td><td>20%</td><td>25%</td><td>75%</td></tr>
+        <tr><td>1/2 pot</td><td>3 to 1</td><td>25%</td><td>33%</td><td>67%</td></tr>
+        <tr><td>2/3 pot</td><td>2.5 to 1</td><td>29%</td><td>40%</td><td>60%</td></tr>
+        <tr><td>Pot</td><td>2 to 1</td><td>33%</td><td>50%</td><td>50%</td></tr>
+        <tr><td>2x pot</td><td>1.5 to 1</td><td>40%</td><td>67%</td><td>33%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Exact, from tools/poker.js odds, rounded. Pot is counted before the bet. Pot odds are (pot + bet) to bet: a 1/2 pot bet of 50 into 100 is 150 to 50, or 3 to 1.</p>
+</figure>
+
+<p class="math">Equity to call = bet / (pot + 2 x bet). Bluff breaks even at bet / (pot + bet). Minimum defense = pot / (pot + bet).</p>
+
+<details class="drill">
+  <summary>On the turn the pot is $100. Your opponent moves all in for $50, and you hold only a flush draw (9 outs). Call or fold?</summary>
+  <p>You need 50 / (100 + 50 + 50) = 50 / 200 = 25%. One card to come gives 9 / 46 = 19.6%. Fold. Because the bet is all in, no later bets can make up the gap.</p>
+</details>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table A.3</span><h3 class="figure-title">Odds to percentage</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Odds against</th><th>You win 1 time in</th><th>Percentage</th></tr></thead>
+      <tbody>
+        <tr><td>1 to 1</td><td>2</td><td>50%</td></tr>
+        <tr><td>2 to 1</td><td>3</td><td>33%</td></tr>
+        <tr><td>3 to 1</td><td>4</td><td>25%</td></tr>
+        <tr><td>4 to 1</td><td>5</td><td>20%</td></tr>
+        <tr><td>5 to 1</td><td>6</td><td>17%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Arithmetic: X to 1 is 1 / (X + 1). For example, 1 / 6 = 16.7%.</p>
+</figure>
+
+<h2>Preflop matchups</h2>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. A.3</span><h3 class="figure-title">Four all-in matchups to know</h3></div>
+  <div data-fig="split"><script type="application/json">
+  {"label": "All-in preflop equity for four matchups: a pair against two overcards is 54 to 46, pair over pair is 80 to 20, a dominated ace is 74 to 26, and two overcards against two undercards is 62 to 38.",
+   "rows": [
+     {"label": "QQ against AKs", "note": "the coin flip", "parts": [{"label": "Pair", "value": 53.8, "tone": "ink"}, {"label": "Overcards", "value": 46.2, "tone": "accent"}]},
+     {"label": "KK against 88", "note": "pair over pair", "parts": [{"label": "Bigger pair", "value": 80.2, "tone": "ink"}, {"label": "Smaller pair", "value": 19.8, "tone": "accent"}]},
+     {"label": "AKo against AQo", "note": "domination", "parts": [{"label": "Dominating", "value": 74.0, "tone": "ink"}, {"label": "Dominated", "value": 26.0, "tone": "accent"}]},
+     {"label": "AKo against 87o", "note": "overcards over undercards", "parts": [{"label": "Overcards", "value": 61.9, "tone": "ink"}, {"label": "Undercards", "value": 38.1, "tone": "accent"}]}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact, from tools/poker.js equity, counting every board, ties split. Example suits: QhQd v AsKs, KsKd v 8h8c, AsKd v AhQc, AsKd v 8h7c. Suits can move a matchup by up to about 4 points: QhQd against offsuit AsKc is 57.2/42.8, AsKs against AhQh is 71.3/28.7, and AsKd against suited 8h7h is 58.1/41.9. Memorize it as about 55/45, 80/20, 70 to 75 against 25 to 30, and 60/40.</p>
+</figure>
+
+<h2>Counting combinations</h2>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table A.4</span><h3 class="figure-title">How many ways to hold a hand</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Hand</th><th>Combos</th><th>If one of its cards is out of play</th></tr></thead>
+      <tbody>
+        <tr><td>A specific pair, such as <span class="cards" role="img" aria-label="Ace, Ace"><span class="pc">A</span><span class="pc">A</span></span></td><td>6</td><td>3 (and 1 if two are out)</td></tr>
+        <tr><td>A specific suited hand, such as AKs</td><td>4</td><td>3 (one suit blocked)</td></tr>
+        <tr><td>A specific offsuit hand, such as AKo</td><td>12</td><td>9 (one ace blocked)</td></tr>
+        <tr><td>A specific unpaired hand, both</td><td>16</td><td>12</td></tr>
+        <tr><td>All starting hands</td><td>1,326</td><td></td></tr>
+        <tr><td>Hand types</td><td>169</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Arithmetic and tools/poker.js combos. Pairs: 4 x 3 / 2 = 6. Unpaired: 4 x 4 = 16. Total: 52 x 51 / 2 = 1,326. Blocked unpaired: with one ace out, AK is 3 x 4 = 12 combos. See <a class="xref" href="14-combinatorics.html">Chapter 14, Combinatorics</a>.</p>
+</figure>
+
+<h2>How often things happen</h2>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. A.4</span><h3 class="figure-title">Frequencies worth knowing</h3></div>
+  <div data-fig="bars"><script type="application/json">
+  {"label": "How often common events happen: a pocket pair is dealt 5.9 percent of the time, a pair flops a set or better 11.8 percent, a suited hand flops a flush draw 10.9 percent, and aces are dealt 0.45 percent.",
+   "unit": "%", "max": 15,
+   "items": [
+     {"label": "Pocket pair flops a set or better", "value": 11.8, "note": "about 1 in 8.5", "tone": "accent2"},
+     {"label": "Suited hand flops a flush draw", "value": 10.9, "note": "about 1 in 9"},
+     {"label": "You are dealt a pocket pair", "value": 5.9, "note": "1 in 17"},
+     {"label": "Suited hand flops a made flush", "value": 0.8, "note": "about 1 in 119"},
+     {"label": "You are dealt aces", "value": 0.45, "note": "1 in 221", "tone": "gold"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic. Pair: 78 / 1,326. Aces: 6 / 1,326 = 1 / 221. Set or better: 1 - C(48,3) / C(50,3) = 1 - 17,296 / 19,600. Flush draw: 55 x 39 / 19,600, exactly two suited cards among the 11 left. Made flush: 165 / 19,600.</p>
+</figure>
+
+<h2>Stack depth</h2>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. A.5</span><h3 class="figure-title">Stack-to-pot ratio in a $2/$5 hand</h3></div>
+  <svg class="art" viewBox="0 0 360 120" role="img" aria-label="A flop pot of 67 dollars beside an effective stack of 270 dollars, giving a stack-to-pot ratio of about 4.">
+    <rect class="fill-gold stroke-ink" x="20" y="70" width="60" height="30"/>
+    <text class="t" x="50" y="60" text-anchor="middle">Pot $67</text>
+    <rect class="fill-ink" x="130" y="10" width="60" height="90"/>
+    <text class="t" x="160" y="116" text-anchor="middle">Stack $270</text>
+    <text class="t big" x="270" y="62" text-anchor="middle">SPR 4</text>
+  </svg>
+  <p class="math">SPR = effective stack / pot on the flop = 270 / 67 = 4.0</p>
+  <p class="figure-note">Arithmetic. An example hand, not a real hand history: a player who bought in for $300 opens to $30, one player calls, and the blinds fold. Pot: 30 + 30 + 2 + 5 = $67. Effective stack (the smaller stack): 300 - 30 = $270.</p>
+</figure>
+
+<p>Stack-to-pot ratio (SPR) is the effective stack divided by the pot on the flop. As a rule of thumb, not a computed result: under about 4, top pair with a good kicker is usually ready to get all in; over about 10, it usually is not, and you want two pair or better to play for stacks. At 100 big blinds, the kind of pot decides which side of that line you are on.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table A.5</span><h3 class="figure-title">SPR at $2/$5 with $500 stacks</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Pot type</th><th>Flop pot</th><th>Stack left</th><th>SPR</th></tr></thead>
+      <tbody>
+        <tr><td>Open to $20, one call</td><td>$47</td><td>$480</td><td>10.2</td></tr>
+        <tr><td>Open to $20, two calls</td><td>$62</td><td>$480</td><td>7.7</td></tr>
+        <tr><td>3-bet to $70, one call</td><td>$147</td><td>$430</td><td>2.9</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Arithmetic, on example hands. Heads up, blinds fold: 20 + 20 + 2 + 5 = 47, and 480 / 47 = 10.2. Three-way with the big blind calling: 20 x 3 + 2 = 62, and 480 / 62 = 7.7. A 3-bet pot, blinds fold: 70 + 70 + 2 + 5 = 147, and 430 / 147 = 2.9. Bet sizes are a typical live baseline, a judgment, not a rule.</p>
+</figure>
+
+<p>In a tournament, M is your stack divided by what one full orbit costs in blinds and antes. With blinds of 100 and 200, and a big blind ante of 200, an orbit costs 100 + 200 + 200 = 500. A 3,000 stack is 3,000 / 500 = an M of 6. Under about 10, as a rule of thumb, your plays narrow toward shove or fold; see <a class="xref" href="31-live-tournament-fundamentals.html">Chapter 31, Live Tournament Fundamentals</a>. Count big blinds too: with a big blind ante, M runs well below your stack in big blinds. This stack is M 6 but 3,000 / 200 = 15 big blinds, and push-or-fold charts are usually built on big blinds.</p>
         </div>
       </article>
 
@@ -49,5 +228,6 @@
   </div>
 
   <script src="../js/version.js"></script>
+  <script src="../js/figures.js"></script>
 </body>
 </html>

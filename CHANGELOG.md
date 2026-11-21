@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.32.0] - 2026-11-21
+
+### Added
+
+- Appendix A, Table Math Cheat Sheet: Appendix A: the table math cheat sheet, with draws, prices, matchups, combos, frequencies, SPR, and M, every number checked.
+
 ## [0.31.0] - 2026-11-21
 
 ### Added
