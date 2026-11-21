@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.46.2] - 2026-11-20
+
+### Fixed
+
+- Chapters 13 and 15: one figure in each did not draw, because card shorthand inside a figure's data was expanded into markup. The build now leaves figure data as plain text.
+
 ## [0.46.1] - 2026-11-20
 
 ### Fixed

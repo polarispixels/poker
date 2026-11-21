@@ -49,6 +49,11 @@ const SUITS = { s: ['♠', 'spades'], h: ['♥', 'hearts'], d: ['♦', 'diamonds
 const RANK_NAMES = { A: 'Ace', K: 'King', Q: 'Queen', J: 'Jack', T: 'Ten' };
 // [[As Kh]] -> card markup that needs no script.
 function expandCards(html) {
+  // Inside a figure's JSON, [[As Kh]] becomes plain text: markup there would break the spec.
+  const parts = html.split(/(<script[\s\S]*?<\/script>)/);
+  return parts.map((part, i) => (i % 2 ? part.replace(/\[\[([^\]\[]*[A-Za-z?][^\]\[]*)\]\]/g, '$1') : expandCardsIn(part))).join('');
+}
+function expandCardsIn(html) {
   return html.replace(/\[\[([^\]]*)\]\]/g, (m, inner) => {
     const names = [];
     const cards = inner.trim().split(/\s+/).map((tok) => {
