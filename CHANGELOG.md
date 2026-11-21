@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.16.0] - 2026-11-21
+
+### Added
+
+- Chapter 24, Exploitative Play: Chapter 24 teaches baseline-then-deviate play: finding a leak by counting, the alpha math of bluffing an over-folder, what a wrong read costs, and how reads go stale.
+
 ## [0.15.0] - 2026-11-21
 
 ### Added
