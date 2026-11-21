@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.34.0] - 2026-11-21
+
+### Added
+
+- Chapter 31, Live Tournament Fundamentals: Chapter 31 teaches stack depth in big blinds and M, effective stacks, priced push-or-fold shoves with dead big blind antes, and the stages of a live tournament.
+
 ## [0.33.0] - 2026-11-21
 
 ### Added

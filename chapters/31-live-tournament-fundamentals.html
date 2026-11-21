@@ -22,13 +22,259 @@
     <main>
       <article class="chapter">
         <header class="chapter-head">
-          <p class="chapter-kicker label">Chapter 31 <span class="badge">To come</span></p>
+          <p class="chapter-kicker label">Chapter 31 <span class="badge">Preliminary draft</span></p>
           <h1 class="chapter-title">Live Tournament Fundamentals</h1>
           <p class="standfirst">Stack depth in big blinds, M, push-fold play, and the stages of a tournament.</p>
         </header>
 
         <div class="prose chapter-body">
-<p class="lead">This page has not been written yet. The book is being written and published one chapter at a time.</p>
+<p class="lead">In a live tournament your stack is a clock, not a bankroll. This chapter teaches you to read it in big blinds and in M, to know when you are in push-or-fold territory, and to see how the same stack plays differently as a tournament ages.</p>
+
+<h2>Chips are not dollars</h2>
+
+<p>In a live $2/$5 cash game you can rebuy, and the blinds never change. A tournament changes both rules. You pay once, you are out when you bust (a re-entry event lets you pay again, but that is a second buy-in), and the blinds climb on a schedule. Your chips matter only through what they let you do next.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 31.1</span><h3 class="figure-title">Cash chips and tournament chips</h3></div>
+  <div class="compare">
+    <div class="a"><h4>Tournament</h4><p>One buy-in. Blinds and antes rise on a clock. When the chips are gone, you are out. Your stack is a count of how long you can wait.</p></div>
+    <div class="b"><h4>Live cash game</h4><p>Blinds stay put. Chips are dollars, and you can rebuy. Waiting costs a fixed amount per orbit, forever. See <a class="xref" href="30-live-cash-games.html">Chapter 30, Live Cash Games</a>.</p></div>
+  </div>
+  <p class="figure-note">A summary of this section.</p>
+</figure>
+
+<p>So a bare chip count tells you almost nothing. Twelve thousand chips is a monster when the big blind is 100. It is a short stack when the big blind is 1,000. The first fix is to divide by the big blind. Say the blinds are 200/400 and the stack is 12,000 chips. That is 12,000 / 400 = 30 big blinds.</p>
+
+<p>Big blinds tell you how deep you are. They do not tell you how fast you are bleeding, because they ignore antes. Antes are the second fix, and they lead to M.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 31.2</span><h3 class="figure-title">One stack, three measures</h3></div>
+  <ul class="stats">
+    <li><b>12,000</b><span>chips, at 200/400 with a 400 big blind ante</span></li>
+    <li><b>30</b><span>big blinds (12,000 / 400)</span></li>
+    <li><b>12</b><span>M (12,000 / 1,000 per orbit)</span></li>
+  </ul>
+  <p class="figure-note">Arithmetic. One orbit costs 200 + 400 + 400 = 1,000. A nine-handed table is assumed.</p>
+</figure>
+
+<h2>M: how many orbits you can sit</h2>
+
+<p>An orbit is one full trip of the button around the table. Each orbit you pay the small blind once, the big blind once, and the antes once. That total is what it costs to do nothing. M counts how many orbits your stack covers.</p>
+
+<p class="math">M = stack / (small blind + big blind + antes for one orbit)</p>
+
+<p>With the 12,000 stack above, M is 12: you can fold for twelve orbits before you are out. Nine-handed, twelve orbits is 108 hands. That sounds like plenty. It is not. The blinds rise long before then, and as your stack shrinks, your shove threatens less, so your fold equity (the chips you win when others fold) shrinks with it.</p>
+
+<p>Many live events use a single big blind ante: the big blind posts one ante for the whole table. Others collect an ante from every player. Read the structure sheet before play, because the same stack has a different M under each style.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table 31.1</span><h3 class="figure-title">M for four stacks across four levels</h3></div>
+  <div data-fig="heat"><script type="application/json">
+  {"label": "M for stacks of 4,000, 8,000, 12,000, and 20,000 chips at four blind levels with a big blind ante. M falls from 40 for the deepest stack at the first level to under 1 for the shortest at the last.",
+   "corner": "Stack", "unit": "", "tone": "accent",
+   "cols": ["100/200", "200/400", "400/800", "1000/2000"],
+   "rows": ["4,000", "8,000", "12,000", "20,000"],
+   "values": [[8, 4, 2, 0.8], [16, 8, 4, 1.6], [24, 12, 6, 2.4], [40, 20, 10, 4]]}
+  </script></div>
+  <p class="figure-note">Arithmetic: stack / (small blind + big blind + big blind ante). The orbit costs are 500, 1,000, 2,000, and 5,000. An example structure, not any real event.</p>
+</figure>
+
+<p>Read the table down a column and you see depth. Read it along a row and you see time: the same 12,000 chips go from M 24 to M 2.4 as the blinds rise by a factor of ten. You did not lose a chip, and your position got much worse.</p>
+
+<aside class="key">
+  <p class="label">Key idea</p>
+  <p>Your cards matter less than your M. A stack of 12 is a different game from a stack of 40, even holding the same hand in the same seat.</p>
+</aside>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Dan Harrington might say</p>
+  <p class="said">He would tell you to stop asking what your hand is worth and start asking what your stack allows. M sets the plays that are open to you, and a player who ignores it will keep making a good play at the wrong depth.</p>
+  <p class="note">An imagined voice: our reading of the stack-size ideas in Harrington on Hold&#x27;em, not his words.</p>
+</aside>
+
+<h2>Bands of M</h2>
+
+<p>M works because it sorts stacks into bands, each with its own kind of poker. The cut points below are rules of thumb, not computed values. They blur at the edges, and a table full of aggressive players moves them upward. Because push-fold charts are written in big blinds, the table also gives each band in big blinds, assuming a big blind ante (where M is big blinds times 0.4, as the Table Math box shows).</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table 31.2</span><h3 class="figure-title">What each band of M asks of you</h3></div>
+  <div class="table-scroll">
+    <table class="wrap">
+      <thead><tr><th>M</th><th>BB</th><th>Plan</th><th>What changes</th></tr></thead>
+      <tbody>
+        <tr><td>Over 20</td><td>Over 50</td><td>Normal poker</td><td>You have room to call, to see flops, and to outplay people after the flop. Your cards still choose the pots.</td></tr>
+        <tr><td>10 to 20</td><td>25 to 50</td><td>Raise or fold</td><td>Calling raises with hands that need to hit loses value, since the stack is too small to win a big pot after the flop. Your reshove becomes a real threat.</td></tr>
+        <tr><td>4 to 10</td><td>10 to 25</td><td>Push-fold thinking</td><td>Small opens, planned with the stack in mind. Shoving over an opener is a main weapon, and late-position open shoves start.</td></tr>
+        <tr><td>Under 4</td><td>Under 10</td><td>Push or fold</td><td>Any open commits most of your stack. The choice is all in or fold, and fold equity does much of the work.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Rules of thumb, not computed values. Big blinds assume a big blind ante (BB = M x 2.5). The under 10 line for M matches the Table Math cheat sheet in <a class="xref" href="a-table-math-cheat-sheet.html">Appendix A, Table Math Cheat Sheet</a>: below it, push-fold thinking takes over.</p>
+</figure>
+
+<p>Why is the bottom band so different? A 3x open from 10 big blinds puts 3 / 10, about a third, of your stack in. If a player behind shoves, the price to call the rest is so good that you are close to committed, so you might as well have shoved first and kept the fold equity. That is a judgment, not chart output. At 25 big blinds the same open risks only 3 / 25 = 12%, which is why opening and folding to a shove is still fine there.</p>
+
+<h2>Effective stack: the smaller one wins the argument</h2>
+
+<p>Your own M is only half the story. In a hand between two players, the amount that can be won or lost is the smaller of the two stacks. That is the effective stack. If you have 4,000 and the player you face has 12,000, you are playing a 4,000 hand.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 31.3</span><h3 class="figure-title">Hero shoves from the button: whose stack counts</h3></div>
+  <div data-fig="table"><script type="application/json">
+  {"label": "Nine-handed table with hero on the button holding five-five and 4,000 chips, the small blind with 2,500, and the big blind with 12,000. Everyone else has folded.",
+   "button": 0, "pot": "1,000",
+   "seats": [
+     {"pos": "BTN", "stack": "4,000", "cards": "5h 5d", "state": "hero", "note": "10 BB"},
+     {"pos": "SB", "stack": "2,500", "bet": "200", "note": "effective 2,500"},
+     {"pos": "BB", "stack": "12,000", "bet": "800", "note": "effective 4,000"},
+     {"pos": "UTG", "state": "fold"},
+     {"pos": "UTG+1", "state": "fold"},
+     {"pos": "MP", "state": "fold"},
+     {"pos": "LJ", "state": "fold"},
+     {"pos": "HJ", "state": "fold"},
+     {"pos": "CO", "state": "fold"}
+   ]}
+  </script></div>
+  <p class="figure-note">An example hand. Blinds 200/400 with a 400 big blind ante, so the big blind has posted 800 and the pot is 200 + 800 = 1,000. Not a real hand history.</p>
+</figure>
+
+<p>Hero covers the small blind, so if the small blind calls, the effective stack is 2,500: that is the most hero can win or lose from him. Against the big blind, who covers hero, the effective stack is hero&#x27;s own 4,000. A player who covers you can bust you. A player you cover risks his whole tournament when he calls, so in most live games a covered player calls a shove with a tighter range than one who covers you. That is a judgment about players, not a measured fact. Mark who covers whom before you decide.</p>
+
+<h2>Push-fold in practice</h2>
+
+<p>Below about 10 big blinds, a lot of decisions reduce to shove or fold. Software computes full push-fold charts for this. Those charts are worth studying, and <a class="xref" href="c-preflop-range-charts.html">Appendix C, Preflop Range Charts</a> and <a class="xref" href="37-solvers-advanced-theory-and-elite-adaptation.html">Chapter 37, Solvers, Advanced Theory, and Elite Adaptation</a> point toward them. This section does not copy one from memory. It shows how a shove is priced, so you can check any chart against what you see at the table.</p>
+
+<p>The setup is the same as in the table figure above. Blinds are 200/400 with a 400 big blind ante. Hero is on the button with 4,000, which is 10 big blinds and M 4. The small blind folds. The big blind has 12,000, so the effective stack is hero&#x27;s 4,000, and the big blind must decide on a call.</p>
+
+<p>We need a stated calling range to price a shove. Here is a tight one: the big blind calls with these hands only.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 31.4</span><h3 class="figure-title">A tight calling range for the big blind</h3></div>
+  <div data-fig="range"><script type="application/json">
+  {"label": "The starting hand grid with the calling range shaded: all pairs, ace-eight suited or better, king-ten suited or better, queen-jack suited, ace-ten offsuit or better, and king-queen offsuit.",
+   "groups": [
+     {"name": "Big blind calls", "tone": "accent", "hands": "22+,A8s+,KTs+,QJs,ATo+,KQo"}
+   ]}
+  </script></div>
+  <p class="figure-note">An assumed range for the example, not a measured one. Combos counted by tools/poker.js: 178 of 1,326, or 13.4% of all starting hands.</p>
+</figure>
+
+<p>Say the small blind folds and hero shoves. If the big blind folds, hero wins the 200 + 400 + 400 = 1,000 already in the middle. If the big blind calls, he adds 3,600 to his 400 blind. His 400 ante is dead money: it does not count toward the call. So the called pot is 4,000 (hero) + 4,000 (big blind) + 400 (ante) + 200 (small blind) = 8,600. Win and hero nets 4,600. Lose and hero is out 4,000.</p>
+
+<p>Take <span class="cards" role="img" aria-label="5 of hearts, 5 of diamonds"><span class="pc r">5<i>♥</i></span><span class="pc r">5<i>♦</i></span></span>. The big blind holds a hand in his calling range 173 times out of the 1,225 hands left in the deck after hero&#x27;s two cards, so he calls 173 / 1,225 = 14.1% of the time. Against that range, <span class="cards" role="img" aria-label="5 of hearts, 5 of diamonds"><span class="pc r">5<i>♥</i></span><span class="pc r">5<i>♦</i></span></span> has 45.19% equity (tools/poker.js, sampled, good to about 0.2 points).</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 31.5</span><h3 class="figure-title">The value of the shove with a pair of fives</h3></div>
+  <ul class="tree">
+    <li><span class="node root">Shove 4,000 on the button</span>
+      <ul>
+        <li><span class="edge">Big blind folds 85.9% of the time</span><span class="node win">Win 1,000</span></li>
+        <li><span class="edge">Big blind calls 14.1% of the time</span><span class="node lose">Net about -114 on average</span></li>
+      </ul>
+    </li>
+  </ul>
+  <p class="math">Call branch: 0.4519 x 8,600 - 4,000 = 3,886 - 4,000 = -114</p>
+  <p class="math">EV = 0.859 x 1,000 + 0.141 x (-114) = 859 - 16 = +843 chips</p>
+  <p class="figure-note">Arithmetic, with equity from tools/poker.js (sampled). EV is measured against folding, which is worth 0. At 400 a big blind, +843 chips is about +2.1 big blinds.</p>
+</figure>
+
+<p>The shove earns about two big blinds, almost all of it from the fold. Notice what happened: the pair gave up 114 chips each time it was called, yet the shove still pays. Fold equity carried it. This is the reason short stacks shove so much.</p>
+
+<p>Now widen the caller. Suppose the big blind knows you are short and calls with a much wider range: every pair, any ace-two suited or better, king-nine suited or better, queen-ten suited or better, jack-ten suited, ace-eight offsuit or better, king-ten offsuit or better, and queen-jack offsuit. That is 274 combos, 20.7% of hands. Here is the same shove, for six hands, against both callers.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 31.6</span><h3 class="figure-title">The same shove against a tight and a wide caller</h3></div>
+  <div data-fig="columns"><script type="application/json">
+  {"label": "Expected value in chips of shoving 4,000 on the button for six hands, against a big blind who calls with 13 percent of hands and one who calls with 21 percent. Every shove is positive, and the weak hands lose the most value against the wide caller.",
+   "unit": "", "categories": ["A-T off", "5-5", "A-5 suited", "8-7 suited", "Q-9 off", "K-6 off"],
+   "series": [
+     {"name": "Tight caller", "values": [826, 843, 798, 750, 726, 707], "tone": "ink"},
+     {"name": "Wide caller", "values": [871, 821, 762, 634, 592, 584], "tone": "accent"}
+   ]}
+  </script></div>
+  <p class="figure-note">EV in chips, from tools/poker.js equities (sampled) and the arithmetic above (called pot 8,600; call frequencies count the caller&#x27;s combos left after hero&#x27;s two cards, out of 1,225). Hands: <span class="cards" role="img" aria-label="Ace of hearts, Ten of diamonds"><span class="pc r">A<i>♥</i></span><span class="pc r">T<i>♦</i></span></span>, <span class="cards" role="img" aria-label="5 of hearts, 5 of diamonds"><span class="pc r">5<i>♥</i></span><span class="pc r">5<i>♦</i></span></span>, <span class="cards" role="img" aria-label="Ace of clubs, 5 of clubs"><span class="pc">A<i>♣</i></span><span class="pc">5<i>♣</i></span></span>, <span class="cards" role="img" aria-label="8 of spades, 7 of spades"><span class="pc">8<i>♠</i></span><span class="pc">7<i>♠</i></span></span>, <span class="cards" role="img" aria-label="Queen of diamonds, 9 of hearts"><span class="pc r">Q<i>♦</i></span><span class="pc r">9<i>♥</i></span></span>, <span class="cards" role="img" aria-label="King of spades, 6 of diamonds"><span class="pc">K<i>♠</i></span><span class="pc r">6<i>♦</i></span></span>. Assumes the small blind folds.</p>
+</figure>
+
+<p>The weak hands lose about a sixth of their value when the caller widens (from 707 to 584 for <span class="cards" role="img" aria-label="King of spades, 6 of diamonds"><span class="pc">K<i>♠</i></span><span class="pc r">6<i>♦</i></span></span>), while the strong ones barely move, and <span class="cards" role="img" aria-label="Ace of hearts, Ten of diamonds"><span class="pc r">A<i>♥</i></span><span class="pc r">T<i>♦</i></span></span> even gains, because the wide caller adds hands it dominates. <span class="cards" role="img" aria-label="King of spades, 6 of diamonds"><span class="pc">K<i>♠</i></span><span class="pc r">6<i>♦</i></span></span> still shoves, at +584, which is about 1.5 big blinds. How wide could the big blind call before the shove stops paying? With equity held at the wide-range figure of 34.46%, the call branch is 0.3446 x 8,600 - 4,000 = 2,964 - 4,000 = -1,036. The shove breaks even when 1,000 x (1 - c) = 1,036 x c, so c = 1,000 / 2,036 = 49%. That is a floor, not a ceiling: a wider calling range adds weaker hands, so the equity of <span class="cards" role="img" aria-label="King of spades, 6 of diamonds"><span class="pc">K<i>♠</i></span><span class="pc r">6<i>♦</i></span></span> rises as the caller widens. Against the top 45% of hands, it has 42.45% (tools/poker.js, sampled). In most live games few players call a shove with anything like half their hands, which is why short stacks can shove light. Run the numbers again if the caller changes.</p>
+
+<p>Two limits. First, these examples have one caller, because the small blind folds. Each extra player who might wake up with a hand cuts your fold equity. Second, this is a chip EV measure. Near a payout line, chips you risk are worth more than chips you win. That adjustment is the subject of <a class="xref" href="32-icm-and-final-tables.html">Chapter 32, ICM and Final Tables</a>.</p>
+
+<details class="drill">
+  <summary>You shove 4,000 into a 1,000 pot. The big blind calls 20% of the time, and your hand has 35% against his calling range. What is the EV of the shove, if a called pot is 8,600?</summary>
+  <p>Called: 0.35 x 8,600 - 4,000 = 3,010 - 4,000 = -990. EV = 0.80 x 1,000 + 0.20 x (-990) = 800 - 198 = +602 chips.</p>
+</details>
+
+<details class="drill">
+  <summary>The same shove, but the big blind calls 40% of the time and you have 35% when called. Still a shove?</summary>
+  <p>EV = 0.60 x 1,000 + 0.40 x (-990) = 600 - 396 = +204 chips. It still shows a gain, about half a big blind, but the margin is thin, and a read that the caller is stronger than your assumed range can flip it.</p>
+</details>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Vanessa Selbst might say</p>
+  <p class="said">She would say that the shove is the cheapest weapon a short stack has, and that most players use it too late. By the time a stack is desperate, every opponent knows it, and the fold equity is gone. Pull the trigger while folds are still likely.</p>
+  <p class="note">An imagined voice: our reading of her publicly known aggressive tournament style, not her words.</p>
+</aside>
+
+<h2>The stages of a tournament</h2>
+
+<p>Every live tournament runs through the same shape, though the speed varies. Each stage pulls a different skill to the front. The labels below are common usage, not official terms, and the boundaries are fuzzy.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 31.7</span><h3 class="figure-title">Five stages of a live tournament</h3></div>
+  <ol class="timeline">
+    <li><b>Early</b><span>Deep stacks, small blinds, many players. Play your normal game and protect your chips.</span></li>
+    <li><b>Middle</b><span>Antes begin and stacks shorten. Stealing blinds and antes becomes worth real money.</span></li>
+    <li><b>Bubble</b><span>Close to the first paid place. Players protect their stacks, so shoves and pressure work.</span></li>
+    <li><b>In the money</b><span>Pay jumps start to matter. Short stacks gamble, big stacks lean on them.</span></li>
+    <li><b>Final table</b><span>Each place is worth a lot. Stack sizes and pay jumps shape every call. See <a class="xref" href="32-icm-and-final-tables.html">Chapter 32, ICM and Final Tables</a>.</span></li>
+  </ol>
+  <p class="figure-note">A summary of this section. Where one stage ends and the next begins depends on the field and the structure.</p>
+</figure>
+
+<p>In the early stage, the key plan is to stay deep and let weaker players make mistakes. A 12 M stack is a handicap you want to avoid. In the middle, antes bite, and the pot before the flop gets large enough to be worth stealing. That is also where your M starts to slide through the bands in the earlier table.</p>
+
+<p>Here is that slide for one stack in an example structure. The stack never changes, and its M goes from 40 to 2.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 31.8</span><h3 class="figure-title">One stack of 20,000 chips as the levels rise</h3></div>
+  <div data-fig="line"><script type="application/json">
+  {"label": "M for a fixed stack of 20,000 chips at six blind levels with a big blind ante: 40, 20, 13.3, 8, 4, and 2. M crosses 10, where push-fold thinking takes over, between the third and fourth levels.",
+   "yLabel": "M", "yMin": 0, "yMax": 45,
+   "categories": ["100/200", "200/400", "300/600", "500/1000", "1000/2000", "2000/4000"],
+   "series": [
+     {"name": "M at 20,000 chips", "tone": "ink", "values": [40, 20, 13.3, 8, 4, 2]}
+   ],
+   "refs": [{"y": 10, "label": "M 10"}]}
+  </script></div>
+  <p class="figure-note">Arithmetic: 20,000 / (small blind + big blind + big blind ante). Orbit costs 500, 1,000, 1,500, 2,500, 5,000, and 10,000. An example structure, not any real event.</p>
+</figure>
+
+<p>The lesson: standing still is losing. If a stack does not grow, the blinds shrink it for you. You cannot wait for aces from M 8. You need a plan before the slide reaches the line, which is why a player at M 14 should start picking spots to take chips rather than waiting.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Phil Hellmuth might say</p>
+  <p class="said">He would defend patience in the early levels. Chips lost deep are chips you cannot use later, and a deep stack lets you pick your spots. He would still agree that patience has an expiry date, and that waiting past M 10 is how people go out without a fight.</p>
+  <p class="note">An imagined voice: our reading of his publicly known tournament approach of patience and survival, not his words.</p>
+</aside>
+
+<details class="drill">
+  <summary>You have 15,000 at blinds of 300/600 with a 600 big blind ante. What are your big blinds and your M?</summary>
+  <p>Big blinds: 15,000 / 600 = 25. Orbit: 300 + 600 + 600 = 1,500. M = 15,000 / 1,500 = 10. You are on the line between raise-or-fold and push-fold thinking: small opens, with a reshove ready.</p>
+</details>
+
+<details class="drill">
+  <summary>You have 9,000 at blinds of 500/1,000 with no ante. What are your big blinds and your M?</summary>
+  <p>Big blinds: 9,000 / 1,000 = 9. Orbit: 500 + 1,000 = 1,500. M = 9,000 / 1,500 = 6. With no ante, M 6 is only 9 big blinds, and any open commits you. This is push-or-fold play. Here the big blind count tells you more than M.</p>
+</details>
+
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>Stack to big blinds and M at a glance</h2>
+  <p><strong>The shortcut.</strong> Divide your chips by the big blind to get big blinds. Then, with a big blind ante and the small blind at half the big blind, an orbit costs 2.5 big blinds, so M is big blinds times 0.4. With no ante, an orbit costs 1.5 big blinds, so M is big blinds times two thirds.</p>
+  <p class="math">24,000 chips at 400/800 with an 800 big blind ante: 24,000 / 800 = 30 big blinds, and 30 x 0.4 = M 12. Check: 24,000 / (400 + 800 + 800) = 12.</p>
+  <p>Run it backward too. With a big blind ante, M 10 is 10 / 0.4 = 25 big blinds, and 10 big blinds is M 4. Keep that pair in your head, because M and big blinds name very different depths.</p>
+  <p><strong>Where it bends.</strong> The 0.4 only fits a big blind ante. If every player pays an ante, the orbit costs more at a full table. At 400/800 with 100 from each of nine players, the orbit is 400 + 800 + 900 = 2,100, so M is 24,000 / 2,100 = 11.4, not 12. When seats empty, per-player antes fall and M rises. Check the structure sheet, then do the division once.</p>
+</aside>
         </div>
       </article>
 
@@ -49,5 +295,6 @@
   </div>
 
   <script src="../js/version.js"></script>
+  <script src="../js/figures.js"></script>
 </body>
 </html>
