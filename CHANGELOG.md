@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.37.0] - 2026-11-21
+
+### Added
+
+- Chapter 33, Heads-Up Play: Heads-up play: wider ranges, a baseline button range and big blind defense, MDF against a raise every hand, pressure, and closing out a short-stacked match.
+
 ## [0.36.0] - 2026-11-21
 
 ### Added

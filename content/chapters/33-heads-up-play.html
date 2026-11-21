@@ -1,0 +1,232 @@
+<p class="lead">Heads-up poker strips the game to two seats and two blinds. This chapter shows how far ranges stretch, how to defend against a player who raises every hand, how pressure pays, and how to close out a match.</p>
+
+<h2>Two seats, two blinds</h2>
+
+<p>Heads-up means one opponent. Two things change at once. First, there are no other players to fold, so you play far more hands than at a full table. Second, the blinds do all the work: the pot is never empty, and whoever ignores it bleeds chips.</p>
+
+<p>The rule that surprises new players: the button posts the small blind. That seat acts first before the flop and last on every street after it. The other player posts the big blind, acts last before the flop, and acts first on the flop, turn, and river. (Position is covered in {{ch:3}}.) Ask the dealer to confirm the rule before a live match, since house practice can differ.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Heads-up at $2/$5, after a raise</h3></div>
+  <div data-fig="table"><script type="application/json">
+  {"label": "A heads-up table. The button, who also posts the small blind, has raised to 15 dollars. The big blind, holding king ten offsuit, has 5 dollars in and acts next.",
+   "button": 1, "pot": "$20",
+   "seats": [
+     {"pos": "BB", "stack": "$495", "bet": "$5", "cards": "Ks Td", "state": "hero"},
+     {"pos": "BTN/SB", "stack": "$485", "bet": "$15", "state": "villain"}
+   ]}
+  </script></div>
+  <p class="figure-note">An example hand, not a real hand history. Both players started with $500. The button posted $2 and raised to $15, leaving $485. The big blind posted $5, leaving $495. The pot is $15 + $5 = $20.</p>
+</figure>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">What each seat has going for it</h3></div>
+  <div class="compare">
+    <div class="a"><h4>Button and small blind</h4><p>Acts last on every street after the flop. Sees what the opponent does before choosing. Pays for it before the flop: it acts first and has only a small blind in, so it must add more chips to play a hand.</p></div>
+    <div class="b"><h4>Big blind</h4><p>Already has a full blind in. Gets a discount on calling a raise. Acts last preflop, but first on every later street, so it plays most pots out of position.</p></div>
+  </div>
+  <p class="figure-note">A summary of the section.</p>
+</figure>
+
+<h2>Why nearly every hand plays</h2>
+
+<p>In a full ring game, a hand like [[7s 2d]] is easy to fold: eight players are behind you, and one of them probably has something. Heads-up, only one player has cards. Your opponent holds a random-looking pair of cards most of the time, and the average hand is weak.</p>
+
+<p>The bars below show how each hand does against a completely random hand. The worst hand in poker, seven-deuce offsuit, still wins about a third of the time. A king and nine offsuit is a clear favorite. Even [[Js 4d]] is only a few points short of even.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Equity against one random hand</h3></div>
+  <div data-fig="bars"><script type="application/json">
+  {"label": "All-in preflop equity against a random hand for nine hands, from 85 percent for aces down to 35 percent for seven-deuce offsuit. Pocket deuces and nine-eight suited are near 50 percent.",
+   "unit": "%", "max": 100,
+   "items": [
+     {"label": "A-A", "value": 85.2, "tone": "ink"},
+     {"label": "A-T offsuit", "value": 62.7},
+     {"label": "K-Q offsuit", "value": 61.5},
+     {"label": "K-9 offsuit", "value": 57.8},
+     {"label": "A-5 offsuit", "value": 57.7},
+     {"label": "9-8 suited", "value": 50.8, "tone": "accent2"},
+     {"label": "2-2", "value": 50.3, "tone": "accent2"},
+     {"label": "J-4 offsuit", "value": 46.1},
+     {"label": "7-2 offsuit", "value": 34.6, "tone": "accent"}
+   ]}
+  </script></div>
+  <p class="figure-note">From tools/poker.js, each hand against all 1,225 hands that do not share its cards. Sampled over 400,000 deals, good to about 0.2 points. A real opponent does not hold a random hand, so treat these as the floor of the argument, not a strategy.</p>
+</figure>
+
+<p>This is why heads-up ranges widen. When your opponent's average hand is weak, your marginal hands are no longer marginal. An ace with a small kicker, such as [[As 5d]], wins about 58 percent of the time against a random hand (57.7 percent from the tool). Against a real opponent who also plays wide, it is still a hand worth playing.</p>
+
+<h2>The widest ranges you will play</h2>
+
+<p>The figure below shows one baseline for the button's raising range. It is a judgment, not a solver result: a sketch of the hands worth a raise at 100 big blinds against a typical opponent. It holds 922 of the 1,326 starting hand combinations, which is 69.5 percent. A typical button open at a full table is far narrower. (Counting combinations is in {{ch:14}}, and thinking in ranges is in {{ch:13}}.) Theory-based heads-up charts often play even more hands, and some limp part of their range. Treat this picture as a starting point to compare against.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">A baseline button raising range</h3></div>
+  <div data-fig="range"><script type="application/json">
+  {"label": "The starting hand grid with a heads-up button raising range shaded: every pair, every suited ace, king, queen, and jack, most other suited hands, and most offsuit hands with a high card. About 70 percent of hands.",
+   "groups": [
+     {"name": "Raise", "tone": "ink", "hands": "22+,A2s+,K2s+,Q2s+,J2s+,T3s+,94s+,84s+,74s+,63s+,53s+,43s,A2o+,K2o+,Q4o+,J6o+,T6o+,96o+,86o+,75o+,65o"}
+   ]}
+  </script></div>
+  <p class="figure-note">A baseline and a judgment, not solver output. Counted with tools/poker.js from the range string: 922 combos, 69.5 percent.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Linus Loeliger might say</p>
+  <p class="said">He would call this range a place to start, not a rule. Learn the equilibrium baseline first, he would say, because you cannot choose a good deviation until you know what you are deviating from. Then use your read of the one person across from you to move away from it.</p>
+  <p class="note">An imagined voice: our reading of his reputation for game theory optimal play at high-stakes online cash games, as summarized in the Oval Table reference, not his words.</p>
+</aside>
+
+<p>Notice what is missing: only the weakest offsuit hands, such as [[7s 2d]]. Expect the same width from your opponent. Their range is wide too, so the hand you hold matters less than the pattern of how it hits the flop.</p>
+
+<h2>Defending against a raise every hand</h2>
+
+<p>The most common heads-up pattern is simple: the button raises almost every hand. If you fold too often, that raise prints money. The tool for this is <strong>minimum defense frequency</strong> (MDF): the share of your range that must continue so a raise with any two cards cannot profit automatically. (The theory is in {{ch:22}}.)</p>
+
+<p class="math">MDF = pot / (pot + new chips bet)</p>
+
+<p>Work in big blinds, with a small blind of half a big blind. Before the raise, the pot holds the two blinds: 0.5 plus 1, or 1.5. The button already has 0.5 in, so a raise to 2.5 big blinds puts in 2 new chips. That gives 1.5 / (1.5 + 2) = 42.9 percent. A raise to 3 big blinds puts in 2.5 new chips: 1.5 / 4 = 37.5 percent. In short, MDF = 1.5 / (1 + r) for a raise to r big blinds. Bigger raises ask for less defense.</p>
+
+<p>There is a second number, and the two are not the same. The price of a call is what equity you need. You already posted a big blind, so you pay only the difference. Against a raise to r big blinds you call r - 1 to win a pot of r + 1, so you need (r - 1) / (2r). That is 30 percent against 2.5 big blinds. The figure below puts both numbers side by side.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Defense needed, and the price of a call</h3></div>
+  <div data-fig="line"><script type="application/json">
+  {"label": "As the button raise grows from 2 to 4 big blinds, the minimum defense frequency falls from 50 percent to 30 percent, while the equity the big blind needs to call rises from 25 percent to 37.5 percent.",
+   "xLabel": "Raise size in big blinds", "xUnit": "bb", "yUnit": "%", "yMin": 0, "yMax": 60,
+   "series": [
+     {"name": "MDF (share to defend)", "tone": "ink", "points": [[2, 50], [2.5, 42.9], [3, 37.5], [4, 30]]},
+     {"name": "Equity needed to call", "tone": "accent", "points": [[2, 25], [2.5, 30], [3, 33.3], [4, 37.5]]}
+   ],
+   "marks": [{"x": 2.5, "y": 42.9, "label": "2.5bb: 42.9%"}]}
+  </script></div>
+  <p class="figure-note">Arithmetic, in big blinds with a 0.5 small blind. MDF = 1.5 / (1 + r). Equity needed = (r - 1) / (2r). The tool's odds command with a pot of 1.5 and a bet of 2 gives the same 42.86 percent MDF.</p>
+</figure>
+
+<p>Turn the 42.9 percent into hands. Against a raise to 2.5 big blinds, the big blind should continue with about 43 of every 100 hands at the least. The sketch below is a baseline defending range holding 634 combinations, 47.8 percent. It is a judgment. Defending above the floor makes sense because the price is good: you need only 30 percent equity, and many hands have that much against a wide range. Position is why you do not call with everything that clears 30 percent. You play these pots out of position and realize less of your equity, so the weakest offsuit hands still fold.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">A baseline big blind defense</h3></div>
+  <div data-fig="range"><script type="application/json">
+  {"label": "The starting hand grid with a big blind defending range against a button raise: strong hands and two suited wheel aces shaded as raises, and a wide band of pairs, suited hands, and offsuit hands with a high card shaded as calls. About 48 percent of hands.",
+   "groups": [
+     {"name": "Raise back", "tone": "accent", "hands": "TT+,AQs+,AKo,A5s,A4s"},
+     {"name": "Call", "tone": "accent2", "hands": "22-99,A2s-A3s,A6s-AJs,K2s+,Q2s+,J4s+,T6s+,96s+,85s+,75s+,64s+,54s,A2o-AQo,K7o+,Q8o+,J8o+,T8o+,98o"}
+   ]}
+  </script></div>
+  <p class="figure-note">A baseline and a judgment, not solver output. The suited wheel aces are raised as bluffs because they block strong aces and can make straights and flushes when called. Counted with tools/poker.js: 58 raise combos and 576 call combos, 634 in all.</p>
+</figure>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Defending 100 raised hands</h3></div>
+  <div data-fig="dots"><script type="application/json">
+  {"label": "Out of 100 hands dealt to the big blind against a raise to 2.5 big blinds, about 48 continue and 52 fold.",
+   "parts": [
+     {"label": "Continue (call or raise back)", "value": 48, "tone": "accent2"},
+     {"label": "Fold", "value": 52, "tone": "paper"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: 634 / 1,326 = 47.81 percent, rounded to 48. The MDF floor is 42.9 percent.</p>
+</figure>
+
+<p>Here is the whole idea on one hand. You are in the big blind with [[Ks Td]]. The button raises to $15. You call $10 into a pot of $20, so you need 10 / (20 + 10) = 33.3 percent. Your hand has 56.3 percent against the baseline raising range earlier. That is a call with room to spare.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">K-T in the big blind, to the turn</h3></div>
+  <div class="table-scroll">
+    <table class="hand-log">
+      <thead><tr><th>Street</th><th>Board</th><th>Action</th><th>Pot</th></tr></thead>
+      <tbody>
+        <tr><td>Preflop</td><td>Hero: [[Ks Td]]</td><td>Button raises to $15. Hero calls $10 and needs 10 / 30 = 33%. Hero has 56.3% against the range.</td><td class="pot">$30</td></tr>
+        <tr><td>Flop</td><td>[[Qh 7s 3c]]</td><td>Hero checks. Button bets $15. Hero needs 15 / 60 = 25% and has 41.6% against the whole range. Hero calls.</td><td class="pot">$60</td></tr>
+        <tr><td>Turn</td><td>[[Qh 7s 3c 2d]]</td><td>Hero checks. Button checks.</td><td class="pot">$60</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">An example hand in a $2/$5 game, not a real hand history. Equities from tools/poker.js against the baseline raising range: preflop sampled, flop exact. A betting range is stronger than the whole range, so the real flop equity is lower than 41.6 percent. A call is still reasonable at that price against a button who bets often.</p>
+</figure>
+
+<details class="drill">
+  <summary>The button raises to 3 big blinds. What share must you defend, and what equity do you need to call?</summary>
+  <p>The button adds 2.5 new chips to its 0.5 small blind. MDF = 1.5 / (1.5 + 2.5) = 37.5 percent. Equity needed = (3 - 1) / (2 x 3) = 2 / 6 = 33.3 percent. The two numbers are close here, but they answer different questions.</p>
+</details>
+
+<details class="drill">
+  <summary>The button raises to 4 big blinds in a $2/$5 game (that is $20). What do you need to call?</summary>
+  <p>You posted $5 and call $15 more. The pot after your call is $20 + $20 = $40. You need 15 / 40 = 37.5 percent, which matches (4 - 1) / (2 x 4).</p>
+</details>
+
+<h2>Pressure, and what it costs</h2>
+
+<p>Defense is half the game. The other half is making the opponent defend. When both players have wide ranges, most flops miss most hands. The player who bets forces the other to find a hand or give up.</p>
+
+<p>Pressure is only profitable when the fold rate is high enough. A bet of half a pot needs the opponent to fold one time in three. The tree prices a bet on the flop in the hand above, where the button bets $15 into $30.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">The value of a $15 flop bluff into $30</h3></div>
+  <ul class="tree">
+    <li><span class="node root">Bet $15 into $30 with air</span>
+      <ul>
+        <li><span class="edge">Big blind folds 40% of the time</span><span class="node win">Win $30</span></li>
+        <li><span class="edge">Big blind calls 60% of the time</span><span class="node lose">Lose $15</span></li>
+      </ul>
+    </li>
+  </ul>
+  <p class="math">EV = 0.40 x $30 + 0.60 x (-$15) = $12 - $9 = +$3</p>
+  <p class="figure-note">Arithmetic. The 40 percent fold rate is an assumption for the example. Break-even is 15 / 45 = 33.3 percent. This ignores the chance of winning when called.</p>
+</figure>
+
+<p>This is MDF seen from the other side. Against a half-pot bet, the big blind must defend 30 / 45 = two hands in three. If it defends more than that, the bluff does not profit on its own. When you see a player fold much more than a third, bet more. When you see a player who never folds, bet your good hands for value and stop bluffing. (See {{ch:18}} on bluffing and {{ch:24}} on exploiting deviations.)</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Doyle Brunson might say</p>
+  <p class="said">He would tell you that heads-up is a game of nerve. The player who raises, bets, and keeps raising makes the other player guess every time. He would point out that a passive opponent hands over the pot just by waiting for a hand that never arrives, and that your aggression is what turns a weak hand into a winner.</p>
+  <p class="note">An imagined voice: our reading of the aggression-first ideas in Super/System, not his words.</p>
+</aside>
+
+<p>Pressure has a price, though. A player who bets every flop with no plan will meet a player who raises back. Choose a few opponents to pressure and watch what they do when the bet comes. A player who folds to a second barrel is a target. A player who check-raises light is a danger, and you should slow down.</p>
+
+<h2>Closing out a match</h2>
+
+<p>Heads-up matches end when one player holds all the chips. The shorter the stacks get, the less the flop matters and the more the first decision matters. At about 10 big blinds, a common simplification is push or fold: the button either moves all in or folds, and the big blind either calls or folds. Stronger players also use small raises and limps at this depth, but push or fold is a sound baseline. (Stack depth is in {{ch:31}}. Prize pools and pay jumps are in {{ch:32}}.)</p>
+
+<p>Take a shove for 10 big blinds by the button. The pot is 10 + 1 = 11 big blinds. You call 9 to win 11, so you need 9 / (11 + 9) = 45 percent. Check the equities from the bar chart earlier against this line.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">Calling a 10 big blind shove, worst case</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Hand</th><th>Equity vs random</th><th>Needed</th><th>Call?</th></tr></thead>
+      <tbody>
+        <tr><td>K-9 offsuit</td><td>57.8%</td><td>45%</td><td class="good">Call</td></tr>
+        <tr><td>9-8 suited</td><td>50.8%</td><td>45%</td><td class="good">Call</td></tr>
+        <tr><td>2-2</td><td>50.3%</td><td>45%</td><td class="good">Call</td></tr>
+        <tr><td>J-4 offsuit</td><td>46.1%</td><td>45%</td><td>Barely</td></tr>
+        <tr><td>7-2 offsuit</td><td>34.6%</td><td>45%</td><td class="bad">Fold</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Arithmetic and tools/poker.js (sampled, about 0.2 points). This is the worst case: the shover holds any two cards. Real shovers hold a narrower range, so call less than this. Chips alone decide here, with no prize-pool effects.</p>
+</figure>
+
+<p>The table is the limit, not the plan. Hands like [[Js 4d]] only call if the shover really does shove every hand. Against a player who shoves about 70 percent of hands (the baseline button range earlier), [[Js 4d]] has 39.6 percent, short of the 45 it needs, so the same call loses money. Use the numbers to know the edge of the range, then shrink it as your read demands.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Johnny Chan might say</p>
+  <p class="said">He would talk about finishing. Getting heads-up is half the job, he would say, because the winner is the one who stays calm when the stacks are shallow and does not give the other player a free exit. Keep the pressure on, watch how the other player reacts, and take the title when it is there.</p>
+  <p class="note">An imagined voice: our reading of his reputation for heads-up play and for closing out the 1987 and 1988 Main Events, as summarized in the Oval Table reference, not his words.</p>
+</aside>
+
+<details class="drill">
+  <summary>You have $500 and the big blind is $5. The button shoves $500. What equity do you need to call?</summary>
+  <p>The stack is 500 / 5 = 100 big blinds. You call 99 more into a pot of 100 + 1 = 101. You need 99 / (101 + 99) = 49.5 percent. That is far tighter than the 10 big blind case, because the price is nearly even money.</p>
+</details>
+
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>How wide to defend against a raise every hand</h2>
+  <p><strong>The shortcut.</strong> Add one to the raise size in big blinds, then divide the blinds, 1.5, by that. The added one accounts for the small blind the raiser already posted.</p>
+  <p class="math">Raise to 2.5bb: 1.5 / 3.5 = 3 / 7, about 43%. Raise to 3bb: 1.5 / 4 = 37.5%.</p>
+  <p><strong>Worked example.</strong> At $2/$5 the button raises to $15, which is 3 big blinds. The shortcut says 37.5 percent. In real chips the small blind is $2, not $2.50: the blinds are $7 and the button adds $13, so MDF = 7 / 20 = 35 percent. Either way, of 100 hands, about 35 to 38 continue at the least.</p>
+  <p><strong>Where it bends.</strong> MDF is a floor, not a plan. Against a raise-every-hand player, the good price usually justifies defending above the floor, but out of position you realize less equity, so the weakest hands still fold. Against a player who raises only strong hands, the premise is false, and you should fold more. The call price (30 percent at 2.5 big blinds) is a separate number from MDF (42.9 percent).</p>
+</aside>
