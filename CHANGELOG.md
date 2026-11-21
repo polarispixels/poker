@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.29.0] - 2026-11-21
+
+### Added
+
+- Chapter 17, Playing the Turn and River: Chapter 17 follows one $2/$5 hand through the turn and river: barreling, pot control, thin value, pricing the river call, and SPR in Table Math.
+
 ## [0.28.0] - 2026-11-21
 
 ### Added

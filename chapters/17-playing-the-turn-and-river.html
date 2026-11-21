@@ -22,13 +22,249 @@
     <main>
       <article class="chapter">
         <header class="chapter-head">
-          <p class="chapter-kicker label">Chapter 17 <span class="badge">To come</span></p>
+          <p class="chapter-kicker label">Chapter 17 <span class="badge">Preliminary draft</span></p>
           <h1 class="chapter-title">Playing the Turn and River</h1>
           <p class="standfirst">Barreling, pot control, thin value, and the most expensive decision.</p>
         </header>
 
         <div class="prose chapter-body">
-<p class="lead">This page has not been written yet. The book is being written and published one chapter at a time.</p>
+<p class="lead">The flop is cheap and the river is not. This chapter gives you a way to decide which turn cards deserve a second bet, when to keep the pot small, when a thin bet still earns money, and how to price the river decision, the one that costs the most when you get it wrong.</p>
+
+<h2>The turn is where the pot gets big</h2>
+<p>Bets on the flop are small next to the stacks behind them. By the turn the pot has more than doubled, and by the river it can be four or five times what it was on the flop. Every mistake on the later streets costs more than the same mistake earlier. That is why a hand you played fine on the flop can still lose a buy-in.</p>
+<p>We follow one example hand through the chapter. It is a live $2/$5 game, nine-handed, $500 stacks. You raise to $15 in the cutoff with <span class="cards" role="img" aria-label="King of clubs, Jack of diamonds"><span class="pc">K<i>♣</i></span><span class="pc r">J<i>♦</i></span></span>. The big blind calls and everyone else folds. The pot is $15 + $15 + $2 = $32. The flop is <span class="cards" role="img" aria-label="Jack of hearts, 7 of clubs, 2 of spades"><span class="pc r">J<i>♥</i></span><span class="pc">7<i>♣</i></span><span class="pc">2<i>♠</i></span></span>, you bet $20 (a c-bet, a continuation bet, as covered in <a class="xref" href="16-continuation-betting.html">Chapter 16, Continuation Betting</a>), and the big blind calls. Now the pot is $72, and the turn is the <span class="cards" role="img" aria-label="9 of diamonds"><span class="pc r">9<i>♦</i></span></span>.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 17.1</span><h3 class="figure-title">The turn spot</h3></div>
+  <div data-fig="table"><script type="application/json">
+  {"label": "Nine-handed table. Hero in the cutoff holds king of clubs, jack of diamonds on a board of jack of hearts, seven of clubs, two of spades, nine of diamonds. The big blind called the flop bet. The pot is 72 and each player has 465 behind.",
+   "button": 1, "pot": "$72", "board": "Jh 7c 2s 9d",
+   "seats": [
+     {"pos": "CO", "stack": "$465", "cards": "Kc Jd", "state": "hero"},
+     {"pos": "BTN", "state": "fold"},
+     {"pos": "SB", "state": "fold"},
+     {"pos": "BB", "stack": "$465", "state": "villain"},
+     {"pos": "UTG", "state": "fold"},
+     {"pos": "UTG+1", "state": "fold"},
+     {"pos": "MP", "state": "fold"},
+     {"pos": "LJ", "state": "fold"},
+     {"pos": "HJ", "state": "fold"}
+   ]}
+  </script></div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history. Stacks: $500 minus $15 minus $20 = $465.</p>
+</figure>
+
+<p>Look at what the street has done to the stacks. The <strong>stack-to-pot ratio</strong>, or SPR, is the effective stack divided by the pot. (The effective stack is the smaller of the two stacks in the hand.) It tells you how many pots are left to bet.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 17.2</span><h3 class="figure-title">Pot and stack, street by street</h3></div>
+  <div data-fig="columns"><script type="application/json">
+  {"label": "Pot size and effective stack at the start of the flop, turn, and river, after a $20 flop bet and a $36 turn bet are called. The pot grows from 32 to 144 while the stack shrinks from 485 to 429.",
+   "unit": "$", "categories": ["Flop", "Turn", "River"],
+   "series": [
+     {"name": "Pot", "values": [32, 72, 144], "tone": "gold"},
+     {"name": "Effective stack", "values": [485, 465, 429], "tone": "ink"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic. Flop: $15 + $15 + $2 = $32. Turn: $32 + $20 + $20 = $72. River: $72 + $36 + $36 = $144, after a $36 turn bet and call. Stacks: $500 - $15 = $485, then $465, then $429.</p>
+</figure>
+
+<p>The SPR went from 485 / 32 = 15.2 on the flop to 465 / 72 = 6.5 on the turn, and it will be 429 / 144 = 3.0 on the river. Two medium bets, $20 and $36, turn a deep-stacked hand into a nearly committed one. Plan the whole hand on the flop, because the later bets are forced by the earlier ones.</p>
+
+<h2>Barreling: which turn cards to keep betting</h2>
+<p>A <strong>barrel</strong> is a bet on a street after you already bet the one before. Firing a second barrel means betting the turn. You should not fire on autopilot. A c-bet works because most flops miss most hands. The turn is different: your opponent called, so his range is now stronger and narrower than before (see <a class="xref" href="13-thinking-in-ranges.html">Chapter 13, Thinking in Ranges</a> for building ranges).</p>
+<p>The question is what the new card did. Take a different hand: you hold <span class="cards" role="img" aria-label="Ace of clubs, Queen of hearts"><span class="pc">A<i>♣</i></span><span class="pc r">Q<i>♥</i></span></span> on a flop of <span class="cards" role="img" aria-label="Queen of spades, 8 of diamonds, 3 of clubs"><span class="pc">Q<i>♠</i></span><span class="pc r">8<i>♦</i></span><span class="pc">3<i>♣</i></span></span>, you bet $20, and the big blind calls. His calling range, as an assumption, is QJs, QJo, QTs, Q9s, Q8s, KQs, KQo, A8s, 98s, 87s, T9s, J9s, 88, 99, TT, and 77. Here is your equity against that range on six different turn cards: <span class="cards" role="img" aria-label="Ace of spades"><span class="pc">A<i>♠</i></span></span>, <span class="cards" role="img" aria-label="2 of hearts"><span class="pc r">2<i>♥</i></span></span>, <span class="cards" role="img" aria-label="7 of hearts"><span class="pc r">7<i>♥</i></span></span>, <span class="cards" role="img" aria-label="King of spades"><span class="pc">K<i>♠</i></span></span>, <span class="cards" role="img" aria-label="9 of spades"><span class="pc">9<i>♠</i></span></span>, and <span class="cards" role="img" aria-label="Jack of diamonds"><span class="pc r">J<i>♦</i></span></span>.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 17.3</span><h3 class="figure-title">The same hand on six turn cards</h3></div>
+  <div data-fig="bars"><script type="application/json">
+  {"label": "Equity of ace queen on a queen, eight, three flop against a fixed calling range, by turn card: ace of spades 90.5 percent, deuce of hearts 86.9, seven of hearts 77.8, king of spades 75.8, nine of spades 69.9, and jack of diamonds 65.9.",
+   "unit": "%", "max": 100,
+   "items": [
+     {"label": "As: two pair", "value": 90.5, "tone": "accent2"},
+     {"label": "2h: a blank", "value": 86.9},
+     {"label": "7h: hits 87s, 77", "value": 77.8},
+     {"label": "Ks: overcard", "value": 75.8},
+     {"label": "9s: hits 99, T9, 98", "value": 69.9},
+     {"label": "Jd: hits QJ, J9, T9", "value": 65.9, "tone": "accent"}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact, from tools/poker.js. Hero is <span class="cards" role="img" aria-label="Ace of clubs, Queen of hearts"><span class="pc">A<i>♣</i></span><span class="pc r">Q<i>♥</i></span></span>, board <span class="cards" role="img" aria-label="Queen of spades, 8 of diamonds, 3 of clubs"><span class="pc">Q<i>♠</i></span><span class="pc r">8<i>♦</i></span><span class="pc">3<i>♣</i></span></span> plus the turn card, against the 16 hand types named above. Suits matter: the same rank in another suit moves the figure by up to two points. On the flop, before any turn card, you have 79.5%. The range itself is an assumption.</p>
+</figure>
+
+<p>The hand never changed, yet its strength moved by 25 points. A good turn to barrel is a card that helps you or that your opponent's calling range misses. A bad one is a card that connects with many of the hands he called with. Check each new card against his calling range before you bet again.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Doyle Brunson might say</p>
+  <p class="said">He would say you bet the turn too rarely. A caller who has already shown weakness by not raising is easy to push off the hand, and the player who keeps applying pressure keeps the initiative. Why give a free card to a hand that is drawing?</p>
+  <p class="note">An imagined voice: our reading of the aggression-first approach in Super/System (1979), not his words.</p>
+</aside>
+
+<p>The counterweight is price. A bluff with no equity must work often. On a $72 pot, a $50 bet needs the villain to fold 41% of the time (50 / (72 + 50)). A draw changes that. Say you hold <span class="cards" role="img" aria-label="Ace of hearts, 5 of hearts"><span class="pc r">A<i>♥</i></span><span class="pc r">5<i>♥</i></span></span> on a turn of <span class="cards" role="img" aria-label="King of hearts, 9 of clubs, 4 of hearts, Ten of spades"><span class="pc r">K<i>♥</i></span><span class="pc">9<i>♣</i></span><span class="pc r">4<i>♥</i></span><span class="pc">T<i>♠</i></span></span>. You have nine outs to the nut flush, and with one card to come you complete 9 / 46 = 19.57% of the time. A <strong>semi-bluff</strong> is a bet with a hand that is not yet best but can improve. It wins two ways: he folds, or you hit.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 17.4</span><h3 class="figure-title">A $50 semi-bluff into $72</h3></div>
+  <ul class="tree">
+    <li><span class="node root">Bet $50 into $72 with a flush draw</span>
+      <ul>
+        <li><span class="edge">He folds 30% of the time (an assumption)</span><span class="node win">Win $72</span></li>
+        <li><span class="edge">He calls 70% of the time</span><span class="node lose">Average result: 19.57% x $172 - $50 = -$16.35</span></li>
+      </ul>
+    </li>
+  </ul>
+  <p class="math">EV = 0.30 x $72 + 0.70 x (-$16.35) = $21.60 - $11.44 = +$10.16</p>
+  <p class="figure-note">Arithmetic. Pot after a call: $72 + $50 + $50 = $172. This counts only the nine flush outs, treats every flush as a winner, and ignores bets on the river. Break-even fold rate: 16.35 / (72 + 16.35) = 18.5%.</p>
+</figure>
+
+<p>The draw cut the fold rate you need from 41% to about 19%. That is why good players barrel draws more than bluffs with nothing. The next chapter, <a class="xref" href="18-bluffing-and-semi-bluffing.html">Chapter 18, Bluffing and Semi-Bluffing</a>, covers bluff selection in full, and <a class="xref" href="20-bet-sizing.html">Chapter 20, Bet Sizing</a> covers how the size of the bet moves these numbers.</p>
+
+<h2>Pot control: keeping a medium hand affordable</h2>
+<p><strong>Pot control</strong> means choosing a smaller bet, or a check, so that the pot matches the strength of your hand. A one-pair hand is good for a pot of $72 and often not good for a pot of $400. The more money that goes in, the more your opponent's range shrinks toward hands that beat you.</p>
+<p>Go back to <span class="cards" role="img" aria-label="King of clubs, Jack of diamonds"><span class="pc">K<i>♣</i></span><span class="pc r">J<i>♦</i></span></span> on <span class="cards" role="img" aria-label="Jack of hearts, 7 of clubs, 2 of spades, 9 of diamonds"><span class="pc r">J<i>♥</i></span><span class="pc">7<i>♣</i></span><span class="pc">2<i>♠</i></span><span class="pc r">9<i>♦</i></span></span>. Here is your equity against his flop calling range and two parts of it, all assumptions for the example. The hands that would raise you for value: 99, 77, 22, J9s, 97s, T8s (a straight), and AJ. The draws and weaker hands: T9s, 98s, 87s, A7s, QTs, KQs, AQs, AKs, TT, 88, 66, and 55. The whole range is those two groups plus the worse jacks: QJ, JT, KJs, and J8s.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 17.5</span><h3 class="figure-title">Top pair against three parts of a range</h3></div>
+  <div data-fig="bars"><script type="application/json">
+  {"label": "Equity of king jack on a jack, seven, deuce, nine board: 64.8 percent against the whole calling range, 87.0 percent against draws and weaker hands, and 4.2 percent against hands that raise for value.",
+   "unit": "%", "max": 100,
+   "items": [
+     {"label": "Whole calling range", "value": 64.8, "note": "94 combos", "tone": "ink"},
+     {"label": "Draws, weaker hands", "value": 87.0, "note": "50 combos", "tone": "accent2"},
+     {"label": "Value raises", "value": 4.2, "note": "25 combos", "tone": "accent"}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact, from tools/poker.js. A <em>combo</em> is one specific two-card holding (<a class="xref" href="14-combinatorics.html">Chapter 14, Combinatorics</a>). The three ranges are assumptions for the example, not measured data.</p>
+</figure>
+
+<p>You are a big favorite against most of what he holds and nearly drawing dead against the few hands that raise. So bet to get value from the weaker hands, keep the bet modest, and do not build a pot you cannot fold out of. A half-pot bet of $36 does that job. With a hand that is only second pair, checking the turn keeps the pot at $72 and lets you reach the river cheaply. The check also gives a weaker hand the chance to bluff at a pot you can still call.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Phil Galfond might say</p>
+  <p class="said">He would ask you to think about your whole range, not one hand. If you only check the turn with weak hands, you become easy to attack. A strong player checks some good hands too, so that a check does not look like a confession. He is known as a teacher, and our reading is that he would want you to understand why the line works before copying it.</p>
+  <p class="note">An imagined voice: our reading of the range-based coaching approach associated with Run It Once, not his words.</p>
+</aside>
+
+<p>Live games add a wrinkle. In most low-stakes live games, players do not check-raise the turn without a strong hand. The raise in the figure above is rare, and when it comes, the 4.2% is a warning. A call of a turn raise with one pair is usually a mistake against this kind of opponent. That is a judgment about player tendencies, so adjust it to the person in front of you (<a class="xref" href="19-hand-reading.html">Chapter 19, Hand Reading</a>).</p>
+
+<h2>Thin value: betting when you are only a little ahead</h2>
+<p><strong>Thin value</strong> is a bet with a hand that is only slightly better than the hands that will call. The test is short: when you are called, are you more often ahead or behind? The bet wins its size when a worse hand calls and loses its size when a better hand calls. So the bet is profitable when worse hands that call outnumber better hands that call. Ties and raises aside, that is all there is to it.</p>
+<p>Here is the whole example hand. You bet the turn $36, the big blind called, and the river is the <span class="cards" role="img" aria-label="4 of diamonds"><span class="pc r">4<i>♦</i></span></span>, a blank.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 17.6</span><h3 class="figure-title">The example hand, street by street</h3></div>
+  <div class="table-scroll">
+    <table class="hand-log">
+      <thead><tr><th>Street</th><th>Board</th><th>Action</th><th>Pot</th></tr></thead>
+      <tbody>
+        <tr><td>Preflop</td><td>Hero: <span class="cards" role="img" aria-label="King of clubs, Jack of diamonds"><span class="pc">K<i>♣</i></span><span class="pc r">J<i>♦</i></span></span></td><td>Hero raises to $15 in the cutoff. The big blind calls.</td><td class="pot">$32</td></tr>
+        <tr><td>Flop</td><td><span class="cards" role="img" aria-label="Jack of hearts, 7 of clubs, 2 of spades"><span class="pc r">J<i>♥</i></span><span class="pc">7<i>♣</i></span><span class="pc">2<i>♠</i></span></span></td><td>Hero bets $20. Villain calls.</td><td class="pot">$72</td></tr>
+        <tr><td>Turn</td><td><span class="cards" role="img" aria-label="Jack of hearts, 7 of clubs, 2 of spades, 9 of diamonds"><span class="pc r">J<i>♥</i></span><span class="pc">7<i>♣</i></span><span class="pc">2<i>♠</i></span><span class="pc r">9<i>♦</i></span></span></td><td>Hero bets $36, half the pot. Villain calls.</td><td class="pot">$144</td></tr>
+        <tr><td>River</td><td><span class="cards" role="img" aria-label="Jack of hearts, 7 of clubs, 2 of spades, 9 of diamonds, 4 of diamonds"><span class="pc r">J<i>♥</i></span><span class="pc">7<i>♣</i></span><span class="pc">2<i>♠</i></span><span class="pc r">9<i>♦</i></span><span class="pc r">4<i>♦</i></span></span></td><td>Hero bets $50, about a third of the pot. The decision is whether this bet earns money.</td><td class="pot">$144</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">An example hand in a $2/$5 game. Not a real hand history. Pot before the river bet: $72 + $36 + $36 = $144.</p>
+</figure>
+
+<p>Suppose the villain would call a $50 bet with these hands: QJ, JT, J8s, AJ, KJs, J9s, J7s, 99, 77, 88, TT, 98s, and A9s. That is 54 combos once the cards you can see are removed. Counting them against your top pair with a king kicker gives 36 combos that are worse than you, 17 that are better, and 1 that ties.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 17.7</span><h3 class="figure-title">Who calls a $50 river bet</h3></div>
+  <div data-fig="split"><script type="application/json">
+  {"label": "Of 54 calling combos, 66.7 percent are worse than top pair with a king kicker and 33.3 percent are better or tied.",
+   "rows": [
+     {"label": "Calling combos", "note": "54 in all", "parts": [{"label": "Worse than you", "value": 66.7, "tone": "accent2"}, {"label": "Better or tied", "value": 33.3, "tone": "accent"}]}
+   ]}
+  </script></div>
+  <p class="figure-note">Exact count, with the hand strengths from tools/poker.js: 36 worse, 17 better, 1 tied, out of 54. If every one of them calls and none raises, the bet earns (36 x $50 - 17 x $50) / 54 = $17.59 per call, compared with checking. Real opponents fold some of these and raise others, so the true gain is smaller.</p>
+</figure>
+
+<p>The list is only as good as your read of the villain. If he calls with a pair of tens and also with every jack, the bet is strong. If he calls only with hands that beat you, the bet is a donation. This is a place to use what you have seen at the table (<a class="xref" href="09-watching-the-table.html">Chapter 9, Watching the Table</a>). The bet size matters too: a smaller bet gets called by more worse hands, and a larger one folds them out.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What David Sklansky might say</p>
+  <p class="said">He would say a thin value bet is the Fundamental Theorem at work. If a worse hand calls you and a better hand folds, your opponent has played differently than he would if he could see your cards, and you gain. Our reading is that he would measure the bet by how often each kind of hand calls, not by how it feels.</p>
+  <p class="note">An imagined voice: our reading of the Fundamental Theorem of Poker in The Theory of Poker, not his words.</p>
+</aside>
+
+<details class="drill">
+  <summary>You bet the river and 20 worse combos call, 10 better combos call, and none tie. The bet is $40. What is the average gain per calling combo?</summary>
+  <p>(20 x $40 - 10 x $40) / 30 = $400 / 30 = $13.33. The bet is profitable because worse hands outnumber better ones two to one.</p>
+</details>
+
+<h2>The river: the most expensive decision</h2>
+<p>The river is the most expensive decision for two reasons. The pot is as big as it will get, and no cards are left to come. A turn call with a draw buys you another look. A river call is a pure bet on a hand: you call and see, or you fold and never learn.</p>
+<p>Now flip the seats. The villain bets into you on the river. A call wins the pot plus his bet when you are right, and loses your call when you are wrong. Use the pot of $144 from the example. Here is what each bet size asks of you, from tools/poker.js and the formula <span class="math">call / (pot + 2 x call)</span>.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table 17.1</span><h3 class="figure-title">What a river bet asks, into a $144 pot</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>His bet</th><th>Size</th><th>You must win</th><th>He must be bluffing</th><th>You must call</th></tr></thead>
+      <tbody>
+        <tr><td>$36</td><td>1/4 pot</td><td>16.7%</td><td>16.7%</td><td>80%</td></tr>
+        <tr><td>$72</td><td>1/2 pot</td><td>25.0%</td><td>25.0%</td><td>66.7%</td></tr>
+        <tr><td>$144</td><td>Pot</td><td>33.3%</td><td>33.3%</td><td>50%</td></tr>
+        <tr><td>$216</td><td>1.5 x pot</td><td>37.5%</td><td>37.5%</td><td>40%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Exact, from tools/poker.js odds. The last column is the minimum defense frequency, the share of hands a caller must continue with so that bluffs cannot profit at will. The bluff share equals the equity needed because a bluff catcher only wins against bluffs.</p>
+</figure>
+
+<p>A <strong>bluff catcher</strong> is a hand that beats only bluffs. Against a pot-size bet you must be right a third of the time. That means one bluff for every two value bets in his betting range. Picture 100 of his river pot bets.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig. 17.8</span><h3 class="figure-title">What breaks even against a pot-size bet</h3></div>
+  <div data-fig="dots"><script type="application/json">
+  {"label": "Out of 100 pot-size river bets, 67 are value and 33 are bluffs. Calling with a bluff catcher breaks even at about that mix.",
+   "parts": [
+     {"label": "Value hands that beat you", "value": 67, "tone": "ink"},
+     {"label": "Bluffs you beat", "value": 33, "tone": "accent"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: 144 / (144 + 288) = 1/3, rounded to 33 in 100. If he bluffs more than 33 times in 100, calling earns money. If less, folding does.</p>
+</figure>
+
+<p>The real question then is not what the odds say. It is how many bluffs your villain really has. In most low-stakes live games, a large river bet is value-heavy, and players bluff less than the table math allows. That is a judgment from how these games tend to play, not a measurement. It means your folds against big river bets with a bluff catcher are often correct, and your bluffs against a player who rarely folds are often wasted. A player who shows up with missed draws, and one who never does, call for different answers. Hand reading on the river is the subject of <a class="xref" href="19-hand-reading.html">Chapter 19, Hand Reading</a>, and the balance between value and bluffs is in <a class="xref" href="23-balance-and-unexploitability.html">Chapter 23, Balance and Unexploitability</a>.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Daniel Negreanu might say</p>
+  <p class="said">He would tell you to stop treating the river call as a math problem and start treating it as a reading problem. The odds give the break-even point, and the story of the hand tells you which side of it you are on. Our reading is that he would want you to ask whether the bet size and the earlier streets all make sense for a bluff, and to fold when they do not.</p>
+  <p class="note">An imagined voice: our reading of his hand-reading and small-ball approach, not his words.</p>
+</aside>
+
+<details class="drill">
+  <summary>The river pot is $200 and your opponent bets $100. How often must he be bluffing for a call with a bluff catcher to break even?</summary>
+  <p>100 / (200 + 200) = 25%. One bluff for every three value bets.</p>
+</details>
+
+<details class="drill">
+  <summary>On the turn, the pot is $60 and you bet $40 with eight outs to a straight. How often must he fold for the bet to break even, counting only your equity on the river card?</summary>
+  <p>With 8 outs and one card to come you win 17.39% of the time. After a call the pot is $140. A call is worth 0.1739 x $140 - $40 = -$15.65. Break-even fold rate: 15.65 / (60 + 15.65) = 20.7%.</p>
+</details>
+
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>Stack-to-pot ratio: are you committed?</h2>
+  <p><strong>The shortcut.</strong> Divide the effective stack by the pot at the start of the street. Do it on the flop and again on the turn. The result is your SPR.</p>
+  <p class="math">Turn in the example hand: $465 / $72 = 6.5</p>
+
+  <figure class="figure">
+    <div class="figure-head"><span class="figure-number">Fig. 17.9</span><h3 class="figure-title">Pot against stack on the turn</h3></div>
+    <svg class="art" viewBox="0 0 360 150" role="img" aria-label="A pot of 72 drawn as a short bar above an effective stack of 465, giving a stack-to-pot ratio of about 6.5.">
+      <rect class="fill-gold stroke-ink" x="20" y="25" width="46" height="30"/>
+      <text class="t" x="20" y="16">Pot $72</text>
+      <rect class="fill-ink" x="20" y="85" width="300" height="30"/>
+      <text class="t" x="20" y="76">Effective stack $465</text>
+      <text class="t big" x="180" y="145" text-anchor="middle">SPR 6.5</text>
+    </svg>
+    <p class="figure-note">Arithmetic: 465 / 72 = 6.46. The bars are drawn to scale.</p>
+  </figure>
+
+  <p>A rough guide, which is a rule of thumb and not a law: with an SPR under 4, a hand as good as top pair is usually ready to put in the whole stack. Over 10, one pair usually is not. In between, the hand and the opponent decide. At SPR 6.5, your <span class="cards" role="img" aria-label="King of clubs, Jack of diamonds"><span class="pc">K<i>♣</i></span><span class="pc r">J<i>♦</i></span></span> is happy to bet the turn and the river for value, but should think hard before putting in the whole stack against a raise.</p>
+  <p><strong>Where it bends.</strong> The ratio uses the smaller stack, so a short opponent changes it. It does not know the board: top pair on a wet board is weaker than top pair on a dry one (<a class="xref" href="15-board-texture.html">Chapter 15, Board Texture</a>). And it assumes two players. With more players in the pot, one pair loses value fast (<a class="xref" href="27-multiway-pots.html">Chapter 27, Multiway Pots</a>).</p>
+</aside>
         </div>
       </article>
 
@@ -49,5 +285,6 @@
   </div>
 
   <script src="../js/version.js"></script>
+  <script src="../js/figures.js"></script>
 </body>
 </html>
