@@ -1,0 +1,244 @@
+<p class="lead">Preflop is where a live game is cheapest to beat. This chapter gives you baseline ranges for opening, isolating limpers, 3-betting, and defending the blinds, plus how to play against a straddle and from the straddle seat. Every range here is a starting point you bend to the table in front of you.</p>
+
+<p>The default game is a live $2/$5 cash game, nine-handed, with $500 stacks (100 big blinds). Seats run UTG, UTG+1, MP, LJ, HJ, CO, BTN, SB, BB, as in {{ch:3}}. The ranges below are judgments for that room: pots with several limpers, opens that get called too often, and few players who 4-bet light. They are not solver output, and the charts in {{ch:C}} hold the longer versions.</p>
+
+<h2>Opening: position sets the range</h2>
+
+<p>An open is the first voluntary raise in a hand. In most low-stakes live games, players open too many hands from early seats and too few from the button (a judgment from how these games tend to play, not a measured fact). Fixing that one habit matters more than any trick. The cause is simple: the later you act, the fewer players can wake up behind you, and the more often you play the rest of the hand with the last say ({{ch:3}}).</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">A live opening baseline, by seat</h3></div>
+  <div data-fig="range"><script type="application/json">
+  {"label": "The starting hand grid with three opening ranges layered: the early-seat range, the extra hands added in the hijack and cutoff, and the extra hands added on the button.",
+   "groups": [
+     {"name": "UTG to LJ", "tone": "ink", "hands": "77+,ATs+,KQs,AQo+"},
+     {"name": "Add in HJ and CO", "tone": "accent2", "hands": "22-66,A2s-A9s,KTs-KJs,QJs,JTs,T9s,98s,AJo,KQo"},
+     {"name": "Add on the button", "tone": "gold", "hands": "K2s-K9s,Q8s-QTs,J8s-J9s,T8s,97s,86s,87s,76s,65s,54s,ATo,A9o,KJo,KTo,QJo,QTo,JTo"}
+   ]}
+  </script></div>
+  <p class="figure-note">A live baseline and a judgment, not a solver output. Combo counts come from tools/poker.js. Fold everything outside the shaded cells.</p>
+</figure>
+
+<p>The grid counts 92 combos for the early seats (6.9 percent of all hands), 202 for the hijack and cutoff together (15.2 percent), and 366 on the button (27.6 percent). A solver would open the button wider than that. Live, a button open often faces two blinds who see the flop and a table that calls raises, so a narrower button range is a reasonable price for a simpler game. Widen it when the blinds fold too much.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">How much of the deck you open</h3></div>
+  <div data-fig="bars"><script type="application/json">
+  {"label": "Share of all starting hands opened: 6.9 percent in early seats, 15.2 percent in the hijack and cutoff, and 27.6 percent on the button.",
+   "unit": "%", "max": 40,
+   "items": [
+     {"label": "UTG to LJ", "value": 6.9, "note": "92 combos", "tone": "ink"},
+     {"label": "HJ and CO", "value": 15.2, "note": "202 combos", "tone": "accent2"},
+     {"label": "Button", "value": 27.6, "note": "366 combos", "tone": "gold"}
+   ]}
+  </script></div>
+  <p class="figure-note">Arithmetic: combos / 1,326, from tools/poker.js. Each bar counts every hand in the ranges up to that seat.</p>
+</figure>
+
+<p>Size an open to 3 big blinds ($15), or 4 ($20) when the table calls light. Use the same size from every seat. A size that changes with your hand tells the table what you hold.</p>
+
+<h2>Limpers: isolate or fold</h2>
+
+<p>A limp is calling the big blind without raising. In most low-stakes live games limpers are common, and their limp range is mostly weak (a judgment): small pairs, suited aces, suited connectors, and a few offsuit broadways. A raise that isolates one limper heads-up, with you in position, takes advantage of that. You do not need a big hand. You need a better hand than a limper has, and the last action.</p>
+
+<p>Here is how three hands fare against one made-up limp range of 212 combos: 22-99, A2s-A9s, KTs+, QTs+, JTs, the suited connectors from T9s down to 54s, KJo+, QJo, and A8o-AJo. This range is an illustration, not a measured one:</p>
+
+<ul>
+  <li>[[Ad Jd]] has about 62 percent equity.</li>
+  <li>[[Kc Qh]] has about 50 percent.</li>
+  <li>[[8s 7s]] has about 42 percent.</li>
+</ul>
+
+<p>Those equities were sampled with tools/poker.js (400,000 deals, good to about 0.2 points) and rounded. Ace-jack suited is a big favorite over a typical limper. King-queen offsuit is about even. The suited connector is behind, so it needs position and implied odds to earn its raise. Check the number against several callers, not one: equity falls as the field grows ({{ch:27}}).</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Two limpers in front of the button</h3></div>
+  <div data-fig="table"><script type="application/json">
+  {"label": "Nine-handed table. Two players have limped for 5 dollars each. Hero on the button holds ace jack of diamonds and raises to 25 dollars. Both blinds are still to act.",
+   "button": 0, "pot": "$42",
+   "seats": [
+     {"pos": "BTN", "stack": "$500", "bet": "$25", "cards": "Ad Jd", "state": "hero"},
+     {"pos": "SB", "stack": "$480", "bet": "$2"},
+     {"pos": "BB", "stack": "$500", "bet": "$5"},
+     {"pos": "UTG", "stack": "$450", "bet": "$5", "state": "villain"},
+     {"pos": "UTG+1", "state": "fold"},
+     {"pos": "MP", "stack": "$520", "bet": "$5", "state": "villain"},
+     {"pos": "LJ", "state": "fold"},
+     {"pos": "HJ", "state": "fold"},
+     {"pos": "CO", "state": "fold"}
+   ]}
+  </script></div>
+  <p class="figure-note">An example hand in a $2/$5 game, not a real hand history. Pot: $2 + $5 + $5 + $5 + $25 = $42.</p>
+</figure>
+
+<p>The raise is $25: 3 big blinds ($15) plus one more big blind for each limper ($5 x 2 = $10). Each limper who calls adds money to the pot, so the extra big blind per limper keeps their price to call from getting better and better. The Table Math box at the end of this chapter explains it.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Doyle Brunson might say</p>
+  <p class="said">He would call a limper a gift and tell you to take the pot away with a raise. Weak players who limp are asking to be pushed around, and a raise puts the work on them. He would add that a raise gives you two ways to win: they fold now, or you bet when they miss the flop.</p>
+  <p class="note">An imagined voice: our reading of the aggressive approach in Super/System (1979), not his words.</p>
+</aside>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Isolating a limper, hand by hand</h3></div>
+  <div class="table-scroll">
+    <table class="hand-log">
+      <thead><tr><th>Street</th><th>Board</th><th>Action</th><th>Pot</th></tr></thead>
+      <tbody>
+        <tr><td>Preflop</td><td>Hero: [[Ad Jd]]</td><td>UTG and MP limp $5 each. Hero raises to $25 on the button. Both blinds and UTG fold. MP calls $20.</td><td class="pot">$62</td></tr>
+        <tr><td>Flop</td><td>[[Jc 7h 3s]]</td><td>MP checks. Hero bets $40, about two thirds of the pot. MP folds.</td><td class="pot">$62</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">An example hand in a $2/$5 game, not a real hand history. Preflop pot: $2 + $5 + $25 + $25 + $5 (the UTG limp, now dead) = $62. Hero wins the $62 pot.</p>
+</figure>
+
+<p>Isolate tighter when you are out of position or have several players left behind you, and fold weak offsuit hands such as K8o rather than raising them. If a limper is a calling station, raise bigger for value and expect a call. If two limpers are sticky, the pot gets multiway and your hand shrinks, so prefer hands with top-pair strength or a nut draw. {{ch:25}} covers how to spot those players.</p>
+
+<h2>3-betting and 4-betting</h2>
+
+<p>A 3-bet is the first re-raise after an open (the blinds count as the first bet, the open as the second). In most low-stakes live games a 3-bet reads as a strong hand (a judgment), so a well-chosen light 3-bet gets credit. Most of your 3-bets should still be for value, with a few bluffs mixed in so that your range is not just premium hands.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">A 3-bet range from the button</h3></div>
+  <div data-fig="range"><script type="application/json">
+  {"label": "The starting hand grid showing a button 3-bet range against a cutoff open: top value hands, second-tier value hands, and a few suited bluffs.",
+   "groups": [
+     {"name": "Value, will 4-bet", "tone": "ink", "hands": "QQ+,AKs,AKo"},
+     {"name": "Value, will call a 4-bet or fold", "tone": "gold", "hands": "JJ,TT,AQs"},
+     {"name": "Bluffs", "tone": "accent", "hands": "A5s,A4s,76s,65s"}
+   ]}
+  </script></div>
+  <p class="figure-note">A live baseline and a judgment. The three groups hold 34, 16, and 16 combos, 66 in all (4.98 percent of hands), counted with tools/poker.js.</p>
+</figure>
+
+<p>The bluffs are suited aces and suited connectors because they have equity when called and block hands that call you. Keep them few. Many low-stakes live players call 3-bets too often with hands like small pairs and weak broadways, which pays your value hands and punishes bluffs. Pick a bluff target who opens wide and folds, and never bluff someone who never folds. Size a 3-bet to about 3 times the open when you have position (so $15 becomes $45) and 4 times when you do not ($60). Out of position, a bigger size makes up for the position you lack.</p>
+
+<p>A 4-bet is a re-raise of a 3-bet. In most low-stakes live games players 4-bet rarely, and mostly with aces, kings, and sometimes queens or ace-king (a judgment, not a measured fact), so a 4-bet from a stranger is strong. The figure shows hands against two such ranges. It explains why you cannot call light with a pair like queens when a 4-bet range is that narrow.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">What a 4-bet range does to your hand</h3></div>
+  <div data-fig="split"><script type="application/json">
+  {"label": "All-in equity of four hands against a tight live 4-bet range of queens or better plus ace king: kings 57 percent, queens 40, ace king offsuit 39, and suited ace five 30. Queens against only kings or aces drops to 18 percent.",
+   "rows": [
+     {"label": "KK vs QQ+, AK", "note": "a premium pair", "parts": [{"label": "Hero", "value": 57, "tone": "ink"}, {"label": "Villain", "value": 43, "tone": "accent"}]},
+     {"label": "QQ vs QQ+, AK", "note": "worse than a flip", "parts": [{"label": "Hero", "value": 40, "tone": "ink"}, {"label": "Villain", "value": 60, "tone": "accent"}]},
+     {"label": "AKo vs QQ+, AK", "note": "dominated often", "parts": [{"label": "Hero", "value": 39, "tone": "ink"}, {"label": "Villain", "value": 61, "tone": "accent"}]},
+     {"label": "A5s vs QQ+, AK", "note": "a bluff", "parts": [{"label": "Hero", "value": 30, "tone": "ink"}, {"label": "Villain", "value": 70, "tone": "accent"}]},
+     {"label": "QQ vs KK+", "note": "a very tight range", "parts": [{"label": "Hero", "value": 18, "tone": "ink"}, {"label": "Villain", "value": 82, "tone": "accent"}]}
+   ]}
+  </script></div>
+  <p class="figure-note">Equities from tools/poker.js against the listed ranges, sampled over 400,000 deals (good to about 0.2 points) and rounded. Card removal is counted.</p>
+</figure>
+
+<p>Even kings are only 57 percent when the pot goes all in against queens-plus and ace-king, so a 4-bet is an investment, not a shield. Four-bet for value with kings and better, and with ace-king when you are ready to play for stacks. Against a player whose 4-bet is only kings or aces, queens are 18 percent: fold them. A suited ace is the one bluff worth considering, because it blocks aces. Size the 4-bet to around 2.2 times the 3-bet ($45 becomes about $100), and plan what you will do if you are shoved on before you put the money in.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Daniel Negreanu might say</p>
+  <p class="said">He would warn you that every 3-bet out of position builds a big pot with a hand you cannot always protect, and he would rather call and use his reads after the flop. He would still 3-bet the premium hands and mix in a few bluffs, but he would pick the opponents with care.</p>
+  <p class="note">An imagined voice: our reading of his small ball approach to many pots, not his words.</p>
+</aside>
+
+<h2>Defending the blinds</h2>
+
+<p>You post a blind before you see your cards, so you get a discount. Against a button open to $15, the big blind has $5 in already and calls $10 more. The pot is $2 + $5 + $15 = $22 (the small blind folds), so the call is $10 to win $22. You need 10 / (22 + 10) = 10 / 32 = 31.25 percent equity.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">Equity the big blind needs to call, by open size</h3></div>
+  <div data-fig="heat"><script type="application/json">
+  {"label": "Equity the big blind needs to call an open of 10, 15, 20, or 25 dollars, with zero, one, or two callers in between. The price falls as more players call.",
+   "corner": "Open size", "unit": "%", "tone": "accent2",
+   "cols": ["No callers", "One caller", "Two callers"],
+   "rows": ["$10", "$15", "$20", "$25"],
+   "values": [[22.7, 15.6, 11.9], [31.3, 21.3, 16.1], [35.7, 24.2, 18.3], [38.5, 26.0, 19.6]]}
+  </script></div>
+  <p class="figure-note">Arithmetic: (open - $5) / (pot + open - $5), where the pot is $2 + $5 + the open times (1 + callers). The small blind folds. This is raw equity, not realized equity.</p>
+</figure>
+
+<p>Raw equity is not what you win. Out of position you realize less than your equity, because the player behind you gets to bet last. So you need a bit more than the table says. Here is a defending range against a button open to $15, with the hands that 3-bet separated from the hands that call.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Big blind versus a button open to $15</h3></div>
+  <div data-fig="range"><script type="application/json">
+  {"label": "The starting hand grid showing a big blind defense against a button open: hands that 3-bet for value, suited bluffs that 3-bet, and hands that call.",
+   "groups": [
+     {"name": "3-bet for value", "tone": "ink", "hands": "JJ+,AQs+,AKo"},
+     {"name": "3-bet bluff", "tone": "accent", "hands": "A5s,A4s,76s,65s"},
+     {"name": "Call", "tone": "accent2", "hands": "22-TT,A2s-A3s,A6s-AJs,K5s-KQs,Q7s-QJs,J7s-JTs,T7s-T9s,96s-98s,86s-87s,75s,A8o-AQo,KTo-KQo,QTo-QJo,JTo,T9o"}
+   ]}
+  </script></div>
+  <p class="figure-note">A live baseline and a judgment, not solver output. The ranges hold 44, 16, and 334 combos: 394 in all, 29.7 percent of hands (tools/poker.js). Against a different open size or position, move the edges.</p>
+</figure>
+
+<p>As a check, here are equities from tools/poker.js for three calling hands against the 366-combo button range from the first figure, sampled and rounded: [[8s 6s]] about 38 percent, [[Kc Td]] about 46 percent, [[As 8d]] about 48 percent. Each clears the 31 percent price with room to spare for playing out of position. Some folded hands clear the raw price too: [[Kc 9d]] has about 43 percent and [[As 5d]] about 46 percent. Weak offsuit hands realize their equity poorly out of position, because they rarely make strong hands or draws, so this baseline folds them and leans on suited and connected hands. They are close, not clear folds. When the button is a tight player who opens little, shrink the call range. When the button opens every hand, widen it.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Phil Galfond might say</p>
+  <p class="said">He would teach the balanced baseline first, so you know where the ranges sit, and then show you where a live table pulls you off it. A player who never 3-bets the blinds can be attacked with a wider call range, and he would want you to know which of your calls are close and which are not.</p>
+  <p class="note">An imagined voice: our reading of his teaching approach at Run It Once, not his words.</p>
+</aside>
+
+<p>The small blind is the worst seat at the table: you are out of position after the flop and the big blind still acts behind you. Against the same button open to $15, you have $2 in and call $13 to win $22, so you need 13 / (22 + 13) = 13 / 35 = 37.1 percent, and the big blind can still raise. A baseline for most live games (a judgment) is to 3-bet or fold from the small blind, and call only with hands that play well multiway, such as small pairs and suited aces. Three-bet to about 4 times the open ($60), because you will be out of position.</p>
+
+<h2>The straddle</h2>
+
+<p>A straddle is an extra blind, posted before the deal, usually by the player under the gun, usually double the big blind. In a $2/$5 game it is $10. The straddler acts last preflop, and the first action goes to the player on his left. It changes the math of the whole round.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">The same hand with and without a $10 straddle</h3></div>
+  <div class="table-scroll">
+    <table class="wrap">
+      <thead><tr><th>Measure</th><th>No straddle</th><th>$10 UTG straddle</th></tr></thead>
+      <tbody>
+        <tr><td>Money in before action</td><td>$7</td><td>$17</td></tr>
+        <tr><td>Stack in the new big blind</td><td>100 big blinds</td><td>50 straddles</td></tr>
+        <tr><td>Price of a limp (pot odds)</td><td>41.7%</td><td>37.0%</td></tr>
+        <tr><td>Open size (3 big blinds)</td><td>$15</td><td>$30</td></tr>
+        <tr><td>Pot after one caller, blinds fold</td><td>$37</td><td>$77</td></tr>
+        <tr><td>Stack-to-pot ratio on the flop</td><td class="good">13.1</td><td class="bad">6.1</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Arithmetic. No straddle: limp $5 into $7 needs 5 / 12 (pot odds only, the hand goes on). Straddle: limp $10 into $17 needs 10 / 27. Pots: $2 + $5 + $15 + $15 = $37, and $2 + $5 + $10 + $30 + $30 = $77. Stack-to-pot ratio: $485 / $37 = 13.1 and $470 / $77 = 6.1.</p>
+</figure>
+
+<p>Treat the straddle as the new big blind when you size. Raise to 3 straddles ($30), plus a straddle per limper. Playing deep stops being a feature: with a stack-to-pot ratio near 6, hands that need a huge payoff to justify a call, such as small pairs and suited connectors, lose value. Hands that make top pair and strong draws gain it, because a stack is closer to committed.</p>
+
+<p>The straddler acts last preflop, so he has a discount and the last option. After the flop, though, the usual UTG straddler is out of position against most of the table. In most live games he defends wide, so expect fewer folds to your raise and bet your strong hands for value. Pots are bigger and more players limp. The button is still the best seat in the room.</p>
+
+<p>Now take the straddle seat yourself. You post $10 blind and will play most pots out of position after the flop, so a voluntary straddle costs you money in most spots (a judgment). Post one only when the table expects it or a bigger game is worth the cost. In the seat, defend like a big blind. Facing a $30 open with everyone else folded, you have $10 in and call $20 to win $47 ($2 + $5 + $10 + $30), so you need 20 / (47 + 20) = 20 / 67 = 29.9 percent. Defend a little tighter than that number says, because you play the rest of the hand out of position.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Adjusting to a straddle</h3></div>
+  <ol class="flow">
+    <li><strong>Reset the unit</strong><span>Count the straddle as the big blind. Stack size drops to 50.</span></li>
+    <li><strong>Raise bigger</strong><span>3 straddles plus 1 per limper, not 3 old big blinds.</span></li>
+    <li><strong>Trim the speculative hands</strong><span>Less depth, so small pairs and suited gappers lose value.</span></li>
+    <li><strong>Favor strength and position</strong><span>Top pair and good draws hold up better at a low ratio.</span></li>
+  </ol>
+  <p class="figure-note">A summary of this section and a judgment for live play, not a computed result.</p>
+</figure>
+
+<details class="drill">
+  <summary>Drill: the button, two limpers, $2/$5, no straddle. How much do you raise to?</summary>
+  <p>$15 for 3 big blinds, plus $5 for each limper: $15 + $10 = $25.</p>
+</details>
+
+<details class="drill">
+  <summary>Drill: you are in the big blind. Button opens to $20, no callers, small blind folds. What equity do you need?</summary>
+  <p>Pot: $2 + $5 + $20 = $27. You call $15 more. 15 / (27 + 15) = 15 / 42 = 35.7 percent, matching the table.</p>
+</details>
+
+<details class="drill">
+  <summary>Drill: a $10 straddle is in. An early player opens to $30, one player calls, and both blinds and the straddler fold. What is the pot?</summary>
+  <p>$2 + $5 + $10 + $30 + $30 = $77, as in the straddle table.</p>
+</details>
+
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>Sizing opens with limpers in the pot</h2>
+  <p><strong>The shortcut.</strong> Start at 3 big blinds. Add 1 big blind for every limper.</p>
+  <p class="math">$2/$5, two limpers: 3 x $5 + 2 x $5 = $15 + $10 = $25</p>
+  <p>The pot then holds the blinds, the two limps, and your raise. If the blinds fold and both limpers call, you are three-way and the pot is $2 + $5 + $25 x 3 = $82.</p>
+  <p><strong>Where it bends.</strong> Add a big blind or more out of position, and against players who call any raise; against them the extra dollars are less about folds and more about charging them for the hand. With a straddle, count the straddle as the big blind: two limpers make it 3 x $10 + 2 x $10 = $50. Past three or four limpers the formula builds a pot so large that your stack-to-pot ratio drops fast, so tighten the hands you raise rather than keep adding.</p>
+</aside>

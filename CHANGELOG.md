@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.22.0] - 2026-11-21
+
+### Added
+
+- Chapter 12, Preflop Strategy for Live Games: Chapter 12 gives live $2/$5 baseline ranges for opening, isolating limpers, 3-betting and 4-betting, defending both blinds, and playing against and from the straddle, with checked equities and pot math.
+
 ## [0.21.0] - 2026-11-21
 
 ### Added
