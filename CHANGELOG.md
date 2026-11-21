@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.38.0] - 2026-11-21
+
+### Added
+
+- Chapter 32, ICM and Final Tables: Chapter 32 explains ICM with computed Malmuth-Harville values, bubble call prices, who can pressure whom, how payout shape changes the price, and chip, locked, and ICM deals.
+
 ## [0.37.0] - 2026-11-21
 
 ### Added

@@ -1,0 +1,280 @@
+<p class="lead">In a tournament, chips are not money. This chapter shows how to turn a stack into a prize-money value, why that makes some all-in calls wrong that are right in a cash game, and how to think about a deal when the table is down to a few players.</p>
+
+<h2>Chips are not dollars</h2>
+
+<p>In a cash game, a chip is worth what it says. Win $100 and you are $100 richer. Lose $100 and you are $100 poorer. The two moves are mirror images, so a coin flip for equal stacks is neutral.</p>
+
+<p>A tournament breaks that. You are paid by finishing place, not by how many chips you hold, and chips only buy you a better chance at a higher place. {{ch:31}} covered stack depth and push-fold play, which treat chips as the thing you are trying to win. This chapter asks what happens when the prize pool is fixed, a few places pay, and the pay steps up toward first.</p>
+
+<p>The standard tool is the <strong>Independent Chip Model</strong>, or ICM. It converts a set of stacks into a dollar value for each player. Its best-known form is the Malmuth-Harville model. Every number below comes from that model, computed with a short script, not from memory.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Three players: chips against prize money</h3></div>
+  <div data-fig="columns"><script type="application/json">
+  {"label": "With stacks of 5,000, 3,000, and 2,000 and prizes of $5,000, $3,000, and $2,000, the chip leader holds 50 percent of the chips but only 38.4 percent of the prize money, while the short stack holds 20 percent of the chips and is worth 28.9 percent.",
+   "unit": "%", "categories": ["Big stack", "Mid stack", "Short stack"],
+   "series": [
+     {"name": "Share of chips", "values": [50, 30, 20], "tone": "gold"},
+     {"name": "Share of prize money (ICM)", "values": [38.4, 32.8, 28.9], "tone": "ink"}
+   ]}
+  </script></div>
+  <p class="figure-note">Three players left, all paid: $5,000, $3,000, $2,000, a $10,000 pool. Malmuth-Harville model, computed with a throwaway Node script. Values are 3,839, 3,275, and 2,886 dollars.</p>
+</figure>
+
+<p>The leader holds half the chips and is worth $3,839, not $5,000. The short stack holds a fifth of the chips and is worth $2,886, not $2,000. Chips are worth less per chip as the pile grows. All three places pay, so the short stack already has $2,000 locked up and still wins first one time in five. The leader still has to beat two people to take first.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">The value of a stack bends</h3></div>
+  <div data-fig="line"><script type="application/json">
+  {"label": "Prize money as a share of the pool against share of the chips, four players left with three paid. The curve sits above the straight line for small stacks and below it for big stacks.",
+   "xLabel": "Your share of the chips", "xUnit": "%", "yUnit": "%", "yMin": 0, "yMax": 100,
+   "series": [
+     {"name": "Chip value (a straight line)", "tone": "muted", "dashed": true, "points": [[0, 0], [20, 20], [40, 40], [60, 60], [80, 80]]},
+     {"name": "ICM value", "tone": "ink", "points": [[5, 7.0], [10, 12.7], [20, 21.5], [30, 28.0], [40, 33.0], [50, 37.0], [60, 40.3], [70, 43.2], [80, 45.7]]}
+   ],
+   "marks": [{"x": 50, "y": 37.0, "label": "Half the chips: 37% of the pool"}]}
+  </script></div>
+  <p class="figure-note">Four players left, prizes of $5,000, $3,000, and $2,000 for the top three, nothing for fourth. You hold the stack shown; the other three split the rest equally. Malmuth-Harville model, computed.</p>
+</figure>
+
+<p>The curve is the whole chapter in one picture. It rises more slowly as the stack grows. That bend is why a double-up is worth less than a bust costs.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Dan Harrington might say</p>
+  <p class="said">He would say your stack size sets your strategy before your cards do. Near the money, survival is a real asset, and a player who calls like it is a cash game is spending it for free.</p>
+  <p class="note">An imagined voice: our reading of the tournament ideas in Harrington on Hold'em, not his words.</p>
+</aside>
+
+<h2>How the model counts</h2>
+
+<p>The Malmuth-Harville model rests on one assumption: your chance of finishing first equals your share of the chips. Then it asks who finishes second among everyone left, and again each player's chance is their share of the chips that remain. It repeats until the prizes run out.</p>
+
+<p>The assumption is crude. It ignores skill, position, and blinds. It still earns its place because it is exact, easy to repeat, and good enough to show you when a call is far wrong.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Valuing the 3,000 stack, one step at a time</h3></div>
+  <ul class="tree">
+    <li><span class="node root">Hero has 3,000 of 10,000 chips</span>
+      <ul>
+        <li><span class="edge">First: 3,000 / 10,000 = 30.0%</span><span class="node win">Prize $5,000</span></li>
+        <li><span class="edge">Second: 0.5 x 3/5 + 0.2 x 3/8 = 37.5%</span><span class="node">Prize $3,000</span></li>
+        <li><span class="edge">Third: 1 - 0.300 - 0.375 = 32.5%</span><span class="node lose">Prize $2,000</span></li>
+      </ul>
+    </li>
+  </ul>
+  <p class="math">Value = 0.300 x $5,000 + 0.375 x $3,000 + 0.325 x $2,000 = $1,500 + $1,125 + $650 = $3,275</p>
+  <p class="figure-note">Arithmetic. The big stack (5,000) wins first 50% of the time, and then hero has 3,000 of the 5,000 chips left, so 3/5. The short stack (2,000) wins first 20% of the time, and then hero has 3,000 of 8,000 left, so 3/8.</p>
+</figure>
+
+<p>You will not run this at the table. You carry its results as feel: big stacks are overvalued by chip count, short stacks are undervalued, and the middle is close. The rest of the chapter puts numbers on how much.</p>
+
+<h2>The bubble</h2>
+
+<p>The <strong>bubble</strong> is the point where one more elimination puts everyone left into the prizes. Four players remain, three get paid, and the fourth gets nothing. Here is the example for the rest of the chapter.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">On the bubble, four players left</h3></div>
+  <div data-fig="table"><script type="application/json">
+  {"label": "Four-handed table on the bubble. The button shoves all-in for 4,000 chips. The big blind, the hero, has 3,000 and must decide. The small blind has 2,000 and has folded. The player under the gun has 1,000 and has folded.",
+   "button": 2, "pot": "4,000",
+   "seats": [
+     {"pos": "BB", "stack": "3,000", "state": "hero", "cards": "Ah Qc"},
+     {"pos": "UTG", "stack": "1,000", "state": "fold"},
+     {"pos": "BTN", "stack": "4,000", "bet": "4,000", "state": "villain"},
+     {"pos": "SB", "stack": "2,000", "state": "fold"}
+   ]}
+  </script></div>
+  <p class="figure-note">An invented example in a live tournament. Prizes: $5,000, $3,000, $2,000 for the top three. Blinds and antes are ignored to keep the arithmetic clean. Not a real hand history.</p>
+</figure>
+
+<p>Hero holds [[Ah Qc]]. A call risks all 3,000 chips to win 3,000 of the button's. The button covers hero by 1,000 chips, so only 3,000 of the shove is in play. In chips, hero risks 3,000 to win 3,000, so a cash-game call needs 50%. In a tournament, ask what the chips are worth.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">What the call is worth in dollars</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Outcome</th><th>Hero stack</th><th>Hero ICM value</th><th>Change</th></tr></thead>
+      <tbody>
+        <tr><td>Fold</td><td>3,000</td><td>$2,949</td><td>none</td></tr>
+        <tr><td>Call and win</td><td>6,000</td><td>$4,045</td><td class="good">+$1,096</td></tr>
+        <tr><td>Call and lose</td><td>0 (out in fourth)</td><td>$0</td><td class="bad">-$2,949</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Malmuth-Harville model, computed. After a win the button has 1,000 and the others hold 2,000 and 1,000. After a loss the button has 7,000.</p>
+</figure>
+
+<p>Winning adds $1,096. Losing costs $2,949. That ratio is the <strong>bubble factor</strong>: what you lose divided by what you gain, here 2,949 / 1,096 = 2.69. You need to win often enough that the gain pays for the loss:</p>
+
+<p class="math">Equity needed = loss / (loss + gain) = 2,949 / (2,949 + 1,096) = 72.9%</p>
+
+<p>The cash-game price was 50%. The tournament price is 73%. Say the button shoves every pair, every suited ace, A8 offsuit and better, and the best king, queen, and jack hands plus T9 suited (<code>22+, A2s+, A8o+, K9s+, KTo+, Q9s+, QTo+, J9s+, T9s</code>: 298 combinations, about 22 percent of all starting hands). That range is an assumption for the example, not a measured habit. Against it, [[Ah Qc]] has about 58 percent. That clears the cash-game price easily and falls far short of 73, so it is a fold. Even [[Qc Qd]], at about 71 percent, falls just short. Only [[Ac Ad]] (about 85 percent) and [[Kc Kd]] (about 76 percent) clear the bar. Against a wider shove (about a third of all hands, every ace included) [[Ah Qc]] rises only to about 61 percent, still a fold. Equities come from <code>tools/poker.js</code>, sampled over 400,000 deals, good to about 0.2 points.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">The price of a call rises with your stack</h3></div>
+  <div data-fig="columns"><script type="application/json">
+  {"label": "Equity needed to call an all-in from a 4,000-chip stack on the bubble, by hero's stack: 50 percent by chip count at every stack, but 61 percent for a 1,000 stack, 68 percent for 2,000, 72 percent for 3,000, and 75 percent for 4,000.",
+   "unit": "%", "yMax": 100, "categories": ["1,000", "2,000", "3,000", "4,000"],
+   "xLabel": "Hero stack", "yLabel": "Equity needed",
+   "series": [
+     {"name": "Chip EV (cash-game price)", "values": [50, 50, 50, 50], "tone": "gold"},
+     {"name": "ICM price", "values": [60.7, 67.7, 72.3, 75.2], "tone": "accent"}
+   ]}
+  </script></div>
+  <p class="figure-note">Four players on the bubble, top three paid $5,000, $3,000, $2,000. The button has 4,000 and shoves. The two other players split the remaining chips equally, so the 3,000 column (others at 1,500 each) differs a little from the 72.9% above (others at 2,000 and 1,000). Computed.</p>
+</figure>
+
+<p>A bigger stack calls at a worse price because it has more prize money to lose, and a loss still drops it to $0. Even the smallest stack here needs 61 percent where chips say 50.</p>
+
+<details class="drill">
+  <summary>The bubble factor is 2. What equity do you need to call?</summary>
+  <p>2 / (2 + 1) = 66.7%. A bubble factor of 1.5 needs 1.5 / 2.5 = 60%. A factor of 1 is the cash-game price, 50%.</p>
+</details>
+
+<details class="drill">
+  <summary>Calling a 4,000 shove from 3,000 on the bubble costs $2,949 on a loss and gains $1,096 on a win. A flip for 3,000 is 50 percent. How much does it lose per hand?</summary>
+  <p>0.5 x $1,096 + 0.5 x (-$2,949) = $548 - $1,474.50 = -$926.50. A call that looks like break-even in chips costs about $927 in prize money.</p>
+</details>
+
+<h2>Who can pressure whom</h2>
+
+<p>The price of a call is not a fixed number. It depends on who you are and who is shoving. Cover your opponent and you cannot bust, so you can call lighter. Be covered, and you are risking the whole bankroll.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">Equity needed to call, by both stacks</h3></div>
+  <div data-fig="heat"><script type="application/json">
+  {"label": "Equity needed to call an all-in on the bubble, for hero stacks of 1,500, 2,500, and 3,500 against a shover with 2,500, 3,500, or 4,500. The price is lowest for a small hero stack against a small shover and highest when two big stacks meet.",
+   "corner": "Hero stack", "unit": "%", "tone": "accent",
+   "cols": ["Shover 2,500", "Shover 3,500", "Shover 4,500"],
+   "rows": ["1,500", "2,500", "3,500"],
+   "values": [[60.3, 63.0, 66.2], [65.2, 68.5, 72.1], [61.6, 72.2, 75.8]]}
+  </script></div>
+  <p class="figure-note">Four players, 10,000 chips, prizes $5,000, $3,000, $2,000 for the top three. The two non-playing stacks split the remainder equally. Computed with the Malmuth-Harville model. Chip EV says 50% in every cell.</p>
+</figure>
+
+<p>Look at the bottom left. Hero holds 3,500 against a 2,500 shove and needs 61.6 percent. Hero cannot go out on a loss. A 3,500 stack against a 3,500 shove needs 72.2 percent, because now a loss ends the tournament.</p>
+
+<p>This is why bubbles turn lopsided. The stack that covers others can raise and shove with less at stake, and everyone it covers should fold hands that would be standard calls in a cash game. The short stacks fold into the money as well, as long as someone else is closer to the edge.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Two ways to play the bubble</h3></div>
+  <div class="compare">
+    <div class="a"><h4>If you are covered</h4><p>Your calls are expensive. Tighten your calling range most against players who cover you. Your shoves still work against the stacks you cover, because they pay the same kind of premium to call you.</p></div>
+    <div class="b"><h4>If you cover others</h4><p>Your raises are cheap and their calls are expensive. Open wider, put pressure on the stacks who would be out. Be careful when the player you cover is not afraid.</p></div>
+  </div>
+  <p class="figure-note">A summary of this section, with the heat table above as the numbers. Judgment, not a computed rule: how aggressive to be depends on the players and the structure. See {{ch:24}}.</p>
+</figure>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Phil Hellmuth might say</p>
+  <p class="said">He would point out that a bubble is when patience pays, and that the player who folds a marginal spot to reach the money often gives up very little. He would also admit that the same patience can leave you short when the pay jumps come.</p>
+  <p class="note">An imagined voice: our reading of the survival-first tournament approach he is known for, not his words.</p>
+</aside>
+
+<details class="drill">
+  <summary>Hero has 3,500 and the button shoves 2,500, on the same bubble. Why is the price 61.6% and not 72.2%?</summary>
+  <p>The price depends on what a loss costs. At 3,500 against 2,500, hero keeps 1,000 chips after a loss and can still cash. Against a 3,500 shove, a loss ends the tournament with $0.</p>
+</details>
+
+<h2>Pay jumps and final tables</h2>
+
+<p>After the bubble, ICM does not go away. Every place has a payout step above it, and the stack you hold sits somewhere on the curve. A <strong>pay jump</strong> is the difference between what you get for one place and the next. What sets the pressure is how much of the money is paid below first. When first place takes almost everything, chips are worth close to face value and you can play more like a cash game. When the paid places are close together, surviving is worth most of the prize, and a risky call gets expensive. A big jump just ahead of you also rewards waiting for a shorter stack to bust first.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Fig.</span><h3 class="figure-title">Flatter pay, pricier call</h3></div>
+  <div data-fig="bars"><script type="application/json">
+  {"label": "The same bubble call, 3,000 chips against a 4,000 shove with 2,000 and 1,000 behind, needs 50 percent when the winner takes all, 61 percent with steep prizes, 73 percent with this chapter's prizes, and 81 percent with flat prizes.",
+   "unit": "%", "max": 100,
+   "items": [
+     {"label": "Winner takes all", "value": 50.0, "note": "$10,000 / 0 / 0", "tone": "muted"},
+     {"label": "Steep", "value": 61.2, "note": "$7,000 / 2,000 / 1,000"},
+     {"label": "This chapter", "value": 72.9, "note": "$5,000 / 3,000 / 2,000", "tone": "ink"},
+     {"label": "Flat", "value": 80.7, "note": "$4,000 / 3,500 / 2,500", "tone": "accent"}
+   ]}
+  </script></div>
+  <p class="figure-note">Four players, $10,000 pool, three places paid except in the winner-take-all row. Stacks 4,000 (shover), 3,000 (hero), 2,000, 1,000. Malmuth-Harville model, computed.</p>
+</figure>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">What a chip is worth, stack by stack</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Stack</th><th>Share of chips</th><th>ICM value</th><th>Dollars per 1,000 chips</th></tr></thead>
+      <tbody>
+        <tr><td>4,000</td><td>40%</td><td>$3,360</td><td>$840</td></tr>
+        <tr><td>3,000</td><td>30%</td><td>$2,949</td><td>$983</td></tr>
+        <tr><td>2,000</td><td>20%</td><td>$2,359</td><td>$1,179</td></tr>
+        <tr><td>1,000</td><td>10%</td><td>$1,332</td><td>$1,332</td></tr>
+        <tr class="total"><td>Total</td><td>100%</td><td>$10,000</td><td>$1,000 average</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Four players, top three paid $5,000, $3,000, $2,000. Malmuth-Harville model, computed. Dollars per 1,000 chips is ICM value divided by stack, times 1,000.</p>
+</figure>
+
+<p>The smallest stack is worth $1,332 per 1,000 chips and the biggest $840. If the small stack doubled it would not be worth double. Chips at the top of the table are the cheapest ones, so the big stack risks less prize money per chip when it attacks, and a short stack's few chips are worth more than their count.</p>
+
+<aside class="key">
+  <p class="label">Key idea</p>
+  <p>The model values the chip you could lose above the chip you could win. The cost of busting is greatest when a lot of money is still paid below first place, and smallest when first place takes nearly everything.</p>
+</aside>
+
+<p>Use this as a brake, not a rule. ICM says nothing about who plays well, who is on tilt, or how your fold equity changes when others are afraid. Read the table (see {{ch:9}}), and remember the thesis of the book: the numbers are the baseline, the reads are how you win.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What David Sklansky might say</p>
+  <p class="said">He would want the decision measured in expected dollars, not in expected chips, and would be wary of people who rely on a feeling of safety. A fold that costs you nothing in dollars is good. A fold that costs you dollars because of fear is not.</p>
+  <p class="note">An imagined voice: our reading of the expected-value approach in The Theory of Poker, not his words.</p>
+</aside>
+
+<h2>Making a deal</h2>
+
+<p>Many live tournaments let the last few players split the remaining prize money by agreement. This is a <strong>deal</strong>. Rules vary by room, so ask the floor first. A deal is a negotiation, not a calculation, but ICM gives you the shape of a fair offer.</p>
+
+<figure class="figure">
+  <div class="figure-head"><span class="figure-number">Table</span><h3 class="figure-title">Chip chop against ICM chop, three left</h3></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Player</th><th>Chips</th><th>Chip chop</th><th>Locked chop</th><th>ICM chop</th></tr></thead>
+      <tbody>
+        <tr><td>Big stack</td><td>5,000</td><td>$5,000</td><td>$4,000</td><td>$3,839</td></tr>
+        <tr><td>Mid stack</td><td>3,000</td><td>$3,000</td><td>$3,200</td><td>$3,275</td></tr>
+        <tr><td>Short stack</td><td>2,000</td><td>$2,000</td><td>$2,800</td><td>$2,886</td></tr>
+        <tr class="total"><td>Total</td><td>10,000</td><td>$10,000</td><td>$10,000</td><td>$10,000</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-note">Three players left, $10,000 of remaining prizes: $5,000, $3,000, $2,000. A chip chop splits the whole pool by share of chips. A locked chop first gives everyone the $2,000 they are already sure of, then splits the other $4,000 by chips (big stack: $2,000 + 50% of $4,000 = $4,000). The ICM chop is the Malmuth-Harville value from the first figure. Arithmetic and computed.</p>
+</figure>
+
+<p>The columns set the range. A straight chip chop is the best case for the big stack, but it ignores money nobody can lose: here it hands the short stack exactly the $2,000 it already has locked. A locked chop fixes that, and it lands close to ICM. In most live deals the leader argues for a chip-based split and the short stacks argue for ICM. That is a judgment about how these talks usually go, not a rule. The gap is where skill, table image, and patience come in.</p>
+
+<p>Three questions help before you agree.</p>
+
+<ol>
+  <li>What does each player get if no deal is made? ICM is a fair estimate of that. It is not exact, because you are not the average player.</li>
+  <li>Are you better than the field left? If so, the ICM number understates what you could earn by playing on, and you should ask for more.</li>
+  <li>Is there a trophy, a title, or a seat prize? A prize that cannot be split changes what players will accept.</li>
+</ol>
+
+<p>Heads-up is the simple case. With $5,000 for first, $3,000 for second, and stacks of 7,000 and 3,000, ICM gives the leader $4,400 and the other $3,600. A straight chip chop of the $8,000 would give $5,600 and $2,400, but no one should take $2,400 when second place already pays $3,000. Lock $3,000 for each player and split the other $2,000 by chips, and the leader gets $3,000 + $1,400 = $4,400: heads-up, the locked chop and ICM give the same answer. For play itself, see {{ch:33}}.</p>
+
+<aside class="voice voice-imagined">
+  <p class="who label">What Stephen Chidwick might say</p>
+  <p class="said">He would run the numbers before the deal conversation starts, not during it, and he would treat the ICM figure as an anchor rather than a verdict. His edge in a deal is knowing what the figure leaves out.</p>
+  <p class="note">An imagined voice: our reading of his math-first, prepared approach to tournaments, not his words.</p>
+</aside>
+
+<details class="drill">
+  <summary>Two players are left. Prizes are $5,000 and $3,000. Stacks are 7,000 and 3,000. What is the leader worth under ICM, and what would a chip chop give?</summary>
+  <p>The leader finishes first 70% of the time: 0.70 x $5,000 + 0.30 x $3,000 = $3,500 + $900 = $4,400. A straight chip chop of $8,000 gives 0.70 x $8,000 = $5,600, which would leave the other player $2,400, less than the $3,000 they are guaranteed. A locked chop gives $3,000 + 0.70 x $2,000 = $4,400, the same as ICM.</p>
+</details>
+
+<aside class="tablemath">
+  <p class="label">Table Math</p>
+  <h2>Chips you lose are worth more than chips you win</h2>
+  <p><strong>The shortcut.</strong> In a tournament with prizes, chips follow a bent curve. Losing a stack costs more than winning the same stack gains. Ask for your needed equity as loss divided by loss plus gain, in prize dollars.</p>
+  <p class="math">Hero with 3,000 on the bubble flips for 1,000 chips with the 2,000 stack: +1,000 chips = +$496; -1,000 chips = -$590. Needed equity = 590 / (590 + 496) = 54.3%</p>
+  <p>The figures use four players with stacks of 4,000, 3,000, 2,000, and 1,000 and prizes of $5,000, $3,000, $2,000 for the top three. Hero moves from $2,949 to $3,444 with 1,000 chips more and to $2,359 with 1,000 chips fewer. Even a small risk of one thousand chips needs about 54 percent, not 50.</p>
+  <p><strong>Where it bends.</strong> The premium grows when the loss would end your tournament, as in the call above, which needed 73 percent. It also grows when the paid places are close together: with prizes of $4,000, $3,500, and $2,500, the same 1,000-chip flip needs about 56 percent. It shrinks as the prizes get more top-heavy, and it vanishes in a winner-take-all event, where your chance of winning is your share of the chips and chips are worth exactly their face value. The model ignores skill and blinds, so treat the number as a baseline for what to ask of a call, not a verdict. The cheat sheet for the cash-game price is in {{ch:A}}.</p>
+</aside>
