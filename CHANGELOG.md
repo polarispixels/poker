@@ -4,6 +4,12 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.20.0] - 2026-11-21
+
+### Added
+
+- Chapter 23, Balance and Unexploitability: Chapter 23 explains balance as indifference, shows what it protects and costs with a worked river range, argues it matters less live, and checks river bluff counts in Table Math.
+
 ## [0.19.0] - 2026-11-21
 
 ### Added
